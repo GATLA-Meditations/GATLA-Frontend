@@ -15,6 +15,10 @@
     background: var(--complementary);
 }
 
+.red {
+    background: var(--red);
+}
+
 .small {
     height: 36px;
     width: 149px;
