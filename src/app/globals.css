@@ -41,6 +41,8 @@
   --grey-500: #52525B;
   --grey-600: #323238;
   --grey-700: #141418;
+
+  --red: #E85353
 }
 
 /*@media (prefers-color-scheme: dark) {*/
