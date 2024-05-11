@@ -1,6 +1,7 @@
 :root {
     --black: #0c1012;
     --white: #ffffff;
+    --bg-color: #f3edf7;
 
     --complementary: #47ba84;
     --complementary-700: #0a4b2d;
@@ -86,22 +87,27 @@ h1 {
     font-size: 56px;
     font-weight: 400;
 }
+
 h2 {
     font-size: 38px;
     font-weight: 400;
 }
+
 h3 {
     font-size: 32px;
     font-weight: 400;
 }
+
 h4 {
     font-size: 28px;
     font-weight: 400;
 }
+
 h5 {
     font-size: 24px;
     font-weight: 500;
 }
+
 h6 {
     font-size: 18px;
     font-weight: 400;
@@ -110,20 +116,25 @@ h6 {
 .body1 {
     font-size: 16px;
 }
+
 .body1bold {
     font-size: 16px;
     font-weight: 600;
 }
+
 .body2 {
     font-size: 14px;
 }
+
 .body2bold {
     font-size: 14px;
     font-weight: 600;
 }
+
 .body3 {
     font-size: 12px;
 }
+
 .body3bold {
     font-size: 12px;
     font-weight: 600;
@@ -137,6 +148,7 @@ h6 {
     font-size: 10px;
     font-weight: 600;
 }
+
 .bold {
     font-weight: 700;
 }

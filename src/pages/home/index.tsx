@@ -18,5 +18,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-let view = 1;
