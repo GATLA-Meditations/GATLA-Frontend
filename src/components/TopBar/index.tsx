@@ -2,8 +2,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Notifications from '@/assets/Notifications';
-import Settings from '@/assets/Settings';
+import Notifications from '../Notifications';
+import Settings from '../Settings';
 
 interface TopBarProps {
     amtNotifications: number;
