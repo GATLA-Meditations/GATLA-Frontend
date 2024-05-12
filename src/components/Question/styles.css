@@ -1,0 +1,81 @@
+.layout{
+    display: flex;
+    width: 365px;
+    height: 174px;
+    padding-bottom: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    border-radius: 15px;
+    background: var(--secondary-100, #F4EEFD);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.head{
+    display: flex;
+    height: fit-content;
+    width: fit-content;
+    padding: 9px 0px 5px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    border-radius: 15px 15px 0px 0px;
+    background: var(--secondary-200, #DECAF7);
+    gap : 10px;
+}
+
+.questionNumberText{
+    color: var(--secondary-600, #5D2088);
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 15px;
+    padding-left: 10px;
+}
+
+.questionText{
+    height: fit-content;
+    flex-shrink: 0;
+    color: var(--secondary-600, #5D2088);
+    font-family: Inter, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    padding-bottom: 5px;
+    padding-left: 18px;
+    padding-right: 18px;
+    width: fit-content;
+}
+
+.button-container{
+    display: flex;
+    width: inherit;
+    height: fit-content;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.options-container{
+    display: flex;
+    width: inherit;
+    height: inherit;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+
+}
+
+.options-text{
+    color: var(--secondary-600, #5D2088);
+    font-family: Inter, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 15px;
+    text-align: center;
+}
