@@ -1,48 +1,48 @@
 :root {
-  --black: #0c1012;
-  --white: #ffffff;
+    --black: #0c1012;
+    --white: #ffffff;
+    --bg-color: #f3edf7;
 
-  --complementary: #47BA84;
-  --complementary-700: #0A4B2D;
-  --complementary-200: #9CE8C4;
+    --complementary: #47ba84;
+    --complementary-700: #0a4b2d;
+    --complementary-200: #9ce8c4;
 
+    --primary-base: #6964e9;
+    --primary-100: #e8e7fc;
+    --primary-200: #bdbcf6;
+    --primary-300: #9390f0;
+    --primary-400: #6964e9;
+    --primary-500: #3e34dc;
+    --primary-600: #221a93;
+    --primary-700: #0c0849;
 
-  --primary-base: #6964E9;
-  --primary-100: #E8E7FC;
-  --primary-200: #BDBCF6;
-  --primary-300: #9390F0;
-  --primary-400: #6964E9;
-  --primary-500: #3E34DC;
-  --primary-600: #221A93;
-  --primary-700: #0C0849;
+    --secondary-base: #ab64e9;
+    --secondary-100: #f4eefd;
+    --secondary-200: #decaf7;
+    --secondary-300: #c399f1;
+    --secondary-400: #ab64e9;
+    --secondary-500: #8b34c9;
+    --secondary-600: #5d2088;
+    --secondary-700: #330e4d;
 
-  --secondary-base: #AB64E9;
-  --secondary-100: #F4EEFD;
-  --secondary-200: #DECAF7;
-  --secondary-300: #C399F1;
-  --secondary-400: #AB64E9;
-  --secondary-500: #8B34C9;
-  --secondary-600: #5D2088;
-  --secondary-700: #330E4D;
+    --tertiary-base: #64a2e9;
+    --tertiary-100: #e7eefb;
+    --tertiary-200: #abc7f2;
+    --tertiary-300: #64a2e9;
+    --tertiary-400: #437dba;
+    --tertiary-500: #2e5986;
+    --tertiary-600: #1a3756;
+    --tertiary-700: #09192a;
 
-  --tertiary-base: #64A2E9;
-  --tertiary-100: #E7EEFB;
-  --tertiary-200: #ABC7F2;
-  --tertiary-300: #64A2E9;
-  --tertiary-400: #437DBA;
-  --tertiary-500: #2E5986;
-  --tertiary-600: #1A3756;
-  --tertiary-700: #09192A;
+    --grey-100: #e9e9ea;
+    --grey-200: #c1c1c4;
+    --grey-300: #9a9aa0;
+    --grey-400: #75757d;
+    --grey-500: #52525b;
+    --grey-600: #323238;
+    --grey-700: #141418;
 
-  --grey-100: #E9E9EA;
-  --grey-200: #C1C1C4;
-  --grey-300: #9A9AA0;
-  --grey-400: #75757D;
-  --grey-500: #52525B;
-  --grey-600: #323238;
-  --grey-700: #141418;
-
-  --red: #E85353
+    --red: #e85353;
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -78,69 +78,79 @@
 /*  }*/
 /*}*/
 
-
 * {
-  font-family: Inter, sans-serif;
-  margin: 0;
+    font-family: Inter, sans-serif;
+    margin: 0;
 }
 
 .h1 {
-  font-size: 56px;
-  font-weight: 400;
+    font-size: 56px;
+    font-weight: 400;
 }
+
 .h2 {
-  font-size: 38px;
-  font-weight: 400;
+    font-size: 38px;
+    font-weight: 400;
 }
+
 .h3 {
-  font-size: 32px;
-  font-weight: 400;
+    font-size: 32px;
+    font-weight: 400;
 }
+
 .h4 {
-  font-size: 28px;
-  font-weight: 400;
+    font-size: 28px;
+    font-weight: 400;
 }
+
 .h5 {
-  font-size: 24px;
-  font-weight: 500;
+    font-size: 24px;
+    font-weight: 500;
 }
+
 .h6 {
-  font-size: 18px;
-  font-weight: 400;
+    font-size: 18px;
+    font-weight: 400;
 }
 
 .body1 {
-  font-size: 16px;
+    font-size: 16px;
 }
+
 .body1bold {
-  font-size: 16px;
-  font-weight: 600;
+    font-size: 16px;
+    font-weight: 600;
 }
+
 .body2 {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 .body2bold {
-  font-size: 14px;
-  font-weight: 600;
+    font-size: 14px;
+    font-weight: 600;
 }
+
 .body3 {
-  font-size: 12px;
+    font-size: 12px;
 }
+
 .body3bold {
-  font-size: 12px;
-  font-weight: 600;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .body4 {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 .body4bold {
-  font-size: 10px;
-  font-weight: 600;
+    font-size: 10px;
+    font-weight: 600;
 }
+
 .bold {
-  font-weight: 700;
+    font-weight: 700;
 }
 
 /*@media (prefers-color-scheme: dark) {*/
