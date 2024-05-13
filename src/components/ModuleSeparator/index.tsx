@@ -12,7 +12,7 @@ const ModuleSeparator = ({ text }: { text: string }) => {
                 sx={{
                     backgroundColor: 'var(--grey-400)',
                     height: '0.4vh',
-                    width: '25%',
+                    width: '20%',
                 }}
             ></Box>
             <Typography
@@ -26,7 +26,7 @@ const ModuleSeparator = ({ text }: { text: string }) => {
                 sx={{
                     backgroundColor: 'var(--grey-400)',
                     height: '0.4vh',
-                    width: '25%',
+                    width: '20%',
                 }}
             ></Box>
         </Box>
