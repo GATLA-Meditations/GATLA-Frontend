@@ -13,26 +13,25 @@ const MeditationEntryPoint = () => {
                 borderRadius: 3,
                 margin: 'auto',
                 boxShadow: 5,
-                marginTop: 10,
                 maxWidth: 400,
+                '&:hover': { boxShadow: 10, cursor: 'pointer' },
             }}
+            justifyContent={'space-between'}
         >
             <Box
                 display={'flex'}
                 sx={{
                     bgcolor: 'var(--secondary-200)',
-                    borderTopLeftRadius: 10,
-                    borderTopRightRadius: 10,
-                    height: 10,
-                    padding: 2,
+                    borderTopLeftRadius: 'inherit',
+                    borderTopRightRadius: 'inherit',
+                    height: '3vh',
+                    padding: '2vh',
                 }}
-                marginBottom={3}
+                marginBottom={'2vh'}
                 alignItems={'center'}
             >
                 <Typography
-                    className="h5"
-                    fontWeight={'bold'}
-                    fontFamily={'var(--font-family)'}
+                    className="h5 bold"
                     sx={{ color: 'var(--secondary-700)' }}
                 >
                     Meditemos
@@ -48,7 +47,7 @@ const MeditationEntryPoint = () => {
                         bgcolor: 'var(--secondary-200)',
                         width: '80%',
                         borderRadius: 8,
-                        height: 15,
+                        height: '2vh',
                         position: 'relative',
                     }}
                 >
@@ -62,11 +61,11 @@ const MeditationEntryPoint = () => {
                         }}
                     ></Box>
                 </Box>
-                <Typography color={'var(--grey-500)'} fontWeight={'bold'}>
+                <Typography className="body1 bold" color={'var(--grey-500)'}>
                     75%
                 </Typography>
             </Box>
-            <Box margin={2}>
+            <Box margin={'2vh'}>
                 <Button variant="green" size="small">
                     Comenzar
                 </Button>
