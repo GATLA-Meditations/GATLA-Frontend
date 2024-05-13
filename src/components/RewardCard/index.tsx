@@ -29,7 +29,9 @@ const RewardCard = ({ logo, text, bgColor, textColor }: RewardCardProps) => {
                 {logo}
             </Box>
             <Box>
-                <Typography color={textColor} className={'body2 bold'}>{text}</Typography>
+                <Typography color={textColor} className={'body2 bold'}>
+                    {text}
+                </Typography>
             </Box>
         </Box>
     );
