@@ -1,19 +1,19 @@
 import React from 'react';
-import './styles.css';
-import '@/app/globals.css';
-import './styles.css';
-import {Radio} from '@mui/material';
+import { Radio } from '@mui/material';
+import "./styles.css"
 
-interface Question{
+interface QuestionProps {
     questionNumber: number;
     questionText: string;
+    selectedValue: string;
+    onSelectChange: (value: string) => void; // Function to handle selection change
 }
 
-const Question = ({questionNumber, questionText}: Question) => {
-    const [selectedValue, setSelectedValue] = React.useState('a');
+const Question: React.FC<QuestionProps> = ({ questionNumber, questionText, selectedValue, onSelectChange }) => {
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedValue(event.target.value);
+    const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = event.target.value; // Get the new selected value
+        onSelectChange(newValue); // Call the onSelectChange function passed from the parent component
     };
 
     return (
@@ -29,55 +29,16 @@ const Question = ({questionNumber, questionText}: Question) => {
                     <p className="options-text">Completamente de acuerdo</p>
                 </div>
                 <div className="button-container">
-                    <Radio
-                        checked={selectedValue === '1'}
-                        onChange={handleChange}
-                        value="1"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '1' }}
-                    />
-                    <Radio
-                        checked={selectedValue === '2'}
-                        onChange={handleChange}
-                        value="2"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '2' }}
-                    />
-                    <Radio
-                        checked={selectedValue === '3'}
-                        onChange={handleChange}
-                        value="3"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '3' }}
-                    />
-                    <Radio
-                        checked={selectedValue === '4'}
-                        onChange={handleChange}
-                        value="4"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '4' }}
-                    />
-                    <Radio
-                        checked={selectedValue === '5'}
-                        onChange={handleChange}
-                        value="5"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '5' }}
-                    />
-                    <Radio
-                        checked={selectedValue === '6'}
-                        onChange={handleChange}
-                        value="6"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '6' }}
-                    />
-                    <Radio
-                        checked={selectedValue === '7'}
-                        onChange={handleChange}
-                        value="7"
-                        name="radio-buttons"
-                        inputProps={{ 'aria-label': '7' }}
-                    />
+                    {Array.from({ length: 7 }, (_, i) => (
+                        <Radio
+                            key={i}
+                            checked={selectedValue === (i + 1).toString()} // Check if the current radio button is selected
+                            value={(i + 1).toString()} // Set the value of the radio button
+                            name="radio-buttons"
+                            inputProps={{ 'aria-label': (i + 1).toString() }}
+                            onChange={handleSelectChange} // Call the handleSelectChange function when the radio button is changed
+                        />
+                    ))}
                 </div>
             </div>
         </div>
@@ -85,3 +46,4 @@ const Question = ({questionNumber, questionText}: Question) => {
 };
 
 export default Question;
+
