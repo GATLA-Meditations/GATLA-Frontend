@@ -2,6 +2,7 @@ import './test.css';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import icon from '../../assets/onboardingIcon.png'
 
 const TestPageOnboarding = () => {
     const router = useRouter();
@@ -14,8 +15,8 @@ const TestPageOnboarding = () => {
         <div className={'TestPageOnboarding'}>
             <div>
                 <Image
-                    src="https://via.placeholder.com/117x113"
-                    alt="Placeholder Image"
+                    src={icon}
+                    alt="onboarding icon"
                     width={117}
                     height={113}
                 />
