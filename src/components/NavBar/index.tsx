@@ -12,7 +12,8 @@ interface NavBarProps {
 const NavBar = ({ value }: NavBarProps) => {
     const [val, setValue] = React.useState(value);
     return (
-        <BottomNavigation style={{ backgroundColor: 'var(--bg-color)', boxShadow: '0px -2px 4px rgba(0, 0, 0, 0.25)' }}
+        <BottomNavigation style={{ backgroundColor: 'var(--bg-color)', boxShadow: '0px -2px 4px rgba(0, 0, 0, 0.25)', bottom: '0px', position: 'absolute',
+            width: '100%', left: '0px'}}
             value={val}
             onChange={(event, newValue) => {
                 setValue(newValue);

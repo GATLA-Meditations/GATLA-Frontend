@@ -14,7 +14,7 @@
 .head{
     display: flex;
     height: fit-content;
-    width: fit-content;
+    width: 100%;
     padding: 9px 0px 5px 0px;
     flex-direction: column;
     align-items: flex-start;
