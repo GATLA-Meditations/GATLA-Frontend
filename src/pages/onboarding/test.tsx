@@ -7,7 +7,6 @@ import icon from '../../assets/onboardingIcon.png'
 const TestPageOnboarding = () => {
     const router = useRouter();
     const goToTest = () => {
-        // @ts-ignore
         router.push('/test').then(() => console.log('click'));
     };
 
