@@ -21,7 +21,7 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' , alignItems: 'center', marginBottom: "100px"}}>
             {questions.map((question, index) => (
                 <Question
                     key={index}
@@ -31,8 +31,8 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
                     questionText={question}
                 />
             ))}
-            <Button variant={'green'} onClick={handleSubmit}>
-                <h1>Enviar respuestas</h1>
+            <Button variant={'green'} size={"medium"} onClick={handleSubmit}>
+                <h3>Enviar respuestas</h3>
             </Button>
         </div>
     );
