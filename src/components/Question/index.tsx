@@ -2,14 +2,14 @@ import React from 'react';
 import './styles.css';
 import '@/app/globals.css';
 import './styles.css';
-import {Radio} from '@mui/material';
+import { Radio } from '@mui/material';
 
-interface Question{
+interface Question {
     questionNumber: number;
     questionText: string;
 }
 
-const Question = ({questionNumber, questionText}: Question) => {
+const Question = ({ questionNumber, questionText }: Question) => {
     const [selectedValue, setSelectedValue] = React.useState('a');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
