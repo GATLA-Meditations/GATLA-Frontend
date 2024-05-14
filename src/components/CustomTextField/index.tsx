@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import '../../app/globals.css';
 
@@ -13,15 +13,14 @@ interface CustomTextFieldProps {
 }
 
 const CustomTextField = ({
-                             variant = 'default',
-                             placeholder,
-                             label,
-                             helperText,
-                             name,
-                             type,
-                             onChange,
-                         }: CustomTextFieldProps) => {
-
+    variant = 'default',
+    placeholder,
+    label,
+    helperText,
+    name,
+    type,
+    onChange,
+}: CustomTextFieldProps) => {
     const [inputValue, setInputValue] = useState(variant);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
