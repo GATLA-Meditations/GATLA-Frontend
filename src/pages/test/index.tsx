@@ -1,20 +1,27 @@
-import './style.css'
+import './style.css';
 import TopBar from '../../components/TopBar';
-import QuestionsList from "../../components/QuestionList";
-import TitleExplanationContainer from "@/components/TitleExplanationContainer";
+import QuestionsList from '../../components/QuestionList';
+import TitleExplanationContainer from '@/components/TitleExplanationContainer';
 
 const TestPage = () => {
-    let questions = ["¿Qué piensas de todo esto?", "¿Cuál es tu opinión?", "¿Qué te parece?"];
-    let notifications = 0
+    let questions = [
+        '¿Qué piensas de todo esto?',
+        '¿Cuál es tu opinión?',
+        '¿Qué te parece?',
+    ];
+    let notifications = 0;
     return (
-        <div className={"TestPage"}>
+        <div className={'TestPage'}>
             <TopBar amtNotifications={notifications}></TopBar>
-            <TitleExplanationContainer title={"Introduccion"}  explainingText={"este es el test explicativo de la actividad"}>
+            <TitleExplanationContainer
+                title={'Introduccion'}
+                explainingText={'este es el test explicativo de la actividad'}
+            >
                 <p>aca se explica el puntaje de la actividad</p>
             </TitleExplanationContainer>
-            <QuestionsList   questions={questions}/>
+            <QuestionsList questions={questions} />
         </div>
-    )
-}
+    );
+};
 
-export default TestPage
+export default TestPage;

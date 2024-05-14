@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import Button from "@/components/Button";
-import Question from "@/components/Question";
+import Button from '@/components/Button';
+import Question from '@/components/Question';
 
 interface Props {
     questions: string[];
 }
 
 const QuestionsList: React.FC<Props> = ({ questions }) => {
-    const [selectedValues, setSelectedValues] = useState<string[]>(Array(questions.length).fill(''));
+    const [selectedValues, setSelectedValues] = useState<string[]>(
+        Array(questions.length).fill('')
+    );
 
     const handleSelectChange = (index: number, value: string) => {
         const newSelectedValues = [...selectedValues];
@@ -16,12 +18,20 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
     };
 
     const handleSubmit = () => {
-        console.log("Submitted values:", selectedValues);
+        console.log('Submitted values:', selectedValues);
         // Here you can send the selected values to your backend or perform any other action
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' , alignItems: 'center', marginBottom: "100px"}}>
+        <div
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '28px',
+                alignItems: 'center',
+                marginBottom: '100px',
+            }}
+        >
             {questions.map((question, index) => (
                 <Question
                     key={index}
@@ -31,11 +41,11 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
                     questionText={question}
                 />
             ))}
-            <Button variant={'green'} size={"medium"} onClick={handleSubmit}>
+            <Button variant={'green'} size={'medium'} onClick={handleSubmit}>
                 <h3>Enviar respuestas</h3>
             </Button>
         </div>
     );
-}
+};
 
 export default QuestionsList;

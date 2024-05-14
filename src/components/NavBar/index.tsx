@@ -12,8 +12,15 @@ interface NavBarProps {
 const NavBar = ({ value }: NavBarProps) => {
     const [val, setValue] = React.useState(value);
     return (
-        <BottomNavigation style={{ backgroundColor: 'var(--bg-color)', boxShadow: '0px -2px 4px rgba(0, 0, 0, 0.25)', bottom: '0px', position: 'absolute',
-            width: '100%', left: '0px'}}
+        <BottomNavigation
+            style={{
+                backgroundColor: 'var(--bg-color)',
+                boxShadow: '0px -2px 4px rgba(0, 0, 0, 0.25)',
+                bottom: '0px',
+                position: 'absolute',
+                width: '100%',
+                left: '0px',
+            }}
             value={val}
             onChange={(event, newValue) => {
                 setValue(newValue);
@@ -21,10 +28,16 @@ const NavBar = ({ value }: NavBarProps) => {
         >
             <BottomNavigationAction
                 label="Home"
-                icon={<HomeIcon style={{ fontSize: '2.5rem'}} />}
+                icon={<HomeIcon style={{ fontSize: '2.5rem' }} />}
             />
-            <BottomNavigationAction label="Meet" icon={<VideocamIcon style={{ fontSize: '2.5rem' }}/>} />
-            <BottomNavigationAction label="User" icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }}/>} />
+            <BottomNavigationAction
+                label="Meet"
+                icon={<VideocamIcon style={{ fontSize: '2.5rem' }} />}
+            />
+            <BottomNavigationAction
+                label="User"
+                icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }} />}
+            />
         </BottomNavigation>
     );
 };

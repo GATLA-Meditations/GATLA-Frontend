@@ -1,6 +1,6 @@
 import React from 'react';
 import { Radio } from '@mui/material';
-import "./styles.css"
+import './styles.css';
 
 interface QuestionProps {
     questionNumber: number;
@@ -9,8 +9,12 @@ interface QuestionProps {
     onSelectChange: (value: string) => void; // Function to handle selection change
 }
 
-const Question: React.FC<QuestionProps> = ({ questionNumber, questionText, selectedValue, onSelectChange }) => {
-
+const Question: React.FC<QuestionProps> = ({
+    questionNumber,
+    questionText,
+    selectedValue,
+    onSelectChange,
+}) => {
     const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value; // Get the new selected value
         onSelectChange(newValue); // Call the onSelectChange function passed from the parent component
@@ -46,4 +50,3 @@ const Question: React.FC<QuestionProps> = ({ questionNumber, questionText, selec
 };
 
 export default Question;
-

@@ -15,9 +15,7 @@ const TopBar = ({ amtNotifications }: TopBarProps) => {
             sx={{ flexGrow: 1 }}
             style={{ backgroundColor: 'var(--bg-color)' }}
         >
-            <AppBar
-                style={{ backgroundColor: 'var(--bg-color)' }}
-            >
+            <AppBar style={{ backgroundColor: 'var(--bg-color)' }}>
                 <Toolbar>
                     <Typography
                         variant="h6"
