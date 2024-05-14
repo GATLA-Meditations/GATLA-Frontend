@@ -12,10 +12,10 @@ interface TopBarProps {
 const TopBar = ({ amtNotifications }: TopBarProps) => {
     return (
         <Box
+            sx={{ flexGrow: 1 }}
             style={{ backgroundColor: 'var(--bg-color)' }}
         >
             <AppBar
-                position="static"
                 style={{ backgroundColor: 'var(--bg-color)' }}
             >
                 <Toolbar>
@@ -27,7 +27,7 @@ const TopBar = ({ amtNotifications }: TopBarProps) => {
                     >
                         Renacentia
                     </Typography>
-                    <Box sx={{ }} />
+                    <Box sx={{ flexGrow: 1 }} />
                     <Box>
                         <Notifications amtNotifications={amtNotifications} />
                     </Box>
