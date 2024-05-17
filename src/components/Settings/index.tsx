@@ -1,7 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import SettingsIcon from '@mui/icons-material/Settings';
 
-const Settings = () => {
+const SettingsButton = () => {
     return (
         <>
             <IconButton size="large" aria-label="settings">
@@ -11,4 +11,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default SettingsButton;
