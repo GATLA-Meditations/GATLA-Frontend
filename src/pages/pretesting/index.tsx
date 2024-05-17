@@ -1,11 +1,18 @@
 import Button from '@/components/Button';
 import { Box, Typography } from '@mui/material';
 import React from 'react';
-import Image from 'next/image'; // Import the Image component from next/image
+import Image from 'next/image';
 import './style.css';
 import image from '../../assets/images/prepagesimg.png';
+import { useRouter } from 'next/router';
 
 const PreTesting = () => {
+    const router = useRouter();
+
+    const handleStart = () => {
+        router.push('/test');
+    };
+
     return (
         <Box
             display={'flex'}
@@ -21,7 +28,7 @@ const PreTesting = () => {
                 completa honestidad.
             </Typography>
             <Box margin={'3vh'}>
-                <Button variant="green" size="medium">
+                <Button variant="green" size="medium" onClick={handleStart}>
                     Empezar
                 </Button>
             </Box>
