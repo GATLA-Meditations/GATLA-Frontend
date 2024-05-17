@@ -2,45 +2,35 @@ import React, { useState } from 'react';
 import './styles.css';
 import '../../app/globals.css';
 
-interface CustomTextFieldProps {
+interface CustomTextFieldProps
+    extends React.InputHTMLAttributes<HTMLInputElement> {
     variant?: 'default' | 'error';
     placeholder?: string;
     label?: string;
     helperText?: string;
-    name?: string;
-    type?: string;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomTextField = ({
-    variant = 'default',
+    variant,
     placeholder,
     label,
     helperText,
-    name,
-    type,
-    onChange,
 }: CustomTextFieldProps) => {
-    const [inputValue, setInputValue] = useState(variant);
+    const [inputVariant, setInputVariant] = useState(variant);
 
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setInputValue('default');
-        if (onChange) {
-            onChange(e);
-        }
+    const handleInputChange = () => {
+        setInputVariant('default');
     };
 
     return (
         <div className="customTextFieldContainer">
             {label && <label className="label h6">{label}</label>}
             <input
-                className={`customTextField ${inputValue}`}
+                className={'customTextField ' + inputVariant}
                 placeholder={placeholder}
                 onChange={handleInputChange}
-                name={name}
-                type={type}
             />
-            {variant === 'error' && helperText && (
+            {inputVariant === 'error' && helperText && (
                 <p className="helperText">{helperText}</p>
             )}
         </div>
