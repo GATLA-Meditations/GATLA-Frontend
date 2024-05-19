@@ -2,7 +2,6 @@ import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import {
     Box,
-    Divider,
     FormControl,
     FormControlLabel,
     FormGroup,
@@ -11,6 +10,7 @@ import {
 } from '@mui/material';
 import React from 'react';
 import './style.css';
+import ModuleSeparator from '@/components/ModuleSeparator';
 
 const Settings = () => {
     return (
@@ -19,20 +19,12 @@ const Settings = () => {
                 <TopBar amtNotifications={0} selected="settings"></TopBar>
             </Box>
             <Box display={'flex'} flexDirection={'column'}>
-                <Divider
+                <ModuleSeparator
+                    text="Configuración"
+                    textColor="black"
+                    separatorColor="black"
                     textAlign="left"
-                    sx={{
-                        '&.MuiDivider-root::before': {
-                            width: 0,
-                        },
-                        '&.MuiDivider-root::after': {
-                            width: '70%',
-                            borderTop: 'solid',
-                        },
-                    }}
-                >
-                    <Typography className="h5 bold">Configuración</Typography>
-                </Divider>
+                ></ModuleSeparator>
                 <Box padding={'3vh'}>
                     <Typography className="h6 bold">Notificaciones:</Typography>
                     <Typography className="body1" padding={'1vh'}>
@@ -56,9 +48,7 @@ const Settings = () => {
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                     }}
-                                    control={
-                                        <Switch />
-                                    }
+                                    control={<Switch />}
                                 />
                                 <FormControlLabel
                                     label={
