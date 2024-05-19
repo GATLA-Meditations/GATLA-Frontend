@@ -7,7 +7,11 @@ interface ModuleSeparatorProps {
     textColor: string;
 }
 
-const ModuleSeparator = ({ text, separatorColor, textColor }: ModuleSeparatorProps) => {
+const ModuleSeparator = ({
+    text,
+    separatorColor,
+    textColor,
+}: ModuleSeparatorProps) => {
     return (
         <Divider
             sx={{
@@ -23,11 +27,7 @@ const ModuleSeparator = ({ text, separatorColor, textColor }: ModuleSeparatorPro
                 },
             }}
         >
-            <Typography
-                className="h5 bold"
-                color={textColor}
-                align="center"
-            >
+            <Typography className="h5 bold" color={textColor} align="center">
                 {text}
             </Typography>
         </Divider>
