@@ -1,0 +1,12 @@
+.select-box {
+    border-radius: 25px;
+    background-color: var(--tertiary-200);
+    color: var(--grey-600);
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border: none;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 14px 20px;
+}
