@@ -8,3 +8,26 @@
     gap: 22px;
     background: #fef7ff;
 }
+
+body,
+html,
+#root {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.component {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.navbar {
+    flex-shrink: 0;
+}

@@ -4,10 +4,14 @@ import ModuleSeparator from '@/components/ModuleSeparator';
 import './styles.css';
 import MeditationEntryPoint from '@/components/MeditationEntryPoint';
 import NavBar from '@/components/NavBar';
+import Box from '@mui/material/Box';
 
 const HomeScreen = () => {
     return (
-        <div>
+        <Box
+            className="component"
+            style={{ backgroundColor: 'var(--bg-color)' }}
+        >
             <TopBar amtNotifications={0} />
             <p>stats</p>
             <ModuleSeparator
@@ -16,11 +20,11 @@ const HomeScreen = () => {
                 textColor={'#141418'}
             />
             <MeditationEntryPoint />
-            <div>
+            <Box className="content" />
+            <Box className="navbar">
                 <NavBar value={0} />
-            </div>
-            {/*<ModuleSeparator text={'Próxima reunión'} separatorColor={'#141418'} textColor={'#141418'}/>*/}
-        </div>
+            </Box>
+        </Box>
     );
 };
 
