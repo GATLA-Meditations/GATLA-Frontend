@@ -8,9 +8,9 @@ export const FireIcon: React.FC<FireIconProps> = ({ color }: FireIconProps) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="40"
+            width="41"
             height="41"
-            viewBox="0 0 40 41"
+            viewBox="0 0 41 41"
             fill="none"
         >
             <path
