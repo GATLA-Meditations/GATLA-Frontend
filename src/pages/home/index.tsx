@@ -12,7 +12,7 @@ const HomeScreen = () => {
             className="component"
             style={{ backgroundColor: 'var(--bg-color)' }}
         >
-            <TopBar amtNotifications={0} />
+            <TopBar amtNotifications={0} selected={''} />
             <p>stats</p>
             <ModuleSeparator
                 text={'Módulo actual'}
@@ -21,9 +21,7 @@ const HomeScreen = () => {
             />
             <MeditationEntryPoint />
             <Box className="content" />
-            <Box className="navbar">
-                <NavBar value={0} />
-            </Box>
+            <NavBar value={0} />
         </Box>
     );
 };
