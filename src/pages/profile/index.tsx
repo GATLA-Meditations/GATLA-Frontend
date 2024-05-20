@@ -17,13 +17,15 @@ const Profile = () => {
 
     return (
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
-            <TopBar amtNotifications={0} />
+            <Box>
+                <TopBar amtNotifications={0} />
+            </Box>
             <Box
                 display={'flex'}
                 flexDirection={'column'}
                 justifyContent={'space-around'}
                 alignItems={'center'}
-                height={'inherit'}
+                height={'80vh'}
             >
                 <Box
                     display={'flex'}
@@ -39,7 +41,11 @@ const Profile = () => {
                     ></Avatar>
                     <Typography className="h5 bold">Name Lastname</Typography>
                 </Box>
-                <Button variant="green" size="large" onClick={handleChangePassword}>
+                <Button
+                    variant="green"
+                    size="large"
+                    onClick={handleChangePassword}
+                >
                     Cambiar contraseña
                 </Button>
                 <Button variant="red" size="large" onClick={handleLogout}>
