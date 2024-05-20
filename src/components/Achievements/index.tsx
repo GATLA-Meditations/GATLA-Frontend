@@ -36,7 +36,7 @@ const Achievements: React.FC<AchievementsProps> = ({
     return (
         <Box className="achievements-main-box">
             <Box className="achievements-title-box">
-                <Typography className={'body1 bold'}>{title}</Typography>
+                <Typography className={'h5 bold'}>{title}</Typography>
                 <Typography
                     className={'body1 bold'}
                     sx={{ textDecoration: 'underline' }}
