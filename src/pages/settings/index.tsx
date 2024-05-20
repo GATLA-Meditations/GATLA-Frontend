@@ -9,7 +9,7 @@ import {
     Typography,
 } from '@mui/material';
 import React from 'react';
-import './style.css';
+import '../../app/globals.css';
 import ModuleSeparator from '@/components/ModuleSeparator';
 
 const Settings = () => {
