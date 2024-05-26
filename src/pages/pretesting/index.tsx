@@ -2,7 +2,7 @@ import Button from '@/components/Button';
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Image from 'next/image';
-import './style.css';
+import './styles.css';
 import image from '../../assets/images/prepagesimg.png';
 import { useRouter } from 'next/router';
 
@@ -20,6 +20,7 @@ const PreTesting = () => {
             alignItems={'center'}
             height={'100vh'}
             justifyContent={'center'}
+            style={{ backgroundColor: 'var(--secondary-100)' }}
         >
             <Image src={image} width={200} alt="pretesting" className="image" />
             <Typography className="title">Antes de Meditar...</Typography>
