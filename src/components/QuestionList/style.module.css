@@ -1,0 +1,17 @@
+.popupContent{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 16px;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.popupContent h1 {
+
+}
+
+.popupContent h2 {
+
+}
