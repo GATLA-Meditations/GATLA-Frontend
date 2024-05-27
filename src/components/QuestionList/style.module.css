@@ -1,4 +1,4 @@
-.popupContent{
+.popupContent {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -9,9 +9,7 @@
 }
 
 .popupContent h1 {
-
 }
 
 .popupContent h2 {
-
 }

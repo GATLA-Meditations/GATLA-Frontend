@@ -13,12 +13,16 @@ const TestPage = () => {
     return (
         <div className={'TestPage'}>
             <TopBar amtNotifications={notifications}></TopBar>
-            <TitleExplanationContainer
-                title={'Introduccion'}
-                explainingText={'este es el test explicativo de la actividad'}
-            >
-                <p>aca se explica el puntaje de la actividad</p>
-            </TitleExplanationContainer>
+            <div style={{ paddingTop: '3rem' }}>
+                <TitleExplanationContainer
+                    title={'Introduccion'}
+                    explainingText={
+                        'este es el test explicativo de la actividad'
+                    }
+                >
+                    <p>aca se explica el puntaje de la actividad</p>
+                </TitleExplanationContainer>
+            </div>
             <QuestionsList questions={questions} />
         </div>
     );

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Button from '@/components/Button';
 import Question from '@/components/Question';
-import TestPopover from '@/components/Test-Popover';
-import style from './style.module.css'
+import TestModal from '../TestModal';
+import style from './style.module.css';
 
 interface Props {
     questions: string[];
@@ -12,48 +12,57 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
     const [selectedValues, setSelectedValues] = useState<string[]>(
         Array(questions.length).fill('')
     );
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isOkToSend, setIsOkToSend] = React.useState(false);
 
     const handleSelectChange = (index: number, value: string) => {
         const newSelectedValues = [...selectedValues];
         newSelectedValues[index] = value;
         setSelectedValues(newSelectedValues);
-        setIsOkToSend(false)
+        setIsOkToSend(false);
     };
 
     const handleSubmit = () => {
-        if (selectedValues.indexOf('') === -1 || isOkToSend){
+        if (selectedValues.indexOf('') === -1 || isOkToSend) {
             console.log('Submitted values:', selectedValues);
             // Here you can send the selected values to your backend or perform any other action
-        }
-        else {
-            setIsPopoverOpen(true)
-            setIsOkToSend(true)
+        } else {
+            setIsModalOpen(true);
+            setIsOkToSend(true);
         }
     };
 
-    function handleCloseOfPopup() {
-        setIsPopoverOpen(false)
-        setIsOkToSend(false)
+    function handleCloseOfModal() {
+        setIsModalOpen(false);
+        setIsOkToSend(false);
     }
 
-    const PopupContent = () => {
+    const ModalContent = () => {
         return (
             <div className={style.popupContent}>
                 <h1>Respuestas incompletas</h1>
-                <h3>Notamos que no contesto todas las preguntas. No es necesario forzar una respuesta</h3>
+                <h3>
+                    Notamos que no contesto todas las preguntas. No es necesario
+                    forzar una respuesta
+                </h3>
                 <h3>¿desea enviar de todos modos el questionario?</h3>
-                <Button variant={'green'} size={'medium'} onClick={handleSubmit}>
+                <Button
+                    variant={'green'}
+                    size={'medium'}
+                    onClick={handleSubmit}
+                >
                     <h3>Enviar</h3>
                 </Button>
-                <Button variant={'red'} size={'medium'} onClick={handleCloseOfPopup}>
+                <Button
+                    variant={'red'}
+                    size={'medium'}
+                    onClick={handleCloseOfModal}
+                >
                     <h3>No enviar</h3>
                 </Button>
-
             </div>
         );
-    }
+    };
 
     return (
         <div
@@ -62,7 +71,7 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
                 flexDirection: 'column',
                 gap: '28px',
                 alignItems: 'center',
-                marginBottom: '100px',
+                marginBottom: '50px',
             }}
         >
             {questions.map((question, index) => (
@@ -74,18 +83,14 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
                     questionText={question}
                 />
             ))}
-            <TestPopover
-                open={isPopoverOpen}
-                onClose={handleCloseOfPopup}
-                children={PopupContent()}
-            />
+            <TestModal open={isModalOpen} onClose={handleCloseOfModal}>
+                {ModalContent()}
+            </TestModal>
             <Button variant={'green'} size={'medium'} onClick={handleSubmit}>
                 <h3>Enviar respuestas</h3>
             </Button>
         </div>
     );
 };
-
-
 
 export default QuestionsList;

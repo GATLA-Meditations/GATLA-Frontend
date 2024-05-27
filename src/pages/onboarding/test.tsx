@@ -2,7 +2,7 @@ import './test.css';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import icon from '../../assets/onboardingIcon.png'
+import icon from '../../assets/onboardingIcon.png';
 
 const TestPageOnboarding = () => {
     const router = useRouter();
