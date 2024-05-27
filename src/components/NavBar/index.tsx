@@ -11,6 +11,7 @@ interface NavBarProps {
 
 const NavBar = ({ value }: NavBarProps) => {
     const [val, setValue] = React.useState(value);
+
     return (
         <BottomNavigation
             style={{

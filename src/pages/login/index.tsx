@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.css';
-import { Formik, Field, Form } from 'formik';
-import './styles.css';
+import { Field, Form, Formik } from 'formik';
 import CustomTextField from '@/components/CustomTextField';
 import Button from '@/components/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Link from 'next/link';
 
 interface FormValues {
     email: string;
@@ -49,9 +49,12 @@ const LoginPage = () => {
                         <Typography className="bold">contraseña?</Typography>
                     </Box>
                     <Box className="buttonContainer">
-                        <Button variant="green" size="medium" type="submit">
-                            Iniciar Sesión
-                        </Button>
+                        {/*CAMBIAR*/}
+                        <Link href="/home" style={{ textDecoration: 'none' }}>
+                            <Button variant="green" size="medium" type="submit">
+                                Iniciar Sesión
+                            </Button>
+                        </Link>
                     </Box>
                 </Form>
             </Formik>

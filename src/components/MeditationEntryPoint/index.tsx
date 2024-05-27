@@ -66,9 +66,11 @@ const MeditationEntryPoint = () => {
                 </Typography>
             </Box>
             <Box margin={'2vh'}>
+                {/*<Link href="/test" style={{ textDecoration: 'none' }}>*/}
                 <Button variant="green" size="small">
                     Comenzar
                 </Button>
+                {/*</Link>*/}
             </Box>
         </Box>
     );

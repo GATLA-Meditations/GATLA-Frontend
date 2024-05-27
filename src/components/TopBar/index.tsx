@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Notifications from '../Notifications';
 import { useState } from 'react';
 import SettingsButton from '../Settings';
+import Link from 'next/link';
 import { posix } from 'path';
 
 interface TopBarProps {
@@ -56,7 +57,9 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                             borderRadius: '100%',
                         }}
                     >
-                        <SettingsButton />
+                        <Link href="/settings">
+                            <SettingsButton />
+                        </Link>
                     </Box>
                 </Toolbar>
             </AppBar>
