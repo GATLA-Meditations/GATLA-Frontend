@@ -6,9 +6,13 @@ import style from './style.module.css';
 
 interface Props {
     questions: string[];
+    numberOfQuestionOptions?: number;
 }
 
-const QuestionsList: React.FC<Props> = ({ questions }) => {
+const QuestionsList: React.FC<Props> = ({
+    questions,
+    numberOfQuestionOptions,
+}) => {
     const [selectedValues, setSelectedValues] = useState<string[]>(
         Array(questions.length).fill('')
     );
@@ -81,6 +85,10 @@ const QuestionsList: React.FC<Props> = ({ questions }) => {
                     onSelectChange={(value) => handleSelectChange(index, value)} // Pass callback function
                     questionNumber={1 + index}
                     questionText={question}
+                    numberOfQuestionOptions={
+                        numberOfQuestionOptions ? numberOfQuestionOptions : 7
+                    }
+                    optionsText={undefined} //aplicar a la hora de hacerlo funcionar
                 />
             ))}
             <TestModal open={isModalOpen} onClose={handleCloseOfModal}>

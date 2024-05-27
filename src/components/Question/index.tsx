@@ -7,6 +7,8 @@ interface QuestionProps {
     questionText: string;
     selectedValue: string;
     onSelectChange: (value: string) => void; // Function to handle selection change
+    numberOfQuestionOptions: number;
+    optionsText?: string[];
 }
 
 const Question: React.FC<QuestionProps> = ({
@@ -14,6 +16,8 @@ const Question: React.FC<QuestionProps> = ({
     questionText,
     selectedValue,
     onSelectChange,
+    numberOfQuestionOptions,
+    optionsText,
 }) => {
     const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = event.target.value; // Get the new selected value
@@ -28,12 +32,28 @@ const Question: React.FC<QuestionProps> = ({
             </div>
             <div>
                 <div className="options-container">
-                    <p className="options-text">Completamente en desacuerdo</p>
-                    <p className="options-text">Ni de acuerdo o desacuerdo</p>
-                    <p className="options-text">Completamente de acuerdo</p>
+                    {optionsText ? (
+                        optionsText.map((option, index) => (
+                            <p className={'options-text'} key={index}>
+                                {option}
+                            </p>
+                        ))
+                    ) : (
+                        <>
+                            <p className="options-text">
+                                Completamente en desacuerdo
+                            </p>
+                            <p className="options-text">
+                                Ni de acuerdo o desacuerdo
+                            </p>
+                            <p className="options-text">
+                                Completamente de acuerdo
+                            </p>
+                        </>
+                    )}
                 </div>
                 <div className="button-container">
-                    {Array.from({ length: 7 }, (_, i) => (
+                    {Array.from({ length: numberOfQuestionOptions }, (_, i) => (
                         <Radio
                             key={i}
                             checked={selectedValue === (i + 1).toString()} // Check if the current radio button is selected

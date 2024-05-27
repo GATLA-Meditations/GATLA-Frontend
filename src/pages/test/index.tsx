@@ -9,10 +9,13 @@ const TestPage = () => {
         '¿Cuál es tu opinión?',
         '¿Qué te parece?',
     ];
+
+    const numberOfAnswers = 7;
+
     let notifications = 0;
     return (
         <div className={'TestPage'}>
-            <TopBar amtNotifications={notifications}></TopBar>
+            <TopBar amtNotifications={notifications} selected={''} />
             <div style={{ paddingTop: '3rem' }}>
                 <TitleExplanationContainer
                     title={'Introduccion'}
@@ -23,7 +26,10 @@ const TestPage = () => {
                     <p>aca se explica el puntaje de la actividad</p>
                 </TitleExplanationContainer>
             </div>
-            <QuestionsList questions={questions} />
+            <QuestionsList
+                questions={questions}
+                numberOfQuestionOptions={numberOfAnswers}
+            />
         </div>
     );
 };

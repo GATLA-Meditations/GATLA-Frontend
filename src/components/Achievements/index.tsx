@@ -2,8 +2,8 @@ import Box from '@mui/material/Box';
 import './styles.css';
 import { Grid } from '@mui/material';
 import RewardCard from '@/components/RewardCard';
-import { FireIcon } from '@/assets/FireIcon';
-import { GoalIcon } from '@/assets/GoalIcon';
+import { FireIcon } from '@/Assets/FireIcon';
+import { GoalIcon } from '@/Assets/GoalIcon';
 import React, { JSX } from 'react';
 import Typography from '@mui/material/Typography';
 
