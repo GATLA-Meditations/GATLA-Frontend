@@ -16,6 +16,9 @@ const NavBar = ({ value }: NavBarProps) => {
             style={{
                 backgroundColor: 'var(--bg-color)',
                 boxShadow: '0px -2px 4px rgba(0, 0, 0, 0.25)',
+                position: 'fixed',
+                bottom: 0,
+                width: '100%',
             }}
             value={val}
             onChange={(event, newValue) => {

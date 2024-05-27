@@ -3,17 +3,24 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Notifications from '../Notifications';
-import Settings from '../Settings';
+import { useState } from 'react';
+import SettingsButton from '../Settings';
+import { posix } from 'path';
 
 interface TopBarProps {
     amtNotifications: number;
+    selected: string;
 }
 
-const TopBar = ({ amtNotifications }: TopBarProps) => {
+const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
+    const [selectedOption, setSelectedOption] = useState(selected);
+
     return (
         <Box
             sx={{ flexGrow: 1 }}
-            style={{ backgroundColor: 'var(--bg-color)' }}
+            style={{
+                backgroundColor: 'var(--bg-color)',
+            }}
         >
             <AppBar style={{ backgroundColor: 'var(--bg-color)' }}>
                 <Toolbar>
@@ -26,11 +33,27 @@ const TopBar = ({ amtNotifications }: TopBarProps) => {
                         Renacentia
                     </Typography>
                     <Box sx={{ flexGrow: 1 }} />
-                    <Box>
+                    <Box
+                        sx={{
+                            bgcolor:
+                                selectedOption === 'notifications'
+                                    ? 'rgba(0, 0, 0, 0.1)'
+                                    : 'transparent',
+                            borderRadius: '100%',
+                        }}
+                    >
                         <Notifications amtNotifications={amtNotifications} />
                     </Box>
-                    <Box>
-                        <Settings />
+                    <Box
+                        sx={{
+                            bgcolor:
+                                selectedOption === 'settings'
+                                    ? 'rgba(0, 0, 0, 0.1)'
+                                    : 'transparent',
+                            borderRadius: '100%',
+                        }}
+                    >
+                        <SettingsButton />
                     </Box>
                 </Toolbar>
             </AppBar>

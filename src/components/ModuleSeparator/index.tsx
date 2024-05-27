@@ -5,23 +5,25 @@ interface ModuleSeparatorProps {
     text: string;
     separatorColor: string;
     textColor: string;
+    textAlign?: 'left' | 'center' | 'right';
 }
 
 const ModuleSeparator = ({
     text,
     separatorColor,
     textColor,
+    textAlign,
 }: ModuleSeparatorProps) => {
     return (
         <Divider
             sx={{
                 '&.MuiDivider-root::before': {
-                    width: '100%',
+                    width: textAlign === 'left' ? 0 : '100%',
                     borderTop: 'solid',
                     color: separatorColor,
                 },
                 '&.MuiDivider-root::after': {
-                    width: '100%',
+                    width: textAlign === 'right' ? 0 : '100%',
                     borderTop: 'solid',
                     color: separatorColor,
                 },
