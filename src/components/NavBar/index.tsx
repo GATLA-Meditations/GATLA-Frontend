@@ -28,8 +28,10 @@ const NavBar = ({ value }: NavBarProps) => {
         >
             <BottomNavigationAction
                 label="Home"
+                href="/home"
                 icon={<HomeIcon style={{ fontSize: '2.5rem' }} />}
             />
+
             <BottomNavigationAction
                 label="Meet"
                 icon={<VideocamIcon style={{ fontSize: '2.5rem' }} />}
