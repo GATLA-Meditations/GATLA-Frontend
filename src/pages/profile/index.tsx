@@ -4,7 +4,6 @@ import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import { Avatar, Box, Typography } from '@mui/material';
 import React from 'react';
-import avatar from '../../assets/images/avatar.png';
 import AvatarIcon from '@/assets/AvatarIcon';
 
 const Profile = () => {
@@ -37,7 +36,6 @@ const Profile = () => {
                 flexDirection={'column'}
                 justifyContent={'space-around'}
                 alignItems={'center'}
-                height={'80vh'}
                 marginBottom={'5vh'}
             >
                 <Box
@@ -52,7 +50,7 @@ const Profile = () => {
                             marginBottom: '1vh',
                         }}
                     >
-                        <AvatarIcon/>
+                        <AvatarIcon />
                     </Avatar>
                     <Typography className="h4 bold" marginBottom={'3vh'}>
                         Name Lastname
@@ -63,16 +61,22 @@ const Profile = () => {
                         viewMoreButton="Ver más"
                     />
                 </Box>
-                <Button
-                    variant="green"
-                    size="large"
-                    onClick={handleChangePassword}
+                <Box
+                    display={'flex'}
+                    flexDirection={'column'}
+                    sx={{ margin: '3vh', gap: '3vh' }}
                 >
-                    Cambiar contraseña
-                </Button>
-                <Button variant="red" size="large" onClick={handleLogout}>
-                    Cerrar sesión
-                </Button>
+                    <Button
+                        variant="green"
+                        size="large"
+                        onClick={handleChangePassword}
+                    >
+                        Cambiar contraseña
+                    </Button>
+                    <Button variant="red" size="large" onClick={handleLogout}>
+                        Cerrar sesión
+                    </Button>
+                </Box>
             </Box>
             <NavBar value={2} />
         </Box>
