@@ -38,6 +38,7 @@ const NavBar = ({ value }: NavBarProps) => {
             />
             <BottomNavigationAction
                 label="User"
+                href="/profile"
                 icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }} />}
             />
         </BottomNavigation>
