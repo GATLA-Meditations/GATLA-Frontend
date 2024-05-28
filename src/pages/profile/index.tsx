@@ -1,3 +1,4 @@
+import Achievements from '@/components/Achievements';
 import Button from '@/components/Button';
 import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
@@ -15,9 +16,18 @@ const Profile = () => {
         console.log('Change Password');
     };
 
+    const achivementsMock = [
+        { type: 'streak', title: '1 día' },
+        { type: 'streak', title: '2 días' },
+        { type: 'streak', title: '3 días' },
+        { type: 'week', title: '1 semana' },
+        { type: 'week', title: '2 semanas' },
+        { type: 'week', title: '3 semanas' },
+    ];
+
     return (
-        <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
-            <Box>
+        <Box display={'flex'} flexDirection={'column'} height={'100%'}>
+            <Box marginBottom={'3vh'}>
                 <TopBar amtNotifications={0} />
             </Box>
             <Box
@@ -26,6 +36,7 @@ const Profile = () => {
                 justifyContent={'space-around'}
                 alignItems={'center'}
                 height={'80vh'}
+                marginBottom={'5vh'}
             >
                 <Box
                     display={'flex'}
@@ -34,12 +45,19 @@ const Profile = () => {
                 >
                     <Avatar
                         sx={{
-                            width: '15vh',
-                            height: '15vh',
-                            marginBottom: '2vh',
+                            width: '13vh',
+                            height: '13vh',
+                            marginBottom: '1vh',
                         }}
                     ></Avatar>
-                    <Typography className="h5 bold">Name Lastname</Typography>
+                    <Typography className="h4 bold" marginBottom={'3vh'}>
+                        Name Lastname
+                    </Typography>
+                    <Achievements
+                        achievements={achivementsMock}
+                        title={'Logros'}
+                        viewMoreButton="Ver más"
+                    />
                 </Box>
                 <Button
                     variant="green"
