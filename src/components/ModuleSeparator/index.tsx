@@ -18,14 +18,14 @@ const ModuleSeparator = ({
         <Divider
             sx={{
                 '&.MuiDivider-root::before': {
-                    width: textAlign === 'left'? 0: '100%',
+                    width: textAlign === 'left' ? 0 : '100%',
                     borderTop: 'solid',
                     color: separatorColor,
                 },
                 '&.MuiDivider-root::after': {
-                    width: textAlign === 'right'? 0: '100%',
+                    width: textAlign === 'right' ? 0 : '100%',
                     borderTop: 'solid',
-                    color: separatorColor
+                    color: separatorColor,
                 },
             }}
         >
