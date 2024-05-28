@@ -10,7 +10,7 @@ import { posix } from 'path';
 
 interface TopBarProps {
     amtNotifications: number;
-    selected: string;
+    selected?: string;
 }
 
 const TopBar = ({ amtNotifications, selected }: TopBarProps) => {

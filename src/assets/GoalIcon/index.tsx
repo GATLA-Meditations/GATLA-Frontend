@@ -8,8 +8,8 @@ export const GoalIcon: React.FC<GoalIconProps> = ({ color }: GoalIconProps) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="41"
-            height="41"
+            width="6vh"
+            height="6vh"
             viewBox="0 0 41 41"
             fill="none"
         >
