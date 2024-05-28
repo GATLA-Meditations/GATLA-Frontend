@@ -24,7 +24,7 @@ const iconColor: { [key: string]: JSX.Element } = {
 };
 
 const cardColor: { [key: string]: string } = {
-    streak: 'var(--tertiary-200)',
+    streak: 'var(--tertiary-300)',
     week: 'var(--secondary-400)',
 };
 
