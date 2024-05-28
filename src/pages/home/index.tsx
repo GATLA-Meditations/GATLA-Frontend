@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TopBar from '@/components/TopBar';
 import ModuleSeparator from '@/components/ModuleSeparator';
 import './styles.css';
@@ -17,7 +17,7 @@ const HomeScreen = () => {
                 separatorColor={'#141418'}
                 textColor={'#141418'}
             />
-            <MeditationEntryPoint />
+            <MeditationEntryPoint name={'Meditemos'} progress={75} />
             <Box className="content" />
             <NavBar value={0} />
         </Box>
