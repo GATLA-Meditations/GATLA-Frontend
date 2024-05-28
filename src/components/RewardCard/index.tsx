@@ -13,7 +13,7 @@ interface RewardCardProps {
 const RewardCard = ({ icon, text, bgColor, textColor }: RewardCardProps) => {
     return (
         <Box className={'reward-card'} bgcolor={bgColor}>
-            <Box height={40} width={40}>
+            <Box>
                 {icon}
             </Box>
             <Box>

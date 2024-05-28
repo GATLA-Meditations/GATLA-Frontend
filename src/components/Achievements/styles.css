@@ -15,11 +15,12 @@
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 15px;
+    margin-top: 2vh;
 }
 
 .achievements-box {
     width: 100%;
+    margin: 2vh;
 }
 
 /*.m-5{*/

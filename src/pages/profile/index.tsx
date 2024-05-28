@@ -4,6 +4,8 @@ import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import { Avatar, Box, Typography } from '@mui/material';
 import React from 'react';
+import avatar from '../../assets/images/avatar.png';
+import AvatarIcon from '@/assets/AvatarIcon';
 
 const Profile = () => {
     const handleLogout = () => {
@@ -49,7 +51,9 @@ const Profile = () => {
                             height: '13vh',
                             marginBottom: '1vh',
                         }}
-                    ></Avatar>
+                    >
+                        <AvatarIcon/>
+                    </Avatar>
                     <Typography className="h4 bold" marginBottom={'3vh'}>
                         Name Lastname
                     </Typography>
