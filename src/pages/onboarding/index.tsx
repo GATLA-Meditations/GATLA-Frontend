@@ -24,7 +24,9 @@ const TestPageOnboarding = () => {
                 size={'small'}
                 onClick={goToTest}
                 // children={<h3>Empezar</h3>}
-            />
+            >
+                Empezar
+            </Button>
         </div>
     );
 };
