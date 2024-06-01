@@ -3,18 +3,19 @@ import Button from '@/components/Button';
 import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import { Avatar, Box, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
+import ChangePassword from '@/components/ChangePassword';
 
 const Profile = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const handleLogout = () => {
         //implement method to logout
         console.log('Logout');
     };
 
     const handleChangePassword = () => {
-        //implement method to change password
-        console.log('Change Password');
+        setIsModalOpen(true);
     };
 
     const achivementsMock = [
@@ -78,6 +79,9 @@ const Profile = () => {
                     </Button>
                 </Box>
             </Box>
+            {isModalOpen && (
+                <ChangePassword closeModal={() => setIsModalOpen(false)} />
+            )}
             <NavBar value={2} />
         </Box>
     );
