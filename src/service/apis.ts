@@ -25,4 +25,8 @@ gatlaAxios.interceptors.response.use(
     }
 );
 
+export const getVideos = async (activityId: string) => {
+    const response = await gatlaAxios.get(`/activity/${activityId}`);
+    return response.data;
+};
 
