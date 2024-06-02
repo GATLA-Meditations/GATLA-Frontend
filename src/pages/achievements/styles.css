@@ -32,3 +32,12 @@ html,
     gap: 10px;
     flex-shrink: 0;
 }
+
+.button_content {
+    display: flex;
+    padding: 10px 12px;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
