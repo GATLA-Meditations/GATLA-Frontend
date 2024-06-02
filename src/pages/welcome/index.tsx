@@ -6,7 +6,6 @@ import MeditationIcon from '@/assets/MeditationIcon';
 const WelcomePage = () => {
     const router = useRouter();
     const goToHome = () => {
-        // @ts-ignore
         router.push('/home').then(() => console.log('click'));
     };
 
