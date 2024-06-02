@@ -8,10 +8,10 @@ export interface VideoPlayerProps extends ReactPlayerProps {
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     const ref = useRef<ReactPlayer>(null);
-    const [isBrowser, setIsBrowser] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        setIsBrowser(true);
+        setIsMounted(true);
     }, []);
 
     const handlePlay = () => {
@@ -26,20 +26,20 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
         }
     };
 
+    if (!isMounted) {
+        return null;
+    }
+
     return (
-        <div style={{ position: 'relative', display: isBrowser ? 'block' : 'none' }}>
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}></div>
-            <ReactPlayer
-                ref={ref}
-                url={url}
-                onPlay={handlePlay}
-                onPause={handlePause}
-                controls={false}
-                className="video-player"
-            />
-        </div>
+        <ReactPlayer
+            ref={ref}
+            url={url}
+            onPlay={handlePlay}
+            onPause={handlePause}
+            controls={false}
+            className="video-player"
+        />
     );
 };
 
 export default VideoPlayer;
-
