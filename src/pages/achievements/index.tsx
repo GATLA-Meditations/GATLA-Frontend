@@ -34,7 +34,7 @@ const AchievementsScreen = () => {
     };
 
     return (
-        <Box height={'100vh'} style={{ backgroundColor: 'var(--bg-color)' }}>
+        <Box height={'100vh'}>
             <TopBar amtNotifications={0} selected={''} />
             <div className={'button_content'}>
                 <AchievementsFilter
