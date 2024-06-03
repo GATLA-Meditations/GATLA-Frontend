@@ -8,7 +8,6 @@ import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 
 const HomeScreen = () => {
-
     return (
         <Box height={'100vh'} style={{ backgroundColor: 'var(--bg-color)' }}>
             <TopBar amtNotifications={0} selected={''} />
@@ -20,8 +19,6 @@ const HomeScreen = () => {
             />
             <MeditationEntryPoint />
             <Box className="content" />
-            <Box className="content">
-            </Box>
             <NavBar value={0} />
         </Box>
     );
