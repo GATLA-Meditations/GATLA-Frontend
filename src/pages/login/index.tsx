@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import { Formik, Field, Form } from 'formik';
 import './styles.css';
@@ -6,15 +6,28 @@ import CustomTextField from '@/components/CustomTextField';
 import Button from '@/components/Button';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { login } from '@/service/apis';
+import { setToken } from '@/service/store';
+import { useRouter } from 'next/router';
 
 interface FormValues {
-    email: string;
+    patientCode: string;
     password: string;
 }
 
 const LoginPage = () => {
-    const handleSubmit = (values: FormValues) => {
-        console.log(values);
+    const router = useRouter();
+    const [error, setError] = useState('');
+
+    const handleSubmit = async (values: FormValues) => {
+        try {
+            const token = await login(values);
+            setToken(token);
+            router.push('/home');
+        } catch (error) {
+            console.log(error);
+            setError('Verifica el código o la contraseña');
+        }
     };
 
     return (
@@ -26,16 +39,21 @@ const LoginPage = () => {
                     Comienza tu bienestar personal
                 </Typography>
             </Box>
+            {error && (
+                <Typography className="body1" sx={{ color: 'red', marginBottom: '1vh' }}>
+                    {error}
+                </Typography>
+            )}
             <Formik
-                initialValues={{ email: '', password: '' }}
+                initialValues={{ patientCode: '', password: '' }}
                 onSubmit={handleSubmit}
             >
                 <Form className="inputContainer">
                     <Field
                         as={CustomTextField}
-                        placeholder="usuario@gmail.com"
-                        label="Email"
-                        name="email"
+                        placeholder="código de gatla"
+                        label="Código"
+                        name="patientCode"
                     />
                     <Field
                         as={CustomTextField}
