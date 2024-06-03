@@ -6,20 +6,8 @@ import MeditationEntryPoint from '@/components/MeditationEntryPoint';
 import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
-import { getVideos } from '@/service/apis';
-import VideoPlayer from '@/components/VideoPlayer';
 
 const HomeScreen = () => {
-    const [videos, setVideos] = useState([]);
-
-    useEffect(() => {
-        const fetchVideos = async () => {
-            const activityId = '1';
-            const videosData = await getVideos(activityId);
-            setVideos(videosData);
-        };
-        fetchVideos();
-    }, []);
 
     return (
         <Box height={'100vh'} style={{ backgroundColor: 'var(--bg-color)' }}>
@@ -33,9 +21,6 @@ const HomeScreen = () => {
             <MeditationEntryPoint />
             <Box className="content" />
             <Box className="content">
-                {videos.map((video, index) => (
-                    <VideoPlayer key={index} url={video} />
-                ))}
             </Box>
             <NavBar value={0} />
         </Box>
