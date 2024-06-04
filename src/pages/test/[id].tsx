@@ -19,9 +19,7 @@ const TestPage = () => {
     }, [id]);
 
     const getQuestionnaire = async () => {
-        const response = await getQuestionnarieById(
-            id
-        );
+        const response = await getQuestionnarieById(id);
         setQuestionnaireName(response.name);
         setQuestions(response.questions);
     };
