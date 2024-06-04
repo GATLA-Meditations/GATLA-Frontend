@@ -7,6 +7,7 @@ import { Radio } from '@mui/material';
 interface Question {
     questionNumber: number;
     questionText: string;
+    id: string;
 }
 
 const Question = ({ questionNumber, questionText }: Question) => {
