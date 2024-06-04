@@ -25,4 +25,11 @@ gatlaAxios.interceptors.response.use(
     }
 );
 
-
+export const getQuestionnarieById = async (id: string) => {
+    try {
+        const response = await gatlaAxios.get(`questionnaire/${id}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
