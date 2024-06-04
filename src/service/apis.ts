@@ -43,3 +43,14 @@ export const getVideo = async (activityId: string) => {
         throw error;
     }
 };
+
+export const login = async (data: any) => {
+    try {
+        const response = await gatlaAxios.post('/auth/login', data);
+        return response.data.token;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
