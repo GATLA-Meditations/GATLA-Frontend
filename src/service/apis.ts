@@ -25,4 +25,17 @@ gatlaAxios.interceptors.response.use(
     }
 );
 
-
+export const getActualModule = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/actual-module', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        return response.data;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
