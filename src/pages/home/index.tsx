@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TopBar from '@/components/TopBar';
 import ModuleSeparator from '@/components/ModuleSeparator';
 import './styles.css';
