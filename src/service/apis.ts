@@ -25,6 +25,25 @@ gatlaAxios.interceptors.response.use(
     }
 );
 
+export const getQuestionnarieById = async (id: string) => {
+    try {
+        const response = await gatlaAxios.get(`questionnaire/${id}`);
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getVideo = async (activityId: string) => {
+    try {
+        const response = await gatlaAxios.get(`/activity/${activityId}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching video:', error);
+        throw error;
+    }
+};
+
 export const login = async (data: any) => {
     try {
         const response = await gatlaAxios.post('/auth/login', data);
