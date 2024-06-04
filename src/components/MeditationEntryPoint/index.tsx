@@ -2,7 +2,14 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import Button from '../Button';
 
-const MeditationEntryPoint = () => {
+export interface EntryPointData {
+    id: string;
+    name: string;
+    description: string;
+    progress: number;
+}
+
+const MeditationEntryPoint = ({ id, name, description, progress}: EntryPointData) => {
     return (
         <Box
             display={'flex'}
@@ -34,7 +41,7 @@ const MeditationEntryPoint = () => {
                     className="h5 bold"
                     sx={{ color: 'var(--secondary-700)' }}
                 >
-                    Meditemos
+                    {name}
                 </Typography>
             </Box>
             <Box
@@ -56,13 +63,13 @@ const MeditationEntryPoint = () => {
                             position: 'absolute',
                             borderRadius: 'inherit',
                             height: '100%',
-                            width: '75%',
+                            width: `${progress}%`,
                             bgcolor: 'var(--secondary-400)',
                         }}
                     ></Box>
                 </Box>
                 <Typography className="body1 bold" color={'var(--grey-500)'}>
-                    75%
+                    {progress}%
                 </Typography>
             </Box>
             <Box margin={'2vh'}>
