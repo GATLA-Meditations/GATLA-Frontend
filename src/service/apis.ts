@@ -33,8 +33,7 @@ export const getActualModule = async () => {
             },
         });
         return response.data;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         throw error;
     }
@@ -63,8 +62,19 @@ export const login = async (data: any) => {
     try {
         const response = await gatlaAxios.post('/auth/login', data);
         return response.data.token;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
-    catch (error) {
+};
+
+export const getUserStats = async () => {
+    try {
+        const response = await gatlaAxios.get(
+            '/user/homestats',
+        );
+        return response.data;
+    } catch (error) {
         console.log(error);
         throw error;
     }
