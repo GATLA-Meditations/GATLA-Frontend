@@ -6,12 +6,14 @@ import { Avatar, Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
+import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const handleLogout = () => {
-        //implement method to logout
-        console.log('Logout');
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+
+    const handleLogoutClick = () => {
+        setIsLogoutModalOpen(true);
     };
 
     const handleChangePassword = () => {
@@ -74,13 +76,23 @@ const Profile = () => {
                     >
                         Cambiar contraseña
                     </Button>
-                    <Button variant="red" size="large" onClick={handleLogout}>
+                    <Button
+                        variant="red"
+                        size="large"
+                        onClick={handleLogoutClick}
+                    >
                         Cerrar sesión
                     </Button>
                 </Box>
             </Box>
             {isModalOpen && (
                 <ChangePassword closeModal={() => setIsModalOpen(false)} />
+            )}
+            {isLogoutModalOpen && (
+                <LogoutConfirmationModal
+                    open={isLogoutModalOpen}
+                    onClose={() => setIsLogoutModalOpen(false)}
+                />
             )}
             <NavBar value={2} />
         </Box>
