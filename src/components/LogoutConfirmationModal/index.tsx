@@ -1,7 +1,7 @@
 import { Box, Modal, Typography } from '@mui/material';
 import React from 'react';
 import './styles.css';
-import '../../app/globals.css';
+import '@/app/globals.css';
 import Button from '../Button';
 import { useRouter } from 'next/router';
 import { removeToken } from '@/service/store';
