@@ -51,3 +51,27 @@
     align-items: center;
     gap: 35px;
 }
+
+.success-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 15vh;
+    gap: 5vh;
+    color: var(--complementary);
+}
+
+.loading-style {
+    color: var(--complementary);
+}
+
+.error-style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 15vh;
+    gap: 5vh;
+    color: var(--red);
+}

@@ -80,3 +80,18 @@ export const login = async (data: any) => {
         throw error;
     }
 };
+
+export const changePassword = async (data: any) => {
+    try {
+        const response = await gatlaAxios.put('/user/changepass', data, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        return response.status;
+    }
+    catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
