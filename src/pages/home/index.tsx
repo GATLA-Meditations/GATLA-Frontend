@@ -38,9 +38,9 @@ const HomeScreen = () => {
 
     async function fetchStats() {
         const stats = await getUserStats();
-        setDays(stats.days);
-        setMinutes(convertMinutesToHours(stats.minutes)); /**/
-        setGoals(stats.goals);
+        setDays(stats.days ? stats.days : 0);
+        setMinutes(stats.minutes ? convertMinutesToHours(stats.minutes) : 0);
+        setGoals(stats.goals ? stats.goals : 0);
     }
 
     return (

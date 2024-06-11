@@ -70,9 +70,11 @@ export const login = async (data: any) => {
 
 export const getUserStats = async () => {
     try {
-        const response = await gatlaAxios.get(
-            '/user/homestats',
-        );
+        const response = await gatlaAxios.get('/user/homestats', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
         return response.data;
     } catch (error) {
         console.log(error);
