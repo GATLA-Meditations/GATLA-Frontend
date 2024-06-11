@@ -6,6 +6,7 @@ import { Avatar, Box, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
+import WithAuth from '@/components/WithAuth';
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,4 +88,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default WithAuth(Profile);

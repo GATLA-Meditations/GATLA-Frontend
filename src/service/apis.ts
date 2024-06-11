@@ -12,6 +12,19 @@ const gatlaAxios = axios.create({
     baseURL,
 });
 
+gatlaAxios.interceptors.request.use(
+    function (config) {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    function (error) {
+        return Promise.reject(error);
+    }
+);
+
 gatlaAxios.interceptors.response.use(
     function (response) {
         return response;
@@ -33,8 +46,7 @@ export const getActualModule = async () => {
             },
         });
         return response.data;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         throw error;
     }
@@ -63,8 +75,7 @@ export const login = async (data: any) => {
     try {
         const response = await gatlaAxios.post('/auth/login', data);
         return response.data.token;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         throw error;
     }

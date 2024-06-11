@@ -2,6 +2,7 @@ import './test.css';
 import Button from '@/components/Button';
 import { useRouter } from 'next/router';
 import MeditationIcon from '@/assets/MeditationIcon';
+import WithAuth from '@/components/WithAuth';
 
 const WelcomePage = () => {
     const router = useRouter();
@@ -25,4 +26,4 @@ const WelcomePage = () => {
     );
 };
 
-export default WelcomePage;
+export default WithAuth(WelcomePage);

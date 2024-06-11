@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import Question from '@/components/Question';
 import React, { useEffect, useState } from 'react';
 import { getQuestionnarieById } from '@/service/apis';
+import WithAuth from '@/components/WithAuth';
 
 interface QuestionProps {
     name: string;
@@ -62,4 +63,4 @@ const TestPage = () => {
     );
 };
 
-export default TestPage;
+export default WithAuth(TestPage);
