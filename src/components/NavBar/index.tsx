@@ -28,14 +28,17 @@ const NavBar = ({ value }: NavBarProps) => {
             <BottomNavigationAction
                 label="Home"
                 icon={<HomeIcon style={{ fontSize: '2.5rem' }} />}
+                href={'/home'}
             />
             <BottomNavigationAction
                 label="Meet"
                 icon={<VideocamIcon style={{ fontSize: '2.5rem' }} />}
+                href={'/meet'}
             />
             <BottomNavigationAction
                 label="User"
                 icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }} />}
+                href={'/profile'}
             />
         </BottomNavigation>
     );
