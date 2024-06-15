@@ -3,9 +3,11 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Notifications from '../Notifications';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SettingsButton from '../Settings';
 import { posix } from 'path';
+import Image from 'next/image';
+import logo from '@/assets/Logo/logo.png';
 
 interface TopBarProps {
     amtNotifications: number;
@@ -27,6 +29,9 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                 style={{ backgroundColor: 'var(--bg-color)' }}
             >
                 <Toolbar>
+                    <Box style={{marginRight: 10}}>
+                        <Image src={logo} alt="logo" width={30} height={50} />
+                    </Box>
                     <Typography
                         variant="h6"
                         noWrap
