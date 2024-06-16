@@ -58,13 +58,13 @@ const Activity = () => {
                     width: '100%',
                 }}
             >
-                {activity?.contents.map((activity) =>
+                {activity?.contents.map((activity, key) =>
                     activity.type === ActivityContentType.VIDEO ? (
-                        <div className={'activity-video'}>
+                        <div className={'activity-video'} key={key}>
                             <VideoPlayer url={activity.content} />
                         </div>
                     ) : (
-                        <div className={'activity-description-div'}>
+                        <div className={'activity-description-div'} key={key}>
                             <p className={'h3 activity-p'}>Descripción</p>
                             <p className={'h6 activity-p'}>
                                 {activity.content}
