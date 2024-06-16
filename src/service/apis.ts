@@ -25,6 +25,20 @@ gatlaAxios.interceptors.response.use(
     }
 );
 
+export const getActualModule = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/actual-module', {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
 export const getQuestionnarieById = async (id: string) => {
     try {
         const response = await gatlaAxios.get(`questionnaire/${id}`);
@@ -62,6 +76,16 @@ export const getActivityById = async (id: string) => {
         return response.data;
     } catch (error) {
         console.error('Coudnt find module');
+        throw error;
+    }
+};
+
+export const login = async (data: any) => {
+    try {
+        const response = await gatlaAxios.post('/auth/login', data);
+        return response.data.token;
+    } catch (error) {
+        console.log(error);
         throw error;
     }
 };
