@@ -98,8 +98,7 @@ export const changePassword = async (data: any) => {
             },
         });
         return response.status;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         throw error;
     }
