@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './styles.css';
 import { Formik, Field, Form } from 'formik';
-import './styles.css';
 import CustomTextField from '@/components/CustomTextField';
 import Button from '@/components/Button';
 import Typography from '@mui/material/Typography';

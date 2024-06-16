@@ -2,7 +2,19 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
 
-const MeditationEntryPoint = () => {
+export interface EntryPointData {
+    id: string;
+    name: string;
+    description: string;
+    progress: number;
+}
+
+const MeditationEntryPoint = ({
+    id,
+    name,
+    description,
+    progress,
+}: EntryPointData) => {
     const router = useRouter();
 
     return (
@@ -36,7 +48,7 @@ const MeditationEntryPoint = () => {
                 <Box
                     sx={{
                         height: '0.5vh',
-                        width: '75%',
+                        width: `${progress}%`,
                         bgcolor: 'var(--secondary-400)',
                     }}
                 ></Box>
@@ -53,7 +65,7 @@ const MeditationEntryPoint = () => {
                     size="small"
                     onClick={() => router.push('/module/moduleId1')}
                 >
-                    Meditemos
+                    {name}
                 </Typography>
             </Box>
         </Box>

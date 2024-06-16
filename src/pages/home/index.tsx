@@ -5,7 +5,6 @@ import MeditationEntryPoint, {
     EntryPointData,
 } from '@/components/MeditationEntryPoint';
 import '../../app/globals.css';
-import MeditationEntryPoint from '@/components/MeditationEntryPoint';
 import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';

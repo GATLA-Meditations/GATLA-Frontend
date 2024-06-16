@@ -29,7 +29,7 @@ const Profile = () => {
     ];
 
     return (
-        <Box display={'flex'} flexDirection={'column'} height={'100%'}>
+        <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
             <Box marginBottom={'3vh'}>
                 <TopBar amtNotifications={0} />
             </Box>
