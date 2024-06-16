@@ -43,3 +43,25 @@ export const getVideo = async (activityId: string) => {
         throw error;
     }
 };
+
+export const getModuleById = async (id: string) => {
+    try {
+        // const token = localStorage.getItem('token')!!;
+        const response = await gatlaAxios.get(`/module/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Coudnt find module');
+        throw error;
+    }
+};
+
+export const getActivityById = async (id: string) => {
+    try {
+        const token = localStorage.getItem('token')!!;
+        const response = await gatlaAxios.get(`/activity/${id}`, config(token));
+        return response.data;
+    } catch (error) {
+        console.error('Coudnt find module');
+        throw error;
+    }
+};

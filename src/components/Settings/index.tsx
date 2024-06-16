@@ -5,7 +5,7 @@ const SettingsButton = () => {
     return (
         <>
             <IconButton size="large" aria-label="settings">
-                <SettingsIcon style={{ color: 'var(--black)' }} />
+                <SettingsIcon style={{ color: 'var(--primary-700)' }} />
             </IconButton>
         </>
     );

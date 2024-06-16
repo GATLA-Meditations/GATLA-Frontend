@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Notifications from '../Notifications';
 import { useState } from 'react';
 import SettingsButton from '../Settings';
-import { posix } from 'path';
 
 interface TopBarProps {
     amtNotifications: number;
@@ -17,21 +16,20 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
 
     return (
         <Box
-            sx={{ flexGrow: 1 }}
             style={{
-                backgroundColor: 'var(--bg-color)',
+                background: 'none',
             }}
         >
             <AppBar
                 position="static"
-                style={{ backgroundColor: 'var(--bg-color)' }}
+                style={{ background: 'none', boxShadow: 'none' }}
             >
                 <Toolbar>
                     <Typography
-                        variant="h6"
+                        variant="h5"
                         noWrap
-                        component="div"
-                        color={'#1D1B20'}
+                        color={'var(--primary-700)'}
+                        fontWeight={600}
                     >
                         Renacentia
                     </Typography>

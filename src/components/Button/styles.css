@@ -19,6 +19,10 @@
     background: var(--red);
 }
 
+.default {
+    background: var(--secondary-400);
+}
+
 .small {
     height: 36px;
     width: 149px;

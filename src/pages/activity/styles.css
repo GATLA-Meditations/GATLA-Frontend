@@ -1,0 +1,34 @@
+.activity-main-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    height: 100vh;
+    background-color: var(--tertiary-700);
+}
+
+.activity-video {
+    height: 30vh;
+    width: 90%;
+}
+
+.activity-p {
+    color: white;
+    line-height: 1.5;
+}
+.activity-description-div {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.activity-title-div {
+    display: flex;
+    margin-top: 12px;
+    padding: 12px;
+}
+
+.activity-title {
+    text-align: center;
+}

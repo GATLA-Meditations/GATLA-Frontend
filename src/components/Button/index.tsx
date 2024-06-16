@@ -4,7 +4,7 @@ import '@/app/globals.css';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: React.ReactNode;
-    variant?: 'grey' | 'green' | 'red';
+    variant?: 'grey' | 'green' | 'red' | 'default';
     size?: 'small' | 'medium' | 'large';
     onClick?: () => void;
     disabled?: boolean;
