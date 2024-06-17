@@ -1,16 +1,33 @@
-import Achievements from '@/components/Achievements';
+import { Achievement } from '@/components/Achievements';
 import Button from '@/components/Button';
 import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import { Avatar, Box, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
+import { getUserProfile } from '@/service/apis';
+
+export interface User {
+    patientCode: string;
+    image: string;
+    achievements: Achievement[];
+}
 
 const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+    const [user, setUser] = useState<User>();
+
+    useEffect(() => {
+        handleGetUser().then();
+    }, []);
+
+    const handleGetUser = async () => {
+        const user = await getUserProfile();
+        setUser(user);
+    };
 
     const handleLogoutClick = () => {
         setIsLogoutModalOpen(true);
@@ -20,14 +37,14 @@ const Profile = () => {
         setIsModalOpen(true);
     };
 
-    const achivementsMock = [
-        { type: 'streak', title: '1 día' },
-        { type: 'streak', title: '2 días' },
-        { type: 'streak', title: '3 días' },
-        { type: 'week', title: '1 semana' },
-        { type: 'week', title: '2 semanas' },
-        { type: 'week', title: '3 semanas' },
-    ];
+    // const achivementsMock = [
+    //     { type: 'streak', title: '1 día' },
+    //     { type: 'streak', title: '2 días' },
+    //     { type: 'streak', title: '3 días' },
+    //     { type: 'week', title: '1 semana' },
+    //     { type: 'week', title: '2 semanas' },
+    //     { type: 'week', title: '3 semanas' },
+    // ];
 
     return (
         <Box display={'flex'} flexDirection={'column'} height={'100%'}>
@@ -56,13 +73,13 @@ const Profile = () => {
                         <AvatarIcon />
                     </Avatar>
                     <Typography className="h4 bold" marginBottom={'3vh'}>
-                        Name Lastname
+                        {user?.patientCode}
                     </Typography>
-                    <Achievements
-                        achievements={achivementsMock}
-                        title={'Logros'}
-                        viewMoreButton="Ver más"
-                    />
+                    {/*<Achievements*/}
+                    {/*    achievements={achivementsMock}*/}
+                    {/*    title={'Logros'}*/}
+                    {/*    viewMoreButton="Ver más"*/}
+                    {/*/>*/}
                 </Box>
                 <Box
                     display={'flex'}
