@@ -5,6 +5,7 @@ import Image from 'next/image';
 import './styles.css';
 import image from '../../assets/images/prepagesimg.png';
 import { useRouter } from 'next/router';
+import WithAuth from '@/components/WithAuth';
 
 const PreTesting = () => {
     const router = useRouter();
@@ -37,4 +38,4 @@ const PreTesting = () => {
     );
 };
 
-export default PreTesting;
+export default WithAuth(PreTesting);

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { store } from 'next/dist/build/output/store';
+import { getToken } from '@/service/store';
 
 const baseURL = 'http://localhost:3001';
 
@@ -11,6 +13,19 @@ const config = (token: string) => ({
 const gatlaAxios = axios.create({
     baseURL,
 });
+
+gatlaAxios.interceptors.request.use(
+    function (config) {
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    function (error) {
+        return Promise.reject(error);
+    }
+);
 
 gatlaAxios.interceptors.response.use(
     function (response) {
@@ -68,6 +83,30 @@ export const login = async (data: any) => {
     }
 };
 
+export const changePassword = async (data: any) => {
+    try {
+        const response = await gatlaAxios.put('/user/changepass', data, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        });
+        return response.status;
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+};
+
+export const getUserProfile = async () => {
+    try {
+        const response = await gatlaAxios.get(
+            '/user/profile',
+            config(getToken()!!)
+        );
+        return response.data;
+    } catch (error) {}
+};
+
 export const getUserStats = async () => {
     try {
         const response = await gatlaAxios.get('/user/homestats', {
@@ -76,8 +115,5 @@ export const getUserStats = async () => {
             },
         });
         return response.data;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+    } catch (error) {}
 };
