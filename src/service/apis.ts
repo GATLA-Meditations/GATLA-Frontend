@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { store } from 'next/dist/build/output/store';
+import { getToken } from '@/service/store';
 
 const baseURL = 'http://localhost:3001';
 
@@ -89,8 +91,20 @@ export const changePassword = async (data: any) => {
             },
         });
         return response.status;
+    } catch (error) {
+        console.log(error);
+        throw error;
     }
-    catch (error) {
+};
+
+export const getUserProfile = async () => {
+    try {
+        const response = await gatlaAxios.get(
+            '/user/profile',
+            config(getToken()!!)
+        );
+        return response.data;
+    } catch (error) {
         console.log(error);
         throw error;
     }
