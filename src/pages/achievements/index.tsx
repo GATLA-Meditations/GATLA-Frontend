@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import AchievementsFilter from '@/components/AchievementsFilter';
 import Achievements from '@/components/Achievements';
 import '../../app/globals.css';
+import WithAuth from '@/components/WithAuth';
 
 const AchievementsScreen = () => {
     const [option, setOption] = useState<string>('');
@@ -49,4 +50,4 @@ const AchievementsScreen = () => {
     );
 };
 
-export default AchievementsScreen;
+export default WithAuth(AchievementsScreen);

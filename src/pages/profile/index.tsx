@@ -8,6 +8,7 @@ import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
 import { getUserProfile } from '@/service/apis';
+import WithAuth from '@/components/WithAuth';
 
 export interface User {
     patientCode: string;
@@ -116,4 +117,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default WithAuth(Profile);

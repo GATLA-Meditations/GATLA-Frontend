@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import '../../app/globals.css';
 import ModuleSeparator from '@/components/ModuleSeparator';
+import WithAuth from '@/components/WithAuth';
 
 const Settings = () => {
     return (
@@ -101,4 +102,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default WithAuth(Settings);
