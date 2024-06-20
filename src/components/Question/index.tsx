@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.css';
 import '@/app/globals.css';
 import './styles.css';
 import { Radio } from '@mui/material';
@@ -26,16 +25,7 @@ const Question = ({
             <div className="head">
                 <p className="questionText">{questionText}</p>
             </div>
-            <div>
-                <div className="options-container">
-                    {optionsText.map((option, key) => {
-                        return (
-                            <p className={'options-text'} key={key}>
-                                {option}
-                            </p>
-                        );
-                    })}
-                </div>
+            <div className={'question-options-text-container'}>
                 <div className="button-container">
                     {Array.from({ length: optionsAmt }, (_, i) => (
                         <Radio
@@ -48,6 +38,15 @@ const Question = ({
                             onChange={onChange}
                         />
                     ))}
+                </div>
+                <div className="options-container">
+                    {optionsText.map((option, key) => {
+                        return (
+                            <p className={'options-text'} key={key}>
+                                {option}
+                            </p>
+                        );
+                    })}
                 </div>
             </div>
         </div>

@@ -15,7 +15,9 @@ const Notifications = ({ amtNotifications }: NotificationsIconProps) => {
                 aria-label={`show ${amtNotifications} new notifications`}
             >
                 <Badge badgeContent={amtNotifications} color="error">
-                    <NotificationsIcon style={{ color: 'var(--black)' }} />
+                    <NotificationsIcon
+                        style={{ color: 'var(--primary-700)' }}
+                    />
                 </Badge>
             </IconButton>
         </Link>

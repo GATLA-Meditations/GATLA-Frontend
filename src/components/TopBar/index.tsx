@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography';
 import Notifications from '../Notifications';
 import React, { useState } from 'react';
 import SettingsButton from '../Settings';
-import { posix } from 'path';
 import Image from 'next/image';
 import logo from '@/assets/Logo/logo.png';
 
@@ -19,27 +18,19 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
 
     return (
         <Box
-            sx={{ flexGrow: 1 }}
             style={{
-                backgroundColor: 'var(--bg-color)',
+                background: 'none',
             }}
         >
             <AppBar
                 position="static"
-                style={{ backgroundColor: 'var(--bg-color)' }}
+                style={{ background: 'none', boxShadow: 'none' }}
             >
                 <Toolbar>
-                    <Box style={{marginRight: 10}}>
+                    <Box style={{ marginRight: 10 }}>
                         <Image src={logo} alt="logo" width={30} height={50} />
                     </Box>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        color={'#1D1B20'}
-                    >
-                        Renacentia
-                    </Typography>
+
                     <Box sx={{ flexGrow: 1 }} />
                     <Box
                         sx={{

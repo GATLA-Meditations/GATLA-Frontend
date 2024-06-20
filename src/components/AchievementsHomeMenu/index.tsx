@@ -10,19 +10,22 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
     const containerStyle: React.CSSProperties = {
         display: 'flex',
         alignItems: 'center',
-        // gap: '10px',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        gap: '10px',
+        margin: '16px',
     };
 
     const itemStyle: React.CSSProperties = {
         height: '156px', // Set a fixed height for consistency
-        width: `${100 / 3}%`,
         display: 'flex',
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        gap: '5px',
+        background: 'var(--white)',
+        borderRadius: '10px',
+        gap: '8px',
     };
 
     const svgStyle: React.CSSProperties = {
@@ -32,7 +35,7 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
 
     const h1Style: React.CSSProperties = {
         color: 'black',
-        fontSize: '15px',
+        fontSize: '24px',
         fontFamily: 'Inter',
         fontWeight: '700',
         letterSpacing: '0.45px',
@@ -40,10 +43,9 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
     };
 
     const h2Style: React.CSSProperties = {
-        width: '100%',
         textAlign: 'center',
-        color: 'black',
-        fontSize: '12px',
+        color: 'var(--primary-700)',
+        fontSize: '14px',
         fontFamily: 'Inter',
         fontWeight: '400',
         letterSpacing: '0.36px',
@@ -65,7 +67,11 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
                     />
                 </svg>
                 <h1 style={h1Style}>{days}</h1>
-                <h2 style={h2Style}>Días seguidos en racha</h2>
+                <h2 style={h2Style}>
+                    Días seguidos
+                    <br />
+                    en racha
+                </h2>
             </div>
             <div style={itemStyle}>
                 <svg
@@ -76,11 +82,6 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
                     viewBox="0 0 32 31"
                     fill="none"
                 >
-                    <path
-                        opacity="0.2"
-                        d="M32 16.5C32 20.213 30.525 23.774 27.8995 26.3995C25.274 29.025 21.713 30.5 18 30.5C14.287 30.5 10.726 29.025 8.1005 26.3995C5.475 23.774 4 20.213 4 16.5C4 12.787 5.475 9.22601 8.1005 6.6005C10.726 3.975 14.287 2.5 18 2.5C21.713 2.5 25.274 3.975 27.8995 6.6005C30.525 9.22601 32 12.787 32 16.5Z"
-                        fill="#8B34C9"
-                    />
                     <path
                         fillRule="evenodd"
                         clipRule="evenodd"
@@ -126,7 +127,7 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
                     />
                 </svg>
                 <h1 style={h1Style}>{goals}</h1>
-                <h2 style={h2Style}>Recompenzas recibidas</h2>
+                <h2 style={h2Style}>Recompensas recibidas</h2>
             </div>
         </div>
     );

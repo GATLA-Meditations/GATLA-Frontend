@@ -6,7 +6,6 @@
 .video-player {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
     height: 100% !important;
     width: 100% !important;
 }

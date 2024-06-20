@@ -1,6 +1,7 @@
 :root {
     --black: #0c1012;
     --white: #ffffff;
+    --light-white: #fdfdfd;
     --bg-color: #f3edf7;
 
     --complementary: #47ba84;
@@ -151,6 +152,15 @@
 
 .bold {
     font-weight: 700 !important;
+}
+
+body {
+    background: linear-gradient(
+        to bottom,
+        var(--primary-100),
+        var(--primary-300),
+        var(--primary-200)
+    );
 }
 
 /*@media (prefers-color-scheme: dark) {*/
