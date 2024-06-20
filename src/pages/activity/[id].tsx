@@ -1,9 +1,12 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getActivityById } from '@/service/apis';
 import '../../app/globals.css';
 import './styles.css';
 import VideoPlayer from '@/components/VideoPlayer';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 enum ActivityContentType {
     VIDEO = 'VIDEO',
@@ -26,6 +29,7 @@ const Activity = () => {
     const router = useRouter();
     const id = router.query.id as string;
     const [activity, setActivity] = useState<Activity>();
+    const [showDescription, setShowDescription] = useState<boolean>(false);
 
     const activityMap = (content: string, type: string) => {};
 
@@ -36,25 +40,35 @@ const Activity = () => {
         }
     };
 
+    const handleShowDescription = () => {
+        setShowDescription(!showDescription);
+    };
+
     useEffect(() => {
         handleGetActivity().then();
     }, [id]);
 
     return (
         <div className={'activity-main-div'}>
-            <div className={'activity-title-div'}>
-                <p
-                    className={'h2 activity-title'}
-                    style={{ color: 'var(--light-white)' }}
-                >
-                    {activity?.name}
-                </p>
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    width: '90%',
+                    margin: '10px 0',
+                    color: 'white',
+                }}
+            >
+                <ArrowBackIosNewIcon onClick={() => router.back()} />
             </div>
             <div
                 style={{
                     display: 'flex',
                     flexDirection: 'column-reverse',
                     alignItems: 'center',
+                    justifyContent: 'start',
+                    gap: '20px',
+                    height: '100%',
                     width: '100%',
                 }}
             >
@@ -64,11 +78,26 @@ const Activity = () => {
                             <VideoPlayer url={activity.content} />
                         </div>
                     ) : (
-                        <div className={'activity-description-div'} key={key}>
-                            <p className={'h3 activity-p'}>Descripción</p>
-                            <p className={'h6 activity-p'}>
-                                {activity.content}
+                        <div
+                            className={'activity-description-div'}
+                            key={key}
+                            onClick={handleShowDescription}
+                        >
+                            <p className={'h5 description-title'}>
+                                Descripción
                             </p>
+                            {showDescription && (
+                                <p className={'body1 activity-p'}>
+                                    {activity.content}
+                                </p>
+                            )}
+                            <div className={'show-description-arrow-div'}>
+                                {showDescription ? (
+                                    <KeyboardArrowUpIcon />
+                                ) : (
+                                    <KeyboardArrowDownIcon />
+                                )}
+                            </div>
                         </div>
                     )
                 )}

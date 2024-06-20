@@ -2,8 +2,14 @@ import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
 
+export enum ModuleType {
+    MEDITATION = 'MEDITATION',
+    QUESTIONNAIRES = 'QUESTIONNAIRES',
+}
+
 export interface EntryPointData {
     id: string;
+    type: ModuleType;
     name: string;
     description: string;
     progress: number;
@@ -12,6 +18,7 @@ export interface EntryPointData {
 const MeditationEntryPoint = ({
     id,
     name,
+    type,
     description,
     progress,
 }: EntryPointData) => {
@@ -29,6 +36,11 @@ const MeditationEntryPoint = ({
                 '&:hover': { cursor: 'pointer' },
             }}
             justifyContent={'space-between'}
+            onClick={() =>
+                type === ModuleType.MEDITATION
+                    ? router.push(`/module/${id}`)
+                    : router.push('/pretesting')
+            }
         >
             <Box
                 display={'flex'}
@@ -60,13 +72,7 @@ const MeditationEntryPoint = ({
                 display={'flex'}
                 flexDirection={'row'}
             >
-                <Typography
-                    fontSize={'1.25rem'}
-                    size="small"
-                    onClick={() => router.push('/module/moduleId1')}
-                >
-                    {name}
-                </Typography>
+                <Typography fontSize={'1.25rem'}>{name}</Typography>
             </Box>
         </Box>
     );

@@ -17,7 +17,7 @@ const ActivityCard = ({ isAllowed, title, onClick }: ActivityCardProps) => {
         >
             <div className="title-div">
                 <div className={'text-div'}>
-                    <p className="h5">{title}</p>
+                    <p className="h6">{title}</p>
                 </div>
                 <div className={'lock-div'}>
                     {isAllowed ? (

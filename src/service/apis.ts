@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { store } from 'next/dist/build/output/store';
 import { getToken } from '@/service/store';
+import {
+    QuestionnaireAnswers,
+    QuestionProps,
+} from '@/pages/questionnaire/[id]';
 
 const baseURL = 'http://localhost:3001';
 
@@ -48,8 +52,7 @@ export const getActualModule = async () => {
             },
         });
         return response.data;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         throw error;
     }
@@ -57,7 +60,10 @@ export const getActualModule = async () => {
 
 export const getQuestionnarieById = async (id: string) => {
     try {
-        const response = await gatlaAxios.get(`questionnaire/${id}`);
+        const response = await gatlaAxios.get(
+            `questionnaire/${id}`,
+            config(getToken())
+        );
         return response.data;
     } catch (error) {
         console.log(error);
@@ -100,8 +106,7 @@ export const login = async (data: any) => {
     try {
         const response = await gatlaAxios.post('/auth/login', data);
         return response.data.token;
-    }
-    catch (error) {
+    } catch (error) {
         console.log(error);
         throw error;
     }
@@ -118,6 +123,14 @@ export const changePassword = async (data: any) => {
     } catch (error) {
         console.log(error);
         throw error;
+    }
+};
+
+export const submitQuestionnaire = async (answers: QuestionnaireAnswers) => {
+    try {
+        await gatlaAxios.post('/submission', answers, config(getToken()));
+    } catch (error) {
+        console.log(error);
     }
 };
 

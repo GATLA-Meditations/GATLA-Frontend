@@ -19,6 +19,10 @@
     background: var(--red);
 }
 
+.common {
+    background: var(--primary-300);
+}
+
 .small {
     height: 36px;
     width: 149px;

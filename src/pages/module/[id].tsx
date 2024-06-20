@@ -8,7 +8,7 @@ import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
 
-interface Module {
+export interface Module {
     id: string;
     name: string;
     description: string;
@@ -22,7 +22,7 @@ interface ActivityPreview {
     name: string;
 }
 
-const MeditationScreen = () => {
+const ModuleScreen = () => {
     const router = useRouter();
     const id = router.query.id as string;
 
@@ -48,7 +48,7 @@ const MeditationScreen = () => {
             <Box height={'100vh'} className={'home-div'}>
                 <TopBar amtNotifications={0} />
                 <div className="module-name-div">
-                    <h1>{module?.name}</h1>
+                    <p className={'h2 bold'}>{module?.name}</p>
                 </div>
                 <div className="activity-division-div">
                     {module?.activities?.map((activity, key) => (
@@ -65,4 +65,4 @@ const MeditationScreen = () => {
         </>
     );
 };
-export default MeditationScreen;
+export default ModuleScreen;

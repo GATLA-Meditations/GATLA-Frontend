@@ -1,10 +1,11 @@
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 import Question from '@/components/Question';
-import React, {useEffect, useState} from 'react';
-import {getQuestionnarieById, submitQuestionnaire} from '@/service/apis';
-import './styles.css'
-import Button from "@/components/Button";
+import React, { useEffect, useState } from 'react';
+import { getQuestionnarieById, submitQuestionnaire } from '@/service/apis';
+import './styles.css';
+import Button from '@/components/Button';
 import WithAuth from '@/components/WithAuth';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export interface QuestionProps {
     name: string;
@@ -14,8 +15,8 @@ export interface QuestionProps {
 }
 
 export interface QuestionnaireAnswers {
-    questionnaireId: string,
-    answers: QuestionProps[]
+    questionnaireId: string;
+    answers: QuestionProps[];
 }
 
 const TestPage = () => {
@@ -38,35 +39,64 @@ const TestPage = () => {
         const questionId = event.target.id;
         setQuestions((prevQuestions) =>
             prevQuestions?.map((q) =>
-                q.id === questionId
-                    ? {...q, answer: event.target.value}
-                    : q
+                q.id === questionId ? { ...q, answer: event.target.value } : q
             )
         );
     };
 
     const handleSendButton = async () => {
-        await submitQuestionnaire({questionnaireId:id, answers:questions!!})
-        await router.push('/home')
-    }
+        await submitQuestionnaire({
+            questionnaireId: id,
+            answers: questions!!,
+        });
+        await router.push('/home');
+    };
     const allQuestionsAnswered = questions?.every(
         (question) => question.answer
     );
 
     return (
         <div className={'questionnaire-questions-main-div'}>
+            <div className={'progress-bar-arrow-div'}>
+                <div className={'progress-bar'}>
+                    {questions?.map((question, key) => {
+                        return (
+                            <div
+                                key={key}
+                                className={`progress-bar-item ${question.answer ? 'answered' : 'not-answered'}`}
+                            ></div>
+                        );
+                    })}
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        marginLeft: '10px',
+                    }}
+                >
+                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                </div>
+            </div>
+
             <div className={'questionnaire-title-div'}>
-                <p className={'h2 bold questionnaire-title-p'}>{questionnaireName}</p>
+                <p className={'h4 bold questionnaire-title-p'}>
+                    {questionnaireName}
+                </p>
             </div>
             <div className={'questionnaire-questions-div'}>
                 {questions?.map((question, key) => {
                     return (
-                        <div className={'question-div'}>
+                        <div className={'question-div'} key={key}>
                             <Question
                                 optionsAmt={7}
                                 optionsText={[
+                                    'Completamente en desacuerdo',
                                     'En desacuerdo',
+                                    'Parcialmente en desacuerdo',
+                                    'Indiferente',
                                     'Parcialmente de acuerdo',
+                                    'De acuerdo',
                                     'Completamente de acuerdo',
                                 ]}
                                 key={key}
@@ -80,11 +110,15 @@ const TestPage = () => {
                 })}
             </div>
             <div className={'questionnaire-send-button-div'}>
-                {allQuestionsAnswered  &&
-                <Button variant={'common'} size={'medium'} onClick={handleSendButton}>
-                    Enviar respuestas
-                </Button>
-                }
+                {allQuestionsAnswered && (
+                    <Button
+                        variant={'common'}
+                        size={'medium'}
+                        onClick={handleSendButton}
+                    >
+                        Enviar respuestas
+                    </Button>
+                )}
             </div>
         </div>
     );

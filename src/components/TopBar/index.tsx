@@ -27,17 +27,10 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                 style={{ background: 'none', boxShadow: 'none' }}
             >
                 <Toolbar>
-                    <Box style={{marginRight: 10}}>
+                    <Box style={{ marginRight: 10 }}>
                         <Image src={logo} alt="logo" width={30} height={50} />
                     </Box>
-                    <Typography
-                        variant="h5"
-                        noWrap
-                        color={'var(--primary-700)'}
-                        fontWeight={600}
-                    >
-                        Renacentia
-                    </Typography>
+
                     <Box sx={{ flexGrow: 1 }} />
                     <Box
                         sx={{

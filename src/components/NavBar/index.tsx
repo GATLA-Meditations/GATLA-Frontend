@@ -36,12 +36,12 @@ const NavBar = ({ value }: NavBarProps) => {
             />
             <BottomNavigationAction
                 label={'Reunión'}
-                icon={<VideocamIcon style={{ fontSize: '2.5rem' }} />}
+                icon={<VideocamIcon style={{ fontSize: '2rem' }} />}
                 href={'/meet'}
             />
             <BottomNavigationAction
                 label={'Perfil'}
-                icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }} />}
+                icon={<AccountCircleIcon style={{ fontSize: '2rem' }} />}
                 href={'/profile'}
             />
         </BottomNavigation>

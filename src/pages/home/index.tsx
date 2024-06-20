@@ -33,6 +33,7 @@ const HomeScreen = () => {
                 <AchievementsHomeMenu days={1} minutes={1} goals={1} />
                 <MeditationEntryPoint
                     id={actualModule.id}
+                    type={actualModule.type}
                     name={actualModule.name}
                     description={actualModule.description}
                     progress={actualModule.progress}
