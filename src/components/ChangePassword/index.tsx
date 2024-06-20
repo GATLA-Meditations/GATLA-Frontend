@@ -31,8 +31,7 @@ const ChangePassword = ({ closeModal }: ChangePassword) => {
                 validateStrongPassword(passwordInput)
             ) {
                 setIsButtonDisabled(false);
-            }
-            else {
+            } else {
                 setIsButtonDisabled(true);
             }
         };
@@ -106,7 +105,7 @@ const ChangePassword = ({ closeModal }: ChangePassword) => {
                                 type="password"
                                 onChange={handlePasswordRepeatInputChange}
                                 variant={isButtonDisabled ? 'error' : 'default'}
-                                helperText='La contraseña es muy débil o no coincide.'
+                                helperText="La contraseña es muy débil o no coincide."
                             />
 
                             <div className={'elements_container'}>

@@ -1,6 +1,10 @@
 import axios from 'axios';
 import { store } from 'next/dist/build/output/store';
 import { getToken } from '@/service/store';
+import {
+    QuestionnaireAnswers,
+    QuestionProps,
+} from '@/pages/questionnaire/[id]';
 
 const baseURL = 'http://localhost:3001';
 
@@ -56,7 +60,10 @@ export const getActualModule = async () => {
 
 export const getQuestionnarieById = async (id: string) => {
     try {
-        const response = await gatlaAxios.get(`questionnaire/${id}`);
+        const response = await gatlaAxios.get(
+            `questionnaire/${id}`,
+            config(getToken())
+        );
         return response.data;
     } catch (error) {
         console.log(error);
@@ -69,6 +76,28 @@ export const getVideo = async (activityId: string) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching video:', error);
+        throw error;
+    }
+};
+
+export const getModuleById = async (id: string) => {
+    try {
+        // const token = localStorage.getItem('token')!!;
+        const response = await gatlaAxios.get(`/module/${id}`);
+        return response.data;
+    } catch (error) {
+        console.error('Coudnt find module');
+        throw error;
+    }
+};
+
+export const getActivityById = async (id: string) => {
+    try {
+        const token = localStorage.getItem('token')!!;
+        const response = await gatlaAxios.get(`/activity/${id}`, config(token));
+        return response.data;
+    } catch (error) {
+        console.error('Coudnt find module');
         throw error;
     }
 };
@@ -94,6 +123,14 @@ export const changePassword = async (data: any) => {
     } catch (error) {
         console.log(error);
         throw error;
+    }
+};
+
+export const submitQuestionnaire = async (answers: QuestionnaireAnswers) => {
+    try {
+        await gatlaAxios.post('/submission', answers, config(getToken()));
+    } catch (error) {
+        console.log(error);
     }
 };
 
