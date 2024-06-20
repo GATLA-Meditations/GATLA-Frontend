@@ -8,6 +8,8 @@ import Box from '@mui/material/Box';
 import { login } from '@/service/apis';
 import { setToken } from '@/service/store';
 import { useRouter } from 'next/router';
+import logo from '../../assets/Logo/logo.png';
+import Image from 'next/image';
 
 interface FormValues {
     patientCode: string;
@@ -32,7 +34,7 @@ const LoginPage = () => {
     return (
         <Box className="loginPageContainer">
             <Box className="headerContainer">
-                <h1>Logo</h1>
+                <Image src={logo} alt="logo" width={100} height={150} />
                 <Typography className="title h3 bold">Renacentia</Typography>
                 <Typography className="subtitle">
                     Comienza tu bienestar personal

@@ -9,14 +9,19 @@ import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import { getActualModule } from '@/service/apis';
+import WithAuth from '@/components/WithAuth';
 
 const HomeScreen = () => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
 
     useEffect(() => {
         async function fetchData() {
-            const moduleData = await getActualModule();
-            setActualModule(moduleData);
+            try {
+                const moduleData = await getActualModule();
+                setActualModule(moduleData);
+            } catch (error) {
+                console.log(error);
+            }
         }
         fetchData();
     }, []);
@@ -39,4 +44,4 @@ const HomeScreen = () => {
     );
 };
 
-export default HomeScreen;
+export default WithAuth(HomeScreen);

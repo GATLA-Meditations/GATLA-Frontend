@@ -7,7 +7,7 @@ import { GoalIcon } from '@/assets/GoalIcon';
 import React, { JSX } from 'react';
 import Typography from '@mui/material/Typography';
 
-interface Achievement {
+export interface Achievement {
     type: string;
     title: string;
 }

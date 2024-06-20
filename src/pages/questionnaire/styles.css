@@ -1,0 +1,34 @@
+.questionnaire-questions-div{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+.question-div{
+    display: flex;
+    margin: 4px
+}
+
+.questionnaire-title-div {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 12px;
+    padding: 12px;
+}
+
+.questionnaire-questions-main-div{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.questionnaire-title-p{
+    color: var(--primary-700);
+}
+
+.questionnaire-send-button-div{
+    display: flex;
+    margin: 12px 0;
+}

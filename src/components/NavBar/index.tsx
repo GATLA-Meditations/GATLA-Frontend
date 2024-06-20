@@ -4,7 +4,6 @@ import HomeIcon from '@mui/icons-material/Home';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import './styles.css';
 import React from 'react';
-import { useRouter } from 'next/router';
 
 interface NavBarProps {
     value: number;
@@ -12,7 +11,6 @@ interface NavBarProps {
 
 const NavBar = ({ value }: NavBarProps) => {
     const [val, setValue] = React.useState(value);
-    const router = useRouter();
     return (
         <BottomNavigation
             style={{
@@ -33,18 +31,18 @@ const NavBar = ({ value }: NavBarProps) => {
         >
             <BottomNavigationAction
                 label={'Inicio'}
-                onClick={() => router.push('/home')}
+                href={'/home'}
                 icon={<HomeIcon style={{ fontSize: '2rem' }} />}
             />
             <BottomNavigationAction
                 label={'Reunión'}
-                onClick={() => router.push('/meet')}
-                icon={<VideocamIcon style={{ fontSize: '2rem' }} />}
+                icon={<VideocamIcon style={{ fontSize: '2.5rem' }} />}
+                href={'/meet'}
             />
             <BottomNavigationAction
                 label={'Perfil'}
-                onClick={() => router.push('/profile')}
-                icon={<AccountCircleIcon style={{ fontSize: '2rem' }} />}
+                icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }} />}
+                href={'/profile'}
             />
         </BottomNavigation>
     );
