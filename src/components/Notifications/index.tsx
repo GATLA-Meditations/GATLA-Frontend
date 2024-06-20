@@ -1,6 +1,7 @@
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Link from 'next/link';
 
 interface NotificationsIconProps {
     amtNotifications: number;
@@ -8,7 +9,7 @@ interface NotificationsIconProps {
 
 const Notifications = ({ amtNotifications }: NotificationsIconProps) => {
     return (
-        <>
+        <Link href="/notifications">
             <IconButton
                 size="large"
                 aria-label={`show ${amtNotifications} new notifications`}
@@ -17,7 +18,7 @@ const Notifications = ({ amtNotifications }: NotificationsIconProps) => {
                     <NotificationsIcon style={{ color: 'var(--black)' }} />
                 </Badge>
             </IconButton>
-        </>
+        </Link>
     );
 };
 
