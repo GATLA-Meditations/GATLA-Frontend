@@ -46,11 +46,7 @@ gatlaAxios.interceptors.response.use(
 
 export const getActualModule = async () => {
     try {
-        const response = await gatlaAxios.get('/user/actual-module', {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+        const response = await gatlaAxios.get('/user/actual-module');
         return response.data;
     } catch (error) {
         console.log(error);
@@ -62,7 +58,6 @@ export const getQuestionnarieById = async (id: string) => {
     try {
         const response = await gatlaAxios.get(
             `questionnaire/${id}`,
-            config(getToken())
         );
         return response.data;
     } catch (error) {
@@ -93,8 +88,7 @@ export const getModuleById = async (id: string) => {
 
 export const getActivityById = async (id: string) => {
     try {
-        const token = localStorage.getItem('token')!!;
-        const response = await gatlaAxios.get(`/activity/${id}`, config(token));
+        const response = await gatlaAxios.get(`/activity/${id}`);
         return response.data;
     } catch (error) {
         console.error('Coudnt find module');
@@ -114,11 +108,7 @@ export const login = async (data: any) => {
 
 export const changePassword = async (data: any) => {
     try {
-        const response = await gatlaAxios.put('/user/changepass', data, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        });
+        const response = await gatlaAxios.put('/user/changepass', data);
         return response.status;
     } catch (error) {
         console.log(error);
@@ -128,7 +118,7 @@ export const changePassword = async (data: any) => {
 
 export const submitQuestionnaire = async (answers: QuestionnaireAnswers) => {
     try {
-        await gatlaAxios.post('/submission', answers, config(getToken()));
+        await gatlaAxios.post('/submission', answers);
     } catch (error) {
         console.log(error);
     }
@@ -138,11 +128,14 @@ export const getUserProfile = async () => {
     try {
         const response = await gatlaAxios.get(
             '/user/profile',
-            config(getToken()!!)
         );
         return response.data;
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
+    } catch (error) {}
+};
+
+export const getUserStats = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/homestats');
+        return response.data;
+    } catch (error) {}
 };

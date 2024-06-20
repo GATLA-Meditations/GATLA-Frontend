@@ -8,11 +8,14 @@ import '../../app/globals.css';
 import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
-import { getActualModule } from '@/service/apis';
+import { getActualModule, getUserStats } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 
 const HomeScreen = () => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
+    const [days, setDays] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [goals, setGoals] = useState(0);
 
     useEffect(() => {
         async function fetchData() {
@@ -23,8 +26,27 @@ const HomeScreen = () => {
                 console.log(error);
             }
         }
+
         fetchData();
     }, []);
+
+    useEffect(() => {
+        fetchStats();
+    }, []);
+
+    function convertMinutesToHours(minutes: number) {
+        if (minutes > 60) {
+            return Math.floor(minutes / 60);
+        }
+        return minutes;
+    }
+
+    async function fetchStats() {
+        const stats = await getUserStats();
+        setDays(stats.days ? stats.days : 0);
+        setMinutes(stats.minutes ? convertMinutesToHours(stats.minutes) : 0);
+        setGoals(stats.goals ? stats.goals : 0);
+    }
 
     return (
         <>
