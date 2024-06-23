@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { getToken } from '@/service/store';
+import Loader from '../Loader';
 
 const WithAuth = (WrappedComponent: React.ComponentType) => {
     const ComponentWithAuth = (props: any) => {
@@ -17,7 +18,7 @@ const WithAuth = (WrappedComponent: React.ComponentType) => {
             }
         }, [router]);
 
-        if (isLoading) return null;
+        if (isLoading) return <Loader />;
 
         return <WrappedComponent {...props} />;
     };

@@ -30,13 +30,16 @@ const Activity = () => {
     const id = router.query.id as string;
     const [activity, setActivity] = useState<Activity>();
     const [showDescription, setShowDescription] = useState<boolean>(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const activityMap = (content: string, type: string) => {};
 
     const handleGetActivity = async () => {
         if (id) {
+            setIsLoading(true);
             const activityInfo = await getActivityById(id);
             setActivity(activityInfo);
+            setIsLoading(false);
         }
     };
 

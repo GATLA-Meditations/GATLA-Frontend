@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import { getActualModule, getUserStats } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
+import Loader from '@/components/Loader';
 
 const HomeScreen = () => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
@@ -17,8 +18,11 @@ const HomeScreen = () => {
     const [minutes, setMinutes] = useState(0);
     const [goals, setGoals] = useState(0);
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         async function fetchData() {
+            setIsLoading(true);
             try {
                 const moduleData = await getActualModule();
                 setActualModule(moduleData);
@@ -28,6 +32,7 @@ const HomeScreen = () => {
         }
 
         fetchData();
+        setIsLoading(false);
     }, []);
 
     useEffect(() => {
@@ -42,10 +47,16 @@ const HomeScreen = () => {
     }
 
     async function fetchStats() {
+        setIsLoading(true);
         const stats = await getUserStats();
         setDays(stats.days ? stats.days : 0);
         setMinutes(stats.minutes ? convertMinutesToHours(stats.minutes) : 0);
         setGoals(stats.goals ? stats.goals : 0);
+        setIsLoading(false);
+    }
+
+    if (isLoading) {
+        return <Loader />;
     }
 
     return (

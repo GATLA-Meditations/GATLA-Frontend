@@ -7,6 +7,7 @@ import './styles.css';
 import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
+import Loader from '@/components/Loader';
 
 export interface Module {
     id: string;
@@ -26,12 +27,16 @@ const ModuleScreen = () => {
     const router = useRouter();
     const id = router.query.id as string;
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const [module, setModule] = useState<Module>();
 
     const getModule = async () => {
         if (id) {
+            setIsLoading(true);
             const moduleInfo: Module = await getModuleById(id);
             setModule(moduleInfo);
+            setIsLoading(false);
         }
     };
 
@@ -42,6 +47,10 @@ const ModuleScreen = () => {
     useEffect(() => {
         getModule().then();
     }, [id]);
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <>

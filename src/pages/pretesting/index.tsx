@@ -10,14 +10,19 @@ import { getActualModule } from '@/service/apis';
 import ActivityCard from '@/components/ActivitiesCard';
 import { useRouter } from 'next/router';
 import WithAuth from '@/components/WithAuth';
+import Loader from '@/components/Loader';
 
 const PreTesting = () => {
     const [module, setModule] = useState<Module>();
     const router = useRouter();
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleFetchQuestionnaires = async () => {
+        setIsLoading(true);
         const response = await getActualModule();
         setModule(response);
+        setIsLoading(false);
     };
 
     const handleQuestionnaireOnClick = async (questionnaireId: string) => {
@@ -31,6 +36,10 @@ const PreTesting = () => {
     useEffect(() => {
         handleFetchQuestionnaires().then();
     }, []);
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
