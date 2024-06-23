@@ -9,6 +9,7 @@ import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
 import { getUserProfile } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
+import Loader from '@/components/Loader';
 
 export interface User {
     patientCode: string;
@@ -21,13 +22,17 @@ const Profile = () => {
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [user, setUser] = useState<User>();
 
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         handleGetUser().then();
     }, []);
 
     const handleGetUser = async () => {
+        setIsLoading(true);
         const user = await getUserProfile();
         setUser(user);
+        setIsLoading(false);
     };
 
     const handleLogoutClick = () => {
@@ -46,6 +51,10 @@ const Profile = () => {
     //     { type: 'week', title: '2 semanas' },
     //     { type: 'week', title: '3 semanas' },
     // ];
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>

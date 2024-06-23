@@ -10,6 +10,7 @@ import { setToken } from '@/service/store';
 import { useRouter } from 'next/router';
 import logo from '../../assets/Logo/logo.png';
 import Image from 'next/image';
+import Loader from '@/components/Loader';
 
 interface FormValues {
     patientCode: string;
@@ -19,8 +20,10 @@ interface FormValues {
 const LoginPage = () => {
     const router = useRouter();
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleSubmit = async (values: FormValues) => {
+        setIsLoading(true);
         try {
             const token = await login(values);
             setToken(token);
@@ -28,8 +31,13 @@ const LoginPage = () => {
         } catch (error) {
             console.log(error);
             setError('Verifica el código o la contraseña');
+            setIsLoading(false);
         }
     };
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <Box className="loginPageContainer">

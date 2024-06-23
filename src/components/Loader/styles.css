@@ -1,0 +1,11 @@
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: inherit;
+}
+
+.loader-color {
+    color: var(--primary-500) !important;
+}

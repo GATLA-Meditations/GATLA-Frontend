@@ -7,6 +7,7 @@ import { CircularProgress } from '@mui/material';
 import { validateStrongPassword } from '@/util/validation';
 import { CheckCircleOutline, ErrorOutline } from '@mui/icons-material';
 import { changePassword } from '@/service/apis';
+import Loader from '../Loader';
 
 interface ChangePassword {
     closeModal: () => void;
@@ -66,7 +67,7 @@ const ChangePassword = ({ closeModal }: ChangePassword) => {
         <div className={'background'}>
             <div className={'container'}>
                 {isLoading ? (
-                    <CircularProgress size="10vh" className="loading-style" />
+                    <Loader />
                 ) : success ? (
                     <div className={'success-style'}>
                         <CheckCircleOutline fontSize="inherit" />

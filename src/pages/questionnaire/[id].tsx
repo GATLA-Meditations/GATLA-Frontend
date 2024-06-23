@@ -6,6 +6,7 @@ import './styles.css';
 import Button from '@/components/Button';
 import WithAuth from '@/components/WithAuth';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import Loader from '@/components/Loader';
 
 export interface QuestionProps {
     name: string;
@@ -24,15 +25,18 @@ const TestPage = () => {
     const id = router.query.id as string;
     const [questionnaireName, setQuestionnaireName] = useState('');
     const [questions, setQuestions] = useState<QuestionProps[]>();
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         getQuestionnaire().then();
     }, [id]);
 
     const getQuestionnaire = async () => {
+        setIsLoading(true);
         const response = await getQuestionnarieById(id);
         setQuestionnaireName(response.name);
         setQuestions(response.questions);
+        setIsLoading(false);
     };
 
     const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,15 +49,21 @@ const TestPage = () => {
     };
 
     const handleSendButton = async () => {
+        setIsLoading(true);
         await submitQuestionnaire({
             questionnaireId: id,
             answers: questions!!,
         });
         await router.push('/home');
+        setIsLoading(false);
     };
     const allQuestionsAnswered = questions?.every(
         (question) => question.answer
     );
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <div className={'questionnaire-questions-main-div'}>
