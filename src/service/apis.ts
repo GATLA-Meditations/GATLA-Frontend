@@ -56,9 +56,7 @@ export const getActualModule = async () => {
 
 export const getQuestionnarieById = async (id: string) => {
     try {
-        const response = await gatlaAxios.get(
-            `questionnaire/${id}`,
-        );
+        const response = await gatlaAxios.get(`questionnaire/${id}`);
         return response.data;
     } catch (error) {
         console.log(error);
@@ -126,9 +124,7 @@ export const submitQuestionnaire = async (answers: QuestionnaireAnswers) => {
 
 export const getUserProfile = async () => {
     try {
-        const response = await gatlaAxios.get(
-            '/user/profile',
-        );
+        const response = await gatlaAxios.get('/user/profile');
         return response.data;
     } catch (error) {}
 };

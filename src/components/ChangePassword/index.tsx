@@ -17,6 +17,7 @@ const ChangePassword = ({ closeModal }: ChangePassword) => {
     const [isLoading, setIsLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState(false);
+    const [helperError, setHelperError] = useState(false);
     const [passwordInput, setPasswordInput] = useState('');
     const [passwordRepeatInput, setPasswordRepeatInput] = useState('');
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -32,8 +33,10 @@ const ChangePassword = ({ closeModal }: ChangePassword) => {
                 validateStrongPassword(passwordInput)
             ) {
                 setIsButtonDisabled(false);
+                setHelperError(false);
             } else {
                 setIsButtonDisabled(true);
+                setHelperError(true);
             }
         };
         handleEnableButton();
@@ -105,8 +108,10 @@ const ChangePassword = ({ closeModal }: ChangePassword) => {
                                 placeholder={'Repetir contraseña'}
                                 type="password"
                                 onChange={handlePasswordRepeatInputChange}
-                                variant={isButtonDisabled ? 'error' : 'default'}
-                                helperText="La contraseña es muy débil o no coincide."
+                                variant={helperError ? 'error' : 'default'}
+                                helperText={
+                                    'La contraseña es muy débil o no coinciden'
+                                }
                             />
 
                             <div className={'elements_container'}>

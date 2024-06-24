@@ -54,7 +54,13 @@ const TestPage = () => {
             questionnaireId: id,
             answers: questions!!,
         });
-        await router.push('/home');
+        await router.push({
+            pathname: '/home',
+            query: {
+                message: 'El cuestionario ha sido enviado correctamente',
+                type: 'success',
+            },
+        });
         setIsLoading(false);
     };
     const allQuestionsAnswered = questions?.every(

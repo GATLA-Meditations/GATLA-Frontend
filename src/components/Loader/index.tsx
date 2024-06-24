@@ -11,7 +11,7 @@ const Loader = ({ size }: LoaderProps) => {
         <Box className="loader-container">
             <CircularProgress
                 className="loader-color"
-                size={size ? size : '8vh'}
+                size={size ? size : '6vh'}
             />
         </Box>
     );

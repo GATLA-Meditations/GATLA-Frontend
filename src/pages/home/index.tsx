@@ -10,10 +10,13 @@ import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import { getActualModule, getUserStats } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
+import { useRouter } from 'next/router';
+import WithToast, { WithToastProps } from '@/hoc/withToast';
 import Loader from '@/components/Loader';
 
-const HomeScreen = () => {
+const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
+    const router = useRouter();
     const [days, setDays] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [goals, setGoals] = useState(0);
@@ -30,6 +33,7 @@ const HomeScreen = () => {
                 console.log(error);
             }
         }
+        checkForToast().then();
 
         fetchData();
         setIsLoading(false);
@@ -38,6 +42,16 @@ const HomeScreen = () => {
     useEffect(() => {
         fetchStats();
     }, []);
+
+    const checkForToast = async () => {
+        const { message, type } = router.query as Record<
+            string,
+            'success' | 'error'
+        >;
+        if (message && type) {
+            showToast(message, type);
+        }
+    };
 
     function convertMinutesToHours(minutes: number) {
         if (minutes > 60) {
@@ -78,4 +92,4 @@ const HomeScreen = () => {
     );
 };
 
-export default WithAuth(HomeScreen);
+export default WithAuth(WithToast(HomeScreen));

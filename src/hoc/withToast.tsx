@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { ComponentType } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+export interface WithToastProps {
+    showToast: (message: string, type: 'success' | 'error') => void;
+}
+
 const withToast = (WrappedComponent: React.ComponentType<any>) => {
     return (props: any) => {
-        const showToast = (
-            message: string,
-            type: 'success' | 'error'
-        ) => {
+        const showToast = (message: string, type: 'success' | 'error') => {
             switch (type) {
             case 'success':
                 toast.success(message);
@@ -23,7 +24,7 @@ const withToast = (WrappedComponent: React.ComponentType<any>) => {
 
         return (
             <>
-                <WrappedComponent {...props} toast={showToast} />
+                <WrappedComponent {...props} showToast={showToast} />
                 <ToastContainer />
             </>
         );
