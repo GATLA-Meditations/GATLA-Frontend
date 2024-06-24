@@ -7,6 +7,7 @@ export interface WithToastProps {
 }
 
 const withToast = (WrappedComponent: React.ComponentType<any>) => {
+    // eslint-disable-next-line react/display-name
     return (props: any) => {
         const showToast = (message: string, type: 'success' | 'error') => {
             switch (type) {
