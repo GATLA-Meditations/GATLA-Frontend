@@ -7,6 +7,7 @@ import VideoPlayer from '@/components/VideoPlayer';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import Loader from '@/components/Loader';
 
 enum ActivityContentType {
     VIDEO = 'VIDEO',
@@ -50,6 +51,10 @@ const Activity = () => {
     useEffect(() => {
         handleGetActivity().then();
     }, [id]);
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <div className={'activity-main-div'}>

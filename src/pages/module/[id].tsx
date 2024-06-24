@@ -65,7 +65,7 @@ const ModuleScreen = () => {
                             key={key}
                             onClick={() => handleActivityOnClick(activity.id)} //Modal en caso de que no se haya completado la actividad previa
                             title={activity.name}
-                            isAllowed={activity.unlocked}
+                            isAllowed={false}
                         />
                     ))}
                 </div>

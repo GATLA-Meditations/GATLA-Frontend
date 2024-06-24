@@ -1,8 +1,7 @@
-import Button from '@/components/Button';
-import { Box, Typography } from '@mui/material';
+import { Box } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import './styles.css';
-import image from '../../assets/images/prepagesimg.png';
+import '../../app/globals.css';
 import TopBar from '@/components/TopBar';
 import NavBar from '@/components/NavBar';
 import { Module } from '@/pages/module/[id]';
@@ -29,10 +28,6 @@ const PreTesting = () => {
         await router.push(`/questionnaire/${questionnaireId}`);
     };
 
-    const handleStart = () => {
-        console.log('hola');
-    };
-
     useEffect(() => {
         handleFetchQuestionnaires().then();
     }, []);
@@ -57,17 +52,6 @@ const PreTesting = () => {
                     />
                 ))}
             </div>
-            {/*<Image src={image} width={200} alt="pretesting" className="image" />*/}
-            {/*<Typography className="title">Antes de continuar...</Typography>*/}
-            {/*<Typography className="text">*/}
-            {/*    Quisieramos pedirle que complete estos breves cuestionarios con*/}
-            {/*    completa honestidad.*/}
-            {/*</Typography>*/}
-            {/*<Box margin={'3vh'}>*/}
-            {/*    <Button variant="common" size="medium" onClick={handleStart}>*/}
-            {/*        Empezar*/}
-            {/*    </Button>*/}
-            {/*</Box>*/}
             <NavBar value={0} />
         </Box>
     );

@@ -1,18 +1,15 @@
 import React, { useRef, useState, useEffect } from 'react';
 import ReactPlayer, { ReactPlayerProps } from 'react-player';
 import './styles.css';
+import Loader from '@/components/Loader';
 
 export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
     const ref = useRef<ReactPlayer>(null);
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     const handlePlay = () => {
         if (ref.current) {
@@ -25,10 +22,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
             console.log('Video is paused', ref.current.getCurrentTime());
         }
     };
-
-    if (!isMounted) {
-        return null;
-    }
 
     return (
         <ReactPlayer
