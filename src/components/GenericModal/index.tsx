@@ -31,8 +31,10 @@ const GenericModal = ({
     topButtonAction,
     onClose,
     topButtonText = 'Confirmar',
+    topButtonColor,
     bottomButton = true,
     bottomButtonText = 'Cancelar',
+    bottomButtonColor,
     backgroundColor = 'var(--primary-100)',
 }: GenericModalProps) => {
     const handleConfirm = () => {
@@ -79,7 +81,7 @@ const GenericModal = ({
                     <Button
                         size="small"
                         onClick={handleConfirm}
-                        variant={'green'}
+                        className={topButtonColor}
                     >
                         {topButtonText}
                     </Button>
@@ -87,7 +89,7 @@ const GenericModal = ({
                         <Button
                             size="small"
                             onClick={handleClose}
-                            variant={'red'}
+                            className={bottomButtonColor}
                         >
                             {bottomButtonText}
                         </Button>
