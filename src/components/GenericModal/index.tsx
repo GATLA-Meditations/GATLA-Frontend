@@ -1,36 +1,42 @@
-import { Box, Modal, Typography } from '@mui/material';
+import { Box, Modal, Typography, IconButton } from '@mui/material';
 import React from 'react';
+import CloseIcon from '@mui/icons-material/Close';
 import './styles.css';
 import '@/app/globals.css';
 import Button from '@/components/Button';
 
 interface GenericModalProps {
     open: boolean;
+    title?: string;
     onClose: () => void;
-    onConfirm: () => void;
-    title: string;
     description?: string;
     size?: 'small' | 'medium' | 'large';
+    topButton?: boolean;
+    topButtonText?: string;
+    topButtonColor?: string;
+    topButtonAction: () => void;
+    bottomButton?: boolean;
+    bottomButtonText?: string;
+    bottomButtonColor?: string;
     pictureUrl?: string;
-    confirmText?: string;
-    cancelText?: string;
     backgroundColor?: string;
 }
 
 const GenericModal = ({
     open,
-    onClose,
-    onConfirm,
     title,
     description,
     size = 'medium',
     pictureUrl,
-    confirmText = 'Confirmar',
-    cancelText = 'Cancelar',
-    backgroundColor = 'white',
+    topButtonAction,
+    onClose,
+    topButtonText = 'Confirmar',
+    bottomButton = true,
+    bottomButtonText = 'Cancelar',
+    backgroundColor = 'var(--primary-100)',
 }: GenericModalProps) => {
     const handleConfirm = () => {
-        onConfirm();
+        topButtonAction();
     };
 
     const handleClose = () => {
@@ -41,32 +47,51 @@ const GenericModal = ({
         <Modal open={open} onClose={handleClose} className="modal-container">
             <Box
                 className={`modal-style modal-${size}`}
-                style={{ backgroundColor }}
+                style={{ backgroundColor, position: 'relative' }}
             >
+                <IconButton
+                    className="modal-close-button"
+                    onClick={handleClose}
+                    style={{ position: 'absolute', top: 8, right: 8 }}
+                >
+                    <CloseIcon />
+                </IconButton>
+
                 <Box>
-                    <Typography className='modal-title'>{title}</Typography>
+                    {title && (
+                        <Typography className="modal-title">{title}</Typography>
+                    )}
                 </Box>
+
                 {pictureUrl && (
                     <Box className="modal-picture">
                         <img src={pictureUrl} alt="modal" />
                     </Box>
                 )}
+
                 {description && (
                     <Typography className="modal-description">
                         {description}
                     </Typography>
                 )}
+
                 <Box className="button-box">
                     <Button
                         size="small"
-                        variant="green"
                         onClick={handleConfirm}
+                        variant={'green'}
                     >
-                        {confirmText}
+                        {topButtonText}
                     </Button>
-                    <Button size="small" variant="red" onClick={handleClose}>
-                        {cancelText}
-                    </Button>
+                    {bottomButton && (
+                        <Button
+                            size="small"
+                            onClick={handleClose}
+                            variant={'red'}
+                        >
+                            {bottomButtonText}
+                        </Button>
+                    )}
                 </Box>
             </Box>
         </Modal>
