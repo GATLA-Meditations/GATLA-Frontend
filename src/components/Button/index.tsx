@@ -8,6 +8,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'small' | 'medium' | 'large';
     onClick?: () => void;
     disabled?: boolean;
+    className?: string;
 }
 
 const Button = ({
@@ -16,11 +17,12 @@ const Button = ({
     size,
     onClick,
     disabled,
+    className
 }: ButtonProps) => {
     return (
         <button
             onClick={onClick}
-            className={'button body2bold' + ' ' + variant + ' ' + size}
+            className={'button body2bold' + ' ' + variant + ' ' + size + ' ' + className}
             disabled={disabled}
         >
             {children}
