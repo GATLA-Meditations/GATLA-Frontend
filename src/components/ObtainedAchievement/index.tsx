@@ -12,14 +12,14 @@ interface ObtainedAchievementProps {
 
 const ObtainedAchievement = ({rewardCard, text, title}: ObtainedAchievementProps) => {
     return (
-        <Box className={'achievement-card'}>
+        <Box className={'achievement-card-unlocked'}>
             <Box className={'image-container'}>
                 <Image src={rewardCard} alt="logo" style={{ objectFit: 'contain' }} width={100} height={100} />
             </Box>
             <Typography className={'title'}>
                 {title}
             </Typography>
-            <Typography className={'text'}>
+            <Typography className={'text-unlocked'}>
                 {text}
             </Typography>
         </Box>
