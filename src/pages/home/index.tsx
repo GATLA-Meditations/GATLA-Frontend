@@ -13,6 +13,7 @@ import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
 import WithToast, { WithToastProps } from '@/hoc/withToast';
 import Loader from '@/components/Loader';
+import StoreElement from "@/components/StoreElement";
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
