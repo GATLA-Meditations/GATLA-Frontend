@@ -1,15 +1,24 @@
 import Box from '@mui/material/Box';
 import './styles.css';
 import React from 'react';
+import { Lock } from '@/assets/Lock/Lock';
 
 export interface StoreElementProps {
-    category: string;
+    category: 'icon' | 'background';
     previewPicture: any;
+    isLocked: boolean;
 }
 
-const StoreElement = ({ category, previewPicture }: StoreElementProps) => {
+const StoreElement = ({
+    category,
+    previewPicture,
+    isLocked,
+}: StoreElementProps) => {
     return (
-        <Box className={`element-container-${category}`}>
+        <Box
+            className={`element-container-${category}`}
+            style={{ position: 'relative' }}
+        >
             <img
                 src={previewPicture}
                 alt=""
@@ -19,6 +28,14 @@ const StoreElement = ({ category, previewPicture }: StoreElementProps) => {
                     borderRadius: 'inherit',
                 }}
             />
+            {isLocked && (
+                <div className="lock-overlay">
+                    <Lock
+                        size={category === 'background' ? 40 : 30}
+                        color={'black'}
+                    />
+                </div>
+            )}
         </Box>
     );
 };
