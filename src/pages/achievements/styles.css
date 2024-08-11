@@ -49,6 +49,8 @@ html,
     align-items: flex-start;
     gap: 15px;
     padding: 12px;
+    height: 62%;
+    overflow-y: scroll;
 }
 
 .title_text{

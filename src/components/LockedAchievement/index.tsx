@@ -13,7 +13,7 @@ const LockedAchievement = ({rewardCard, text}: LockedAchievementProps) => {
     return (
         <Box className={'achievement-card'}>
             <Box className={'image-container'}>
-                <Image src={rewardCard} alt="logo" style={{ objectFit: 'contain' }} width={100} height={100} />
+                <Image src={rewardCard} alt="logo" style={{ objectFit: 'contain' }} width={85} height={85} />
             </Box>
             <Typography className={'text'}>
                 {text}

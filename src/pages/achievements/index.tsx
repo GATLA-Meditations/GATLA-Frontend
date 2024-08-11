@@ -11,6 +11,7 @@ import ObtainedAchievement from '@/components/ObtainedAchievement';
 import logoLocked from '@/assets/LockedAchievementIcon/LockedAchievement.png';
 import Typography from '@mui/material/Typography';
 import LockedAchievement from '@/components/LockedAchievement';
+import NavBar from '@/components/NavBar';
 
 
 const AchievementsScreen = () => {
@@ -99,6 +100,7 @@ const AchievementsScreen = () => {
                     ))}
                 </Grid>
             </Box>
+            <NavBar value={2}/>
         </Box>
     );
 };
