@@ -1,7 +1,7 @@
 import React from 'react';
 import GenericModal from '@/components/GenericModal';
 
-export interface ChangeBackgroundModalProps {
+export interface ObtainedBackgroundProps {
     open: boolean;
     onClose: () => void;
     onConfirm: () => void;
@@ -9,27 +9,26 @@ export interface ChangeBackgroundModalProps {
     backgroundPreview: any;
 }
 
-const ChangeBackgroundModal = ({
+const ObtainedRewardModal = ({
     open,
     onClose,
     onConfirm,
     backgroundName,
     backgroundPreview,
-}: ChangeBackgroundModalProps) => {
+}: ObtainedBackgroundProps) => {
     return (
         <GenericModal
             open={open}
             onClose={onClose}
-            title="Cambiar el fondo"
-            description={`¿Seguro que quieres seleccionar el fondo ${backgroundName}?`}
-            topButtonText="Confirmar"
+            title="¡Has obtenido una recompensa!"
+            description={`${backgroundName}`}
+            topButtonText="Reclamar"
             topButtonAction={onConfirm}
             topButtonColor="common"
-            bottomButtonText="Cancelar"
-            bottomButtonColor="red"
+            bottomButton={false}
             pictureUrl={backgroundPreview}
         />
     );
 };
 
-export default ChangeBackgroundModal;
+export default ObtainedRewardModal;
