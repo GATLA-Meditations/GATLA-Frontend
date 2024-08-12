@@ -7,12 +7,59 @@ import './styles.css';
 import Stack from '@mui/material/Stack';
 import PersonalizeChip from '@/components/PersonalizeChip';
 import PersonalizeItemsBox from '@/components/PersonalizeItemsBox';
+import { StoreElementProps } from '@/components/StoreElement';
+import CircularProgressComponent from '@/components/CircularProgress';
+
+const backgroundStoreElements: StoreElementProps[] = [
+    {
+        category: 'background',
+        isLocked: false,
+        previewPicture:
+            'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
+    },
+    {
+        category: 'background',
+        isLocked: true,
+        previewPicture:
+            'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
+    },
+    {
+        category: 'background',
+        isLocked: true,
+        previewPicture:
+            'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
+    },
+];
+
+const profileStoreElements: StoreElementProps[] = [
+    {
+        category: 'icon',
+        isLocked: false,
+        previewPicture:
+            'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+    },
+    {
+        category: 'icon',
+        isLocked: true,
+        previewPicture:
+            'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+    },
+    {
+        category: 'icon',
+        isLocked: true,
+        previewPicture:
+            'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+    },
+];
 
 const Personalize = () => {
     return (
         <Box height={'100vh'} className={'personalize-container'}>
             <Box className={'personalize-title-div'}>
-                <Typography className={'h5'}>Mi Renacentia</Typography>
+                <Box className={'title-progress-div'}>
+                    <Typography className={'h5'}>Mi Renacentia</Typography>
+                    <CircularProgressComponent value={40} />
+                </Box>
                 <Stack direction="row" spacing={1}>
                     <PersonalizeChip
                         label={'Fondos'}
@@ -26,9 +73,19 @@ const Personalize = () => {
                     />
                 </Stack>
             </Box>
-            <Box className={'store-elements-container'}>
-                <PersonalizeItemsBox label={'Fondos'} items={[]} />
-                <PersonalizeItemsBox label={'Perfil'} items={[]} />
+            <Box className={'store-elements-main-container'}>
+                <Box className={'store-elements-division-container'}>
+                    <PersonalizeItemsBox
+                        label={'Fondos'}
+                        items={backgroundStoreElements}
+                    />
+                </Box>
+                <Box className={'store-elements-division-container'}>
+                    <PersonalizeItemsBox
+                        label={'Perfil'}
+                        items={profileStoreElements}
+                    />
+                </Box>
             </Box>
 
             <NavBar value={1} />

@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import ArrowRightIcon from '@/assets/ArrowRightIcon';
 import './styles.css';
+import StoreElement from '@/components/StoreElement';
 
 export type PersonalizeItemsBoxProps = {
     label: string;
@@ -14,10 +15,18 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
     return (
         <Box className={'items-container-box'}>
             <Stack direction={'row'} spacing={1} className={'label-stack'}>
-                <Typography>{label}</Typography>
+                <Typography className={'h6'}>{label}</Typography>
                 <ArrowRightIcon width={'16px'} height={'16px'} />
             </Stack>
-            <Box className={'store-elements-box'}></Box>
+            <Box className={'store-elements-box'}>
+                {items.map((element) => (
+                    <StoreElement
+                        category={element.category}
+                        previewPicture={element.previewPicture}
+                        isLocked={element.isLocked}
+                    />
+                ))}
+            </Box>
         </Box>
     );
 };

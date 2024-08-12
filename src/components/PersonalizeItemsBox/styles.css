@@ -4,6 +4,10 @@
 }
 
 .store-elements-box {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
 .label-stack {
