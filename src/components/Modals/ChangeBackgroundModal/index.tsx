@@ -9,7 +9,13 @@ export interface ChangeBackgroundModalProps {
     backgroundPreview: any;
 }
 
-const ChangeBackgroundModal = ({ open, onClose, onConfirm, backgroundName, backgroundPreview}: ChangeBackgroundModalProps) => {
+const ChangeBackgroundModal = ({
+    open,
+    onClose,
+    onConfirm,
+    backgroundName,
+    backgroundPreview,
+}: ChangeBackgroundModalProps) => {
     return (
         <GenericModal
             open={open}

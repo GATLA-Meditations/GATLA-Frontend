@@ -1,0 +1,13 @@
+.chip {
+    display: flex;
+    padding: 6px 13px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 32px;
+    background: var(--secondary-100);
+}
+
+.chip.filled {
+    background: var(--secondary-300);
+    color: white;
+}

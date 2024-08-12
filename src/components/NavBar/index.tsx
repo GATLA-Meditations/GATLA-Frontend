@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
-import VideocamIcon from '@mui/icons-material/Videocam';
+import PaletteIcon from '@mui/icons-material/Palette';
 import './styles.css';
 import React from 'react';
 
@@ -35,9 +35,9 @@ const NavBar = ({ value }: NavBarProps) => {
                 icon={<HomeIcon style={{ fontSize: '2rem' }} />}
             />
             <BottomNavigationAction
-                label={'Reunión'}
-                icon={<VideocamIcon style={{ fontSize: '2rem' }} />}
-                href={'/meet'}
+                label={'Personalizar'}
+                icon={<PaletteIcon style={{ fontSize: '2rem' }} />}
+                href={'/personalize'}
             />
             <BottomNavigationAction
                 label={'Perfil'}

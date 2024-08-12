@@ -1,0 +1,12 @@
+.items-container-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.store-elements-box {
+}
+
+.label-stack {
+    display: flex;
+    align-items: center;
+}

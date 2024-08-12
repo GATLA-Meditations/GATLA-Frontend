@@ -86,6 +86,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                     progress={actualModule.progress}
                 />
                 <Box className="content" />
+
                 <NavBar value={0} />
             </Box>
         </>
