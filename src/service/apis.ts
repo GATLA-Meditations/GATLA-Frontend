@@ -6,7 +6,7 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'http://54.145.36.114:3001';
+const baseURL = 'http://54.160.233.214:3001';
 
 const config = (token: string) => ({
     headers: {
