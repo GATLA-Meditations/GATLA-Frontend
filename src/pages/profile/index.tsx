@@ -10,6 +10,9 @@ import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
 import { getUserProfile } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import Loader from '@/components/Loader';
+import ChangeAvatarModal from '@/components/ChangeAvatarModal';
+import PencilIcon from '@/assets/PencilIcon';
+import './styles.css';
 
 export interface User {
     patientCode: string;
@@ -21,18 +24,22 @@ const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [user, setUser] = useState<User>();
+    const [isChangeAvatarOpen, setIsChangeAvatarOpen] = useState(false);
+    const [avatar, setAvatar] = useState('');
+    const [selectedAvatar, setSelectedAvatar] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        handleGetUser().then();
-    }, []);
-
-    const handleGetUser = async () => {
         setIsLoading(true);
+        handleGetUser().then();
+        setIsLoading(false);
+    }, []);
+    
+    const handleGetUser = async () => {
         const user = await getUserProfile();
         setUser(user);
-        setIsLoading(false);
+        setAvatar(user.image);
     };
 
     const handleLogoutClick = () => {
@@ -43,6 +50,18 @@ const Profile = () => {
         setIsModalOpen(true);
     };
 
+    const handleOnChangeAvatar = (avatar: string) => {
+        setSelectedAvatar(avatar);
+    };
+
+    const handleCancelChangeAvatar = () => {
+        setSelectedAvatar('');
+    };
+
+    const handleConfirmChangeAvatar = () => {
+        handleGetUser().then();
+    };
+
     // const achivementsMock = [
     //     { type: 'streak', title: '1 día' },
     //     { type: 'streak', title: '2 días' },
@@ -51,6 +70,16 @@ const Profile = () => {
     //     { type: 'week', title: '2 semanas' },
     //     { type: 'week', title: '3 semanas' },
     // ];
+
+    const avatarsMock = [
+        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://i.imgur.com/1w6Q0jJ.png',
+    ];
 
     if (isLoading) {
         return <Loader />;
@@ -73,15 +102,28 @@ const Profile = () => {
                     flexDirection={'column'}
                     alignItems={'center'}
                 >
-                    <Avatar
-                        sx={{
-                            width: '13vh',
-                            height: '13vh',
-                            marginBottom: '1vh',
-                        }}
+                    <Box
+                        className={'avatar-container'}
+                        onClick={() =>
+                            setIsChangeAvatarOpen(!isChangeAvatarOpen)
+                        }
                     >
-                        <AvatarIcon />
-                    </Avatar>
+                        <Avatar
+                            sx={{
+                                width: '13vh',
+                                height: '13vh',
+                                marginBottom: '1vh',
+                            }}
+                            src={
+                                selectedAvatar === '' ? avatar : selectedAvatar
+                            }
+                        ></Avatar>
+                        <Box className={'edit-icon'}>
+                            {!isChangeAvatarOpen && (
+                                <PencilIcon width="35px" height="35px" />
+                            )}
+                        </Box>
+                    </Box>
                     <Typography className="h4 bold" marginBottom={'3vh'}>
                         {user?.patientCode}
                     </Typography>
@@ -98,14 +140,14 @@ const Profile = () => {
                 >
                     <Button
                         variant="common"
-                        size="large"
+                        size="medium"
                         onClick={handleChangePassword}
                     >
                         Cambiar contraseña
                     </Button>
                     <Button
                         variant="red"
-                        size="large"
+                        size="medium"
                         onClick={handleLogoutClick}
                     >
                         Cerrar sesión
@@ -119,6 +161,16 @@ const Profile = () => {
                 <LogoutConfirmationModal
                     open={isLogoutModalOpen}
                     onClose={() => setIsLogoutModalOpen(false)}
+                />
+            )}
+            {isChangeAvatarOpen && (
+                <ChangeAvatarModal
+                    isOpen={isChangeAvatarOpen}
+                    onClose={() => setIsChangeAvatarOpen(false)}
+                    avatars={avatarsMock}
+                    onChangeAvatar={handleOnChangeAvatar}
+                    onCancel={handleCancelChangeAvatar}
+                    onConfirm={handleConfirmChangeAvatar}
                 />
             )}
             <NavBar value={2} />
