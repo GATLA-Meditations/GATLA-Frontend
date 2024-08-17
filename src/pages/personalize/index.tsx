@@ -9,6 +9,7 @@ import PersonalizeChip from '@/components/PersonalizeChip';
 import PersonalizeItemsBox from '@/components/PersonalizeItemsBox';
 import { StoreElementProps } from '@/components/StoreElement';
 import CircularProgressComponent from '@/components/CircularProgress';
+import TopBar from '@/components/TopBar';
 
 const backgroundStoreElements: StoreElementProps[] = [
     {
@@ -55,6 +56,7 @@ const profileStoreElements: StoreElementProps[] = [
 const Personalize = () => {
     return (
         <Box height={'100vh'} className={'personalize-container'}>
+            <TopBar amtNotifications={0} />
             <Box className={'personalize-title-div'}>
                 <Box className={'title-progress-div'}>
                     <Typography className={'h5'}>Mi Renacentia</Typography>
