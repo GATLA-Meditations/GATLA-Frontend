@@ -60,13 +60,17 @@ const Personalize = () => {
 
     React.useEffect(() => {
         const fetchShopItems = async () => {
-            const shopItems = await getShopItems();
-            setBackgroundStoreElements(
-                shopItems.filter((item) => item.type === 'BACKGROUND')
-            );
-            setAvatarStoreElements(
-                shopItems.filter((item) => item.type === 'AVATAR')
-            );
+            try {
+                const shopItems = await getShopItems();
+                setBackgroundStoreElements(
+                    shopItems.filter((item) => item.type === 'BACKGROUND')
+                );
+                setAvatarStoreElements(
+                    shopItems.filter((item) => item.type === 'AVATAR')
+                );
+            } catch (error) {
+                console.error('Error fetching shop items:', error);
+            }
         };
 
         fetchShopItems();
