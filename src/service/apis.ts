@@ -98,7 +98,7 @@ export const login = async (data: any) => {
     try {
         console.log('data', data);
         const response = await gatlaAxios.post('/auth/login', data);
-        console.log(response)
+        console.log(response);
         return response.data.token;
     } catch (error) {
         console.log(error);

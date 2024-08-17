@@ -54,13 +54,23 @@ import { getShopItems } from '@/service/apis';
 // ];
 
 const Personalize = () => {
-    const shopItems = getShopItems();
-    const backgroundStoreElements = shopItems.filter(
-        (item) => item.type === 'BACKGROUND'
-    );
-    const avatarStoreElements = shopItems.filter(
-        (item) => item.type === 'AVATAR'
-    );
+    const [backgroundStoreElements, setBackgroundStoreElements] =
+        React.useState([]);
+    const [avatarStoreElements, setAvatarStoreElements] = React.useState([]);
+
+    React.useEffect(() => {
+        const fetchShopItems = async () => {
+            const shopItems = await getShopItems();
+            setBackgroundStoreElements(
+                shopItems.filter((item) => item.type === 'BACKGROUND')
+            );
+            setAvatarStoreElements(
+                shopItems.filter((item) => item.type === 'AVATAR')
+            );
+        };
+
+        fetchShopItems();
+    }, []);
 
     return (
         <Box height={'100vh'} className={'personalize-container'}>
