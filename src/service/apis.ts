@@ -96,7 +96,9 @@ export const getActivityById = async (id: string) => {
 
 export const login = async (data: any) => {
     try {
+        console.log('data', data);
         const response = await gatlaAxios.post('/auth/login', data);
+        console.log(response)
         return response.data.token;
     } catch (error) {
         console.log(error);
@@ -134,4 +136,13 @@ export const getUserStats = async () => {
         const response = await gatlaAxios.get('/user/homestats');
         return response.data;
     } catch (error) {}
+};
+
+export const getShopItems = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/shop-items');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
 };
