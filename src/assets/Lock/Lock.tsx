@@ -3,7 +3,7 @@ export interface LockProps {
     color?: string;
 }
 
-export const Lock = ({size, color}: LockProps) => {
+export const Lock = ({ size, color }: LockProps) => {
     return (
         <svg
             width={size}

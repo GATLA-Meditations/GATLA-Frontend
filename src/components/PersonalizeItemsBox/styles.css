@@ -1,0 +1,16 @@
+.items-container-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.store-elements-box {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.label-stack {
+    display: flex;
+    align-items: center;
+}
