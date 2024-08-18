@@ -7,17 +7,22 @@ export interface StoreElementProps {
     category: 'icon' | 'background';
     previewPicture: any;
     isLocked: boolean;
+    onClick?: () => void;
+    name?: string;
 }
 
 const StoreElement = ({
     category,
     previewPicture,
     isLocked,
+    onClick,
+    name,
 }: StoreElementProps) => {
     return (
         <Box
             className={`element-container-${category}`}
             style={{ position: 'relative' }}
+            onClick={onClick}
         >
             <img
                 src={previewPicture}

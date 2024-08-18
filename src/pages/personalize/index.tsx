@@ -17,18 +17,21 @@ const backgroundStoreElements: StoreElementProps[] = [
         isLocked: false,
         previewPicture:
             'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
+        name: 'Porto Galinhas',
     },
     {
         category: 'background',
         isLocked: true,
         previewPicture:
             'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
+        name: 'Porto Galinhas',
     },
     {
         category: 'background',
         isLocked: true,
         previewPicture:
             'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
+        name: 'Porto Galinhas',
     },
 ];
 
@@ -38,18 +41,21 @@ const profileStoreElements: StoreElementProps[] = [
         isLocked: false,
         previewPicture:
             'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        name: 'Avatar',
     },
     {
         category: 'icon',
         isLocked: true,
         previewPicture:
             'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        name: 'Avatar',
     },
     {
         category: 'icon',
         isLocked: true,
         previewPicture:
             'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        name: 'Avatar',
     },
 ];
 
