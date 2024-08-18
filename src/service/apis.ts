@@ -135,3 +135,17 @@ export const getUserStats = async () => {
         return response.data;
     } catch (error) {}
 };
+
+export const getUserItems = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/shop-items');
+        return response.data.items;
+    } catch (error) {}
+};
+
+export const updateUserAvatar = async (avatar: string) => {
+    try {
+        const response = await gatlaAxios.put('/user/image', {url: avatar});
+        return response;
+    } catch (error) {}
+};
