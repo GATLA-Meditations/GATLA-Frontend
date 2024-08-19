@@ -122,13 +122,13 @@ const Personalize = () => {
                 <Box className={'store-elements-division-container'}>
                     <PersonalizeItemsBox
                         label={'Fondos'}
-                        items={backgroundStoreElements}
+                        items={backgroundItems}
                     />
                 </Box>
                 <Box className={'store-elements-division-container'}>
                     <PersonalizeItemsBox
                         label={'Perfil'}
-                        items={profileStoreElements}
+                        items={avatarItems}
                     />
                 </Box>
             </Box>

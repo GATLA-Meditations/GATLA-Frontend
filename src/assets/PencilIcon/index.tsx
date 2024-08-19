@@ -8,7 +8,15 @@ interface PencilIconProps {
 
 const PencilIcon = ({ width, height, fill }: PencilIconProps) => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: width || '24px', height: height || '24px' }}>
+        <div
+            style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: width || '24px',
+                height: height || '24px',
+            }}
+        >
             <svg
                 width="50%"
                 height="50%"
