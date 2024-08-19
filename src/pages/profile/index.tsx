@@ -41,7 +41,6 @@ const Profile = () => {
         const user = await getUserProfile();
         setUser(user);
         setAvatar(user.image);
-        console.log(user);
         const avatars = await getUserItems().then((items) => {
             return items.filter((item: any) => item.type === 'AVATAR');
         });
