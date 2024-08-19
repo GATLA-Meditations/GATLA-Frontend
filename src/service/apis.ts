@@ -149,3 +149,11 @@ export const updateUserAvatar = async (avatar: string) => {
         return response;
     } catch (error) {}
 };
+
+export const chooseBackground = async (background: string) => {
+    try {
+        await gatlaAxios.put('/user/background', { background });
+    } catch (error) {
+        console.log(error);
+    }
+};
