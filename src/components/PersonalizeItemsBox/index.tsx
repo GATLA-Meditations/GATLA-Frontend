@@ -15,9 +15,15 @@ export type PersonalizeItemsBoxProps = {
 
 const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
-    const [selectedBackground, setSelectedBackground] = useState<{ url: string | null, name: string | null }>({ url: null, name: null });
+    const [selectedBackground, setSelectedBackground] = useState<{
+        url: string | null;
+        name: string | null;
+    }>({ url: null, name: null });
 
-    const handleBackgroundChange = (backgroundUrl: string, backgroundName: string) => {
+    const handleBackgroundChange = (
+        backgroundUrl: string,
+        backgroundName: string
+    ) => {
         setSelectedBackground({ url: backgroundUrl, name: backgroundName });
         setIsBackgroundModalOpen(true);
     };
@@ -56,7 +62,11 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
                         onClick={
                             element.category === 'background' &&
                             !element.isLocked
-                                ? () => handleBackgroundChange(element.previewPicture, element.name || '')
+                                ? () =>
+                                    handleBackgroundChange(
+                                        element.previewPicture,
+                                        element.name || ''
+                                    )
                                 : undefined
                         }
                     />

@@ -1,7 +1,7 @@
 .avatar-container {
-  display: flex;
-  position: relative;
-  z-index: 10;
+    display: flex;
+    position: relative;
+    z-index: 10;
 }
 
 .edit-icon {
