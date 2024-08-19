@@ -123,12 +123,14 @@ const Personalize = () => {
                     <PersonalizeItemsBox
                         label={'Fondos'}
                         items={backgroundItems}
+                        onUpdateItems={handleGetItems}
                     />
                 </Box>
                 <Box className={'store-elements-division-container'}>
                     <PersonalizeItemsBox
                         label={'Perfil'}
                         items={avatarItems}
+                        onUpdateItems={handleGetItems}
                     />
                 </Box>
             </Box>

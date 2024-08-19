@@ -12,9 +12,10 @@ import BuyItemModal from '../Modals/BuyItemModal';
 export type PersonalizeItemsBoxProps = {
     label: string;
     items: any[];
+    onUpdateItems: () => void;
 };
 
-const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
+const PersonalizeItemsBox = ({ label, items, onUpdateItems }: PersonalizeItemsBoxProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
     const [selectedBackground, setSelectedBackground] = useState<{
         url: string | null;
@@ -61,6 +62,7 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
             .then(() => {
                 setIsBuyItemModalOpen(false);
                 setSelectedItem({} as StoreElementProps);
+                onUpdateItems();
             })
             .catch((error) => {
                 console.log(error);
