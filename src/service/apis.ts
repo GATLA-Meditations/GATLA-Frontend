@@ -6,7 +6,7 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'http://localhost:3001';
+const baseURL = 'http://api.banguibeans.com';
 
 const config = (token: string) => ({
     headers: {
@@ -145,7 +145,7 @@ export const getUserItems = async () => {
 
 export const updateUserAvatar = async (avatar: string) => {
     try {
-        const response = await gatlaAxios.put('/user/image', {url: avatar});
+        const response = await gatlaAxios.put('/user/image', { url: avatar });
         return response;
     } catch (error) {}
 };

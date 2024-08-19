@@ -4,7 +4,6 @@
     width: 90%;
 }
 
-
 .motivationalMessage {
     background-color: #f0f0f0;
     border-radius: 15px;
@@ -15,7 +14,7 @@
 }
 
 .motivationalMessage::after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 3px;
     left: 10px;
