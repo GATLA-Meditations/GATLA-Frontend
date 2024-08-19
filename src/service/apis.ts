@@ -135,3 +135,11 @@ export const getUserStats = async () => {
         return response.data;
     } catch (error) {}
 };
+
+export const chooseBackground = async (background: string) => {
+    try {
+        await gatlaAxios.put('/user/background', { background });
+    } catch (error) {
+        console.log(error);
+    }
+};
