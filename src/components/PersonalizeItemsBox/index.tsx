@@ -5,8 +5,9 @@ import Stack from '@mui/material/Stack';
 import ArrowRightIcon from '@/assets/ArrowRightIcon';
 import './styles.css';
 import StoreElement, { StoreElementProps } from '@/components/StoreElement';
-import { chooseBackground } from '@/service/apis';
+import { buyItem, chooseBackground } from '@/service/apis';
 import ChangeBackgroundModal from '@/components/Modals/ChangeBackgroundModal';
+import BuyItemModal from '../Modals/BuyItemModal';
 
 export type PersonalizeItemsBoxProps = {
     label: string;
@@ -16,6 +17,8 @@ export type PersonalizeItemsBoxProps = {
 const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
     const [selectedBackground, setSelectedBackground] = useState<{ url: string | null, name: string | null }>({ url: null, name: null });
+    const [isBuyItemModalOpen, setIsBuyItemModalOpen] = useState(false);
+    const [selectedItem, setSelectedItem] = useState<StoreElementProps>({} as StoreElementProps);
 
     const handleBackgroundChange = (backgroundUrl: string, backgroundName: string) => {
         setSelectedBackground({ url: backgroundUrl, name: backgroundName });
@@ -40,6 +43,20 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
         }
     };
 
+    const handleSelectBuyItem = (item: StoreElementProps) => {
+        setSelectedItem(item);
+        setIsBuyItemModalOpen(true);
+    };
+
+    const handleBuyItem = async () => {
+        await buyItem(selectedItem.id).then(() => {
+            setIsBuyItemModalOpen(false);
+            setSelectedItem({} as StoreElementProps);
+        }).catch((error) => {
+            console.log(error);
+        });
+    };
+
     return (
         <Box className={'items-container-box'}>
             <Stack direction={'row'} spacing={1} className={'label-stack'}>
@@ -49,15 +66,15 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
             <Box className={'store-elements-box'}>
                 {items.map((element: StoreElementProps) => (
                     <StoreElement
+                        id={element.id}
                         key={element.previewPicture}
-                        category={element.category}
+                        type={element.type}
                         previewPicture={element.previewPicture}
                         isLocked={element.isLocked}
                         onClick={
-                            element.category === 'background' &&
-                            !element.isLocked
-                                ? () => handleBackgroundChange(element.previewPicture, element.name || '')
-                                : undefined
+                            !element.isLocked ? (
+                                element.type === 'BACKGROUND' ? () => handleBackgroundChange(element.previewPicture, element.name || '') : undefined
+                            ) : () => handleSelectBuyItem(element)
                         }
                     />
                 ))}
@@ -69,6 +86,15 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
                     onConfirm={handleConfirmBackgroundChange}
                     backgroundName={selectedBackground.name || ''}
                     backgroundPreview={selectedBackground.url}
+                />
+            )}
+            {isBuyItemModalOpen && (
+                <BuyItemModal
+                    open={isBuyItemModalOpen}
+                    onClose={() => setIsBuyItemModalOpen(false)}
+                    onConfirm={handleBuyItem}
+                    itemName={selectedItem.name || ''}
+                    itemPreview={selectedItem.previewPicture}
                 />
             )}
         </Box>
