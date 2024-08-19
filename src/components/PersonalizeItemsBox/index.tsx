@@ -16,11 +16,19 @@ export type PersonalizeItemsBoxProps = {
 
 const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
-    const [selectedBackground, setSelectedBackground] = useState<{ url: string | null, name: string | null }>({ url: null, name: null });
+    const [selectedBackground, setSelectedBackground] = useState<{
+        url: string | null;
+        name: string | null;
+    }>({ url: null, name: null });
     const [isBuyItemModalOpen, setIsBuyItemModalOpen] = useState(false);
-    const [selectedItem, setSelectedItem] = useState<StoreElementProps>({} as StoreElementProps);
+    const [selectedItem, setSelectedItem] = useState<StoreElementProps>(
+        {} as StoreElementProps
+    );
 
-    const handleBackgroundChange = (backgroundUrl: string, backgroundName: string) => {
+    const handleBackgroundChange = (
+        backgroundUrl: string,
+        backgroundName: string
+    ) => {
         setSelectedBackground({ url: backgroundUrl, name: backgroundName });
         setIsBackgroundModalOpen(true);
     };
@@ -49,12 +57,14 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
     };
 
     const handleBuyItem = async () => {
-        await buyItem(selectedItem.id).then(() => {
-            setIsBuyItemModalOpen(false);
-            setSelectedItem({} as StoreElementProps);
-        }).catch((error) => {
-            console.log(error);
-        });
+        await buyItem(selectedItem.id)
+            .then(() => {
+                setIsBuyItemModalOpen(false);
+                setSelectedItem({} as StoreElementProps);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -72,9 +82,15 @@ const PersonalizeItemsBox = ({ label, items }: PersonalizeItemsBoxProps) => {
                         previewPicture={element.previewPicture}
                         isLocked={element.isLocked}
                         onClick={
-                            !element.isLocked ? (
-                                element.type === 'BACKGROUND' ? () => handleBackgroundChange(element.previewPicture, element.name || '') : undefined
-                            ) : () => handleSelectBuyItem(element)
+                            !element.isLocked
+                                ? element.type === 'BACKGROUND'
+                                    ? () =>
+                                        handleBackgroundChange(
+                                            element.previewPicture,
+                                            element.name || ''
+                                        )
+                                    : undefined
+                                : () => handleSelectBuyItem(element)
                         }
                     />
                 ))}
