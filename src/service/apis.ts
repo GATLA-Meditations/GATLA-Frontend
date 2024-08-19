@@ -6,7 +6,7 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'http://api.renacentia.org';
+const baseURL = 'http://localhost:3001';
 
 const config = (token: string) => ({
     headers: {
@@ -153,6 +153,31 @@ export const updateUserAvatar = async (avatar: string) => {
 export const chooseBackground = async (background: string) => {
     try {
         await gatlaAxios.put('/user/background', { background });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getShopItems = async () => {
+    try {
+        const response = await gatlaAxios.get('/shop/all-items-user');
+        const items = response.data.items;
+        return items.map((item: any) => ({
+            isLocked: !item.owns,
+            id: item.itemId,
+            type: item.type,
+            previewPicture: item.content_url,
+            price: item.price,
+            name: item.name,
+        }));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const buyItem = async (id: string) => {
+    try {
+        await gatlaAxios.put(`/shop/buy-item/${id}`);
     } catch (error) {
         console.log(error);
     }

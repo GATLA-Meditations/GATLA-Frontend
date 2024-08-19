@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import NavBar from '@/components/NavBar';
@@ -10,24 +10,28 @@ import PersonalizeItemsBox from '@/components/PersonalizeItemsBox';
 import { StoreElementProps } from '@/components/StoreElement';
 import CircularProgressComponent from '@/components/CircularProgress';
 import TopBar from '@/components/TopBar';
+import { getShopItems } from '@/service/apis';
 
 const backgroundStoreElements: StoreElementProps[] = [
     {
-        category: 'background',
+        id: '1',
+        type: 'BACKGROUND',
         isLocked: false,
         previewPicture:
             'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
         name: 'Porto Galinhas',
     },
     {
-        category: 'background',
+        id: '2',
+        type: 'BACKGROUND',
         isLocked: true,
         previewPicture:
             'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
         name: 'Porto Galinhas',
     },
     {
-        category: 'background',
+        id: '3',
+        type: 'BACKGROUND',
         isLocked: true,
         previewPicture:
             'https://trayectoriasenviaje.com/wp-content/uploads/2018/02/porto-galinhas-portada-256x256.jpg',
@@ -37,21 +41,24 @@ const backgroundStoreElements: StoreElementProps[] = [
 
 const profileStoreElements: StoreElementProps[] = [
     {
-        category: 'icon',
+        id: '4',
+        type: 'AVATAR',
         isLocked: false,
         previewPicture:
             'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
         name: 'Avatar',
     },
     {
-        category: 'icon',
+        id: '5',
+        type: 'AVATAR',
         isLocked: true,
         previewPicture:
             'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
         name: 'Avatar',
     },
     {
-        category: 'icon',
+        id: '6',
+        type: 'AVATAR',
         isLocked: true,
         previewPicture:
             'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
@@ -60,6 +67,36 @@ const profileStoreElements: StoreElementProps[] = [
 ];
 
 const Personalize = () => {
+    const [backgroundItems, setBackgroundItems] = React.useState<
+        StoreElementProps[]
+    >([]);
+    const [avatarItems, setAvatarItems] = React.useState<StoreElementProps[]>(
+        []
+    );
+
+    const handleGetItems = async () => {
+        await getShopItems()
+            .then((items) => {
+                setBackgroundItems(
+                    items.filter(
+                        (item: StoreElementProps) => item.type === 'BACKGROUND'
+                    )
+                );
+                setAvatarItems(
+                    items.filter(
+                        (item: StoreElementProps) => item.type === 'AVATAR'
+                    )
+                );
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    useEffect(() => {
+        handleGetItems().then();
+    }, []);
+
     return (
         <Box height={'100vh'} className={'personalize-container'}>
             <TopBar amtNotifications={0} />
@@ -85,13 +122,15 @@ const Personalize = () => {
                 <Box className={'store-elements-division-container'}>
                     <PersonalizeItemsBox
                         label={'Fondos'}
-                        items={backgroundStoreElements}
+                        items={backgroundItems}
+                        onUpdateItems={handleGetItems}
                     />
                 </Box>
                 <Box className={'store-elements-division-container'}>
                     <PersonalizeItemsBox
                         label={'Perfil'}
-                        items={profileStoreElements}
+                        items={avatarItems}
+                        onUpdateItems={handleGetItems}
                     />
                 </Box>
             </Box>
