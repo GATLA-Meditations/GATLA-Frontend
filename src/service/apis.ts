@@ -6,7 +6,7 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'http://api.banguibeans.com';
+const baseURL = 'http://api.renacentia.org';
 
 const config = (token: string) => ({
     headers: {
