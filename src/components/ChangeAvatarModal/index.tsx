@@ -32,9 +32,8 @@ const ChangeAvatarModal = ({
         onChangeAvatar(avatar);
     };
 
-    const handleConfirm = () => {
+    const handleConfirm = async () => {
         onConfirm && onConfirm();
-        // le pega al endpoint para actualizar la foto de perfil
         onClose();
     };
 

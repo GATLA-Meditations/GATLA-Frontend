@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
-import { getUserProfile } from '@/service/apis';
+import { getUserItems, getUserProfile, updateUserAvatar } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import Loader from '@/components/Loader';
 import ChangeAvatarModal from '@/components/ChangeAvatarModal';
@@ -25,6 +25,7 @@ const Profile = () => {
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [user, setUser] = useState<User>();
     const [isChangeAvatarOpen, setIsChangeAvatarOpen] = useState(false);
+    const [avatars, setAvatars] = useState<string[]>([]);
     const [avatar, setAvatar] = useState('');
     const [selectedAvatar, setSelectedAvatar] = useState('');
 
@@ -35,11 +36,15 @@ const Profile = () => {
         handleGetUser().then();
         setIsLoading(false);
     }, []);
-    
+
     const handleGetUser = async () => {
         const user = await getUserProfile();
         setUser(user);
         setAvatar(user.image);
+        const avatars = await getUserItems().then((items) => {
+            return items.filter((item: any) => item.type === 'AVATAR');
+        });
+        setAvatars(avatars);
     };
 
     const handleLogoutClick = () => {
@@ -55,11 +60,17 @@ const Profile = () => {
     };
 
     const handleCancelChangeAvatar = () => {
-        setSelectedAvatar('');
+        setSelectedAvatar(avatar);
     };
 
-    const handleConfirmChangeAvatar = () => {
-        handleGetUser().then();
+    const handleConfirmChangeAvatar = async () => {
+        await updateUserAvatar(selectedAvatar)
+            .then(() => {
+                handleGetUser().then();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     // const achivementsMock = [
@@ -72,13 +83,11 @@ const Profile = () => {
     // ];
 
     const avatarsMock = [
-        'https://i.imgur.com/1w6Q0jJ.png',
-        'https://i.imgur.com/1w6Q0jJ.png',
-        'https://i.imgur.com/1w6Q0jJ.png',
-        'https://i.imgur.com/1w6Q0jJ.png',
-        'https://i.imgur.com/1w6Q0jJ.png',
-        'https://i.imgur.com/1w6Q0jJ.png',
-        'https://i.imgur.com/1w6Q0jJ.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
     ];
 
     if (isLoading) {
@@ -167,7 +176,7 @@ const Profile = () => {
                 <ChangeAvatarModal
                     isOpen={isChangeAvatarOpen}
                     onClose={() => setIsChangeAvatarOpen(false)}
-                    avatars={avatarsMock}
+                    avatars={avatars}
                     onChangeAvatar={handleOnChangeAvatar}
                     onCancel={handleCancelChangeAvatar}
                     onConfirm={handleConfirmChangeAvatar}
