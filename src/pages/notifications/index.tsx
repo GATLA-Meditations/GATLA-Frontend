@@ -7,7 +7,13 @@ import NotificationsContainers from '@/components/NotificationsContainers';
 import './styles.css';
 
 const Notifications = () => {
-    const notifications = [
+    type NotificationVariant = 'normal' | 'motivationalMessage';
+
+    const notifications: {
+        variant: NotificationVariant;
+        message: string;
+        senderImage?: string;
+    }[] = [
         {
             variant: 'normal',
             message: 'You have a new message from John Doe',
