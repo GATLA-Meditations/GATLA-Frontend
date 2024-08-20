@@ -20,6 +20,7 @@ interface GenericModalProps {
     bottomButtonColor?: string;
     pictureUrl?: string;
     backgroundColor?: string;
+    topButtonDisabled?: boolean;
 }
 
 const GenericModal = ({
@@ -36,6 +37,7 @@ const GenericModal = ({
     bottomButtonText = 'Cancelar',
     bottomButtonColor,
     backgroundColor = 'var(--primary-100)',
+    topButtonDisabled,
 }: GenericModalProps) => {
     const handleConfirm = () => {
         topButtonAction();
@@ -82,6 +84,7 @@ const GenericModal = ({
                         size="small"
                         onClick={handleConfirm}
                         className={topButtonColor}
+                        disabled={topButtonDisabled}
                     >
                         {topButtonText}
                     </Button>
