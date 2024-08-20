@@ -2,22 +2,32 @@ import Box from '@mui/material/Box';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import './styles.css';
-import Image, {StaticImageData} from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 interface ObtainedAchievementProps {
     rewardCard: StaticImageData;
     text?: string;
+    title?: string;
 }
 
-const ObtainedAchievement = ({rewardCard, text}: ObtainedAchievementProps) => {
+const ObtainedAchievement = ({
+    rewardCard,
+    text,
+    title,
+}: ObtainedAchievementProps) => {
     return (
-        <Box className={'achievement-card-unlocked'}>
+        <Box className={'achievement-card'}>
             <Box className={'image-container'}>
-                <Image src={rewardCard} alt="logo" style={{ objectFit: 'contain' }} width={85} height={85} />
+                <Image
+                    src={rewardCard}
+                    alt="logo"
+                    style={{ objectFit: 'contain' }}
+                    width={100}
+                    height={100}
+                />
             </Box>
-            <Typography className={'title'}>
-                {text}
-            </Typography>
+            <Typography className={'title'}>{title}</Typography>
+            <Typography className={'text'}>{text}</Typography>
         </Box>
     );
 };

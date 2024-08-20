@@ -7,9 +7,12 @@ import React, { useEffect, useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
-import { getUserProfile } from '@/service/apis';
+import { getUserItems, getUserProfile, updateUserAvatar } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import Loader from '@/components/Loader';
+import ChangeAvatarModal from '@/components/ChangeAvatarModal';
+import PencilIcon from '@/assets/PencilIcon';
+import './styles.css';
 
 export interface User {
     patientCode: string;
@@ -21,18 +24,27 @@ const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [user, setUser] = useState<User>();
+    const [isChangeAvatarOpen, setIsChangeAvatarOpen] = useState(false);
+    const [avatars, setAvatars] = useState<string[]>([]);
+    const [avatar, setAvatar] = useState('');
+    const [selectedAvatar, setSelectedAvatar] = useState('');
 
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        setIsLoading(true);
         handleGetUser().then();
+        setIsLoading(false);
     }, []);
 
     const handleGetUser = async () => {
-        setIsLoading(true);
         const user = await getUserProfile();
         setUser(user);
-        setIsLoading(false);
+        setAvatar(user.image);
+        const avatars = await getUserItems().then((items) => {
+            return items.filter((item: any) => item.type === 'AVATAR');
+        });
+        setAvatars(avatars);
     };
 
     const handleLogoutClick = () => {
@@ -43,6 +55,24 @@ const Profile = () => {
         setIsModalOpen(true);
     };
 
+    const handleOnChangeAvatar = (avatar: string) => {
+        setSelectedAvatar(avatar);
+    };
+
+    const handleCancelChangeAvatar = () => {
+        setSelectedAvatar(avatar);
+    };
+
+    const handleConfirmChangeAvatar = async () => {
+        await updateUserAvatar(selectedAvatar)
+            .then(() => {
+                handleGetUser().then();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
     // const achivementsMock = [
     //     { type: 'streak', title: '1 día' },
     //     { type: 'streak', title: '2 días' },
@@ -51,6 +81,14 @@ const Profile = () => {
     //     { type: 'week', title: '2 semanas' },
     //     { type: 'week', title: '3 semanas' },
     // ];
+
+    const avatarsMock = [
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
+    ];
 
     if (isLoading) {
         return <Loader />;
@@ -73,15 +111,28 @@ const Profile = () => {
                     flexDirection={'column'}
                     alignItems={'center'}
                 >
-                    <Avatar
-                        sx={{
-                            width: '13vh',
-                            height: '13vh',
-                            marginBottom: '1vh',
-                        }}
+                    <Box
+                        className={'avatar-container'}
+                        onClick={() =>
+                            setIsChangeAvatarOpen(!isChangeAvatarOpen)
+                        }
                     >
-                        <AvatarIcon />
-                    </Avatar>
+                        <Avatar
+                            sx={{
+                                width: '13vh',
+                                height: '13vh',
+                                marginBottom: '1vh',
+                            }}
+                            src={
+                                selectedAvatar === '' ? avatar : selectedAvatar
+                            }
+                        ></Avatar>
+                        <Box className={'edit-icon'}>
+                            {!isChangeAvatarOpen && (
+                                <PencilIcon width="35px" height="35px" />
+                            )}
+                        </Box>
+                    </Box>
                     <Typography className="h4 bold" marginBottom={'3vh'}>
                         {user?.patientCode}
                     </Typography>
@@ -98,14 +149,14 @@ const Profile = () => {
                 >
                     <Button
                         variant="common"
-                        size="large"
+                        size="medium"
                         onClick={handleChangePassword}
                     >
                         Cambiar contraseña
                     </Button>
                     <Button
                         variant="red"
-                        size="large"
+                        size="medium"
                         onClick={handleLogoutClick}
                     >
                         Cerrar sesión
@@ -119,6 +170,16 @@ const Profile = () => {
                 <LogoutConfirmationModal
                     open={isLogoutModalOpen}
                     onClose={() => setIsLogoutModalOpen(false)}
+                />
+            )}
+            {isChangeAvatarOpen && (
+                <ChangeAvatarModal
+                    isOpen={isChangeAvatarOpen}
+                    onClose={() => setIsChangeAvatarOpen(false)}
+                    avatars={avatars}
+                    onChangeAvatar={handleOnChangeAvatar}
+                    onCancel={handleCancelChangeAvatar}
+                    onConfirm={handleConfirmChangeAvatar}
                 />
             )}
             <NavBar value={2} />

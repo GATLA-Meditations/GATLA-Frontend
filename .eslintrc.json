@@ -3,11 +3,15 @@
     "parserOptions": {
         "project": ["./tsconfig.json"]
     },
+    "plugins": ["react-hooks"],
     "rules": {
         "semi": ["error", "always"],
         "quotes": ["error", "single"],
         "indent": ["error", 4],
         "no-multi-spaces": ["error"],
-        "no-multiple-empty-lines": ["error"]
+        "no-multiple-empty-lines": ["error"],
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "off",
+        "@next/next/no-img-element": "off"
     }
 }

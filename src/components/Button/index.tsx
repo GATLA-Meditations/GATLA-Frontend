@@ -17,12 +17,20 @@ const Button = ({
     size,
     onClick,
     disabled,
-    className
+    className,
 }: ButtonProps) => {
     return (
         <button
             onClick={onClick}
-            className={'button body2bold' + ' ' + variant + ' ' + size + ' ' + className}
+            className={
+                'button body2bold' +
+                ' ' +
+                variant +
+                ' ' +
+                size +
+                ' ' +
+                className
+            }
             disabled={disabled}
         >
             {children}

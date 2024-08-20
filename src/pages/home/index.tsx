@@ -13,6 +13,8 @@ import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
 import WithToast, { WithToastProps } from '@/hoc/withToast';
 import Loader from '@/components/Loader';
+import logRocket from 'logrocket';
+import ObtainedRewardModal from '@/components/Modals/ObtainedRewardModal';
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
@@ -22,6 +24,8 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
     const [goals, setGoals] = useState(0);
 
     const [isLoading, setIsLoading] = useState(false);
+
+    logRocket.init('5snaie/renacentia-dev');
 
     useEffect(() => {
         async function fetchData() {
@@ -33,6 +37,11 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                 console.log(error);
             }
         }
+        showToast(
+            '¡Ánimo en tu tratamiento!',
+            'img',
+            'https://ca.slack-edge.com/T010UBTUG4C-U06UB5DCRK4-b5743123495e-512'
+        );
         checkForToast().then();
 
         fetchData();

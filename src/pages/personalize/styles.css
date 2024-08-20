@@ -1,0 +1,33 @@
+.personalize-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.personalize-title-div {
+    display: flex;
+    padding: 24px 16px 0px 16px;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.store-elements-main-container {
+    height: 100%;
+    display: flex;
+    margin-top: 8px;
+    flex-direction: column;
+    background-color: var(--secondary-100);
+}
+
+.store-elements-division-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 16px;
+    border-bottom: 1px solid var(--secondary-200);
+}
+
+.title-progress-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
