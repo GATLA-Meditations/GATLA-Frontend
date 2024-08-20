@@ -75,7 +75,9 @@ const AchievementsScreen = () => {
                 <Grid
                     container
                     spacing={0.5}
-                    className={'cards_content'}
+                    display="flex"
+                    alignItems={'center'}
+                    justifyContent={'center'}
                 >
                     {achievementsUnlocked.map((achievement, index) => (
                         <Grid item key={index} display="flex">
