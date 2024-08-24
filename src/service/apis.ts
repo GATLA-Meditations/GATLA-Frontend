@@ -182,3 +182,20 @@ export const buyItem = async (id: string) => {
         console.log(error);
     }
 };
+
+export const getNotificationSettings = async () => {
+    try {
+        const response = await gatlaAxios.get('/notification/settings');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateNotificationSettings = async (settings: any) => {
+    try {
+        await gatlaAxios.put('/notification/settings', settings);
+    } catch (error) {
+        console.log(error);
+    }
+};
