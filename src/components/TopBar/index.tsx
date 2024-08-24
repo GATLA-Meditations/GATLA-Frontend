@@ -1,12 +1,12 @@
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Notifications from '../Notifications';
 import React, { useState } from 'react';
 import SettingsButton from '../Settings';
 import Image from 'next/image';
 import logo from '@/assets/Logo/logo.png';
+import Link from 'next/link';
 
 interface TopBarProps {
     amtNotifications: number;
@@ -28,7 +28,10 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
             >
                 <Toolbar>
                     <Box style={{ marginRight: 10 }}>
-                        <Image src={logo} alt="logo" width={30} height={50} />
+
+                        <Link href="/home">
+                            <Image src={logo} alt="logo" width={30} height={50} />
+                        </Link>
                     </Box>
 
                     <Box sx={{ flexGrow: 1 }} />
