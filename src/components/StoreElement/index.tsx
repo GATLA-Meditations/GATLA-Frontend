@@ -4,20 +4,27 @@ import React from 'react';
 import { Lock } from '@/assets/Lock/Lock';
 
 export interface StoreElementProps {
-    category: 'icon' | 'background';
+    id: string,
+    type: 'AVATAR' | 'BACKGROUND' | 'VIDEO';
     previewPicture: any;
     isLocked: boolean;
+    price?: number;
+    onClick?: () => void;
+    name?: string;
 }
 
 const StoreElement = ({
-    category,
+    type,
     previewPicture,
     isLocked,
+    onClick,
+    name,
 }: StoreElementProps) => {
     return (
         <Box
-            className={`element-container-${category}`}
+            className={`element-container-${type}`}
             style={{ position: 'relative' }}
+            onClick={onClick}
         >
             <img
                 src={previewPicture}
@@ -31,7 +38,7 @@ const StoreElement = ({
             {isLocked && (
                 <div className="lock-overlay">
                     <Lock
-                        size={category === 'background' ? 40 : 30}
+                        size={type === 'BACKGROUND' ? 40 : 30}
                         color={'black'}
                     />
                 </div>

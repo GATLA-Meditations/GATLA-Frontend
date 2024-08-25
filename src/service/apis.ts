@@ -135,3 +135,50 @@ export const getUserStats = async () => {
         return response.data;
     } catch (error) {}
 };
+
+export const getUserItems = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/shop-items');
+        return response.data.items;
+    } catch (error) {}
+};
+
+export const updateUserAvatar = async (avatar: string) => {
+    try {
+        const response = await gatlaAxios.put('/user/image', { url: avatar });
+        return response;
+    } catch (error) {}
+};
+
+export const chooseBackground = async (background: string) => {
+    try {
+        await gatlaAxios.put('/user/background', { background });
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getShopItems = async () => {
+    try {
+        const response = await gatlaAxios.get('/shop/all-items-user');
+        const items = response.data.items;
+        return items.map((item: any) => ({
+            isLocked: !item.owns,
+            id: item.itemId,
+            type: item.type,
+            previewPicture: item.content_url,
+            price: item.price,
+            name: item.name,
+        }));
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const buyItem = async (id: string) => {
+    try {
+        await gatlaAxios.put(`/shop/buy-item/${id}`);
+    } catch (error) {
+        console.log(error);
+    }
+};

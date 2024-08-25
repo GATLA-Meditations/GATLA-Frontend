@@ -35,21 +35,21 @@ const withToast = (WrappedComponent: React.ComponentType<any>) => {
             imgSrc: string
         ) => {
             switch (type) {
-                case 'success':
-                    toast.success(message);
-                    break;
-                case 'error':
-                    toast.error(message);
-                    break;
-                case 'img':
-                    toast(
-                        htmlForImg(message, imgSrc),
-                        options['imgToastOption']
-                    );
-                    break;
-                default:
-                    toast(message);
-                    break;
+            case 'success':
+                toast.success(message);
+                break;
+            case 'error':
+                toast.error(message);
+                break;
+            case 'img':
+                toast(
+                    htmlForImg(message, imgSrc),
+                    options['imgToastOption']
+                );
+                break;
+            default:
+                toast(message);
+                break;
             }
         };
 
