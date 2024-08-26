@@ -13,7 +13,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
 
     const handleReady = () => {
         setIsLoading(false);
-        if (onReady) onReady(); // Call the original onReady prop if it exists
+        if (onReady) {
+            // @ts-ignore
+            onReady();
+        } // Call the original onReady prop if it exists
     };
 
     const handlePlay = () => {

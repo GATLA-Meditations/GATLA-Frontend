@@ -42,7 +42,7 @@ html,
     justify-content: center;
 }
 
-.achievements_content{
+.achievements_content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -52,7 +52,7 @@ html,
     overflow-y: scroll;
 }
 
-.title_text{
+.title_text {
     color: #000;
     text-align: center;
     font-family: Inter, sans-serif;

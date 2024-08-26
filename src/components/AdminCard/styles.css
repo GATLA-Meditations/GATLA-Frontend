@@ -5,11 +5,11 @@
     align-items: flex-start;
     gap: 8px;
     border-radius: 10px;
-    background: var(--secondary-300, #C399F1);
+    background: var(--secondary-300, #c399f1);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.text-information-card{
+.text-information-card {
     color: var(--grey-700, #141418);
     font-family: Inter, serif;
     font-size: 16px;
@@ -24,8 +24,7 @@
     width: 100%;
 }
 
-
-.image-card{
+.image-card {
     display: flex;
     align-items: center;
     gap: 10px;

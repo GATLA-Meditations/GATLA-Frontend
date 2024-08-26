@@ -83,7 +83,9 @@ const Settings = ({ showToast }: WithToastProps) => {
                                     control={
                                         <Switch
                                             name="motivationalNotifications"
-                                            checked={notifications.motivationalNotifications}
+                                            checked={
+                                                notifications.motivationalNotifications
+                                            }
                                             onChange={handleChange}
                                         />
                                     }
@@ -102,7 +104,9 @@ const Settings = ({ showToast }: WithToastProps) => {
                                     control={
                                         <Switch
                                             name="meditationNotifications"
-                                            checked={notifications.meditationNotifications}
+                                            checked={
+                                                notifications.meditationNotifications
+                                            }
                                             onChange={handleChange}
                                         />
                                     }

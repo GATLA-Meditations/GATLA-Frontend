@@ -16,7 +16,12 @@ export type PersonalizeItemsBoxProps = {
     unlocks: number;
 };
 
-const PersonalizeItemsBox = ({ label, items, onUpdateItems, unlocks }: PersonalizeItemsBoxProps) => {
+const PersonalizeItemsBox = ({
+    label,
+    items,
+    onUpdateItems,
+    unlocks,
+}: PersonalizeItemsBoxProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
     const [selectedBackground, setSelectedBackground] = useState<{
         url: string | null;

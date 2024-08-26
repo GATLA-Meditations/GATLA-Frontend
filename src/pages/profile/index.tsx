@@ -1,21 +1,21 @@
-import {Achievement} from '@/components/Achievements';
+import { Achievement } from '@/components/Achievements';
 import Button from '@/components/Button';
 import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
-import {Avatar, Box, Typography} from '@mui/material';
-import React, {useEffect, useState} from 'react';
+import { Avatar, Box, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
-import {getUserItems, getUserProfile, updateUserAvatar} from '@/service/apis';
+import { getUserItems, getUserProfile, updateUserAvatar } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import Loader from '@/components/Loader';
 import ChangeAvatarModal from '@/components/ChangeAvatarModal';
 import PencilIcon from '@/assets/PencilIcon';
 import './styles.css';
-import Image from "next/image";
-import logo from "@/assets/Logo/logo.png";
-import Link from "next/link";
+import Image from 'next/image';
+import logo from '@/assets/Logo/logo.png';
+import Link from 'next/link';
 
 export interface User {
     patientCode: string;
@@ -94,13 +94,13 @@ const Profile = () => {
     ];
 
     if (isLoading) {
-        return <Loader/>;
+        return <Loader />;
     }
 
     return (
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
             <Box marginBottom={'3vh'}>
-                <TopBar amtNotifications={0}/>
+                <TopBar amtNotifications={0} />
             </Box>
             <Box
                 display={'flex'}
@@ -132,7 +132,7 @@ const Profile = () => {
                         ></Avatar>
                         <Box className={'edit-icon'}>
                             {!isChangeAvatarOpen && (
-                                <PencilIcon width="35px" height="35px"/>
+                                <PencilIcon width="35px" height="35px" />
                             )}
                         </Box>
                     </Box>
@@ -148,12 +148,12 @@ const Profile = () => {
                 <Box
                     display={'flex'}
                     flexDirection={'column'}
-                    sx={{margin: '3vh', gap: '3vh'}}
+                    sx={{ margin: '3vh', gap: '3vh' }}
                 >
                     <Button
                         variant="common"
                         size="medium"
-                        onClick={() => window.location.href = '/achievements'}
+                        onClick={() => (window.location.href = '/achievements')}
                     >
                         Ver logros
                     </Button>
@@ -174,7 +174,7 @@ const Profile = () => {
                 </Box>
             </Box>
             {isModalOpen && (
-                <ChangePassword closeModal={() => setIsModalOpen(false)}/>
+                <ChangePassword closeModal={() => setIsModalOpen(false)} />
             )}
             {isLogoutModalOpen && (
                 <LogoutConfirmationModal
@@ -192,7 +192,7 @@ const Profile = () => {
                     onConfirm={handleConfirmChangeAvatar}
                 />
             )}
-            <NavBar value={2}/>
+            <NavBar value={2} />
         </Box>
     );
 };

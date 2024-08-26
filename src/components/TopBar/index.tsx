@@ -28,9 +28,13 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
             >
                 <Toolbar>
                     <Box style={{ marginRight: 10 }}>
-
                         <Link href="/home">
-                            <Image src={logo} alt="logo" width={30} height={50} />
+                            <Image
+                                src={logo}
+                                alt="logo"
+                                width={30}
+                                height={50}
+                            />
                         </Link>
                     </Box>
 
