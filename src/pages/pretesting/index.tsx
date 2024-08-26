@@ -48,7 +48,7 @@ const PreTesting = () => {
                         key={key}
                         onClick={() => handleQuestionnaireOnClick(activity.id)} //Modal en caso de que no se haya completado la actividad previa
                         title={activity.name}
-                        isAllowed={true}
+                        isAllowed={activity.unlocked}
                     />
                 ))}
             </div>

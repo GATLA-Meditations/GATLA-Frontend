@@ -26,8 +26,8 @@ const ObtainedAchievement = ({
                     height={100}
                 />
             </Box>
-            <Typography className={'title'}>{title}</Typography>
-            <Typography className={'text'}>{text}</Typography>
+            {/*<Typography className={'title'}>{title}</Typography>*/}
+            <Typography className={'title'}>{text}</Typography>
         </Box>
     );
 };

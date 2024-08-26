@@ -63,13 +63,13 @@ const LoginPage = () => {
                 <Form className="inputContainer">
                     <Field
                         as={CustomTextField}
-                        placeholder="código de gatla"
+                        placeholder="Ingrese su código"
                         label="Código"
                         name="patientCode"
                     />
                     <Field
                         as={CustomTextField}
-                        placeholder="contraseña123"
+                        placeholder="Ingrese su contraseña"
                         label="Contraseña"
                         type="password"
                         name="password"

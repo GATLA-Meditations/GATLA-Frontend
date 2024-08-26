@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import NavBar from '@/components/NavBar';
@@ -10,7 +10,7 @@ import PersonalizeItemsBox from '@/components/PersonalizeItemsBox';
 import { StoreElementProps } from '@/components/StoreElement';
 import CircularProgressComponent from '@/components/CircularProgress';
 import TopBar from '@/components/TopBar';
-import { getShopItems } from '@/service/apis';
+import { getProgressAndUnlocks, getShopItems } from '@/service/apis';
 
 const backgroundStoreElements: StoreElementProps[] = [
     {
@@ -73,6 +73,8 @@ const Personalize = () => {
     const [avatarItems, setAvatarItems] = React.useState<StoreElementProps[]>(
         []
     );
+    const [progress, setProgress] = useState(0);
+    const [unlocks, setUnlocks] = useState(0);
 
     const handleGetItems = async () => {
         await getShopItems()
@@ -89,7 +91,15 @@ const Personalize = () => {
                 );
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
+            });
+        await getProgressAndUnlocks()
+            .then((data) => {
+                setProgress(data.progress);
+                setUnlocks(data.renatokens);
+            })
+            .catch((error) => {
+                console.error(error);
             });
     };
 
@@ -103,7 +113,17 @@ const Personalize = () => {
             <Box className={'personalize-title-div'}>
                 <Box className={'title-progress-div'}>
                     <Typography className={'h5'}>Mi Renacentia</Typography>
-                    <CircularProgressComponent value={40} />
+                    <Box className={'progress'}>
+                        <CircularProgressComponent value={progress} />
+                        <Box className={'unlocks'}>
+                            <Typography
+                                className={'h7'}
+                            >{'Desbloqueos disponibles:'}</Typography>
+                            <Box className={'unlocks-value'}>
+                                {unlocks}
+                            </Box>
+                        </Box>
+                    </Box>
                 </Box>
                 <Stack direction="row" spacing={1}>
                     <PersonalizeChip
@@ -124,6 +144,7 @@ const Personalize = () => {
                         label={'Fondos'}
                         items={backgroundItems}
                         onUpdateItems={handleGetItems}
+                        unlocks={unlocks}
                     />
                 </Box>
                 <Box className={'store-elements-division-container'}>
@@ -131,6 +152,7 @@ const Personalize = () => {
                         label={'Perfil'}
                         items={avatarItems}
                         onUpdateItems={handleGetItems}
+                        unlocks={unlocks}
                     />
                 </Box>
             </Box>

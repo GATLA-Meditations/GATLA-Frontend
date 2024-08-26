@@ -183,6 +183,15 @@ export const buyItem = async (id: string) => {
     }
 };
 
+export const getProgressAndUnlocks = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/personalization-tokens');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getNotificationSettings = async () => {
     try {
         const response = await gatlaAxios.get('/notification/settings');
