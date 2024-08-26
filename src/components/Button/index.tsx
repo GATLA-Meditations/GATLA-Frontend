@@ -23,13 +23,15 @@ const Button = ({
         <button
             onClick={onClick}
             className={
-                'button body2bold' +
-                ' ' +
-                variant +
-                ' ' +
-                size +
-                ' ' +
-                className
+                disabled
+                    ? `button body2bold disabled ${size}`
+                    : 'button body2bold' +
+                      ' ' +
+                      variant +
+                      ' ' +
+                      size +
+                      ' ' +
+                      className
             }
             disabled={disabled}
         >

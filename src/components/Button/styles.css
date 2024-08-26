@@ -19,6 +19,10 @@
     background: var(--red);
 }
 
+.disabled {
+    background: var(--grey-200);
+}
+
 .common {
     background: var(--primary-300);
 }
