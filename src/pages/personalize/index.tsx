@@ -116,12 +116,10 @@ const Personalize = () => {
                     <Box className={'progress'}>
                         <CircularProgressComponent value={progress} />
                         <Box className={'unlocks'}>
-                            <Typography
-                                className={'h7'}
-                            >{'Desbloqueos disponibles:'}</Typography>
-                            <Box className={'unlocks-value'}>
-                                {unlocks}
-                            </Box>
+                            <Typography className={'h7'}>
+                                {'Desbloqueos disponibles:'}
+                            </Typography>
+                            <Box className={'unlocks-value'}>{unlocks}</Box>
                         </Box>
                     </Box>
                 </Box>

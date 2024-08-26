@@ -8,7 +8,7 @@ import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
 import Loader from '@/components/Loader';
-import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 
 export interface Module {
     id: string;
@@ -56,7 +56,7 @@ const ModuleScreen = () => {
     return (
         <>
             <Box height={'100vh'} className={'home-div'}>
-                <TopBar amtNotifications={0}/>
+                <TopBar amtNotifications={0} />
                 <div
                     style={{
                         display: 'flex',
@@ -67,7 +67,7 @@ const ModuleScreen = () => {
                         marginTop: '20px',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()}/>
+                    <ArrowBackIosNewIcon onClick={() => router.back()} />
                 </div>
                 <div className="module-name-div">
                     <p className={'h2 bold'}>{module?.name}</p>
@@ -79,15 +79,14 @@ const ModuleScreen = () => {
                             onClick={
                                 activity.unlocked
                                     ? () => handleActivityOnClick(activity.id)
-                                    : () => {
-                                    }
+                                    : () => {}
                             } //Modal en caso de que no se haya completado la actividad previa
                             title={activity.name}
                             isAllowed={activity.unlocked}
                         />
                     ))}
                 </div>
-                <NavBar value={0}/>
+                <NavBar value={0} />
             </Box>
         </>
     );
