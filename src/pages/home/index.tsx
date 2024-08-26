@@ -37,7 +37,6 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                 console.log(error);
             }
         }
-
         showToast(
             '¡Ánimo en tu tratamiento!',
             'img',
@@ -75,7 +74,6 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         try {
             const stats = await getUserStats();
             if (stats) {
-                console.log(stats);
                 setDays(stats.maxStreak ? stats.maxStreak : 0);
                 setMinutes(
                     stats.totalWatchTime
