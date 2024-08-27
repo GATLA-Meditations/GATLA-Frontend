@@ -1,0 +1,68 @@
+.questionnaire-questions-div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+.question-div {
+    display: flex;
+    margin: 4px;
+}
+
+.questionnaire-title-div {
+    display: flex;
+    background-color: var(--secondary-200);
+    border-radius: 15px;
+    align-items: center;
+    text-align: center;
+    margin: 12px 0;
+    padding: 12px;
+    width: 70%;
+}
+
+.questionnaire-questions-main-div {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.questionnaire-title-p {
+    color: var(--secondary-600);
+}
+
+.questionnaire-send-button-div {
+    display: flex;
+    margin: 12px 0;
+}
+
+.answered {
+    background-color: var(--primary-300);
+    transition: background-color 0.2s ease;
+}
+
+.not-answered {
+    background-color: var(--primary-100);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 1vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.progress-bar-arrow-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    position: sticky;
+    top: 0;
+}
+
+.progress-bar-item {
+    width: 100%;
+    border: none;
+}

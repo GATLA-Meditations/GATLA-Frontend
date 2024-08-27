@@ -1,0 +1,45 @@
+.achievement-card {
+    border-radius: 8px;
+    border-top: 2px solid #ab64e9;
+    border-right: 2px solid #ab64e9;
+    border-bottom: 4px solid #ab64e9;
+    border-left: 2px solid #ab64e9;
+    background: #fff;
+    backdrop-filter: blur(2px);
+    display: flex;
+    width: 115px;
+    height: 170px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.text {
+    color: #ab64e9;
+    text-align: center;
+    font-family: Inter sans-serif;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 100%; /* 9px */
+    letter-spacing: 0.27px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    color: #ab64e9;
+    text-align: center;
+    font-family: Inter sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100%; /* 12px */
+    letter-spacing: 0.36px;
+}

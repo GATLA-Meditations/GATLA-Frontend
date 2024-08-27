@@ -1,0 +1,19 @@
+.homePage {
+    display: flex;
+    width: fit-content;
+    height: 100lvh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 22px;
+    background: #fef7ff;
+}
+
+.home-div {
+    background: linear-gradient(
+        to bottom,
+        var(--primary-100),
+        var(--primary-300),
+        var(--primary-200)
+    );
+}

@@ -1,0 +1,25 @@
+.customButton {
+    color: black;
+    text-transform: capitalize;
+    background: transparent;
+    border: 1px solid #000000;
+}
+
+.customButton:hover {
+    border: 1px solid #000000;
+    background: var(--grey-200);
+}
+
+.leftButton {
+    border-radius: 20px;
+    padding: 10px 12px;
+    width: 104px;
+    height: 40px;
+}
+
+.rightButton {
+    border-radius: 20px;
+    padding: 10px 12px;
+    width: 104px;
+    height: 40px;
+}

@@ -1,7 +1,7 @@
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
-import VideocamIcon from '@mui/icons-material/Videocam';
+import PaletteIcon from '@mui/icons-material/Palette';
 import './styles.css';
 import React from 'react';
 
@@ -12,18 +12,38 @@ interface NavBarProps {
 const NavBar = ({ value }: NavBarProps) => {
     const [val, setValue] = React.useState(value);
     return (
-        <BottomNavigation style={{ backgroundColor: 'var(--bg-color)', boxShadow: '0px -2px 4px rgba(0, 0, 0, 0.25)' }}
+        <BottomNavigation
+            style={{
+                backgroundColor: 'var(--secondary-100)',
+                position: 'fixed',
+                bottom: 0,
+                width: '100%',
+                fontWeight: 800,
+                color: 'black',
+                borderTop: '1px solid var(--secondary-200)',
+                padding: '4px 0',
+            }}
             value={val}
             onChange={(event, newValue) => {
                 setValue(newValue);
             }}
+            showLabels={true}
         >
             <BottomNavigationAction
-                label="Home"
-                icon={<HomeIcon style={{ fontSize: '2.5rem'}} />}
+                label={'Inicio'}
+                href={'/home'}
+                icon={<HomeIcon style={{ fontSize: '2rem' }} />}
             />
-            <BottomNavigationAction label="Meet" icon={<VideocamIcon style={{ fontSize: '2.5rem' }}/>} />
-            <BottomNavigationAction label="User" icon={<AccountCircleIcon style={{ fontSize: '2.5rem' }}/>} />
+            <BottomNavigationAction
+                label={'Personalizar'}
+                icon={<PaletteIcon style={{ fontSize: '2rem' }} />}
+                href={'/personalize'}
+            />
+            <BottomNavigationAction
+                label={'Perfil'}
+                icon={<AccountCircleIcon style={{ fontSize: '2rem' }} />}
+                href={'/profile'}
+            />
         </BottomNavigation>
     );
 };

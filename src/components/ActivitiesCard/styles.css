@@ -1,0 +1,37 @@
+.card-div {
+    display: flex;
+    width: 90%;
+    height: 60px;
+    background-color: var(--secondary-100);
+    opacity: 0.8;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 4px;
+}
+
+.title-div {
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.lock-div {
+    display: flex;
+    gap: 12px;
+}
+
+.disallowed {
+    background-color: var(--secondary-200);
+}
