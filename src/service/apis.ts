@@ -6,7 +6,7 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'https://api.renacentia.org';
+const baseURL = 'http://localhost:3001';
 
 const config = (token: string) => ({
     headers: {
@@ -204,6 +204,15 @@ export const getNotificationSettings = async () => {
 export const updateNotificationSettings = async (settings: any) => {
     try {
         await gatlaAxios.put('/notification/settings', settings);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const useGetUserNotifications = async () => {
+    try {
+        const response = await gatlaAxios.get('user/notifications');
+        return response.data;
     } catch (error) {
         console.log(error);
     }

@@ -1,60 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import NotificationsContainers from '@/components/NotificationsContainers';
 import './styles.css';
+import { useGetUserNotifications } from '@/service/apis';
+import { Typography } from '@mui/material';
 
 const Notifications = () => {
-    type NotificationVariant = 'normal' | 'motivationalMessage';
+    const [notifications, setNotifications] = useState([]);
 
-    const notifications: {
-        variant: NotificationVariant;
-        message: string;
-        senderImage?: string;
-    }[] = [
-        {
-            variant: 'normal',
-            message: 'You have a new message from John Doe',
-        },
-        {
-            variant: 'motivationalMessage',
-            message: 'You are doing great!',
-            senderImage: 'https://randomuser.me/api/portraits/men/1.jpg',
-        },
-        {
-            variant: 'normal',
-            message: 'You have a new message from John Doe',
-        },
-        {
-            variant: 'motivationalMessage',
-            message: 'You are doing great!',
-            senderImage: 'https://randomuser.me/api/portraits/men/1.jpg',
-        },
-        {
-            variant: 'normal',
-            message: 'You have a new message from John Doe',
-        },
-        {
-            variant: 'motivationalMessage',
-            message: 'You are doing great!',
-            senderImage: 'https://randomuser.me/api/portraits/men/1.jpg',
-        },
-    ];
+    useEffect(() => {
+        const fetchNotifications = async () => {
+            try {
+                const data = await useGetUserNotifications();
+                setNotifications(data || []);
+            } catch (error) {
+                console.error('Error fetching notifications:', error);
+            }
+        };
+
+        fetchNotifications();
+    }, []);
 
     return (
         <Box height={'100vh'} className={'notifications-container'}>
-            <TopBar amtNotifications={0} />
+            <TopBar amtNotifications={notifications.length} />
             <Box className={'notifications'}>
-                {notifications.map((notification, index) => (
-                    <NotificationsContainers
-                        variant={notification.variant}
-                        message={notification.message}
-                        senderImage={notification?.senderImage || undefined}
-                        key={index}
-                    />
-                ))}
+                {notifications.length > 0 ? (
+                    notifications.map((notification, index) => (
+                        <NotificationsContainers
+                            variant={notification.variant}
+                            message={notification.message}
+                            senderImage={notification?.senderImage || undefined}
+                            key={index}
+                        />
+                    ))
+                ) : (
+                    <div
+                        style={{
+                            display: 'flex',
+                            textAlign: 'center',
+                            gap: 20,
+                            flexDirection: 'column',
+                        }}
+                    >
+                        <Typography>Aún no tienes notificaciones</Typography>
+                        <Typography>¡Ánimo en tu tratamiento!</Typography>
+                    </div>
+                )}
             </Box>
             <NavBar value={1} />
         </Box>
