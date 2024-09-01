@@ -1,10 +1,5 @@
 import axios from 'axios';
-import { store } from 'next/dist/build/output/store';
-import { getToken } from '@/service/store';
-import {
-    QuestionnaireAnswers,
-    QuestionProps,
-} from '@/pages/questionnaire/[id]';
+import {QuestionnaireAnswers,} from '@/pages/questionnaire/[id]';
 
 const baseURL = 'http://localhost:3001';
 
@@ -178,6 +173,22 @@ export const getShopItems = async () => {
 export const buyItem = async (id: string) => {
     try {
         await gatlaAxios.put(`/shop/buy-item/${id}`);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAchievements = async () => {
+    try {
+        return await gatlaAxios.get('/achievement/user/');
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAllAchievements = async () => {
+    try {
+        return await gatlaAxios.get('/achievement/all/');
     } catch (error) {
         console.log(error);
     }
