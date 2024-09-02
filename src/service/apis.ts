@@ -209,9 +209,9 @@ export const updateNotificationSettings = async (settings: any) => {
     }
 };
 
-export const useGetUserNotifications = async () => {
+export const useGetUserNotifications = async (params: any) => {
     try {
-        const response = await gatlaAxios.get('user/notifications');
+        const response = await gatlaAxios.get('user/notifications?page=1&pageSize=10');
         return response.data;
     } catch (error) {
         console.log(error);
