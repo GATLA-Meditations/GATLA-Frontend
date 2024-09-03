@@ -71,11 +71,21 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
 
     async function fetchStats() {
         setIsLoading(true);
-        const stats = await getUserStats();
-        setDays(stats.days ? stats.days : 0);
-        setMinutes(stats.minutes ? convertMinutesToHours(stats.minutes) : 0);
-        setGoals(stats.goals ? stats.goals : 0);
-        setIsLoading(false);
+        try {
+            const stats = await getUserStats();
+            if (stats) {
+                setDays(stats.maxStreak ? stats.maxStreak : 0);
+                setMinutes(
+                    stats.totalWatchTime
+                        ? convertMinutesToHours(stats.totalWatchTime)
+                        : 0
+                );
+                setGoals(stats.goals ? stats.goals : 0);
+            }
+        } catch (error) {
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     if (isLoading) {
@@ -86,7 +96,11 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         <>
             <Box height={'100vh'} className={'home-div'}>
                 <TopBar amtNotifications={0} selected={''} />
-                <AchievementsHomeMenu days={1} minutes={1} goals={1} />
+                <AchievementsHomeMenu
+                    days={days}
+                    minutes={minutes}
+                    goals={goals}
+                />
                 <MeditationEntryPoint
                     id={actualModule.id}
                     type={actualModule.type}

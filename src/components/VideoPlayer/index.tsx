@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import ReactPlayer, { ReactPlayerProps } from 'react-player';
 import './styles.css';
 import Loader from '@/components/Loader';
@@ -10,6 +10,14 @@ export interface VideoPlayerProps extends ReactPlayerProps {
 const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
     const ref = useRef<ReactPlayer>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+
+    const handleReady = () => {
+        setIsLoading(false);
+        if (onReady) {
+            // @ts-ignore
+            onReady();
+        } // Call the original onReady prop if it exists
+    };
 
     const handlePlay = () => {
         if (ref.current) {
@@ -23,15 +31,33 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
         }
     };
 
+    const handleBuffer = () => {
+        setIsLoading(true);
+    };
+
+    const handleBufferEnd = () => {
+        setIsLoading(false);
+    };
+
     return (
-        <ReactPlayer
-            ref={ref}
-            url={url}
-            onPlay={handlePlay}
-            onPause={handlePause}
-            controls={false}
-            className="video-player"
-        />
+        <div className="video-player-container">
+            {isLoading && (
+                <div className="loader-container">
+                    <Loader />
+                </div>
+            )}
+            <ReactPlayer
+                ref={ref}
+                url={url}
+                onReady={handleReady}
+                onPlay={handlePlay}
+                onPause={handlePause}
+                onBuffer={handleBuffer}
+                onBufferEnd={handleBufferEnd}
+                controls={false}
+                className="video-player"
+            />
+        </div>
     );
 };
 

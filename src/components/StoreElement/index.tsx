@@ -4,7 +4,7 @@ import React from 'react';
 import { Lock } from '@/assets/Lock/Lock';
 
 export interface StoreElementProps {
-    id: string,
+    id: string;
     type: 'AVATAR' | 'BACKGROUND' | 'VIDEO';
     previewPicture: any;
     isLocked: boolean;

@@ -56,6 +56,7 @@ const AchievementsScreen = () => {
             <TopBar amtNotifications={0} selected={''}/>
             <AchievementsHomeMenu days={1} minutes={1} goals={1}/>
 
+
             <Box className={'achievements_content'}>
                 {achievementsUnlocked.length > 0 && (
                     <>

@@ -1,7 +1,12 @@
 import axios from 'axios';
-import {QuestionnaireAnswers,} from '@/pages/questionnaire/[id]';
+import { store } from 'next/dist/build/output/store';
+import { getToken } from '@/service/store';
+import {
+    QuestionnaireAnswers,
+    QuestionProps,
+} from '@/pages/questionnaire/[id]';
 
-const baseURL = 'http://localhost:3001';
+const baseURL = 'https://api.renacentia.org';
 
 const config = (token: string) => ({
     headers: {
@@ -173,6 +178,32 @@ export const getShopItems = async () => {
 export const buyItem = async (id: string) => {
     try {
         await gatlaAxios.put(`/shop/buy-item/${id}`);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getProgressAndUnlocks = async () => {
+    try {
+        const response = await gatlaAxios.get('/user/personalization-tokens');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getNotificationSettings = async () => {
+    try {
+        const response = await gatlaAxios.get('/notification/settings');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateNotificationSettings = async (settings: any) => {
+    try {
+        await gatlaAxios.put('/notification/settings', settings);
     } catch (error) {
         console.log(error);
     }

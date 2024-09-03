@@ -16,7 +16,7 @@ const NotificationContainer: React.FC<NotificationContainerProps> = ({
     return (
         <Box className={`notification-container ${variant}`}>
             {variant === 'motivationalMessage' && senderImage && (
-                <img src={senderImage} className="sender-image" />
+                <img src={senderImage} className="sender-image" alt="notification-image"/>
             )}
             <p className="message">{message}</p>
         </Box>

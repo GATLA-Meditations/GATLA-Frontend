@@ -13,9 +13,15 @@ export type PersonalizeItemsBoxProps = {
     label: string;
     items: any[];
     onUpdateItems: () => void;
+    unlocks: number;
 };
 
-const PersonalizeItemsBox = ({ label, items, onUpdateItems }: PersonalizeItemsBoxProps) => {
+const PersonalizeItemsBox = ({
+    label,
+    items,
+    onUpdateItems,
+    unlocks,
+}: PersonalizeItemsBoxProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
     const [selectedBackground, setSelectedBackground] = useState<{
         url: string | null;
@@ -44,7 +50,7 @@ const PersonalizeItemsBox = ({ label, items, onUpdateItems }: PersonalizeItemsBo
             try {
                 await chooseBackground(selectedBackground.url);
             } catch (error) {
-                console.log(error);
+                console.error(error);
             } finally {
                 setIsBackgroundModalOpen(false);
                 setSelectedBackground({ url: null, name: null });
@@ -65,7 +71,7 @@ const PersonalizeItemsBox = ({ label, items, onUpdateItems }: PersonalizeItemsBo
                 onUpdateItems();
             })
             .catch((error) => {
-                console.log(error);
+                console.error(error);
             });
     };
 
@@ -113,6 +119,7 @@ const PersonalizeItemsBox = ({ label, items, onUpdateItems }: PersonalizeItemsBo
                     onConfirm={handleBuyItem}
                     itemName={selectedItem.name || ''}
                     itemPreview={selectedItem.previewPicture}
+                    isConfirmButtonDisabled={unlocks < selectedItem.price!!}
                 />
             )}
         </Box>

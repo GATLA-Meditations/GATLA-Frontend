@@ -7,6 +7,7 @@ export interface BuyItemModalProps {
     onConfirm: () => void;
     itemName: string;
     itemPreview: any;
+    isConfirmButtonDisabled?: boolean;
 }
 
 const BuyItemModal = ({
@@ -15,6 +16,7 @@ const BuyItemModal = ({
     onConfirm,
     itemName,
     itemPreview,
+    isConfirmButtonDisabled,
 }: BuyItemModalProps) => {
     return (
         <GenericModal
@@ -28,6 +30,7 @@ const BuyItemModal = ({
             bottomButtonText="Cancelar"
             bottomButtonColor="red"
             pictureUrl={itemPreview}
+            topButtonDisabled={isConfirmButtonDisabled}
         />
     );
 };

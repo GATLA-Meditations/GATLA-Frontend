@@ -21,7 +21,7 @@ html,
     flex-shrink: 0;
 }
 
-.container{
+.container {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -39,7 +39,7 @@ html,
     flex-shrink: 0;
 }
 
-.title-information{
+.title-information {
     color: #000;
     font-family: Inter, sans-serif;
     font-size: 24px;
@@ -49,7 +49,7 @@ html,
     letter-spacing: 0.72px;
 }
 
-.text-information{
+.text-information {
     color: var(--grey-700, #141418);
     font-family: Inter, sans-serif;
     font-size: 18px;

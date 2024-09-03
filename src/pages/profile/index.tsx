@@ -13,6 +13,9 @@ import Loader from '@/components/Loader';
 import ChangeAvatarModal from '@/components/ChangeAvatarModal';
 import PencilIcon from '@/assets/PencilIcon';
 import './styles.css';
+import Image from 'next/image';
+import logo from '@/assets/Logo/logo.png';
+import Link from 'next/link';
 
 export interface User {
     patientCode: string;
@@ -147,6 +150,13 @@ const Profile = () => {
                     flexDirection={'column'}
                     sx={{ margin: '3vh', gap: '3vh' }}
                 >
+                    <Button
+                        variant="common"
+                        size="medium"
+                        onClick={() => (window.location.href = '/achievements')}
+                    >
+                        Ver logros
+                    </Button>
                     <Button
                         variant="common"
                         size="medium"
