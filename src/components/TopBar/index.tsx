@@ -7,6 +7,7 @@ import SettingsButton from '../Settings';
 import Image from 'next/image';
 import logo from '@/assets/Logo/logo.png';
 import Link from 'next/link';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 
 interface TopBarProps {
     amtNotifications: number;
@@ -60,6 +61,23 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                         }}
                     >
                         <SettingsButton />
+                    </Box>
+                    <Box
+                        sx={{
+                            bgcolor:
+                                selectedOption === 'information'
+                                    ? 'rgba(0, 0, 0, 0.1)'
+                                    : 'transparent',
+                            borderRadius: '100%',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            padding: '8px',
+                        }}
+                    >
+                        <Link href="/information">
+                            <PeopleAltIcon sx={{ color: '#0d0949', fontSize: '25px' }} />
+                        </Link>
                     </Box>
                 </Toolbar>
             </AppBar>
