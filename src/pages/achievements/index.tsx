@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TopBar from '@/components/TopBar';
 import './styles.css';
 import Box from '@mui/material/Box';
@@ -12,8 +12,14 @@ import logoLocked from '@/assets/LockedAchievementIcon/LockedAchievement.png';
 import Typography from '@mui/material/Typography';
 import LockedAchievement from '@/components/LockedAchievement';
 import NavBar from '@/components/NavBar';
+import {getUserStats} from '@/service/apis';
 
 const AchievementsScreen = () => {
+
+    const [days, setDays] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [goals, setGoals] = useState(0);
+
     const achievementsUnlocked = [
         {
             rewardCard: logoUnlocked,
@@ -62,13 +68,38 @@ const AchievementsScreen = () => {
         },
     ];
 
+    useEffect(() => {
+        fetchStats();
+    }, []);
+
+    function convertMinutesToHours(minutes: number) {
+        if (minutes > 60) {
+            return Math.floor(minutes / 60);
+        }
+        return minutes;
+    }
+
+    async function fetchStats() {
+        try {
+            const stats = await getUserStats();
+            if (stats) {
+                setDays(stats.maxStreak ? stats.maxStreak : 0);
+                setMinutes(
+                    stats.totalWatchTime
+                        ? convertMinutesToHours(stats.totalWatchTime)
+                        : 0
+                );
+                setGoals(stats.goals ? stats.goals : 0);
+            }
+        } catch (error) {
+        }
+    }
+
     return (
         <Box height={'100vh'}>
             <TopBar amtNotifications={0} selected={''} />
-
-            <AchievementsHomeMenu days={1} minutes={1} goals={1} />
-
             <Box className={'achievements_content'}>
+                <AchievementsHomeMenu days={days} minutes={minutes} goals={goals} />
                 <Typography className={'title_text'}>
                     Logros obtenidos
                 </Typography>
