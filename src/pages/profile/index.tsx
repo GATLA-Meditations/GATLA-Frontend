@@ -20,6 +20,7 @@ import Link from 'next/link';
 export interface User {
     patientCode: string;
     image: string;
+    background: string;
     achievements: Achievement[];
 }
 
@@ -47,7 +48,7 @@ const Profile = () => {
         const avatars = await getUserItems().then((items) => {
             return items.filter((item: any) => item.type === 'AVATAR');
         });
-        setAvatars(avatars);
+        setAvatars(avatars.map((avatar: any) => avatar.content_url));
     };
 
     const handleLogoutClick = () => {

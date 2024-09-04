@@ -6,7 +6,7 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'https://api.renacentia.org';
+const baseURL = 'http://localhost:3001';
 
 const config = (token: string) => ({
     headers: {
@@ -152,7 +152,7 @@ export const updateUserAvatar = async (avatar: string) => {
 
 export const chooseBackground = async (background: string) => {
     try {
-        await gatlaAxios.put('/user/background', { background });
+        await gatlaAxios.put('/user/background', { url: background });
     } catch (error) {
         console.log(error);
     }
