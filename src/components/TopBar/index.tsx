@@ -7,6 +7,7 @@ import SettingsButton from '../Settings';
 import Image from 'next/image';
 import logo from '@/assets/Logo/logo.png';
 import Link from 'next/link';
+import PeopleButton from '@/components/People/PeopleButton';
 
 interface TopBarProps {
     amtNotifications: number;
@@ -49,6 +50,17 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                         }}
                     >
                         <Notifications amtNotifications={amtNotifications} />
+                    </Box>
+                    <Box
+                        sx={{
+                            bgcolor:
+                                selectedOption === 'information'
+                                    ? 'rgba(0, 0, 0, 0.1)'
+                                    : 'transparent',
+                            borderRadius: '100%',
+                        }}
+                    >
+                        <PeopleButton/>
                     </Box>
                     <Box
                         sx={{
