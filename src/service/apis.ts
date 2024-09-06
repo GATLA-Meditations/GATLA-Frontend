@@ -1,12 +1,10 @@
 import axios from 'axios';
-import { store } from 'next/dist/build/output/store';
-import { getToken } from '@/service/store';
 import {
     QuestionnaireAnswers,
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'http://localhost:3001';
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
 
 const config = (token: string) => ({
     headers: {
