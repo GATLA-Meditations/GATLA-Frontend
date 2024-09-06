@@ -36,19 +36,25 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
         handleGetUser().then();
-        setIsLoading(false);
     }, []);
 
     const handleGetUser = async () => {
-        const user = await getUserProfile();
-        setUser(user);
-        setAvatar(user.image);
-        const avatars = await getUserItems().then((items) => {
-            return items.filter((item: any) => item.type === 'AVATAR');
-        });
-        setAvatars(avatars.map((avatar: any) => avatar.content_url));
+        try {
+            setIsLoading(true);
+            const user = await getUserProfile();
+            setUser(user);
+            setAvatar(user.image);
+
+            const avatars = await getUserItems().then((items) => {
+                return items.filter((item: any) => item.type === 'AVATAR');
+            });
+            setAvatars(avatars);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleLogoutClick = () => {
