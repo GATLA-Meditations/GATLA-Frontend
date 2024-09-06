@@ -11,6 +11,7 @@ import { StoreElementProps } from '@/components/StoreElement';
 import CircularProgressComponent from '@/components/CircularProgress';
 import TopBar from '@/components/TopBar';
 import { getProgressAndUnlocks, getShopItems } from '@/service/apis';
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 
 const backgroundStoreElements: StoreElementProps[] = [
     {
@@ -75,6 +76,11 @@ const Personalize = () => {
     );
     const [progress, setProgress] = useState(0);
     const [unlocks, setUnlocks] = useState(0);
+    const [selectedBackground, setSelectedBackground] = useState<string | null>(
+        null
+    );
+    const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+    const user = useGetProfileInfo();
 
     const handleGetItems = async () => {
         try {
@@ -88,6 +94,13 @@ const Personalize = () => {
 
             setBackgroundItems(sortedBackgroundItems);
             setAvatarItems(sortedAvatarItems);
+
+            // Assuming you have a way to get the selected items
+            const selectedBackground = items.find(item => item.type === 'BACKGROUND' && item.itemId === user.profile?.background)?.id || null;
+            const selectedAvatar = items.find(item => item.type === 'AVATAR' && item.itemId === user.profile?.image)?.id || null;
+
+            setSelectedBackground(selectedBackground);
+            setSelectedAvatar(selectedAvatar);
         } catch (error) {
             console.error(error);
         }
@@ -100,6 +113,8 @@ const Personalize = () => {
                 console.error(error);
             });
     };
+
+    console.log(selectedAvatar, selectedBackground);
 
     useEffect(() => {
         handleGetItems().then();
@@ -147,6 +162,8 @@ const Personalize = () => {
                         items={backgroundItems}
                         onUpdateItems={handleGetItems}
                         unlocks={unlocks}
+                        selectedAvatar={selectedAvatar}
+                        selectedBackground={selectedBackground}
                     />
                 </Box>
                 <Box className={'store-elements-division-container'}>
@@ -155,6 +172,8 @@ const Personalize = () => {
                         items={avatarItems}
                         onUpdateItems={handleGetItems}
                         unlocks={unlocks}
+                        selectedAvatar={selectedAvatar}
+                        selectedBackground={selectedBackground}
                     />
                 </Box>
             </Box>
