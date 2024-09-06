@@ -112,14 +112,15 @@ const Personalize = () => {
             <TopBar amtNotifications={0} />
             <Box className={'personalize-title-div'}>
                 <Box className={'title-progress-div'}>
-                    <Typography className={'h5'}>Mi Renacentia</Typography>
+                    <Typography className={'h5'}>Desbloqueos disponibles</Typography>
                     <Box className={'progress'}>
-                        <CircularProgressComponent value={progress} />
+                        {/*<CircularProgressComponent value={progress} />*/}
                         <Box className={'unlocks'}>
-                            <Typography className={'h7'}>
-                                {'Desbloqueos disponibles:'}
-                            </Typography>
-                            <Box className={'unlocks-value'}>{unlocks}</Box>
+                            <Box className={'unlocks-value'}><Typography className={'h6'}>{unlocks}</Typography></Box>
+                            {/*<Typography className={'body1'}>*/}
+                            {/*    {'Desbloqueos'}*/}
+                            {/*</Typography>*/}
+
                         </Box>
                     </Box>
                 </Box>
@@ -127,7 +128,7 @@ const Personalize = () => {
                     <PersonalizeChip
                         label={'Fondos'}
                         onClick={() => console.log('fondos')}
-                        variant={'filled'}
+                        variant={'outlined'}
                     />
                     <PersonalizeChip
                         label={'Perfil'}
