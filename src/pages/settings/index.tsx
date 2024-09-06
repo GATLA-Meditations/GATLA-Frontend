@@ -53,7 +53,7 @@ const Settings = ({showToast}: WithToastProps) => {
                 <TopBar amtNotifications={0} selected="settings"></TopBar>
             </Box>
             <Box display={'flex'} flexDirection={'column'} padding={'2vh'} gap={'16px'}>
-                <Typography className={'h5'}>Configuracion</Typography>
+                <Typography className={'h5'}>Configuración</Typography>
                 <Box
                     display={'flex'}
                     flexDirection={'column'}
@@ -61,7 +61,7 @@ const Settings = ({showToast}: WithToastProps) => {
                     padding={'2vh'} backgroundColor={'white'} borderRadius={'16px'}
                     gap={'16px'}
                 >
-                    <Typography className="h7" sx={{fontWeight: 'bold'}}>Notificaciones</Typography>
+                    <Typography className="h7">Notificaciones</Typography>
                     <FormControl>
                         <FormGroup sx={{gap: '16px'}}>
                             <Box display="flex" alignItems="center" flexDirection={'row'} width="100%">
