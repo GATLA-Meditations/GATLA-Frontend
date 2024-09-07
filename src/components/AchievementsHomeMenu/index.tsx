@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {getUserStats} from "@/service/apis";
 
-type AchievementsProps = {
-    days: number;
-    minutes: number;
-    goals: number;
-};
+const Achievements = () => {
 
-const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
+    const [days, setDays] = useState(0);
+    const [minutes, setMinutes] = useState(0);
+    const [goals, setGoals] = useState(0);
+
     const containerStyle: React.CSSProperties = {
         display: 'flex',
         alignItems: 'center',
@@ -51,6 +51,33 @@ const Achievements = ({ days, minutes, goals }: AchievementsProps) => {
         letterSpacing: '0.36px',
         wordWrap: 'break-word',
     };
+
+    useEffect(() => {
+        fetchStats();
+    }, []);
+
+    async function fetchStats() {
+        try {
+            const stats = await getUserStats();
+            if (stats) {
+                setDays(stats.maxStreak ? stats.maxStreak : 0);
+                setMinutes(
+                    stats.totalWatchTime
+                        ? convertMinutesToHours(stats.totalWatchTime)
+                        : 0
+                );
+                setGoals(stats.goals ? stats.goals : 0);
+            }
+        } catch (error) {
+        }
+    }
+
+    function convertMinutesToHours(minutes: number) {
+        if (minutes > 60) {
+            return Math.floor(minutes / 60);
+        }
+        return minutes;
+    }
 
     return (
         <div style={containerStyle}>
