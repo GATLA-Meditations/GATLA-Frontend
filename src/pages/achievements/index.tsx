@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TopBar from '@/components/TopBar';
 import './styles.css';
 import Box from '@mui/material/Box';
@@ -6,12 +6,13 @@ import '../../app/globals.css';
 import WithAuth from '@/components/WithAuth';
 import logoUnlocked from '@/assets/ObtainedAchievementIcon/ObtainedAchievement.png';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
-import { Grid } from '@mui/material';
+import {Grid} from '@mui/material';
 import ObtainedAchievement from '@/components/ObtainedAchievement';
 import logoLocked from '@/assets/LockedAchievementIcon/LockedAchievement.png';
 import Typography from '@mui/material/Typography';
 import LockedAchievement from '@/components/LockedAchievement';
 import NavBar from '@/components/NavBar';
+import {getUserStats} from '@/service/apis';
 
 const AchievementsScreen = () => {
     const achievementsUnlocked = [
@@ -64,11 +65,9 @@ const AchievementsScreen = () => {
 
     return (
         <Box height={'100vh'}>
-            <TopBar amtNotifications={0} selected={''} />
-
-            <AchievementsHomeMenu days={1} minutes={1} goals={1} />
-
+            <TopBar amtNotifications={0} selected={''}/>
             <Box className={'achievements_content'}>
+                <AchievementsHomeMenu/>
                 <Typography className={'title_text'}>
                     Logros obtenidos
                 </Typography>
@@ -110,7 +109,7 @@ const AchievementsScreen = () => {
                     ))}
                 </Grid>
             </Box>
-            <NavBar value={2} />
+            <NavBar value={2}/>
         </Box>
     );
 };
