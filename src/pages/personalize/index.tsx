@@ -77,22 +77,20 @@ const Personalize = () => {
     const [unlocks, setUnlocks] = useState(0);
 
     const handleGetItems = async () => {
-        await getShopItems()
-            .then((items) => {
-                setBackgroundItems(
-                    items.filter(
-                        (item: StoreElementProps) => item.type === 'BACKGROUND'
-                    )
-                );
-                setAvatarItems(
-                    items.filter(
-                        (item: StoreElementProps) => item.type === 'AVATAR'
-                    )
-                );
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+        try {
+            const items = await getShopItems();
+            const sortedBackgroundItems = items
+                .filter((item: StoreElementProps) => item.type === 'BACKGROUND')
+                .sort((a, b) => Number(a.isLocked) - Number(b.isLocked));
+            const sortedAvatarItems = items
+                .filter((item: StoreElementProps) => item.type === 'AVATAR')
+                .sort((a, b) => Number(a.isLocked) - Number(b.isLocked));
+
+            setBackgroundItems(sortedBackgroundItems);
+            setAvatarItems(sortedAvatarItems);
+        } catch (error) {
+            console.error(error);
+        }
         await getProgressAndUnlocks()
             .then((data) => {
                 setProgress(data.progress);
@@ -112,14 +110,20 @@ const Personalize = () => {
             <TopBar amtNotifications={0} />
             <Box className={'personalize-title-div'}>
                 <Box className={'title-progress-div'}>
-                    <Typography className={'h5'}>Mi Renacentia</Typography>
+                    <Typography className={'h5'}>
+                        Desbloqueos disponibles
+                    </Typography>
                     <Box className={'progress'}>
-                        <CircularProgressComponent value={progress} />
+                        {/*<CircularProgressComponent value={progress} />*/}
                         <Box className={'unlocks'}>
-                            <Typography className={'h7'}>
-                                {'Desbloqueos disponibles:'}
-                            </Typography>
-                            <Box className={'unlocks-value'}>{unlocks}</Box>
+                            <Box className={'unlocks-value'}>
+                                <Typography className={'h6'}>
+                                    {unlocks}
+                                </Typography>
+                            </Box>
+                            {/*<Typography className={'body1'}>*/}
+                            {/*    {'Desbloqueos'}*/}
+                            {/*</Typography>*/}
                         </Box>
                     </Box>
                 </Box>
@@ -127,7 +131,7 @@ const Personalize = () => {
                     <PersonalizeChip
                         label={'Fondos'}
                         onClick={() => console.log('fondos')}
-                        variant={'filled'}
+                        variant={'outlined'}
                     />
                     <PersonalizeChip
                         label={'Perfil'}

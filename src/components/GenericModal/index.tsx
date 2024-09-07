@@ -51,7 +51,7 @@ const GenericModal = ({
         <Modal open={open} onClose={handleClose} className="modal-container">
             <Box
                 className={`modal-style modal-${size}`}
-                style={{ backgroundColor, position: 'relative' }}
+                style={{ backgroundColor, position: 'relative', outline:'none'}}
             >
                 <IconButton
                     className="modal-close-button"

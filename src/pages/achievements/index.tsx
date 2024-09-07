@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import TopBar from '@/components/TopBar';
 import './styles.css';
 import Box from '@mui/material/Box';
@@ -10,8 +10,7 @@ import ObtainedAchievement from '@/components/ObtainedAchievement';
 import Typography from '@mui/material/Typography';
 import LockedAchievement from '@/components/LockedAchievement';
 import NavBar from '@/components/NavBar';
-import {getAchievements, getAllAchievements} from '@/service/apis';
-
+import {getAchievements, getAllAchievements, getUserStats} from '@/service/apis';
 
 const AchievementsScreen = () => {
     const [achievementsUnlocked, setAchievementsUnlocked] = React.useState([
@@ -53,11 +52,9 @@ const AchievementsScreen = () => {
 
     return (
         <Box height={'100vh'}>
-            <TopBar amtNotifications={0} selected={''}/>
-            <AchievementsHomeMenu days={1} minutes={1} goals={1}/>
-
-
+            <TopBar amtNotifications={0} selected={''} />
             <Box className={'achievements_content'}>
+                <AchievementsHomeMenu/>
                 {achievementsUnlocked.length > 0 && (
                     <>
                         <Typography className={'title_text'}>Logros obtenidos</Typography>

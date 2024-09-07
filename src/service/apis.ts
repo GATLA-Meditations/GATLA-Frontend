@@ -1,12 +1,10 @@
 import axios from 'axios';
-import { store } from 'next/dist/build/output/store';
-import { getToken } from '@/service/store';
 import {
     QuestionnaireAnswers,
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = 'https://api.renacentia.org';
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
 
 const config = (token: string) => ({
     headers: {
@@ -152,7 +150,7 @@ export const updateUserAvatar = async (avatar: string) => {
 
 export const chooseBackground = async (background: string) => {
     try {
-        await gatlaAxios.put('/user/background', { background });
+        await gatlaAxios.put('/user/background', { url: background });
     } catch (error) {
         console.log(error);
     }
@@ -209,6 +207,14 @@ export const updateNotificationSettings = async (settings: any) => {
     }
 };
 
+export const useGetUserNotifications = async (params: any) => {
+    try {
+        const response = await gatlaAxios.get('user/notifications?page=1&pageSize=10');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
 export const getAchievements = async () => {
     try {
         return await gatlaAxios.get('/achievement/user/');
