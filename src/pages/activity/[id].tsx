@@ -26,12 +26,18 @@ interface ActivityContent {
     content: string;
 }
 
+interface VideoInfo {
+    actionType: 'play' | 'pause';
+    time: number;
+}
+
 const Activity = () => {
     const router = useRouter();
     const id = router.query.id as string;
     const [activity, setActivity] = useState<Activity>();
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [videoInfo, setVideoInfo] = useState<VideoInfo[]>([]);
 
     const activityMap = (content: string, type: string) => {};
 
@@ -55,6 +61,14 @@ const Activity = () => {
     if (isLoading) {
         return <Loader />;
     }
+
+    const handleVideoPlay = (time: number) => {
+        setVideoInfo([...videoInfo, { actionType: 'play', time }]);
+    };
+
+    const handleVideoPause = (time: number) => {
+        setVideoInfo([...videoInfo, { actionType: 'pause', time }]);
+    };
 
     return (
         <div className={'activity-main-div'}>
@@ -83,7 +97,12 @@ const Activity = () => {
                 {activity?.contents.map((activity, key) =>
                     activity.type === ActivityContentType.VIDEO ? (
                         <div className={'activity-video'} key={key}>
-                            <VideoPlayer url={activity.content} />
+                            <VideoPlayer
+                                url={activity.content}
+                                isPlaying={handleVideoPlay}
+                                isPausing={handleVideoPause}
+                                activityId={activity.id}
+                            />
                         </div>
                     ) : (
                         <div

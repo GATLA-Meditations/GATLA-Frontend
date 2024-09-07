@@ -73,6 +73,15 @@ export const getVideo = async (activityId: string) => {
     }
 };
 
+export const sendViewTime = async (activityId: string, time: number) => {
+    try {
+        await gatlaAxios.put(`/user/view-time/${activityId}/${time}`);
+    } catch (error) {
+        console.error('Error sending view time:', error);
+        throw error;
+    }
+};
+
 export const getModuleById = async (id: string) => {
     try {
         // const token = localStorage.getItem('token')!!;

@@ -1,13 +1,24 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactPlayer, { ReactPlayerProps } from 'react-player';
 import './styles.css';
 import Loader from '@/components/Loader';
+import { sendViewTime } from '@/service/apis';
+import { OnProgressProps } from 'react-player/base';
 
 export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
+    isPlaying?: (time: number) => void;
+    isPausing?: (time: number) => void;
+    activityId: string;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({
+    url,
+    onReady,
+    isPlaying,
+    isPausing,
+    activityId,
+}) => {
     const ref = useRef<ReactPlayer>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -21,13 +32,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
 
     const handlePlay = () => {
         if (ref.current) {
-            console.log('Video is playing', ref.current.getCurrentTime());
+            isPlaying && isPlaying(ref.current.getCurrentTime());
         }
     };
 
     const handlePause = () => {
         if (ref.current) {
-            console.log('Video is paused', ref.current.getCurrentTime());
+            isPausing && isPausing(ref.current.getCurrentTime());
         }
     };
 
@@ -38,6 +49,23 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
     const handleBufferEnd = () => {
         setIsLoading(false);
     };
+
+    const handleProgress = (state: OnProgressProps) => {
+        const { playedSeconds } = state;
+        sendViewTime(activityId, playedSeconds).catch((error) => {
+            console.error('Error sending view time:', error);
+        });
+    };
+
+    useEffect(() => {
+        return () => {
+            if (ref.current) {
+                sendViewTime(activityId, ref.current.getCurrentTime()).catch((error) => {
+                    console.error('Error sending view time:', error);
+                });
+            }
+        };
+    }, []);
 
     return (
         <div className="video-player-container">
@@ -54,6 +82,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
                 onPause={handlePause}
                 onBuffer={handleBuffer}
                 onBufferEnd={handleBufferEnd}
+                onProgress={handleProgress}
+                progressInterval={60000}
                 controls={false}
                 className="video-player"
             />
