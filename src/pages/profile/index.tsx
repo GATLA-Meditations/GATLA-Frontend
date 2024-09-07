@@ -157,13 +157,13 @@ const Profile = () => {
                     flexDirection={'column'}
                     sx={{ margin: '3vh', gap: '3vh' }}
                 >
-                    <Button
-                        variant="common"
-                        size="medium"
-                        onClick={() => (window.location.href = '/achievements')}
-                    >
-                        Ver logros
-                    </Button>
+                    {/*<Button*/}
+                    {/*    variant="common"*/}
+                    {/*    size="medium"*/}
+                    {/*    onClick={() => (window.location.href = '/achievements')}*/}
+                    {/*>*/}
+                    {/*    Ver logros*/}
+                    {/*</Button>*/}
                     <Button
                         variant="common"
                         size="medium"
