@@ -11,8 +11,9 @@ import { StoreElementProps } from '@/components/StoreElement';
 import TopBar from '@/components/TopBar';
 import { getProgressAndUnlocks, getShopItems } from '@/service/apis';
 import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
+import WithToast, { WithToastProps } from '@/hoc/withToast';
 
-const Personalize = () => {
+const Personalize = ({ showToast }: WithToastProps) => {
     const [backgroundItems, setBackgroundItems] = useState<StoreElementProps[]>(
         []
     );
@@ -117,7 +118,10 @@ const Personalize = () => {
                             unlocks={unlocks}
                             selectedBackground={selectedBackground}
                             selectedAvatar={selectedAvatar}
-                            onBackgroundSelect={(backgroundId) => setSelectedBackground(backgroundId)}
+                            onBackgroundSelect={(backgroundId) =>
+                                setSelectedBackground(backgroundId)
+                            }
+                            showToast={showToast}
                         />
                     </Box>
                 </Box>
@@ -130,7 +134,10 @@ const Personalize = () => {
                             unlocks={unlocks}
                             selectedBackground={selectedBackground}
                             selectedAvatar={selectedAvatar}
-                            onBackgroundSelect={(backgroundId) => setSelectedBackground(backgroundId)}
+                            onBackgroundSelect={(backgroundId) =>
+                                setSelectedBackground(backgroundId)
+                            }
+                            showToast={showToast}
                         />
                     </Box>
                 </Box>
@@ -140,4 +147,4 @@ const Personalize = () => {
     );
 };
 
-export default Personalize;
+export default WithToast(Personalize);
