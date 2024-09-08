@@ -101,7 +101,6 @@ const Activity = () => {
                                 url={activity.content}
                                 isPlaying={handleVideoPlay}
                                 isPausing={handleVideoPause}
-                                activityId={activity.id}
                             />
                         </div>
                     ) : (
