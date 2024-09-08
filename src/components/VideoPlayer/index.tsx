@@ -1,13 +1,20 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactPlayer, { ReactPlayerProps } from 'react-player';
 import './styles.css';
 import Loader from '@/components/Loader';
 
 export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
+    isPlaying?: (time: number) => void;
+    isPausing?: (time: number) => void;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({
+    url,
+    onReady,
+    isPlaying,
+    isPausing,
+}) => {
     const ref = useRef<ReactPlayer>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -21,13 +28,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
 
     const handlePlay = () => {
         if (ref.current) {
-            console.log('Video is playing', ref.current.getCurrentTime());
+            isPlaying && isPlaying(ref.current.getCurrentTime());
         }
     };
 
     const handlePause = () => {
         if (ref.current) {
-            console.log('Video is paused', ref.current.getCurrentTime());
+            isPausing && isPausing(ref.current.getCurrentTime());
         }
     };
 
