@@ -26,7 +26,10 @@ const PersonalizeItemsBox = ({
     unlocks,
     selectedBackground,
     selectedAvatar,
-}: PersonalizeItemsBoxProps) => {
+    onBackgroundSelect, // New prop
+}: PersonalizeItemsBoxProps & {
+    onBackgroundSelect: (backgroundId: string) => void;
+}) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
     const [selectedBackgroundState, setSelectedBackgroundState] = useState<{
         url: string | null;
@@ -57,6 +60,15 @@ const PersonalizeItemsBox = ({
         if (selectedBackgroundState.url) {
             try {
                 await chooseBackground(selectedBackgroundState.url);
+                // Notify parent about the selected background ID
+                const selectedBgId = items.find(
+                    (item) =>
+                        item.previewPicture === selectedBackgroundState.url
+                )?.id;
+
+                if (selectedBgId) {
+                    onBackgroundSelect(selectedBgId);
+                }
             } catch (error) {
                 console.error(error);
             } finally {
