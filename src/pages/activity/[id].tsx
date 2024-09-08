@@ -8,6 +8,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Loader from '@/components/Loader';
+import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
 
 enum ActivityContentType {
     VIDEO = 'VIDEO',
@@ -38,6 +39,13 @@ const Activity = () => {
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [videoInfo, setVideoInfo] = useState<VideoInfo[]>([]);
+    const {profile, loading, error} = useGetProfileInfo();
+
+    const backgroundStyle = {
+        backgroundImage: `url(${profile?.background})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+    };
 
     const activityMap = (content: string, type: string) => {};
 
@@ -71,7 +79,7 @@ const Activity = () => {
     };
 
     return (
-        <div className={'activity-main-div'}>
+        <div className={'activity-main-div'} style={backgroundStyle}>
             <div
                 style={{
                     display: 'flex',

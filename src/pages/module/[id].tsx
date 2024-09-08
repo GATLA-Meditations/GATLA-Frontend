@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
 import Loader from '@/components/Loader';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
 
 export interface Module {
     id: string;
