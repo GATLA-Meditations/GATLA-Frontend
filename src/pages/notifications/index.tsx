@@ -7,9 +7,12 @@ import NotificationsContainers from '@/components/NotificationsContainers';
 import './styles.css';
 import { useGetUserNotifications } from '@/service/apis';
 import { Typography } from '@mui/material';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useRouter } from 'next/router';
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState([]);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchNotifications = async () => {
@@ -27,6 +30,18 @@ const Notifications = () => {
     return (
         <Box height={'100vh'} className={'notifications-container'}>
             <TopBar amtNotifications={notifications.length} />
+            <div
+                style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    width: '90%',
+                    color: 'black',
+                    marginLeft: '10px',
+                    marginTop: '20px',
+                }}
+            >
+                <ArrowBackIosNewIcon onClick={() => router.push('/home')} />
+            </div>
             <Box className={'notifications'}>
                 {notifications.length > 0 ? (
                     notifications.map((notification, index) => (
@@ -51,7 +66,7 @@ const Notifications = () => {
                     </div>
                 )}
             </Box>
-            <NavBar value={1} />
+            <NavBar value={0} />
         </Box>
     );
 };
