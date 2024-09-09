@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getActivityById } from '@/service/apis';
+import { getActivityById, sendVideoTime } from '@/service/apis';
 import '../../app/globals.css';
 import './styles.css';
 import VideoPlayer from '@/components/VideoPlayer';
@@ -8,6 +8,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Loader from '@/components/Loader';
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 
 enum ActivityContentType {
     VIDEO = 'VIDEO',
@@ -26,12 +27,25 @@ interface ActivityContent {
     content: string;
 }
 
+interface VideoInfo {
+    actionType: 'play' | 'pause';
+    time: number;
+}
+
 const Activity = () => {
     const router = useRouter();
     const id = router.query.id as string;
     const [activity, setActivity] = useState<Activity>();
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [videoInfo, setVideoInfo] = useState<VideoInfo[]>([]);
+    const { profile, loading, error } = useGetProfileInfo();
+
+    const backgroundStyle = {
+        backgroundImage: `url(${profile?.background})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+    };
 
     const activityMap = (content: string, type: string) => {};
 
@@ -56,8 +70,21 @@ const Activity = () => {
         return <Loader />;
     }
 
+    const handleVideoPlay = (time: number) => {
+        setVideoInfo([...videoInfo, { actionType: 'play', time }]);
+    };
+
+    const handleVideoPause = (time: number) => {
+        setVideoInfo([...videoInfo, { actionType: 'pause', time }]);
+    };
+
+    const handleSendVideoInfo = async (time: number) => {
+        await sendVideoTime(id, time)
+            .catch((error) => console.error('Error sending video time', error));
+    };
+
     return (
-        <div className={'activity-main-div'}>
+        <div className={'activity-main-div'} style={backgroundStyle}>
             <div
                 style={{
                     display: 'flex',
@@ -83,7 +110,12 @@ const Activity = () => {
                 {activity?.contents.map((activity, key) =>
                     activity.type === ActivityContentType.VIDEO ? (
                         <div className={'activity-video'} key={key}>
-                            <VideoPlayer url={activity.content} />
+                            <VideoPlayer
+                                url={activity.content}
+                                isPlaying={handleVideoPlay}
+                                isPausing={handleVideoPause}
+                                sendInfo={handleSendVideoInfo}
+                            />
                         </div>
                     ) : (
                         <div

@@ -16,14 +16,16 @@ import './styles.css';
 import Image from 'next/image';
 import logo from '@/assets/Logo/logo.png';
 import Link from 'next/link';
+import WithToast, { WithToastProps } from '@/hoc/withToast';
 
 export interface User {
     patientCode: string;
     image: string;
+    background: string;
     achievements: Achievement[];
 }
 
-const Profile = () => {
+const Profile = ({ showToast }: WithToastProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [user, setUser] = useState<User>();
@@ -35,19 +37,25 @@ const Profile = () => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        setIsLoading(true);
         handleGetUser().then();
-        setIsLoading(false);
     }, []);
 
     const handleGetUser = async () => {
-        const user = await getUserProfile();
-        setUser(user);
-        setAvatar(user.image);
-        const avatars = await getUserItems().then((items) => {
-            return items.filter((item: any) => item.type === 'AVATAR');
-        });
-        setAvatars(avatars);
+        try {
+            setIsLoading(true);
+            const user = await getUserProfile();
+            setUser(user);
+            setAvatar(user.image);
+
+            const avatars = await getUserItems().then((items) => {
+                return items.filter((item: any) => item.type === 'AVATAR');
+            });
+            setAvatars(avatars);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     const handleLogoutClick = () => {
@@ -70,6 +78,7 @@ const Profile = () => {
         await updateUserAvatar(selectedAvatar)
             .then(() => {
                 handleGetUser().then();
+                showToast('Avatar actualizado correctamente', 'success');
             })
             .catch((error) => {
                 console.log(error);
@@ -197,4 +206,4 @@ const Profile = () => {
     );
 };
 
-export default WithAuth(Profile);
+export default WithAuth(WithToast(Profile));
