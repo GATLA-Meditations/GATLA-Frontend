@@ -9,6 +9,7 @@ import { buyItem, chooseBackground } from '@/service/apis';
 import ChangeBackgroundModal from '@/components/Modals/ChangeBackgroundModal';
 import BuyItemModal from '../Modals/BuyItemModal';
 import CheckIcon from '@mui/icons-material/Check';
+import { WithToastProps } from '@/hoc/withToast';
 
 export type PersonalizeItemsBoxProps = {
     label: string;
@@ -17,6 +18,7 @@ export type PersonalizeItemsBoxProps = {
     unlocks: number;
     selectedBackground: string | null;
     selectedAvatar: string | null;
+    onBackgroundSelect: (backgroundId: string) => void;
 };
 
 const PersonalizeItemsBox = ({
@@ -26,10 +28,9 @@ const PersonalizeItemsBox = ({
     unlocks,
     selectedBackground,
     selectedAvatar,
-    onBackgroundSelect, // New prop
-}: PersonalizeItemsBoxProps & {
-    onBackgroundSelect: (backgroundId: string) => void;
-}) => {
+    onBackgroundSelect,
+    showToast,
+}: PersonalizeItemsBoxProps & WithToastProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
     const [selectedBackgroundState, setSelectedBackgroundState] = useState<{
         url: string | null;
@@ -60,7 +61,6 @@ const PersonalizeItemsBox = ({
         if (selectedBackgroundState.url) {
             try {
                 await chooseBackground(selectedBackgroundState.url);
-                // Notify parent about the selected background ID
                 const selectedBgId = items.find(
                     (item) =>
                         item.previewPicture === selectedBackgroundState.url
@@ -68,6 +68,7 @@ const PersonalizeItemsBox = ({
 
                 if (selectedBgId) {
                     onBackgroundSelect(selectedBgId);
+                    showToast('Fondo seleccionado correctamente!', 'success');
                 }
             } catch (error) {
                 console.error(error);
@@ -126,7 +127,7 @@ const PersonalizeItemsBox = ({
                         {(element.id === selectedBackground ||
                             element.id === selectedAvatar) && (
                             <div className="tick">
-                                <CheckIcon className="tick-icon"/>
+                                <CheckIcon className="tick-icon" />
                             </div>
                         )}
                     </div>

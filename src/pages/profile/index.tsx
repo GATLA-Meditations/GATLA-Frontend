@@ -16,6 +16,7 @@ import './styles.css';
 import Image from 'next/image';
 import logo from '@/assets/Logo/logo.png';
 import Link from 'next/link';
+import WithToast, { WithToastProps } from '@/hoc/withToast';
 
 export interface User {
     patientCode: string;
@@ -24,7 +25,7 @@ export interface User {
     achievements: Achievement[];
 }
 
-const Profile = () => {
+const Profile = ({ showToast }: WithToastProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [user, setUser] = useState<User>();
@@ -77,6 +78,7 @@ const Profile = () => {
         await updateUserAvatar(selectedAvatar)
             .then(() => {
                 handleGetUser().then();
+                showToast('Avatar actualizado correctamente', 'success');
             })
             .catch((error) => {
                 console.log(error);
@@ -204,4 +206,4 @@ const Profile = () => {
     );
 };
 
-export default WithAuth(Profile);
+export default WithAuth(WithToast(Profile));
