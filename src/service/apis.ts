@@ -4,7 +4,8 @@ import {
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
+const baseURL =
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
 
 const config = (token: string) => ({
     headers: {
@@ -67,6 +68,15 @@ export const getVideo = async (activityId: string) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching video:', error);
+        throw error;
+    }
+};
+
+export const sendVideoTime = async (activityId: string, time: number) => {
+    try {
+        await gatlaAxios.put(`/user/view-time/${activityId}/${time}`);
+    } catch (error) {
+        console.error('Error sending video time:', error);
         throw error;
     }
 };
@@ -209,7 +219,9 @@ export const updateNotificationSettings = async (settings: any) => {
 
 export const useGetUserNotifications = async (params: any) => {
     try {
-        const response = await gatlaAxios.get('user/notifications?page=1&pageSize=10');
+        const response = await gatlaAxios.get(
+            'user/notifications?page=1&pageSize=10'
+        );
         return response.data;
     } catch (error) {
         console.log(error);
