@@ -35,11 +35,6 @@ const HomeScreen = ({showToast}: WithToastProps) => {
             }
         }
 
-        showToast(
-            '¡Ánimo en tu tratamiento!',
-            'img',
-            'https://ca.slack-edge.com/T010UBTUG4C-U06UB5DCRK4-b5743123495e-512'
-        );
         checkForToast().then();
         fetchData();
         setIsLoading(false);
