@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { getActivityById } from '@/service/apis';
+import { getActivityById, sendVideoTime } from '@/service/apis';
 import '../../app/globals.css';
 import './styles.css';
 import VideoPlayer from '@/components/VideoPlayer';
@@ -8,7 +8,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Loader from '@/components/Loader';
-import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 
 enum ActivityContentType {
     VIDEO = 'VIDEO',
@@ -39,7 +39,7 @@ const Activity = () => {
     const [showDescription, setShowDescription] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [videoInfo, setVideoInfo] = useState<VideoInfo[]>([]);
-    const {profile, loading, error} = useGetProfileInfo();
+    const { profile, loading, error } = useGetProfileInfo();
 
     const backgroundStyle = {
         backgroundImage: `url(${profile?.background})`,
@@ -78,6 +78,11 @@ const Activity = () => {
         setVideoInfo([...videoInfo, { actionType: 'pause', time }]);
     };
 
+    const handleSendVideoInfo = async (time: number) => {
+        await sendVideoTime(id, time)
+            .catch((error) => console.error('Error sending video time', error));
+    };
+
     return (
         <div className={'activity-main-div'} style={backgroundStyle}>
             <div
@@ -109,6 +114,7 @@ const Activity = () => {
                                 url={activity.content}
                                 isPlaying={handleVideoPlay}
                                 isPausing={handleVideoPause}
+                                sendInfo={handleSendVideoInfo}
                             />
                         </div>
                     ) : (

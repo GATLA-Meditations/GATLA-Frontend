@@ -10,6 +10,7 @@ export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
     isPlaying?: (time: number) => void;
     isPausing?: (time: number) => void;
+    sendInfo?: (time: number) => void;
 }
 
 const VideoPlayer: React.FC<VideoPlayerProps> = ({
@@ -17,10 +18,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     onReady,
     isPlaying,
     isPausing,
+    sendInfo,
 }) => {
     const ref = useRef<ReactPlayer>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [playing, setPlaying] = useState<boolean>(false);
+    const [duration, setDuration] = useState<number>(0);
 
     const handleReady = () => {
         setIsLoading(false);
@@ -28,15 +31,18 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             // @ts-ignore
             onReady();
         } // Call the original onReady prop if it exists
-    };
 
-    useEffect(() => {
-        handlePlay();
-    }, []);
+        if (ref.current) {
+            const videoDuration = ref.current.getDuration();
+            setDuration(videoDuration);
+            handlePlay();
+        }
+    };
 
     const handlePlay = () => {
         if (ref.current) {
             isPlaying && isPlaying(ref.current.getCurrentTime());
+            sendInfo && sendInfo(ref.current.getCurrentTime());
             setPlaying(true);
         }
     };
@@ -50,6 +56,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
     const handleBufferEnd = () => {
         setIsLoading(false);
+    };
+
+    const handleProgress = () => {
+        if (ref.current) {
+            sendInfo && sendInfo(ref.current.getCurrentTime());
+        }
     };
 
     const togglePlayPause = () => {
@@ -73,6 +85,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 url={url}
                 onReady={handleReady}
                 onBufferEnd={handleBufferEnd}
+                onProgress={handleProgress}
+                progressInterval={60000}
+                onEnded={() => sendInfo && sendInfo(duration)}
                 controls={false}
                 className="video-player"
             />
