@@ -20,6 +20,8 @@ import WithToast from '@/hoc/withToast';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import SpaIcon from '@mui/icons-material/Spa';
 import AbcIcon from '@mui/icons-material/Abc';
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import { useRouter } from 'next/router';
 
 const Settings = ({ showToast }: WithToastProps) => {
     const [notifications, setNotifications] = useState({
@@ -27,6 +29,7 @@ const Settings = ({ showToast }: WithToastProps) => {
         motivationalNotifications: false, // son los achievements pero en el back se llaman asi
         phrasesNotifications: false,
     });
+    const router = useRouter();
 
     useEffect(() => {
         getNotificationSettings().then((data) => {
@@ -49,6 +52,18 @@ const Settings = ({ showToast }: WithToastProps) => {
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
             <Box marginBottom={'3vh'}>
                 <TopBar amtNotifications={0} selected="settings"></TopBar>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        width: '90%',
+                        color: 'black',
+                        marginLeft: '10px',
+                        marginTop: '20px',
+                    }}
+                >
+                    <ArrowBackIosNewIcon onClick={() => router.push('/home')} />
+                </div>
             </Box>
             <Box
                 display={'flex'}
