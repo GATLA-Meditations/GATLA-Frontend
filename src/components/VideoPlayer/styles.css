@@ -2,6 +2,10 @@
     position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .loader-container {
@@ -20,4 +24,14 @@
     overflow: hidden;
     height: 100% !important;
     width: 100% !important;
+    pointer-events: none;
+}
+
+.control-button {
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
 }

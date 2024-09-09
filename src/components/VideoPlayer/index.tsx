@@ -2,6 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactPlayer, { ReactPlayerProps } from 'react-player';
 import './styles.css';
 import Loader from '@/components/Loader';
+import { Button } from '@mui/material';
+import PlayIcon from '@/assets/PlayIcon';
+import PauseIcon from '@/assets/PauseIcon';
 
 export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
@@ -19,6 +22,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
     const ref = useRef<ReactPlayer>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [playing, setPlaying] = useState<boolean>(false);
     const [duration, setDuration] = useState<number>(0);
 
     const handleReady = () => {
@@ -31,6 +35,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (ref.current) {
             const videoDuration = ref.current.getDuration();
             setDuration(videoDuration);
+            handlePlay();
         }
     };
 
@@ -38,17 +43,15 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (ref.current) {
             isPlaying && isPlaying(ref.current.getCurrentTime());
             sendInfo && sendInfo(ref.current.getCurrentTime());
+            setPlaying(true);
         }
     };
 
     const handlePause = () => {
         if (ref.current) {
             isPausing && isPausing(ref.current.getCurrentTime());
+            setPlaying(false);
         }
-    };
-
-    const handleBuffer = () => {
-        setIsLoading(true);
     };
 
     const handleBufferEnd = () => {
@@ -61,6 +64,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         }
     };
 
+    const togglePlayPause = () => {
+        if (playing) {
+            handlePause();
+        } else {
+            handlePlay();
+        }
+    };
+
     return (
         <div className="video-player-container">
             {isLoading && (
@@ -70,11 +81,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             )}
             <ReactPlayer
                 ref={ref}
+                playing={playing}
                 url={url}
                 onReady={handleReady}
-                onPlay={handlePlay}
-                onPause={handlePause}
-                onBuffer={handleBuffer}
                 onBufferEnd={handleBufferEnd}
                 onProgress={handleProgress}
                 progressInterval={60000}
@@ -82,6 +91,13 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 controls={false}
                 className="video-player"
             />
+            <Button className={'control-button'} onClick={togglePlayPause}>
+                {playing ? (
+                    <PauseIcon fill={'white'} width={'50px'} height={'50px'} />
+                ) : (
+                    <PlayIcon fill={'white'} width={'50px'} height={'50px'} />
+                )}
+            </Button>
         </div>
     );
 };
