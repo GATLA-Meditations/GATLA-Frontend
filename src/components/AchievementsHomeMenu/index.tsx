@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {getUserStats} from "@/service/apis";
+import React, { useEffect, useState } from 'react';
+import { getUserStats } from '@/service/apis';
 
 const Achievements = () => {
-
     const [days, setDays] = useState(0);
     const [minutes, setMinutes] = useState(0);
     const [goals, setGoals] = useState(0);
@@ -68,8 +67,7 @@ const Achievements = () => {
                 );
                 setGoals(stats.goals ? stats.goals : 0);
             }
-        } catch (error) {
-        }
+        } catch (error) {}
     }
 
     function convertMinutesToHours(minutes: number) {
