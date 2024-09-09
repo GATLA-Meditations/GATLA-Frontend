@@ -31,23 +31,23 @@ const Personalize = ({ showToast }: WithToastProps) => {
             const items = await getShopItems();
             const sortedBackgroundItems = items
                 .filter((item: StoreElementProps) => item.type === 'BACKGROUND')
-                .sort((a, b) => Number(a.isLocked) - Number(b.isLocked));
+                .sort((a: StoreElementProps, b: StoreElementProps) => Number(a.isLocked) - Number(b.isLocked));
             const sortedAvatarItems = items
                 .filter((item: StoreElementProps) => item.type === 'AVATAR')
-                .sort((a, b) => Number(a.isLocked) - Number(b.isLocked));
+                .sort((a: StoreElementProps, b: StoreElementProps) => Number(a.isLocked) - Number(b.isLocked));
 
             setBackgroundItems(sortedBackgroundItems);
             setAvatarItems(sortedAvatarItems);
 
             const selectedBg =
                 items.find(
-                    (item) =>
+                    (item: StoreElementProps) =>
                         item.type === 'BACKGROUND' &&
                         item.previewPicture === user.profile?.background
                 )?.id || null;
             const selectedAv =
                 items.find(
-                    (item) =>
+                    (item: StoreElementProps) =>
                         item.type === 'AVATAR' &&
                         item.previewPicture === user.profile?.image
                 )?.id || null;

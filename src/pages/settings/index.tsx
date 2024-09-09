@@ -77,9 +77,11 @@ const Settings = ({ showToast }: WithToastProps) => {
                     flexDirection={'column'}
                     justifyContent={'space-evenly'}
                     padding={'2vh'}
-                    backgroundColor={'white'}
-                    borderRadius={'16px'}
-                    gap={'16px'}
+                    sx={{
+                        backgroundColor: 'white',
+                        borderRadius: '16px',
+                        gap: '16px',
+                    }}
                 >
                     <Typography className="h6">Notificaciones</Typography>
                     <FormControl>

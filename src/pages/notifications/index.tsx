@@ -10,13 +10,20 @@ import { Typography } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from 'next/router';
 
+type Notification = {
+    variant: 'normal' | 'motivationalMessage';
+    message: string;
+    senderImage: string | undefined;
+}
+
 const Notifications = () => {
-    const [notifications, setNotifications] = useState([]);
+    const [notifications, setNotifications] = useState<Notification[]>([]);
     const router = useRouter();
 
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
+                // eslint-disable-next-line react-hooks/rules-of-hooks
                 const data = await useGetUserNotifications();
                 setNotifications(data || []);
             } catch (error) {
