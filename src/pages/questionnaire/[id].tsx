@@ -91,7 +91,7 @@ const TestPage = () => {
                         marginLeft: '10px',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
                 </div>
             </div>
 
