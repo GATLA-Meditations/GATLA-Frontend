@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import React from 'react';
 import { useRouter } from 'next/router';
+import {useMediaQuery} from '@mui/system';
 
 export enum ModuleType {
     MEDITATION = 'MEDITATION',
@@ -22,6 +23,7 @@ const MeditationEntryPoint = ({
     description,
     progress,
 }: EntryPointData) => {
+    const isWidthGreaterThan500 = useMediaQuery('(min-width:500px)');
     const router = useRouter();
 
     return (
@@ -32,7 +34,7 @@ const MeditationEntryPoint = ({
                 bgcolor: 'var(--white)',
                 borderRadius: 3,
                 margin: '16px',
-                maxWidth: 400,
+                maxWidth: '100%',
                 '&:hover': { cursor: 'pointer' },
             }}
             justifyContent={'space-between'}
@@ -42,20 +44,24 @@ const MeditationEntryPoint = ({
                     : router.push('/pretesting')
             }
         >
-            <Box
-                display={'flex'}
-                sx={{
-                    backgroundImage:
-                        'url("https://cnnespanol.cnn.com/wp-content/uploads/2022/06/220531190304-woman-meditation-stock-full-169-1.jpeg?quality=100&strip=info")',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'top',
-                    borderTopLeftRadius: 'inherit',
-                    borderTopRightRadius: 'inherit',
-                    height: '10vh',
-                    padding: '2vh',
-                }}
-                alignItems={'center'}
-            ></Box>
+            <>
+                {!isWidthGreaterThan500 && (
+                    <Box
+                        display={'flex'}
+                        sx={{
+                            backgroundImage:
+                                'url("https://cnnespanol.cnn.com/wp-content/uploads/2022/06/220531190304-woman-meditation-stock-full-169-1.jpeg?quality=100&strip=info")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'top',
+                            borderTopLeftRadius: 'inherit',
+                            borderTopRightRadius: 'inherit',
+                            height: '10vh',
+                            padding: '2vh',
+                        }}
+                        alignItems={'center'}
+                    ></Box>
+                )}
+            </>
             <Box alignItems={'center'}>
                 <Box
                     sx={{
