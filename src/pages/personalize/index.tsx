@@ -24,17 +24,25 @@ const Personalize = ({ showToast }: WithToastProps) => {
         null
     );
     const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
     const user = useGetProfileInfo();
 
     const handleGetItems = async () => {
+        setIsLoading(true); // Start loading
         try {
             const items = await getShopItems();
             const sortedBackgroundItems = items
                 .filter((item: StoreElementProps) => item.type === 'BACKGROUND')
-                .sort((a: StoreElementProps, b: StoreElementProps) => Number(a.isLocked) - Number(b.isLocked));
+                .sort(
+                    (a: StoreElementProps, b: StoreElementProps) =>
+                        Number(a.isLocked) - Number(b.isLocked)
+                );
             const sortedAvatarItems = items
                 .filter((item: StoreElementProps) => item.type === 'AVATAR')
-                .sort((a: StoreElementProps, b: StoreElementProps) => Number(a.isLocked) - Number(b.isLocked));
+                .sort(
+                    (a: StoreElementProps, b: StoreElementProps) =>
+                        Number(a.isLocked) - Number(b.isLocked)
+                );
 
             setBackgroundItems(sortedBackgroundItems);
             setAvatarItems(sortedAvatarItems);
@@ -45,6 +53,7 @@ const Personalize = ({ showToast }: WithToastProps) => {
                         item.type === 'BACKGROUND' &&
                         item.previewPicture === user.profile?.background
                 )?.id || null;
+
             const selectedAv =
                 items.find(
                     (item: StoreElementProps) =>
@@ -56,6 +65,8 @@ const Personalize = ({ showToast }: WithToastProps) => {
             setSelectedAvatar(selectedAv);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false); // Stop loading after items are fetched
         }
 
         await getProgressAndUnlocks()
@@ -122,6 +133,7 @@ const Personalize = ({ showToast }: WithToastProps) => {
                                 setSelectedBackground(backgroundId)
                             }
                             showToast={showToast}
+                            isLoading={isLoading}
                         />
                     </Box>
                 </Box>
@@ -138,6 +150,7 @@ const Personalize = ({ showToast }: WithToastProps) => {
                                 setSelectedBackground(backgroundId)
                             }
                             showToast={showToast}
+                            isLoading={isLoading}
                         />
                     </Box>
                 </Box>
