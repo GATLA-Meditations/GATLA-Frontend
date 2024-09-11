@@ -9,6 +9,13 @@
     height: 40px;
 }
 
+.personalize-button {
+    width: 100px;
+    height: 40px;
+    background-color: var(--secondary-300);
+    border-radius: 8px;
+}
+
 .button-container {
     display: flex;
     justify-content: space-between;
