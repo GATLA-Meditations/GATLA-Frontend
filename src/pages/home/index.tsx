@@ -16,7 +16,6 @@ import Loader from '@/components/Loader';
 import logRocket from 'logrocket';
 import { WeeklyDto } from '@/components/Modals/weeklyModal/dto/weekly.dto';
 import WeeklyModal from '@/components/Modals/weeklyModal';
-import { handleAction } from 'next/dist/server/app-render/action-handler';
 
 const HomeScreen = ({showToast}: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
