@@ -215,3 +215,12 @@ export const useGetUserNotifications = async (params: any) => {
         console.log(error);
     }
 };
+
+export const getUserWeeklyData = async () => {
+    try {
+        const response = await gatlaAxios.get('ingamedata/weekly');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

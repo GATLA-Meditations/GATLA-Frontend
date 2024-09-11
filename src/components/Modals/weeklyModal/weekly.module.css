@@ -1,0 +1,28 @@
+.modalContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalContent {
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 75%;
+    height: auto;
+    background: var(--primary-100);
+}
+
+.modalText {
+    color: var(--primary-700);
+    text-align: center;
+    font-family: "Public Sans";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
