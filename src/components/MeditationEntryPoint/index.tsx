@@ -32,7 +32,7 @@ const MeditationEntryPoint = ({
                 bgcolor: 'var(--white)',
                 borderRadius: 3,
                 margin: '16px',
-                maxWidth: '100%',
+                width:"fill-available",
                 '&:hover': {cursor: 'pointer'},
             }}
             justifyContent={'space-between'}

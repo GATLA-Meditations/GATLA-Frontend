@@ -17,3 +17,9 @@
         var(--primary-200)
     );
 }
+
+.wrap-entry-point{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
