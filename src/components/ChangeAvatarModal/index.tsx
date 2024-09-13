@@ -77,30 +77,30 @@ const ChangeAvatarModal = ({
                         )}
                     </Box>
                     <Box className="button-container">
-                        {avatars.length == 0 ? (
-                            <Button
-                                className="personalize-button"
-                                onClick={handleGoToShop}
-                            >
-                                Personalizar
-                            </Button>
-                        ) : (
-                            <>
+                        <>
+                            {avatars.length == 0 ? (
+                                <Button
+                                    className="personalize-button"
+                                    onClick={handleGoToShop}
+                                >
+                                    Personalizar
+                                </Button>
+                            ) : (
                                 <Button
                                     className="confirm-button"
                                     onClick={handleConfirm}
                                 >
                                     Confirmar
-                                </Button>
-                                <Button
-                                    className="cancel-button"
-                                    variant="red"
-                                    onClick={handleCancel}
-                                >
+                                </Button>)
+                            }
+                            <Button
+                                className="cancel-button"
+                                variant="red"
+                                onClick={handleCancel}
+                            >
                                     Cancelar
-                                </Button>
-                            </>
-                        )}
+                            </Button>
+                        </>
                     </Box>
                 </Box>
             )}

@@ -48,7 +48,7 @@ const Profile = ({ showToast }: WithToastProps) => {
             setAvatar(user.image);
 
             const avatars = await getUserItems().then((items) => {
-                return items.filter((item: any) => item.type === 'AVATAR');
+                return items.filter((item: any) => item.type === 'AVATAR').map((item: any) => item.content_url);
             });
             setAvatars(avatars);
         } catch (error) {
@@ -84,15 +84,6 @@ const Profile = ({ showToast }: WithToastProps) => {
                 console.log(error);
             });
     };
-
-    // const achivementsMock = [
-    //     { type: 'streak', title: '1 día' },
-    //     { type: 'streak', title: '2 días' },
-    //     { type: 'streak', title: '3 días' },
-    //     { type: 'week', title: '1 semana' },
-    //     { type: 'week', title: '2 semanas' },
-    //     { type: 'week', title: '3 semanas' },
-    // ];
 
     const avatarsMock = [
         'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
