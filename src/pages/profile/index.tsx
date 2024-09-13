@@ -128,6 +128,7 @@ const Profile = ({ showToast }: WithToastProps) => {
                         onClick={() =>
                             setIsChangeAvatarOpen(!isChangeAvatarOpen)
                         }
+                        sx={{ cursor: 'pointer' }}
                     >
                         <Avatar
                             sx={{
