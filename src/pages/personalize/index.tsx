@@ -24,10 +24,12 @@ const Personalize = ({ showToast }: WithToastProps) => {
         null
     );
     const [selectedAvatar, setSelectedAvatar] = useState<string | null>(null);
+    const [isLoading, setIsLoading] = useState(true); // Loading state
     const user = useGetProfileInfo();
     const [selectedChip, setSelectedChip] = useState<string | null>(null);
 
     const handleGetItems = async () => {
+        setIsLoading(true); // Start loading
         try {
             const items = await getShopItems();
             const sortedBackgroundItems = items
@@ -52,6 +54,7 @@ const Personalize = ({ showToast }: WithToastProps) => {
                         item.type === 'BACKGROUND' &&
                         item.previewPicture === user.profile?.background
                 )?.id || null;
+
             const selectedAv =
                 items.find(
                     (item: StoreElementProps) =>
@@ -63,6 +66,8 @@ const Personalize = ({ showToast }: WithToastProps) => {
             setSelectedAvatar(selectedAv);
         } catch (error) {
             console.error(error);
+        } finally {
+            setIsLoading(false); // Stop loading after items are fetched
         }
 
         await getProgressAndUnlocks()
@@ -120,42 +125,40 @@ const Personalize = ({ showToast }: WithToastProps) => {
             </Box>
 
             <Box className={'store-elements-main-container'}>
-                {(selectedChip === 'Fondos' || selectedChip === null) && (
-                    <Box className={'store-elements-division-container'}>
-                        <Box className={'background-division-container'}>
-                            <PersonalizeItemsBox
-                                label={'Fondos'}
-                                items={backgroundItems}
-                                onUpdateItems={handleGetItems}
-                                unlocks={unlocks}
-                                selectedBackground={selectedBackground}
-                                selectedAvatar={selectedAvatar}
-                                onBackgroundSelect={(backgroundId) =>
-                                    setSelectedBackground(backgroundId)
-                                }
-                                showToast={showToast}
-                            />
-                        </Box>
+                <Box className={'store-elements-division-container'}>
+                    <Box className={'background-division-container'}>
+                        <PersonalizeItemsBox
+                            label={'Fondos'}
+                            items={backgroundItems}
+                            onUpdateItems={handleGetItems}
+                            unlocks={unlocks}
+                            selectedBackground={selectedBackground}
+                            selectedAvatar={selectedAvatar}
+                            onBackgroundSelect={(backgroundId) =>
+                                setSelectedBackground(backgroundId)
+                            }
+                            showToast={showToast}
+                            isLoading={isLoading}
+                        />
                     </Box>
-                )}
-                {(selectedChip === 'Perfil' || selectedChip === null) && (
-                    <Box className={'store-elements-division-container'}>
-                        <Box className={'avatar-division-container'}>
-                            <PersonalizeItemsBox
-                                label={'Perfil'}
-                                items={avatarItems}
-                                onUpdateItems={handleGetItems}
-                                unlocks={unlocks}
-                                selectedBackground={selectedBackground}
-                                selectedAvatar={selectedAvatar}
-                                onBackgroundSelect={(backgroundId) =>
-                                    setSelectedBackground(backgroundId)
-                                }
-                                showToast={showToast}
-                            />
-                        </Box>
+                </Box>
+                <Box className={'store-elements-division-container'}>
+                    <Box className={'avatar-division-container'}>
+                        <PersonalizeItemsBox
+                            label={'Perfil'}
+                            items={avatarItems}
+                            onUpdateItems={handleGetItems}
+                            unlocks={unlocks}
+                            selectedBackground={selectedBackground}
+                            selectedAvatar={selectedAvatar}
+                            onBackgroundSelect={(backgroundId) =>
+                                setSelectedBackground(backgroundId)
+                            }
+                            showToast={showToast}
+                            isLoading={isLoading}
+                        />
                     </Box>
-                )}
+                </Box>
             </Box>
             <NavBar value={1} />
         </Box>

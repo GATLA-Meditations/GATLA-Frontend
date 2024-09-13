@@ -57,17 +57,28 @@ const HomeScreen = ({showToast}: WithToastProps) => {
     return (
         <>
             <Box height={'100vh'} className={'home-div'}>
-                <TopBar amtNotifications={0} selected={''}/>
-                <AchievementsHomeMenu/>
-                <MeditationEntryPoint
-                    id={actualModule.id}
-                    type={actualModule.type}
-                    name={actualModule.name}
-                    description={actualModule.description}
-                    progress={actualModule.progress}
-                />
-                <Box className="content"/>
-                <NavBar value={0}/>
+                <TopBar amtNotifications={0} selected={''} />
+                <AchievementsHomeMenu />
+                <Box
+                    className="entry-point"
+                    sx={{
+                        maxWidth: '500px',
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        margin: 'auto',
+                    }}
+                >
+                    <MeditationEntryPoint
+                        id={actualModule.id}
+                        type={actualModule.type}
+                        name={actualModule.name}
+                        description={actualModule.description}
+                        progress={actualModule.progress}
+                    />
+                </Box>
+                <Box className="content" />
+                <NavBar value={0} />
             </Box>
         </>
     );

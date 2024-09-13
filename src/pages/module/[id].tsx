@@ -68,7 +68,7 @@ const ModuleScreen = () => {
                         marginTop: '20px',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
                 </div>
                 <div className="module-name-div">
                     <p className={'h2 bold'}>{module?.name}</p>
