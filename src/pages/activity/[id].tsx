@@ -9,6 +9,9 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Loader from '@/components/Loader';
 import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
+import TopBar from '@/components/TopBar';
+import NavBar from '@/components/NavBar';
+import { Box } from '@mui/material';
 
 enum ActivityContentType {
     VIDEO = 'VIDEO',
@@ -79,70 +82,75 @@ const Activity = () => {
     };
 
     const handleSendVideoInfo = async (time: number) => {
-        await sendVideoTime(id, time)
-            .catch((error) => console.error('Error sending video time', error));
+        await sendVideoTime(id, time).catch((error) =>
+            console.error('Error sending video time', error)
+        );
     };
 
     return (
-        <div className={'activity-main-div'} style={backgroundStyle}>
-            <div
-                style={{
-                    display: 'flex',
-                    alignItems: 'flex-start',
-                    width: '90%',
-                    margin: '10px 0',
-                    color: 'white',
-                }}
-            >
-                <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
-            </div>
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column-reverse',
-                    alignItems: 'center',
-                    justifyContent: 'start',
-                    gap: '20px',
-                    height: '100%',
-                    width: '100%',
-                }}
-            >
-                {activity?.contents.map((activity, key) =>
-                    activity.type === ActivityContentType.VIDEO ? (
-                        <div className={'activity-video'} key={key}>
-                            <VideoPlayer
-                                url={activity.content}
-                                isPlaying={handleVideoPlay}
-                                isPausing={handleVideoPause}
-                                sendInfo={handleSendVideoInfo}
-                            />
-                        </div>
-                    ) : (
-                        <div
-                            className={'activity-description-div'}
-                            key={key}
-                            onClick={handleShowDescription}
-                        >
-                            <p className={'h5 description-title'}>
-                                Descripción
-                            </p>
-                            {showDescription && (
-                                <p className={'body1 activity-p'}>
-                                    {activity.content}
-                                </p>
-                            )}
-                            <div className={'show-description-arrow-div'}>
-                                {showDescription ? (
-                                    <KeyboardArrowUpIcon />
-                                ) : (
-                                    <KeyboardArrowDownIcon />
-                                )}
+        <Box>
+            <TopBar amtNotifications={0} />
+            <div className={'activity-main-div'} style={backgroundStyle}>
+                <div
+                    style={{
+                        display: 'flex',
+                        alignItems: 'flex-start',
+                        width: '90%',
+                        margin: '10px 0',
+                        color: 'white',
+                    }}
+                >
+                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                </div>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column-reverse',
+                        alignItems: 'center',
+                        justifyContent: 'start',
+                        gap: '20px',
+                        height: '100%',
+                        width: '100%',
+                    }}
+                >
+                    {activity?.contents.map((activity, key) =>
+                        activity.type === ActivityContentType.VIDEO ? (
+                            <div className={'activity-video'} key={key}>
+                                <VideoPlayer
+                                    url={activity.content}
+                                    isPlaying={handleVideoPlay}
+                                    isPausing={handleVideoPause}
+                                    sendInfo={handleSendVideoInfo}
+                                />
                             </div>
-                        </div>
-                    )
-                )}
+                        ) : (
+                            <div
+                                className={'activity-description-div'}
+                                key={key}
+                                onClick={handleShowDescription}
+                            >
+                                <p className={'h5 description-title'}>
+                                    Descripción
+                                </p>
+                                {showDescription && (
+                                    <p className={'body1 activity-p'}>
+                                        {activity.content}
+                                    </p>
+                                )}
+                                <div className={'show-description-arrow-div'}>
+                                    {showDescription ? (
+                                        <KeyboardArrowUpIcon />
+                                    ) : (
+                                        <KeyboardArrowDownIcon />
+                                    )}
+                                </div>
+                            </div>
+                        )
+                    )}
+                </div>
+                <NavBar value={0} />
             </div>
-        </div>
+        </Box>
     );
 };
 export default Activity;
