@@ -36,7 +36,7 @@ const Notifications = () => {
 
     return (
         <Box height={'100vh'} className={'notifications-container'}>
-            <TopBar amtNotifications={notifications.length} />
+            <TopBar selected='notifications' amtNotifications={notifications.length} />
             <div
                 style={{
                     display: 'flex',
