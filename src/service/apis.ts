@@ -227,3 +227,18 @@ export const useGetUserNotifications = async (params?: any) => {
         console.log(error);
     }
 };
+export const getAchievements = async () => {
+    try {
+        return await gatlaAxios.get('/achievement/user/');
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAllAchievements = async () => {
+    try {
+        return await gatlaAxios.get('/achievement/all/');
+    } catch (error) {
+        console.log(error);
+    }
+};
