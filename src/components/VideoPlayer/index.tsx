@@ -4,7 +4,6 @@ import './styles.css';
 import Loader from '@/components/Loader';
 import { Button } from '@mui/material';
 import PlayIcon from '@/assets/PlayIcon';
-import PauseIcon from '@/assets/PauseIcon';
 
 export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
@@ -35,7 +34,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
         if (ref.current) {
             const videoDuration = ref.current.getDuration();
             setDuration(videoDuration);
-            handlePlay();
         }
     };
 
@@ -52,10 +50,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
             isPausing && isPausing(ref.current.getCurrentTime());
             setPlaying(false);
         }
-    };
-
-    const handleBufferEnd = () => {
-        setIsLoading(false);
     };
 
     const handleProgress = () => {
@@ -79,25 +73,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     <Loader />
                 </div>
             )}
+            <div className="video-player-overlay" onClick={togglePlayPause} />
             <ReactPlayer
                 ref={ref}
                 playing={playing}
                 url={url}
                 onReady={handleReady}
-                onBufferEnd={handleBufferEnd}
+                onBufferEnd={() => setIsLoading(false)}
                 onProgress={handleProgress}
                 progressInterval={60000}
                 onEnded={() => sendInfo && sendInfo(duration)}
                 controls={false}
                 className="video-player"
             />
-            <Button className={'control-button'} onClick={togglePlayPause}>
-                {playing ? (
-                    <PauseIcon fill={'white'} width={'50px'} height={'50px'} />
-                ) : (
+            {!playing && (
+                <Button className={'control-button'} onClick={togglePlayPause}>
                     <PlayIcon fill={'white'} width={'50px'} height={'50px'} />
-                )}
-            </Button>
+                </Button>
+            )}
         </div>
     );
 };
