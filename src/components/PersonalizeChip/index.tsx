@@ -5,8 +5,8 @@ import Typography from '@mui/material/Typography';
 
 export interface PersonalizeChipsProps {
     label: string;
-    onClick: () => void;
-    variant: 'outlined' | 'filled';
+    onClick?: () => void;
+    variant: 'outlined' | 'filled' | 'information';
 }
 
 const PersonalizeChip = ({
@@ -16,7 +16,7 @@ const PersonalizeChip = ({
 }: PersonalizeChipsProps) => {
     return (
         <Box onClick={onClick} className={`chip ${variant}`}>
-            <Typography className={'body1'}>{label}</Typography>
+            <Typography className={variant === 'information' ? 'body2' : 'body1'}>{label}</Typography>
         </Box>
     );
 };

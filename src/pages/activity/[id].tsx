@@ -39,7 +39,6 @@ const Activity = () => {
     const router = useRouter();
     const id = router.query.id as string;
     const [activity, setActivity] = useState<Activity>();
-    const [showDescription, setShowDescription] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [videoInfo, setVideoInfo] = useState<VideoInfo[]>([]);
     const { profile, loading, error } = useGetProfileInfo();
@@ -59,10 +58,6 @@ const Activity = () => {
             setActivity(activityInfo);
             setIsLoading(false);
         }
-    };
-
-    const handleShowDescription = () => {
-        setShowDescription(!showDescription);
     };
 
     useEffect(() => {
@@ -127,23 +122,13 @@ const Activity = () => {
                             <div
                                 className={'activity-description-div'}
                                 key={key}
-                                onClick={handleShowDescription}
                             >
                                 <p className={'h5 description-title'}>
                                     Descripción
                                 </p>
-                                {showDescription && (
-                                    <p className={'body1 activity-p'}>
-                                        {activity.content}
-                                    </p>
-                                )}
-                                <div className={'show-description-arrow-div'}>
-                                    {showDescription ? (
-                                        <KeyboardArrowUpIcon />
-                                    ) : (
-                                        <KeyboardArrowDownIcon />
-                                    )}
-                                </div>
+                                <p className={'body1 activity-p'}>
+                                    {activity.content}
+                                </p>
                             </div>
                         )
                     )}
