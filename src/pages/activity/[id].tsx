@@ -5,8 +5,6 @@ import '../../app/globals.css';
 import './styles.css';
 import VideoPlayer from '@/components/VideoPlayer';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Loader from '@/components/Loader';
 import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 import TopBar from '@/components/TopBar';
@@ -39,7 +37,6 @@ const Activity = () => {
     const router = useRouter();
     const id = router.query.id as string;
     const [activity, setActivity] = useState<Activity>();
-    const [showDescription, setShowDescription] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState(false);
     const [videoInfo, setVideoInfo] = useState<VideoInfo[]>([]);
     const { profile, loading, error } = useGetProfileInfo();
@@ -59,10 +56,6 @@ const Activity = () => {
             setActivity(activityInfo);
             setIsLoading(false);
         }
-    };
-
-    const handleShowDescription = () => {
-        setShowDescription(!showDescription);
     };
 
     useEffect(() => {
@@ -100,7 +93,7 @@ const Activity = () => {
                         color: 'white',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
                 </div>
                 <div
                     style={{
@@ -114,7 +107,19 @@ const Activity = () => {
                     }}
                 >
                     {activity?.contents.map((activity, key) =>
-                        activity.type === ActivityContentType.VIDEO ? (
+                        activity.type === ActivityContentType.TEXT ? (
+                            <div
+                                className={'activity-description-div'}
+                                key={key}
+                            >
+                                <p className={'h5 description-title'}>
+                                    Descripción
+                                </p>
+                                <p className={'body1 activity-p'}>
+                                    {activity.content}
+                                </p>
+                            </div>
+                        ) : (
                             <div className={'activity-video'} key={key}>
                                 <VideoPlayer
                                     url={activity.content}
@@ -122,28 +127,6 @@ const Activity = () => {
                                     isPausing={handleVideoPause}
                                     sendInfo={handleSendVideoInfo}
                                 />
-                            </div>
-                        ) : (
-                            <div
-                                className={'activity-description-div'}
-                                key={key}
-                                onClick={handleShowDescription}
-                            >
-                                <p className={'h5 description-title'}>
-                                    Descripción
-                                </p>
-                                {showDescription && (
-                                    <p className={'body1 activity-p'}>
-                                        {activity.content}
-                                    </p>
-                                )}
-                                <div className={'show-description-arrow-div'}>
-                                    {showDescription ? (
-                                        <KeyboardArrowUpIcon />
-                                    ) : (
-                                        <KeyboardArrowDownIcon />
-                                    )}
-                                </div>
                             </div>
                         )
                     )}

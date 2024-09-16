@@ -6,47 +6,38 @@ import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import Typography from '@mui/material/Typography';
 import AdminCard from '@/components/AdminCard';
-import logo1 from '@/assets/AdminIcon/AdminIcon1.png';
-import logo2 from '@/assets/AdminIcon/AdminIcon2.png';
-import logo3 from '@/assets/AdminIcon/AdminIcon3.png';
+import {adminCards, textRenacentia} from '@/util/information';
+
 
 const InformationScreen = () => {
-    const text_renacentia =
-        'Renacentia es una web de meditación para pacientes oncologicos...';
-
-    const adminCards = [
-        {
-            image: logo1,
-            text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sagittis mattis magna aptent nullam congue sagittis suspendisse.',
-        },
-        {
-            image: logo2,
-            text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sagittis mattis magna aptent nullam congue sagittis suspendisse.',
-        },
-        {
-            image: logo3,
-            text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sagittis mattis magna aptent nullam congue sagittis suspendisse.',
-        },
-    ];
 
     return (
-        <Box height={'100vh'}>
+        <Box height={'100%'} marginBottom={'100px'}>
             <TopBar amtNotifications={0} selected={''} />
-            <Box className="container-information">
-                <Typography className="title-information">
-                    ¿Quienes somos?
-                </Typography>
-                <Typography className="text-information">
-                    {text_renacentia}
-                </Typography>
+            <Box className={'information-page-container'}>
+                <Box className="title-information-container">
+                    <Typography className="h4">¿Quiénes somos?</Typography>
+                </Box>
+                <Box className={'information-container'}>
+                    <Box className={'description-text-container'}>
+                        <Typography className="body1">
+                            {textRenacentia}
+                        </Typography>
+                    </Box>
+                </Box>
+                <Box className={'information-container'}>
+                    <Typography className="h5">Equipo Renacentia</Typography>
+                    {adminCards.map((card, index) => (
+                        <AdminCard
+                            key={index}
+                            image={card.image}
+                            tags={card.tags}
+                            name={card.name}
+                            text={card.text}
+                        />
+                    ))}
+                </Box>
 
-                {adminCards.map((card, index) => (
-                    <AdminCard
-                        key={index}
-                        image={card.image}
-                        text={card.text}
-                    />
-                ))}
             </Box>
             <NavBar value={0} />
         </Box>
