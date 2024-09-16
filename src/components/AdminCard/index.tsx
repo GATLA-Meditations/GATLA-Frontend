@@ -3,15 +3,18 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Image, { StaticImageData } from 'next/image';
+import PersonalizeChip from '@/components/PersonalizeChip';
 
-interface AdminCardProps {
+export interface AdminCardProps {
     image: StaticImageData;
     text: string;
+    name:string;
+    tags:string[]
 }
 
-const AdminCard = ({ image, text }: AdminCardProps) => {
+const AdminCard = ({ image, text, name, tags }: AdminCardProps) => {
     return (
-        <Box className={'card-div'}>
+        <Box className={'admin-card-container'}>
             <Box className={'image-card'}>
                 <Image
                     src={image}
@@ -21,8 +24,17 @@ const AdminCard = ({ image, text }: AdminCardProps) => {
                     height={80}
                 />
             </Box>
-
-            <Typography className={'card-text'}>{text}</Typography>
+            <Box className={'admin-card-chips-text-container'}>
+                <Box className={'admin-card-chips-container'}>
+                    {tags.map((tag, key) => (
+                        <PersonalizeChip key={key} label={tag} variant={'information'}/>
+                    ))}
+                </Box>
+                <Box>
+                    <Typography className={'body1 light-bold'}>{name}</Typography>
+                    <Typography className={'body2'}>{text}</Typography>
+                </Box>
+            </Box>
         </Box>
     );
 };
