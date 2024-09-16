@@ -5,8 +5,6 @@ import '../../app/globals.css';
 import './styles.css';
 import VideoPlayer from '@/components/VideoPlayer';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import Loader from '@/components/Loader';
 import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 import TopBar from '@/components/TopBar';
@@ -95,7 +93,7 @@ const Activity = () => {
                         color: 'white',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
                 </div>
                 <div
                     style={{
@@ -109,16 +107,7 @@ const Activity = () => {
                     }}
                 >
                     {activity?.contents.map((activity, key) =>
-                        activity.type === ActivityContentType.VIDEO ? (
-                            <div className={'activity-video'} key={key}>
-                                <VideoPlayer
-                                    url={activity.content}
-                                    isPlaying={handleVideoPlay}
-                                    isPausing={handleVideoPause}
-                                    sendInfo={handleSendVideoInfo}
-                                />
-                            </div>
-                        ) : (
+                        activity.type === ActivityContentType.TEXT ? (
                             <div
                                 className={'activity-description-div'}
                                 key={key}
@@ -129,6 +118,15 @@ const Activity = () => {
                                 <p className={'body1 activity-p'}>
                                     {activity.content}
                                 </p>
+                            </div>
+                        ) : (
+                            <div className={'activity-video'} key={key}>
+                                <VideoPlayer
+                                    url={activity.content}
+                                    isPlaying={handleVideoPlay}
+                                    isPausing={handleVideoPause}
+                                    sendInfo={handleSendVideoInfo}
+                                />
                             </div>
                         )
                     )}
