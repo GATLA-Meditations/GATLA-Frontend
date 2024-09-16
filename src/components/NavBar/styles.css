@@ -1,7 +1,7 @@
-.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root.Mui-selected {
+.MuiBottomNavigationAction-root.Mui-selected {
     color: var(--primary-400) !important;
 }
 
-.css-1bjk3jo-MuiButtonBase-root-MuiBottomNavigationAction-root {
+.MuiBottomNavigationAction-root {
     color: var(--primary-300) !important;
 }
