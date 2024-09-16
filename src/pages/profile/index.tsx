@@ -1,10 +1,8 @@
 import { Achievement } from '@/components/Achievements';
-import Button from '@/components/Button';
 import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import { Avatar, Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import AvatarIcon from '@/assets/AvatarIcon';
 import ChangePassword from '@/components/ChangePassword';
 import LogoutConfirmationModal from '@/components/LogoutConfirmationModal';
 import { getUserItems, getUserProfile, updateUserAvatar } from '@/service/apis';
@@ -13,10 +11,12 @@ import Loader from '@/components/Loader';
 import ChangeAvatarModal from '@/components/ChangeAvatarModal';
 import PencilIcon from '@/assets/PencilIcon';
 import './styles.css';
-import Image from 'next/image';
-import logo from '@/assets/Logo/logo.png';
-import Link from 'next/link';
 import WithToast, { WithToastProps } from '@/hoc/withToast';
+import {TrophyIcon} from '@/assets/TrophyIcon';
+import LockIcon from '@mui/icons-material/Lock';
+import ProfileButton from '@/components/ProfileButton/ProfileButton';
+import {useRouter} from 'next/router';
+import {LogOutIcon} from '@/assets/LogOutIcon';
 
 export interface User {
     patientCode: string;
@@ -33,6 +33,7 @@ const Profile = ({ showToast }: WithToastProps) => {
     const [avatars, setAvatars] = useState<string[]>([]);
     const [avatar, setAvatar] = useState('');
     const [selectedAvatar, setSelectedAvatar] = useState('');
+    const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -85,13 +86,6 @@ const Profile = ({ showToast }: WithToastProps) => {
             });
     };
 
-    const avatarsMock = [
-        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
-        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
-        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
-        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
-        'https://cdn.icon-icons.com/icons2/108/PNG/256/males_male_avatar_man_people_faces_18362.png',
-    ];
 
     if (isLoading) {
         return <Loader />;
@@ -108,6 +102,7 @@ const Profile = ({ showToast }: WithToastProps) => {
                 justifyContent={'space-around'}
                 alignItems={'center'}
                 marginBottom={'5vh'}
+                height={'100%'}
             >
                 <Box
                     display={'flex'}
@@ -126,6 +121,7 @@ const Profile = ({ showToast }: WithToastProps) => {
                                 width: '13vh',
                                 height: '13vh',
                                 marginBottom: '1vh',
+                                backgroundColor:'black'
                             }}
                             src={
                                 selectedAvatar === '' ? avatar : selectedAvatar
@@ -137,41 +133,16 @@ const Profile = ({ showToast }: WithToastProps) => {
                             )}
                         </Box>
                     </Box>
-                    <Typography className="h4 bold" marginBottom={'3vh'}>
+                    <Typography className="h4" marginBottom={'16px'}>
                         {user?.patientCode}
                     </Typography>
-                    {/*<Achievements*/}
-                    {/*    achievements={achivementsMock}*/}
-                    {/*    title={'Logros'}*/}
-                    {/*    viewMoreButton="Ver más"*/}
-                    {/*/>*/}
                 </Box>
                 <Box
-                    display={'flex'}
-                    flexDirection={'column'}
-                    sx={{ margin: '3vh', gap: '3vh' }}
+                    className={'profile-buttons-container'}
                 >
-                    <Button
-                        variant="common"
-                        size="medium"
-                        onClick={() => (window.location.href = '/achievements')}
-                    >
-                        Ver logros
-                    </Button>
-                    <Button
-                        variant="common"
-                        size="medium"
-                        onClick={handleChangePassword}
-                    >
-                        Cambiar contraseña
-                    </Button>
-                    <Button
-                        variant="red"
-                        size="medium"
-                        onClick={handleLogoutClick}
-                    >
-                        Cerrar sesión
-                    </Button>
+                    <ProfileButton title={'Mis logros'} onClick={() => (router.push('/achievements'))} icon={<TrophyIcon width={'24px'} height={'24px'}/>}/>
+                    <ProfileButton title={'Cambiar contraseña'} onClick={handleChangePassword} icon={<LockIcon width={'24px'} height={'24px'}/>}/>
+                    <ProfileButton title={'Cerrar sesión'} onClick={handleLogoutClick} icon={<LogOutIcon/>}/>
                 </Box>
             </Box>
             {isModalOpen && (
