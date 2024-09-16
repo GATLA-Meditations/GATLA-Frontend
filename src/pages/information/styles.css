@@ -1,64 +1,29 @@
-body,
-html,
-#root {
-    height: 100%;
-    margin: 0;
+.title-information-container {
+    margin: 16px 16px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
 }
 
-.component {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.content {
-    flex-grow: 1;
-}
-
-.navbar {
-    flex-shrink: 0;
-}
-
-.container {
+.information-page-container{
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-.container-information {
-    margin: 20px 16px;
+.information-container{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
+    margin: 0 16px;
+    gap: 10px;
 }
 
-.title-information {
-    color: #000;
-    font-family: Inter, sans-serif;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 100%; /* 24px */
-    letter-spacing: 0.72px;
-}
-
-.text-information {
-    color: var(--grey-700, #141418);
-    font-family: Inter, sans-serif;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-}
-
-.button_content {
+.description-text-container{
     display: flex;
-    padding: 10px 12px;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row;
+    padding: 6px 16px;
+    border-radius: 12px;
+    background-color: var(--primary-100);
 }

@@ -36,7 +36,7 @@ const Notifications = () => {
 
     return (
         <Box height={'100vh'} className={'notifications-container'}>
-            <TopBar amtNotifications={notifications.length} />
+            <TopBar selected='notifications' amtNotifications={notifications.length} />
             <div
                 style={{
                     display: 'flex',
@@ -47,7 +47,7 @@ const Notifications = () => {
                     marginTop: '20px',
                 }}
             >
-                <ArrowBackIosNewIcon onClick={() => router.push('/home')} />
+                <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.push('/home')} />
             </div>
             <Box className={'notifications'}>
                 {notifications.length > 0 ? (

@@ -163,6 +163,10 @@ body {
     );
 }
 
+.light-bold {
+    font-weight: 550 !important;
+}
+
 /*@media (prefers-color-scheme: dark) {*/
 /*  html {*/
 /*    color-scheme: dark;*/
