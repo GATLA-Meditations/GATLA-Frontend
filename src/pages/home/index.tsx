@@ -50,7 +50,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
         }
     };
 
-    if (isLoading) {
+    if (isLoading || !actualModule.name) {
         return <Loader/>;
     }
 
