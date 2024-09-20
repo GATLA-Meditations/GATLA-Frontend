@@ -2,6 +2,7 @@ import {AdminCardProps} from '@/components/AdminCard';
 import logo5 from '@/assets/AdminIcon/Eugenio.png';
 import logo4 from '@/assets/AdminIcon/Flor.png';
 import logo2 from '@/assets/AdminIcon/AdminIcon2.png';
+import logo1 from '@/assets/AdminIcon/AdminIcon1.png';
 
 export const textRenacentia =
     ' Somos un equipo de profesionales dedicados a la investigación y desarrollo de terapias para combatir hemopatías malignas tanto en la edad adulta como pediátrica.\n' +
@@ -28,4 +29,13 @@ export const adminCards: AdminCardProps[] = [
         tags:['Estudiante', 'Programador'],
         text: 'Creemos que acompañarte en este momento es muy importante, por eso junto con mis compañeros hicimos esta aplicación con ayuda de los investigadores para que tengas un acceso rápido a las meditaciones y te sientas acompañado durante todo el proceso.',
     },
+
+    {
+        image: logo1,
+        name:'Agustin Augurusa',
+        tags:['Estudiante', 'Programador'],
+        text: 'Mi motivación principal al unirme a este proyecto fue la posibilidad de ayudar ofreciendo una herramienta que realmente pudiera marcar la diferencia en la vida de aquellos que la usen.',
+    },
 ];
+
+export const infoContacto = ' Email: renacentia.meditaciones@gmail.com ';
