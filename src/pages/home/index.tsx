@@ -37,11 +37,13 @@ const HomeScreen = ({showToast}: WithToastProps) => {
             } catch (error) {
                 console.log(error);
             }
+            finally {
+                setIsLoading(false);
+            }
         }
 
         checkForToast().then();
         fetchData();
-        setIsLoading(false);
     }, []);
 
     useEffect(() => {
@@ -67,7 +69,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
         }
     };
 
-    if (isLoading) {
+    if (isLoading || !actualModule.name) {
         return <Loader/>;
     }
 
