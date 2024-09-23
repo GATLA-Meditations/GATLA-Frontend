@@ -11,6 +11,8 @@ import { useRouter } from 'next/router';
 import logo from '../../assets/Logo/logo.png';
 import Image from 'next/image';
 import Loader from '@/components/Loader';
+import { EyeIcon } from '@/assets/EyeIcon';
+import { EyeClosedIcon } from '@/assets/EyeClosedIcon';
 
 interface FormValues {
     patientCode: string;
@@ -21,6 +23,7 @@ const LoginPage = () => {
     const router = useRouter();
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleSubmit = async (values: FormValues) => {
         setIsLoading(true);
@@ -33,6 +36,10 @@ const LoginPage = () => {
             setError('Verifica el código o la contraseña');
             setIsLoading(false);
         }
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
     if (isLoading) {
@@ -67,13 +74,30 @@ const LoginPage = () => {
                         label="Código"
                         name="patientCode"
                     />
-                    <Field
-                        as={CustomTextField}
-                        placeholder="Ingrese su contraseña"
-                        label="Contraseña"
-                        type="password"
-                        name="password"
-                    />
+                    <Box
+                        className="passwordFieldContainer"
+                        sx={{ position: 'relative' }}
+                    >
+                        <Field
+                            as={CustomTextField}
+                            placeholder="Ingrese su contraseña"
+                            label="Contraseña"
+                            type={showPassword ? 'text' : 'password'}
+                            name="password"
+                        />
+                        <Box
+                            sx={{
+                                position: 'absolute',
+                                right: '10px',
+                                top: '50%',
+                                transform: 'translateY(-50%)',
+                                cursor: 'pointer',
+                            }}
+                            onClick={togglePasswordVisibility}
+                        >
+                            {showPassword ? <EyeClosedIcon /> : <EyeIcon />}
+                        </Box>
+                    </Box>
                     <Box className="forgotPassword">
                         <Typography>Has olvidado la </Typography>
                         <Typography className="bold">contraseña?</Typography>
