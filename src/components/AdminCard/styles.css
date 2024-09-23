@@ -24,7 +24,6 @@
 .image-card {
     display: flex;
     align-items: center;
-    align-self: stretch;
 }
 
 .lock-div {
@@ -34,4 +33,14 @@
 
 .disallowed {
     background-color: var(--secondary-200);
+}
+
+.text-background-color{
+    background-color: var(--primary-200);
+    border-radius: 30px;
+}
+
+.admin-arrow-down-div{
+    display: flex;
+    justify-content: center;
 }
