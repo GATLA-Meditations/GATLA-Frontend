@@ -33,11 +33,13 @@ const HomeScreen = ({showToast}: WithToastProps) => {
             } catch (error) {
                 console.log(error);
             }
+            finally {
+                setIsLoading(false);
+            }
         }
 
         checkForToast().then();
         fetchData();
-        setIsLoading(false);
     }, []);
 
     const checkForToast = async () => {
