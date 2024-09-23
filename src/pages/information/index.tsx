@@ -15,10 +15,11 @@ const InformationScreen = () => {
         <Box height={'100%'} marginBottom={'100px'}>
             <TopBar amtNotifications={0} selected={''} />
             <Box className={'information-page-container'}>
-                <Box className="title-information-container">
-                    <Typography className="h4">¿Quiénes somos?</Typography>
-                </Box>
+                {/*<Box className="title-information-container">*/}
+                {/*    */}
+                {/*</Box>*/}
                 <Box className={'information-container'}>
+                    <Typography className="h5 bold" color={'var(--secondary-600)'}>Descripción</Typography>
                     <Box className={'description-text-container'}>
                         <Typography className="body1">
                             {textRenacentia}
@@ -26,7 +27,7 @@ const InformationScreen = () => {
                     </Box>
                 </Box>
                 <Box className={'information-container'}>
-                    <Typography className="h5">Equipo Renacentia</Typography>
+                    <Typography className="h5 bold" color={'var(--secondary-600)'}>Equipo Renacentia</Typography>
                     {adminCards.map((card, index) => (
                         <AdminCard
                             key={index}
