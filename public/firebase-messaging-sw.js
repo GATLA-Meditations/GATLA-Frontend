@@ -2,13 +2,13 @@ importScripts('https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/8.8.0/firebase-messaging.js');
 
 const firebaseConfig = {
-    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
-    measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
+    apiKey: 'AIzaSyBj_wUGgl7MUF71GVm6yVb1vKhgHAyxrrg',
+    authDomain: 'renacentia.firebaseapp.com',
+    projectId: 'renacentia',
+    storageBucket: 'renacentia.appspot.com',
+    messagingSenderId: '110093984274',
+    appId: '1:110093984274:web:d5883dae8a68cb00a0eecb',
+    measurementId: 'G-6T5PHYKB8W'
 };
 
 firebase.initializeApp(firebaseConfig);
