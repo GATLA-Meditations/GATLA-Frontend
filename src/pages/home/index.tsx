@@ -15,6 +15,8 @@ import WithToast, {WithToastProps} from '@/hoc/withToast';
 import Loader from '@/components/Loader';
 import logRocket from 'logrocket';
 import ObtainedRewardModal from '@/components/Modals/ObtainedRewardModal';
+import QuestionModal from '@/components/QuestionModal';
+import QuestionModalManager from '@/components/QuestionModalManager';
 
 const HomeScreen = ({showToast}: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
@@ -56,6 +58,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
 
     return (
         <>
+            <QuestionModalManager/>
             <Box height={'100vh'} className={'home-div'}>
                 <TopBar amtNotifications={0} selected={''} />
                 <AchievementsHomeMenu />
