@@ -27,7 +27,7 @@ export const adminCards: AdminCardProps[] = [
         image: logo8,
         name: 'Pablo Mountford',
         tags: ['Hematólogo', 'Investigador'],
-        text: 'con una visión personal y profesional en la cual aliviar el sufrimiento multidimensional de los pacientes, sus familiares y al personal medico marcaron mi educación continua medica en medicina mente cuerpo así como mi forma de vivir y de compartir estos aprendizajes en mi casa, en el trabajo y otros espacios comunitarios, \n' +
+        text: 'Con una visión personal y profesional en la cual aliviar el sufrimiento multidimensional de los pacientes, sus familiares y al personal medico marcaron mi educación continua medica en medicina mente cuerpo así como mi forma de vivir y de compartir estos aprendizajes en mi casa, en el trabajo y otros espacios comunitarios, \n' +
             'promoviendo practicas meditativas que ayudan a manejar mejor el estrés y a promover la resiliencia, adaptándolas y respetando las creencias personales, lo cual, para muchas personas se encuentra en sus propias practicas religiosas.',
     },
     {
