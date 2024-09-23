@@ -20,6 +20,7 @@
         "axios": "^1.7.2",
         "cookies-next": "^4.2.1",
         "eslint-config-next": "14.2.3",
+        "firebase": "^10.13.2",
         "formik": "^2.4.6",
         "logrocket": "^8.1.2",
         "next": "^14.2.3",

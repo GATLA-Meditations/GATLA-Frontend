@@ -15,9 +15,13 @@ import WithToast, {WithToastProps} from '@/hoc/withToast';
 import Loader from '@/components/Loader';
 import logRocket from 'logrocket';
 import ObtainedRewardModal from '@/components/Modals/ObtainedRewardModal';
+import { getMessaging, onMessage } from 'firebase/messaging';
+import { firebaseApp } from '@/service/firebase';
+import useFcmToken from '@/hooks/useFCMToken';
 
 const HomeScreen = ({showToast}: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
+    const { fcmToken,notificationPermissionStatus } = useFcmToken();
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -33,11 +37,26 @@ const HomeScreen = ({showToast}: WithToastProps) => {
             } catch (error) {
                 console.log(error);
             }
+            finally {
+                setIsLoading(false);
+            }
         }
 
         checkForToast().then();
         fetchData();
-        setIsLoading(false);
+    }, []);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/firebase-messaging-sw.js');
+            const messaging = getMessaging(firebaseApp);
+            const unsubscribe = onMessage(messaging, (payload) => {
+                console.log('Foreground push notification received:', payload);
+            });
+            return () => {
+                unsubscribe();
+            };
+        }
     }, []);
 
     const checkForToast = async () => {
@@ -50,7 +69,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
         }
     };
 
-    if (isLoading) {
+    if (isLoading || !actualModule.name) {
         return <Loader/>;
     }
 

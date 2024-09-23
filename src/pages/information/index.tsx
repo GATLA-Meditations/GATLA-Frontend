@@ -6,7 +6,7 @@ import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import Typography from '@mui/material/Typography';
 import AdminCard from '@/components/AdminCard';
-import {adminCards, textRenacentia} from '@/util/information';
+import {adminCards, infoContacto, textRenacentia} from '@/util/information';
 
 
 const InformationScreen = () => {
@@ -37,7 +37,13 @@ const InformationScreen = () => {
                         />
                     ))}
                 </Box>
-
+                <Box className={'information-container'}>
+                    <Box className={'description-text-container'}>
+                        <Typography className="body1">
+                            {infoContacto}
+                        </Typography>
+                    </Box>
+                </Box>
             </Box>
             <NavBar value={0} />
         </Box>
