@@ -30,10 +30,10 @@
     height: 80%;
 }
 
-.modal-picture img {
-    width: 100%;
-    max-height: 40vh;
-    height: auto;
+.modal-picture {
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 .modal-title {
@@ -54,4 +54,10 @@
     justify-content: space-between;
     margin-top: 20px;
     gap: 10px;
+}
+
+.modal-picture img {
+    max-width: 90%;
+    max-height: 35vh;
+    object-fit: cover;
 }

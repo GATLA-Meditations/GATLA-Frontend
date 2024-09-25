@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import './styles.css';
 import '@/app/globals.css';
 import Button from '@/components/Button';
+import './styles.css';
 
 interface GenericModalProps {
     open: boolean;

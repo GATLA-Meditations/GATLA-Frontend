@@ -46,18 +46,18 @@ const HomeScreen = ({showToast}: WithToastProps) => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/firebase-messaging-sw.js');
-            const messaging = getMessaging(firebaseApp);
-            const unsubscribe = onMessage(messaging, (payload) => {
-                console.log('Foreground push notification received:', payload);
-            });
-            return () => {
-                unsubscribe();
-            };
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+    //         navigator.serviceWorker.register('/firebase-messaging-sw.js');
+    //         const messaging = getMessaging(firebaseApp);
+    //         const unsubscribe = onMessage(messaging, (payload) => {
+    //             console.log('Foreground push notification received:', payload);
+    //         });
+    //         return () => {
+    //             unsubscribe();
+    //         };
+    //     }
+    // }, []);
 
     const checkForToast = async () => {
         const {message, type} = router.query as Record<
