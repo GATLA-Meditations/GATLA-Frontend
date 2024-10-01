@@ -18,13 +18,13 @@ interface AvatarProps {
 }
 
 const ChangeAvatarModal = ({
-                               isOpen,
-                               onClose,
-                               avatars,
-                               onChangeAvatar,
-                               onCancel,
-                               onConfirm,
-                           }: ChangeAvatarModalProps) => {
+    isOpen,
+    onClose,
+    avatars,
+    onChangeAvatar,
+    onCancel,
+    onConfirm,
+}: ChangeAvatarModalProps) => {
     const [selectedAvatar, setSelectedAvatar] = React.useState<AvatarProps>();
 
     const handleSelectAvatar = (avatar: string, index: number) => {
@@ -59,7 +59,10 @@ const ChangeAvatarModal = ({
                         <Box className="avatar-container">
                             {avatars.length == 0 ? (
                                 <Typography style={{ textAlign: 'center' }}>
-                                    No tienes avatars todavía.<br />Puedes desbloquearlos en el segmento de personalización
+                                    No tienes avatars todavía.
+                                    <br />
+                                    Puedes desbloquearlos en el segmento de
+                                    personalización
                                 </Typography>
                             ) : (
                                 avatars.map((avatar, index) => (
@@ -96,8 +99,8 @@ const ChangeAvatarModal = ({
                                         onClick={handleConfirm}
                                     >
                                         Confirmar
-                                    </Button>)
-                                }
+                                    </Button>
+                                )}
                                 <Button
                                     className="cancel-button"
                                     variant="red"
