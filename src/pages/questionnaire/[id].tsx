@@ -11,6 +11,7 @@ import Loader from '@/components/Loader';
 export interface QuestionProps {
     name: string;
     id: string;
+    metadata:string;
     answer: string;
     optionsAmt: number;
 }
@@ -105,7 +106,7 @@ const TestPage = () => {
                     return (
                         <div className={'question-div'} key={key}>
                             <Question
-                                optionsAmt={7}
+                                optionsAmt={JSON.parse(question.metadata).max}
                                 optionsText={[
                                     'Completamente en desacuerdo',
                                     'En desacuerdo',

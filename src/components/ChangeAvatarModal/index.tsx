@@ -50,59 +50,68 @@ const ChangeAvatarModal = ({
     return (
         <Box>
             {isOpen && (
-                <Box className="modal-container">
-                    <Box className="avatar-container">
-                        {avatars.length == 0 ? (
-                            <Typography style={{ textAlign: 'center' }}>
-                                No tienes avatars todavía.<br />Puedes desbloquearlos en el segmento de personalización
-                            </Typography>
-                        ) : (
-                            avatars.map((avatar, index) => (
-                                <Box
-                                    key={index}
-                                    onClick={() =>
-                                        handleSelectAvatar(avatar, index)
-                                    }
-                                >
-                                    <Avatar
-                                        className={`avatar ${
-                                            selectedAvatar?.index === index
-                                                ? 'selected'
-                                                : ''
-                                        }`}
-                                        src={avatar}
-                                    />
-                                </Box>
-                            ))
-                        )}
-                    </Box>
-                    <Box className="button-container">
-                        <>
+                <>
+                    {/* Overlay for background blur/darkening */}
+                    <Box className="modal-overlay" onClick={onClose}></Box>
+
+                    {/* Modal */}
+                    <Box className="modal-container">
+                        <Box className="avatar-container">
                             {avatars.length == 0 ? (
-                                <Button
-                                    className="personalize-button"
-                                    onClick={handleGoToShop}
-                                >
-                                    Personalizar
-                                </Button>
+                                <Typography style={{ textAlign: 'center' }}>
+                                    No tienes avatars todavía.
+                                    <br />
+                                    Puedes desbloquearlos en el segmento de
+                                    personalización
+                                </Typography>
                             ) : (
+                                avatars.map((avatar, index) => (
+                                    <Box
+                                        key={index}
+                                        onClick={() =>
+                                            handleSelectAvatar(avatar, index)
+                                        }
+                                    >
+                                        <Avatar
+                                            className={`avatar ${
+                                                selectedAvatar?.index === index
+                                                    ? 'selected'
+                                                    : ''
+                                            }`}
+                                            src={avatar}
+                                        />
+                                    </Box>
+                                ))
+                            )}
+                        </Box>
+                        <Box className="button-container">
+                            <>
+                                {avatars.length == 0 ? (
+                                    <Button
+                                        className="personalize-button"
+                                        onClick={handleGoToShop}
+                                    >
+                                        Personalizar
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        className="confirm-button"
+                                        onClick={handleConfirm}
+                                    >
+                                        Confirmar
+                                    </Button>
+                                )}
                                 <Button
-                                    className="confirm-button"
-                                    onClick={handleConfirm}
+                                    className="cancel-button"
+                                    variant="red"
+                                    onClick={handleCancel}
                                 >
-                                    Confirmar
-                                </Button>)
-                            }
-                            <Button
-                                className="cancel-button"
-                                variant="red"
-                                onClick={handleCancel}
-                            >
                                     Cancelar
-                            </Button>
-                        </>
+                                </Button>
+                            </>
+                        </Box>
                     </Box>
-                </Box>
+                </>
             )}
         </Box>
     );

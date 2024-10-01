@@ -23,7 +23,14 @@ const LogoutConfirmationModal = ({ open, onClose }: ModalProps) => {
     };
 
     return (
-        <Modal open={open} onClose={handleCloseModal}>
+        <Modal
+            open={open}
+            onClose={handleCloseModal}
+            sx={{
+                backdropFilter: 'blur(5px)',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            }}
+        >
             <Box className="modal-style">
                 <Box>
                     <Typography className="h4 bold">¿Cerrar sesión?</Typography>
