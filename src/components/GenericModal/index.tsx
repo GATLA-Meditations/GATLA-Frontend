@@ -49,10 +49,22 @@ const GenericModal = ({
     };
 
     return (
-        <Modal open={open} onClose={handleClose} className="modal-container">
+        <Modal
+            open={open}
+            onClose={handleClose}
+            className="modal-container"
+            sx={{
+                backdropFilter: 'blur(5px)',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            }}
+        >
             <Box
                 className={`modal-style modal-${size}`}
-                style={{ backgroundColor, position: 'relative', outline:'none'}}
+                style={{
+                    backgroundColor,
+                    position: 'relative',
+                    outline: 'none',
+                }}
             >
                 <IconButton
                     className="modal-close-button"

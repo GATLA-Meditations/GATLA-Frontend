@@ -43,6 +43,19 @@
     padding: 10px;
 }
 
+/* Add overlay to blur or darken the background */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* darken effect */
+    backdrop-filter: blur(5px); /* blur effect */
+    z-index: 3;
+}
+
+/* Modal container styles */
 .modal-container {
     display: flex;
     flex-direction: column;
