@@ -46,4 +46,6 @@ export const adminCards: AdminCardProps[] = [
 
 ];
 
-export const infoContacto = ' Si tienes algun problema o consulta no dudes en contactarnos en: \n' + ' renacentia.meditaciones@gmail.com ';
+export const infoContacto = ' Si tienes algun problema o consulta no dudes en contactarnos en:';
+
+export const contactMail = 'renacentia.meditaciones@gmail.com';
