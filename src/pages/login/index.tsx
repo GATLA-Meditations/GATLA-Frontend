@@ -84,19 +84,11 @@ const LoginPage = () => {
                             label="Contraseña"
                             type={showPassword ? 'text' : 'password'}
                             name="password"
+                            icon={
+                                showPassword ? <EyeClosedIcon /> : <EyeIcon />
+                            }
+                            iconOnClick={togglePasswordVisibility}
                         />
-                        <Box
-                            sx={{
-                                position: 'absolute',
-                                right: '10px',
-                                top: '50%',
-                                transform: 'translateY(-50%)',
-                                cursor: 'pointer',
-                            }}
-                            onClick={togglePasswordVisibility}
-                        >
-                            {showPassword ? <EyeClosedIcon /> : <EyeIcon />}
-                        </Box>
                     </Box>
                     <Box className="forgotPassword">
                         <Typography>Has olvidado la </Typography>

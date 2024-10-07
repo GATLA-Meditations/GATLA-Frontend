@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getMessaging, getToken } from 'firebase/messaging';
 import { firebaseApp } from '@/service/firebase';
+import { saveUserNotificationToken } from '@/service/apis';
 
 const useFcmToken = () => {
     const [token, setToken] = useState('');
@@ -23,6 +24,7 @@ const useFcmToken = () => {
                         if (currentToken) {
                             console.log('token:', currentToken);
                             setToken(currentToken);
+                            await saveUserNotificationToken({ token: currentToken });
                         } else {
                             console.log(
                                 'No registration token available. Request permission to generate one.'
