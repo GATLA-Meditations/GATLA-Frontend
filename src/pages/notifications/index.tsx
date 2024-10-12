@@ -71,7 +71,6 @@ const Notifications = () => {
                     >
                         <Typography>Aún no tienes notificaciones</Typography>
                         <Typography>¡Ánimo en tu tratamiento!</Typography>
-                        <WeeklyQuestions questions={[]} />
                     </div>
                 )}
             </Box>
