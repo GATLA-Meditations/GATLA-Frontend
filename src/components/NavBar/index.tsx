@@ -21,7 +21,7 @@ const NavBar = ({ value }: NavBarProps) => {
                 fontWeight: 800,
                 color: 'black',
                 borderTop: '1px solid var(--secondary-200)',
-                padding: '4px 0',
+                paddingBottom: '24px',
             }}
             value={val}
             onChange={(event, newValue) => {

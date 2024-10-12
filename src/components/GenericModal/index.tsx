@@ -4,6 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import './styles.css';
 import '@/app/globals.css';
 import Button from '@/components/Button';
+import './styles.css';
 
 interface GenericModalProps {
     open: boolean;
@@ -48,10 +49,22 @@ const GenericModal = ({
     };
 
     return (
-        <Modal open={open} onClose={handleClose} className="modal-container">
+        <Modal
+            open={open}
+            onClose={handleClose}
+            className="modal-container"
+            sx={{
+                backdropFilter: 'blur(5px)',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            }}
+        >
             <Box
                 className={`modal-style modal-${size}`}
-                style={{ backgroundColor, position: 'relative', outline:'none'}}
+                style={{
+                    backgroundColor,
+                    position: 'relative',
+                    outline: 'none',
+                }}
             >
                 <IconButton
                     className="modal-close-button"
