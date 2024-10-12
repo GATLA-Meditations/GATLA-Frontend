@@ -9,7 +9,6 @@ import { useGetUserNotifications } from '@/service/apis';
 import { Typography } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from 'next/router';
-import WeeklyQuestions from "@/components/WeeklyQuestions";
 
 type Notification = {
     variant: 'normal' | 'motivationalMessage';
