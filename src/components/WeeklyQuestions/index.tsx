@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box } from '@mui/material';
-import Question from '../Question';
 import './styles.css';
-import QuestionQualitative from '@/components/QuestionQualitative';
+import QuestionQualitative from '../QualitativeQuestion';
+import SingleChoiceQuestion from '@/components/SingleChoiceQuestion';
 
 const mockQuestions = [
     { text: 'esto es una pregunta', type: 'cualitativa' },
@@ -43,16 +43,15 @@ export const WeeklyQuestions = ({ questions }: WeeklyQuestionsProps) => {
 
     return (
         <Box className="scroll-container">
-            {questions.map((question, index) => {
+            {mockQuestions.map((question, index) => {
                 const id = `question-${index}`;
                 return (
                     <Box key={index}>
                         {question.type === 'cuantitativa' ? (
-                            <Question
-                                questionText={question.text}
+                            <SingleChoiceQuestion
+                                questionTitle={question.text}
                                 id={id}
-                                optionsAmt={question.options.length}
-                                optionsText={question.options}
+                                optionsText={question.options || []}
                                 onChange={handleOptionChange}
                                 selected={selectedOption}
                             />

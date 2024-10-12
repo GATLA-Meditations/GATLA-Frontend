@@ -8,7 +8,7 @@ interface QuestionQualitativeProps {
     answer: string;
 }
 
-const QuestionQualitative = ({
+const QualitativeQuestion = ({
     questionText,
     onChange,
     answer,
@@ -35,4 +35,4 @@ const QuestionQualitative = ({
     );
 };
 
-export default QuestionQualitative;
+export default QualitativeQuestion;
