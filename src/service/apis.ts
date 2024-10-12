@@ -227,3 +227,11 @@ export const useGetUserNotifications = async (params?: any) => {
         console.log(error);
     }
 };
+
+export const saveUserNotificationToken = async (data: any) => {
+    try {
+        const response = await gatlaAxios.post('/notification/token', data);
+    } catch (error) {
+        console.log(error);
+    }
+};
