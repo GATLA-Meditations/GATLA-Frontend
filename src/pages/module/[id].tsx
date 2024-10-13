@@ -10,6 +10,9 @@ import TopBar from '@/components/TopBar';
 import Loader from '@/components/Loader';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import {Grid} from '@mui/material';
+import {MeditateIcon} from '@/assets/MeditateIcon';
+import {iconsDictionary} from '@/util/module';
 
 export interface Module {
     id: string;
@@ -71,23 +74,27 @@ const ModuleScreen = () => {
                     <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
                 </div>
                 <div className="module-name-div">
-                    <p className={'h2 bold'}>{module?.name}</p>
+                    <p className={'h2 bold module-name'}>{module?.name}</p>
                 </div>
                 <div className="activity-division-div">
-                    {module?.activities?.map((activity, key) => (
-                        <ActivityCard
-                            key={key}
-                            onClick={
-                                activity.unlocked
-                                    ? () => handleActivityOnClick(activity.id)
-                                    : () => {}
-                            } //Modal en caso de que no se haya completado la actividad previa
-                            title={activity.name}
-                            isAllowed={activity.unlocked}
-                        />
-                    ))}
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} padding={'16px'}>
+                        {module?.activities?.map((activity, key, index) => (
+                            <Grid item xs={6}>
+                                <ActivityCard
+                                    onClick={
+                                        activity.unlocked
+                                            ? () => handleActivityOnClick(activity.id)
+                                            : () => {}
+                                    }
+                                    title={activity.name}
+                                    isAllowed={activity.unlocked}
+                                    icon={iconsDictionary[key]}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
                 </div>
-                <NavBar value={0} />
+                <NavBar value={0}/>
             </Box>
         </>
     );
