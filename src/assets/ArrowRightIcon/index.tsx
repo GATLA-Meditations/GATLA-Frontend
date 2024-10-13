@@ -1,9 +1,9 @@
-export interface ArrowRightIconProps {
+export interface IconProps {
     width: string;
     height: string;
 }
 
-const ArrowRightIcon = ({ width, height }: ArrowRightIconProps) => {
+const ArrowRightIcon = ({ width, height }: IconProps) => {
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
