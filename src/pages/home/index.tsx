@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import TopBar from '@/components/TopBar';
 import './styles.css';
 import MeditationEntryPoint, {
@@ -8,20 +8,21 @@ import '../../app/globals.css';
 import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
-import {getActualModule, getUserStats} from '@/service/apis';
+import { getActualModule, getUserStats } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
-import {useRouter} from 'next/router';
-import WithToast, {WithToastProps} from '@/hoc/withToast';
+import { useRouter } from 'next/router';
+import WithToast, { WithToastProps } from '@/hoc/withToast';
 import Loader from '@/components/Loader';
 import logRocket from 'logrocket';
 import ObtainedRewardModal from '@/components/Modals/ObtainedRewardModal';
 import { getMessaging, onMessage } from 'firebase/messaging';
 import { firebaseApp } from '@/service/firebase';
 import useFcmToken from '@/hooks/useFCMToken';
+import QuestionModalManager from '@/components/QuestionModalManager';
 
-const HomeScreen = ({showToast}: WithToastProps) => {
+const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
-    const { fcmToken,notificationPermissionStatus } = useFcmToken();
+    const { fcmToken, notificationPermissionStatus } = useFcmToken();
     const router = useRouter();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -36,8 +37,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
                 setActualModule(moduleData);
             } catch (error) {
                 console.log(error);
-            }
-            finally {
+            } finally {
                 setIsLoading(false);
             }
         }
@@ -60,7 +60,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
     }, []);
 
     const checkForToast = async () => {
-        const {message, type} = router.query as Record<
+        const { message, type } = router.query as Record<
             string,
             'success' | 'error'
         >;
@@ -70,7 +70,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
     };
 
     if (isLoading || !actualModule.name) {
-        return <Loader/>;
+        return <Loader />;
     }
 
     return (
@@ -96,6 +96,7 @@ const HomeScreen = ({showToast}: WithToastProps) => {
                         progress={actualModule.progress}
                     />
                 </Box>
+                <QuestionModalManager />
                 <Box className="content" />
                 <NavBar value={0} />
             </Box>

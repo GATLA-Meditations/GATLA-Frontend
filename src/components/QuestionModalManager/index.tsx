@@ -1,21 +1,22 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import QuestionModal from '@/components/QuestionModal';
 
 import GenericModal from '@/components/GenericModal';
 
-interface questionsMockType {
-    title: string;
+export interface IWeeklyQuestion {
+    text: string;
+    type: 'cuantitativa' | 'cualitativa';
+    options?: string[];
     answer: string;
 }
 
 const QuestionModalManager = () => {
-    const questionsMock: questionsMockType[] = [
+    const questionsMock: IWeeklyQuestion[] = [
+        { text: 'esto es una pregunta', type: 'cualitativa', answer: '' },
         {
-            title: '¿Qué te aportó esta semana la meditación?',
-            answer: '',
-        },
-        {
-            title: '¿Cómo te sentiste durante esta semana?',
+            text: 'esto es otra pregunta',
+            type: 'cuantitativa',
+            options: ['muy mal', 'muy bien', 'regular'],
             answer: '',
         },
     ];
@@ -40,13 +41,22 @@ const QuestionModalManager = () => {
         setActiveQuestionIndex((prevIndex) => prevIndex + 1);
     };
 
+    const handleChangeQualitativeQuestion = (index: number, value: string) => {
+        setQuestions((prevState) => {
+            return prevState.map((q, i) =>
+                i === index - 1 ? { ...q, answer: value } : q
+            );
+        });
+        setActiveQuestionIndex((prevIndex) => prevIndex + 1);
+    };
+
     if (activeQuestionIndex === 0) {
         return (
             <GenericModal
                 open={true}
                 onClose={() => console.error('error')}
-                topButtonAction={
-                    () => setActiveQuestionIndex(activeQuestionIndex + 1)
+                topButtonAction={() =>
+                    setActiveQuestionIndex(activeQuestionIndex + 1)
                 }
                 topButtonColor={'common'}
                 size={'small'}
@@ -67,8 +77,13 @@ const QuestionModalManager = () => {
                     title={'Resumen semanal'}
                     questionIndex={activeQuestionIndex}
                     questionAmount={questionsMock.length}
-                    question={questionsMock[activeQuestionIndex - 1].title}
-                    sendAnswerFunction={handleQuestionModalAnswer}
+                    question={questionsMock[activeQuestionIndex - 1]}
+                    sendAnswerFunction={
+                        questionsMock[activeQuestionIndex - 1].type ==
+                        'cuantitativa'
+                            ? handleQuestionModalAnswer
+                            : handleChangeQualitativeQuestion
+                    }
                 />
             )}
         </>
