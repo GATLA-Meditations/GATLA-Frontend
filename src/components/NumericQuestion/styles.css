@@ -85,7 +85,7 @@
     margin-bottom: 12px;
 }
 
-.option-container{
+.option-container {
     display: flex;
     flex-direction: row;
     gap: 8px;
@@ -93,10 +93,10 @@
     justify-content: center;
 }
 
-.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked{
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
     color: var(--secondary-400);
 }
 
-.border-radius-15{
+.border-radius-15 {
     border-radius: 15px;
 }

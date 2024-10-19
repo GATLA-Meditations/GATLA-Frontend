@@ -13,16 +13,14 @@ import {
     textRenacentia,
 } from '@/util/information';
 import CopyIcon from '@/assets/CopyIcon';
-import withToast, {WithToastProps} from '@/hoc/withToast';
+import withToast, { WithToastProps } from '@/hoc/withToast';
 
 const InformationScreen = ({ showToast }: WithToastProps) => {
-
-
     const handleCopyButton = () => {
-        try{
+        try {
             navigator.clipboard.writeText(contactMail).then();
             showToast('E-mail copiado al portapapeles', 'success');
-        }catch (e){
+        } catch (e) {
             console.error(e);
         }
     };
@@ -63,14 +61,17 @@ const InformationScreen = ({ showToast }: WithToastProps) => {
                 </Box>
                 <Box className={'information-container'}>
                     <Box className={'description-text-container'}>
-                        <Typography
-                            className="body1"
-                        >
+                        <Typography className="body1">
                             {infoContacto}
                         </Typography>
                         <Box className={'mail-contact-container'}>
-                            <Typography className={'body1 bold'}>{contactMail}</Typography>
-                            <Box display={'flex'} onClick={() => handleCopyButton()}>
+                            <Typography className={'body1 bold'}>
+                                {contactMail}
+                            </Typography>
+                            <Box
+                                display={'flex'}
+                                onClick={() => handleCopyButton()}
+                            >
                                 <CopyIcon
                                     width={'18px'}
                                     height={'18px'}

@@ -1,23 +1,22 @@
-import {Box, Typography} from '@mui/material';
-import {TrophyIcon} from '@/assets/TrophyIcon';
+import { Box, Typography } from '@mui/material';
+import { TrophyIcon } from '@/assets/TrophyIcon';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import React from 'react';
 import './styles.css';
 
 interface ProfileButtonProps {
-    title?:string;
+    title?: string;
     onClick?: () => void;
-    icon?: React.ReactNode
+    icon?: React.ReactNode;
 }
 
-
-const ProfileButton = ({title, onClick, icon:Icon}: ProfileButtonProps) => {
+const ProfileButton = ({ title, onClick, icon: Icon }: ProfileButtonProps) => {
     return (
         <Box className={'profile-buttons'}>
             {Icon}
             <Box className={'profile-button-title-arrow'} onClick={onClick}>
                 <Typography className={'h6'}>{title}</Typography>
-                <ArrowForwardIosIcon width={'24px'} height={'24px'}/>
+                <ArrowForwardIosIcon width={'24px'} height={'24px'} />
             </Box>
         </Box>
     );

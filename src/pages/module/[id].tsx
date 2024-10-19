@@ -9,10 +9,10 @@ import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
 import Loader from '@/components/Loader';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
-import {Grid} from '@mui/material';
-import {MeditateIcon} from '@/assets/MeditateIcon';
-import {iconsDictionary} from '@/util/module';
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
+import { Grid } from '@mui/material';
+import { MeditateIcon } from '@/assets/MeditateIcon';
+import { iconsDictionary } from '@/util/module';
 
 export interface Module {
     id: string;
@@ -71,19 +71,30 @@ const ModuleScreen = () => {
                         marginTop: '20px',
                     }}
                 >
-                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => router.back()}
+                    />
                 </div>
                 <div className="module-name-div">
                     <p className={'h2 bold module-name'}>{module?.name}</p>
                 </div>
                 <div className="activity-division-div">
-                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} padding={'16px'}>
+                    <Grid
+                        container
+                        rowSpacing={1}
+                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                        padding={'16px'}
+                    >
                         {module?.activities?.map((activity, key, index) => (
-                            <Grid item xs={6}>
+                            <Grid item xs={6} key={key}>
                                 <ActivityCard
                                     onClick={
                                         activity.unlocked
-                                            ? () => handleActivityOnClick(activity.id)
+                                            ? () =>
+                                                handleActivityOnClick(
+                                                    activity.id
+                                                )
                                             : () => {}
                                     }
                                     title={activity.name}
@@ -94,7 +105,7 @@ const ModuleScreen = () => {
                         ))}
                     </Grid>
                 </div>
-                <NavBar value={0}/>
+                <NavBar value={0} />
             </Box>
         </>
     );

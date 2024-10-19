@@ -6,7 +6,7 @@ import Image, { StaticImageData } from 'next/image';
 import PersonalizeChip from '@/components/PersonalizeChip';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ArrowRightIcon from '@/assets/ArrowRightIcon';
-import {KeyboardArrowUp} from '@mui/icons-material';
+import { KeyboardArrowUp } from '@mui/icons-material';
 
 export interface AdminCardProps {
     image: StaticImageData;
@@ -44,10 +44,19 @@ const AdminCard = ({ image, text, name, tags }: AdminCardProps) => {
                         {name}
                     </Typography>
                     <Typography className={'body2'}>
-                        {showEntireText ? text : text.slice(0, 100).concat('...')}
+                        {showEntireText
+                            ? text
+                            : text.slice(0, 100).concat('...')}
                     </Typography>
-                    <Box onClick={() => setShowEntireText(!showEntireText)} className={'admin-arrow-down-div'}>
-                        {showEntireText ? <KeyboardArrowUp/> : <KeyboardArrowDownIcon/>}
+                    <Box
+                        onClick={() => setShowEntireText(!showEntireText)}
+                        className={'admin-arrow-down-div'}
+                    >
+                        {showEntireText ? (
+                            <KeyboardArrowUp />
+                        ) : (
+                            <KeyboardArrowDownIcon />
+                        )}
                     </Box>
                 </Box>
             </Box>

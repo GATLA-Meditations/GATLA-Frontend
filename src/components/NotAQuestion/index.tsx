@@ -5,10 +5,7 @@ interface NotAQuestion {
     questionTitle: string;
 }
 
-
-const NotAQuestion = ({
-    questionTitle,
-}: NotAQuestion) => {
+const NotAQuestion = ({ questionTitle }: NotAQuestion) => {
     return (
         <div className="layout">
             <div className="head border-radius-15">

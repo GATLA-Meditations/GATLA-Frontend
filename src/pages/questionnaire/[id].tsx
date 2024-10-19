@@ -13,7 +13,7 @@ import NotAQuestion from '@/components/NotAQuestion';
 export interface QuestionProps {
     name: string;
     id: string;
-    metadata:string;
+    metadata: string;
     answer: string;
     optionsAmt: number;
     type: string;
@@ -68,7 +68,9 @@ const TestPage = () => {
         setIsLoading(false);
     };
 
-    const questionsToAnswer = questions?.filter(question => question.type !== 'NOT_A_QUESTION');
+    const questionsToAnswer = questions?.filter(
+        (question) => question.type !== 'NOT_A_QUESTION'
+    );
 
     const allQuestionsAnswered = questionsToAnswer?.every(
         (question) => question.answer

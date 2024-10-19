@@ -22,7 +22,7 @@
     box-sizing: border-box;
     padding: 8px;
     text-align: center;
-    border-radius:  0 0 8px 8px ;
+    border-radius: 0 0 8px 8px;
 }
 
 .text-div {
@@ -42,7 +42,7 @@
     background-color: var(--secondary-200);
 }
 
-.icons-container{
+.icons-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -52,7 +52,6 @@
     height: 60%;
 }
 
-
-.activity-title{
+.activity-title {
     color: white;
 }

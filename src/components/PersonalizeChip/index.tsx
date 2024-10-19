@@ -16,7 +16,11 @@ const PersonalizeChip = ({
 }: PersonalizeChipsProps) => {
     return (
         <Box onClick={onClick} className={`chip ${variant}`}>
-            <Typography className={variant === 'information' ? 'body2' : 'body1'}>{label}</Typography>
+            <Typography
+                className={variant === 'information' ? 'body2' : 'body1'}
+            >
+                {label}
+            </Typography>
         </Box>
     );
 };

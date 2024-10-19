@@ -8,14 +8,13 @@
     background: var(--primary-100);
 }
 
-.admin-card-chips-text-container{
+.admin-card-chips-text-container {
     display: flex;
     flex-direction: column;
     gap: 6px;
-
 }
 
-.admin-card-chips-container{
+.admin-card-chips-container {
     display: flex;
     flex-direction: row;
     gap: 6px;
@@ -35,12 +34,12 @@
     background-color: var(--secondary-200);
 }
 
-.text-background-color{
+.text-background-color {
     background-color: var(--primary-200);
     border-radius: 30px;
 }
 
-.admin-arrow-down-div{
+.admin-arrow-down-div {
     display: flex;
     justify-content: center;
 }
