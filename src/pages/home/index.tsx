@@ -19,6 +19,8 @@ import { getMessaging, onMessage } from 'firebase/messaging';
 import { firebaseApp } from '@/service/firebase';
 import useFcmToken from '@/hooks/useFCMToken';
 import QuestionModalManager from '@/components/QuestionModalManager';
+import CongratsCard from '@/components/CongratsCard';
+import ModuleSeparator from '@/components/ModuleSeparator';
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
@@ -78,6 +80,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
             <Box height={'100vh'} className={'home-div'}>
                 <TopBar amtNotifications={0} selected={''} />
                 <AchievementsHomeMenu />
+                <ModuleSeparator text={'Módulo actual'} separatorColor={'white'} textColor={'white'}/>
                 <Box
                     className="entry-point"
                     sx={{
@@ -96,7 +99,11 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         progress={actualModule.progress}
                     />
                 </Box>
-                <QuestionModalManager />
+                {/*<ModuleSeparator text={'Logros de compañeros'} separatorColor={'white'} textColor={'white'}/>*/}
+                {/*<div style={{display:'flex',overflowX:'scroll', flexDirection:'row', boxSizing:'border-box', padding:'16px', gap:'8px', width:'auto'}}>*/}
+                {/*    <CongratsCard userName={'gtl-135'} userAvatar={'https://media.discordapp.net/attachments/1232427585737195630/1247661124543844476/blank-profile-picture-973460_960_720.png?ex=66696838&is=666816b8&hm=d38422eae0d1a478d8233dc4cc63a92e564f3104b13e8b4e17fa99ddf656cbcc&=&format=webp&quality=lossless&width=662&height=662'} achievementName={'¡Completó la primer semana de meditación!'}/>*/}
+                {/*    <CongratsCard userName={'gtl-135'} userAvatar={'https://media.discordapp.net/attachments/1232427585737195630/1247661124543844476/blank-profile-picture-973460_960_720.png?ex=66696838&is=666816b8&hm=d38422eae0d1a478d8233dc4cc63a92e564f3104b13e8b4e17fa99ddf656cbcc&=&format=webp&quality=lossless&width=662&height=662'} achievementName={'¡Logró una meditación completa!'}/>*/}
+                {/*</div>*/}
                 <Box className="content" />
                 <NavBar value={0} />
             </Box>
