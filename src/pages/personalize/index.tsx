@@ -114,12 +114,16 @@ const Personalize = ({ showToast }: WithToastProps) => {
                     <PersonalizeChip
                         label={'Fondos'}
                         onClick={() => handleChipClick('Fondos')}
-                        variant={selectedChip === 'Fondos' ? 'filled' : 'outlined'}
+                        variant={
+                            selectedChip === 'Fondos' ? 'filled' : 'outlined'
+                        }
                     />
                     <PersonalizeChip
                         label={'Perfil'}
                         onClick={() => handleChipClick('Perfil')}
-                        variant={selectedChip === 'Perfil' ? 'filled' : 'outlined'}
+                        variant={
+                            selectedChip === 'Perfil' ? 'filled' : 'outlined'
+                        }
                     />
                 </Stack>
             </Box>

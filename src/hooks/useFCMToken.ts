@@ -11,7 +11,10 @@ const useFcmToken = () => {
     useEffect(() => {
         const retrieveToken = async () => {
             try {
-                if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
+                if (
+                    typeof window !== 'undefined' &&
+                    'serviceWorker' in navigator
+                ) {
                     const messaging = getMessaging(firebaseApp);
 
                     const permission = await Notification.requestPermission();
@@ -19,12 +22,15 @@ const useFcmToken = () => {
 
                     if (permission === 'granted') {
                         const currentToken = await getToken(messaging, {
-                            vapidKey: process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
+                            vapidKey:
+                                process.env.NEXT_PUBLIC_FIREBASE_VAPID_KEY,
                         });
                         if (currentToken) {
                             console.log('token:', currentToken);
                             setToken(currentToken);
-                            await saveUserNotificationToken({ token: currentToken });
+                            await saveUserNotificationToken({
+                                token: currentToken,
+                            });
                         } else {
                             console.log(
                                 'No registration token available. Request permission to generate one.'

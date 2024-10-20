@@ -45,7 +45,7 @@ const QuestionModal = ({
                         Pregunta {questionIndex}/{questionAmount}
                     </Typography>
                 </Box>
-                <Box className='question-container'>
+                <Box className="question-container">
                     <Box className={'question-modal-index-container'}>
                         <Typography className={'h5'} textAlign={'center'}>
                             {questionIndex}

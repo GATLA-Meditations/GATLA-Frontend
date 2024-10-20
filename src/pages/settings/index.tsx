@@ -62,7 +62,10 @@ const Settings = ({ showToast }: WithToastProps) => {
                         marginTop: '20px',
                     }}
                 >
-                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.push('/home')} />
+                    <ArrowBackIosNewIcon
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => router.push('/home')}
+                    />
                 </div>
             </Box>
             <Box

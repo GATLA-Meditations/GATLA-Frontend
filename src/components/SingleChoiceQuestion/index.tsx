@@ -1,5 +1,5 @@
 import React from 'react';
-import {Radio} from '@mui/material';
+import { Radio } from '@mui/material';
 import '../NumericQuestion/styles.css';
 
 interface SingleChoiceQuestion {
@@ -9,7 +9,6 @@ interface SingleChoiceQuestion {
     onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
     selected: string;
 }
-
 
 const SingleChoiceQuestion = ({
     questionTitle,
@@ -25,7 +24,7 @@ const SingleChoiceQuestion = ({
             </div>
             <div className={'question-options-text-container'}>
                 <div className="button-container">
-                    {Array.from({length: optionsText.length}, (_, i) => (
+                    {Array.from({ length: optionsText.length }, (_, i) => (
                         <div className={'option-container'} key={i}>
                             <Radio
                                 id={id}
@@ -33,12 +32,12 @@ const SingleChoiceQuestion = ({
                                 checked={optionsText[i] === selected}
                                 value={optionsText[i]}
                                 name="radio-buttons"
-                                inputProps={{'aria-label': (i + 1).toString()}}
+                                inputProps={{
+                                    'aria-label': (i + 1).toString(),
+                                }}
                                 onChange={onChange}
                             />
-                            <p className={'options-text'}>
-                                {optionsText[i]}
-                            </p>
+                            <p className={'options-text'}>{optionsText[i]}</p>
                         </div>
                     ))}
                 </div>
