@@ -1,6 +1,6 @@
-import {Box, Typography} from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React from 'react';
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
 
 export enum ModuleType {
     MEDITATION = 'MEDITATION',
@@ -32,8 +32,8 @@ const MeditationEntryPoint = ({
                 bgcolor: 'var(--white)',
                 borderRadius: 3,
                 margin: '16px',
-                width:'fill-available',
-                '&:hover': {cursor: 'pointer'},
+                width: 'fill-available',
+                '&:hover': { cursor: 'pointer' },
             }}
             justifyContent={'space-between'}
             onClick={() =>

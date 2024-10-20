@@ -1,4 +1,4 @@
-import {AdminCardProps} from '@/components/AdminCard';
+import { AdminCardProps } from '@/components/AdminCard';
 import logo5 from '@/assets/AdminIcon/Eugenio.png';
 import logo4 from '@/assets/AdminIcon/Flor.png';
 import logo2 from '@/assets/AdminIcon/AdminIcon2.png';
@@ -20,14 +20,16 @@ export const adminCards: AdminCardProps[] = [
         image: logo4,
         name: 'Florencia Negri Aranguren',
         tags: ['Hematóloga', 'Investigadora'],
-        text: 'La enfermedad puede ser una oportunidad de transformación y el tratamiento parte de un camino de curación.\n' +
+        text:
+            'La enfermedad puede ser una oportunidad de transformación y el tratamiento parte de un camino de curación.\n' +
             'Pensamos un programa de meditación diseñado para acompañarte durante este tiempo. Este programa busca brindar herramientas para mejorar tu calidad de vida, asociando al  tratamiento quimioterápico otras estrategias que apuntan a la salud integral.',
     },
     {
         image: logo8,
         name: 'Pablo Mountford',
         tags: ['Hematólogo', 'Investigador'],
-        text: 'Con una visión personal y profesional en la cual aliviar el sufrimiento multidimensional de los pacientes, sus familiares y al personal medico marcaron mi educación continua medica en medicina mente cuerpo así como mi forma de vivir y de compartir estos aprendizajes en mi casa, en el trabajo y otros espacios comunitarios, \n' +
+        text:
+            'Con una visión personal y profesional en la cual aliviar el sufrimiento multidimensional de los pacientes, sus familiares y al personal medico marcaron mi educación continua medica en medicina mente cuerpo así como mi forma de vivir y de compartir estos aprendizajes en mi casa, en el trabajo y otros espacios comunitarios, \n' +
             'promoviendo practicas meditativas que ayudan a manejar mejor el estrés y a promover la resiliencia, adaptándolas y respetando las creencias personales, lo cual, para muchas personas se encuentra en sus propias practicas religiosas.',
     },
     {
@@ -43,9 +45,9 @@ export const adminCards: AdminCardProps[] = [
         tags: ['Estudiante', 'Programador'],
         text: 'Mi motivación principal al unirme a este proyecto fue la posibilidad de ayudar ofreciendo una herramienta que realmente pudiera marcar la diferencia en la vida de aquellos que la usen.',
     },
-
 ];
 
-export const infoContacto = ' Si tienes algun problema o consulta no dudes en contactarnos en:';
+export const infoContacto =
+    ' Si tienes algun problema o consulta no dudes en contactarnos en:';
 
 export const contactMail = 'renacentia.meditaciones@gmail.com';

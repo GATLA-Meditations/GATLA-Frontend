@@ -14,7 +14,7 @@ type Notification = {
     variant: 'normal' | 'motivationalMessage';
     message: string;
     senderImage: string | undefined;
-}
+};
 
 const Notifications = () => {
     const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -36,7 +36,10 @@ const Notifications = () => {
 
     return (
         <Box height={'100vh'} className={'notifications-container'}>
-            <TopBar selected='notifications' amtNotifications={notifications.length} />
+            <TopBar
+                selected="notifications"
+                amtNotifications={notifications.length}
+            />
             <div
                 style={{
                     display: 'flex',
@@ -47,7 +50,10 @@ const Notifications = () => {
                     marginTop: '20px',
                 }}
             >
-                <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.push('/home')} />
+                <ArrowBackIosNewIcon
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => router.push('/home')}
+                />
             </div>
             <Box className={'notifications'}>
                 {notifications.length > 0 ? (

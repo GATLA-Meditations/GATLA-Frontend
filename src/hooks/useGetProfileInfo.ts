@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import {getUserProfile} from '@/service/apis';
-import {User} from '@/util/types';
+import { getUserProfile } from '@/service/apis';
+import { User } from '@/util/types';
 
 export const useGetProfileInfo = () => {
     const [profile, setProfile] = useState<User>();

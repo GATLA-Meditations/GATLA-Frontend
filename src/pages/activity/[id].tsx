@@ -93,7 +93,10 @@ const Activity = () => {
                         color: 'white',
                     }}
                 >
-                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => router.back()}
+                    />
                 </div>
                 <div
                     style={{

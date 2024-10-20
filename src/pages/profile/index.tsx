@@ -12,11 +12,11 @@ import ChangeAvatarModal from '@/components/ChangeAvatarModal';
 import PencilIcon from '@/assets/PencilIcon';
 import './styles.css';
 import WithToast, { WithToastProps } from '@/hoc/withToast';
-import {TrophyIcon} from '@/assets/TrophyIcon';
+import { TrophyIcon } from '@/assets/TrophyIcon';
 import LockIcon from '@mui/icons-material/Lock';
 import ProfileButton from '@/components/ProfileButton/ProfileButton';
-import {useRouter} from 'next/router';
-import {LogOutIcon} from '@/assets/LogOutIcon';
+import { useRouter } from 'next/router';
+import { LogOutIcon } from '@/assets/LogOutIcon';
 
 export interface User {
     patientCode: string;
@@ -49,7 +49,9 @@ const Profile = ({ showToast }: WithToastProps) => {
             setAvatar(user.image);
 
             const avatars = await getUserItems().then((items) => {
-                return items.filter((item: any) => item.type === 'AVATAR').map((item: any) => item.content_url);
+                return items
+                    .filter((item: any) => item.type === 'AVATAR')
+                    .map((item: any) => item.content_url);
             });
             setAvatars(avatars);
         } catch (error) {
@@ -86,7 +88,6 @@ const Profile = ({ showToast }: WithToastProps) => {
             });
     };
 
-
     if (isLoading) {
         return <Loader />;
     }
@@ -121,7 +122,7 @@ const Profile = ({ showToast }: WithToastProps) => {
                                 width: '13vh',
                                 height: '13vh',
                                 marginBottom: '1vh',
-                                backgroundColor:'black'
+                                backgroundColor: 'black',
                             }}
                             src={
                                 selectedAvatar === '' ? avatar : selectedAvatar
@@ -137,12 +138,22 @@ const Profile = ({ showToast }: WithToastProps) => {
                         {user?.patientCode}
                     </Typography>
                 </Box>
-                <Box
-                    className={'profile-buttons-container'}
-                >
-                    <ProfileButton title={'Mis logros'} onClick={() => (router.push('/achievements'))} icon={<TrophyIcon width={'24px'} height={'24px'}/>}/>
-                    <ProfileButton title={'Cambiar contraseña'} onClick={handleChangePassword} icon={<LockIcon width={'24px'} height={'24px'}/>}/>
-                    <ProfileButton title={'Cerrar sesión'} onClick={handleLogoutClick} icon={<LogOutIcon/>}/>
+                <Box className={'profile-buttons-container'}>
+                    <ProfileButton
+                        title={'Mis logros'}
+                        onClick={() => router.push('/achievements')}
+                        icon={<TrophyIcon width={'24px'} height={'24px'} />}
+                    />
+                    <ProfileButton
+                        title={'Cambiar contraseña'}
+                        onClick={handleChangePassword}
+                        icon={<LockIcon width={'24px'} height={'24px'} />}
+                    />
+                    <ProfileButton
+                        title={'Cerrar sesión'}
+                        onClick={handleLogoutClick}
+                        icon={<LogOutIcon />}
+                    />
                 </Box>
             </Box>
             {isModalOpen && (

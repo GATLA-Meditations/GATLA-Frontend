@@ -6,21 +6,21 @@
     gap: 25px;
 }
 
-.information-page-container{
+.information-page-container {
     display: flex;
     flex-direction: column;
     gap: 16px;
     margin-top: 16px;
 }
 
-.information-container{
+.information-container {
     display: flex;
     flex-direction: column;
     margin: 0 16px;
     gap: 10px;
 }
 
-.description-text-container{
+.description-text-container {
     display: flex;
     flex-direction: column;
     padding: 6px 16px;
@@ -28,7 +28,7 @@
     background-color: var(--primary-100);
 }
 
-.mail-contact-container{
+.mail-contact-container {
     display: flex;
     align-items: center;
     flex-direction: row;

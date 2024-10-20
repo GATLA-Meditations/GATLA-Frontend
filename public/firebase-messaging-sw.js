@@ -8,7 +8,7 @@ const firebaseConfig = {
     storageBucket: 'renacentia.appspot.com',
     messagingSenderId: '110093984274',
     appId: '1:110093984274:web:d5883dae8a68cb00a0eecb',
-    measurementId: 'G-6T5PHYKB8W'
+    measurementId: 'G-6T5PHYKB8W',
 };
 
 firebase.initializeApp(firebaseConfig);

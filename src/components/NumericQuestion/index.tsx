@@ -35,12 +35,12 @@ const NumericQuestion = ({
                                 checked={(i + 1).toString() === selected}
                                 value={(i + 1).toString()}
                                 name="radio-buttons"
-                                inputProps={{'aria-label': (i + 1).toString()}}
+                                inputProps={{
+                                    'aria-label': (i + 1).toString(),
+                                }}
                                 onChange={onChange}
                             />
-                            <p className={'options-text'}>
-                                {optionsText[i]}
-                            </p>
+                            <p className={'options-text'}>{optionsText[i]}</p>
                         </div>
                     ))}
                 </div>
