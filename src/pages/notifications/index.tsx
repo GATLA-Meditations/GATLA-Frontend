@@ -16,8 +16,23 @@ type Notification = {
     senderImage: string | undefined;
 };
 
+const notificationsMock: Notification[] = [
+    {
+        variant: 'normal',
+        message: '¡Bienvenido a Renacentia!',
+        senderImage: undefined,
+    },
+    {
+        variant: 'motivationalMessage',
+        message: '¡Ánimo en tu tratamiento!',
+        senderImage:
+            'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
+    },
+];
+
 const Notifications = () => {
-    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [notifications, setNotifications] =
+        useState<Notification[]>(notificationsMock);
     const router = useRouter();
 
     useEffect(() => {
@@ -56,11 +71,12 @@ const Notifications = () => {
                 />
             </div>
             <Box className={'notifications'}>
-                {notifications.length > 0 ? (
-                    notifications.map((notification, index) => (
+                {notificationsMock.length > 0 ? (
+                    notificationsMock.map((notification, index) => (
                         <NotificationsContainers
                             variant={notification.variant}
                             message={notification.message}
+                            senderName={'gtl-135'}
                             senderImage={notification?.senderImage || undefined}
                             key={index}
                         />

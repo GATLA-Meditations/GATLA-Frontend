@@ -1,0 +1,50 @@
+.congrats-card-container {
+    display: flex;
+    min-width: 100%;
+    min-height: 100px;
+    max-height: 140px;
+    box-sizing: border-box;
+    padding: 8px 16px;
+    border-radius: 12px;
+    background-color: #bdbcf6;
+}
+
+.congrats-card-elements-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.congrats-card-information-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 10px;
+}
+
+.congrats-card-user-info-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    color: #ffffff;
+}
+
+.congrats-card-achievement-text {
+    color: #ffffff;
+}
+
+.congrats-card-buttons-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+    align-items: end;
+    box-sizing: border-box;
+    padding: 8px 0 4px 0;
+}
+
+.congrats-card-close-icon-container {
+    display: flex;
+}
