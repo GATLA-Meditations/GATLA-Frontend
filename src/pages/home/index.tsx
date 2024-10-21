@@ -8,13 +8,15 @@ import '../../app/globals.css';
 import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
-import { getActualModule, getUserStats } from '@/service/apis';
+import {
+    checkForAfterModuleQuestions,
+    getActualModule,
+} from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
 import WithToast, { WithToastProps } from '@/hoc/withToast';
 import Loader from '@/components/Loader';
 import logRocket from 'logrocket';
-import ObtainedRewardModal from '@/components/Modals/ObtainedRewardModal';
 import { getMessaging, onMessage } from 'firebase/messaging';
 import { firebaseApp } from '@/service/firebase';
 import useFcmToken from '@/hooks/useFCMToken';
@@ -49,6 +51,8 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
     const [congratsOptions, setCongratsOptions] =
         useState<CongratsInfo[]>(congratsInfoMock);
     const router = useRouter();
+    const [isTimeForAfterModuleQuestions, setIsTimeForAfterModuleQuestions] =
+        useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -69,6 +73,22 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
 
         checkForToast().then();
         fetchData();
+    }, []);
+
+    useEffect(() => {
+        async function isTimeForQuestions() {
+            setIsLoading(true);
+            try {
+                const response = await checkForAfterModuleQuestions();
+                setIsTimeForAfterModuleQuestions(response.isTime);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        isTimeForQuestions();
     }, []);
 
     useEffect(() => {
@@ -130,6 +150,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         progress={actualModule.progress}
                     />
                 </Box>
+                {isTimeForAfterModuleQuestions && <QuestionModalManager />}
                 <ModuleSeparator
                     text={'Logros de compañeros'}
                     separatorColor={'white'}
