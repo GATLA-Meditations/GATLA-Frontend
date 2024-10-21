@@ -235,3 +235,33 @@ export const saveUserNotificationToken = async (data: any) => {
         console.log(error);
     }
 };
+
+export const getAfterModuleQuestions = async () => {
+    try {
+        const response = await gatlaAxios.get('/module-question/questions');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const postAfterModuleQuestions = async (data: any) => {
+    try {
+        const response = await gatlaAxios.post(
+            '/module-question/answers',
+            data
+        );
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const checkForAfterModuleQuestions = async () => {
+    try {
+        const response = await gatlaAxios.get('/module-question/isTime');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};

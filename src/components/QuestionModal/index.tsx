@@ -2,7 +2,7 @@ import { Modal, Slider, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import './styles.css';
 import Button from '@/components/Button';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IWeeklyQuestion } from '@/components/QuestionModalManager';
 
 interface QuestionModalProps {
@@ -23,13 +23,18 @@ const QuestionModal = ({
     sendAnswerFunction,
 }: QuestionModalProps) => {
     const [answer, setAnswerState] = useState('');
+    const [sliderValue, setSliderValue] = useState(5);
 
     const handleSendAnswer = () => {
-        sendAnswerFunction(questionIndex, answer);
+        if (question.type === 'quantitative') {
+            setAnswerState(sliderValue.toString());
+            sendAnswerFunction(questionIndex, sliderValue.toString());
+            setSliderValue(5);
+        } else {
+            sendAnswerFunction(questionIndex, answer);
+        }
         setAnswerState('');
     };
-
-    const [sliderValue, setSliderValue] = useState(5);
 
     return (
         <Modal open={open} className={'question-modal'}>
@@ -53,11 +58,11 @@ const QuestionModal = ({
                     </Box>
                     <Box className={'modal-question-container'}>
                         <Typography textAlign={'center'} className={'body1'}>
-                            {question.text}
+                            {question.question}
                         </Typography>
                     </Box>
                     <Box style={{ width: '100%' }} className="chulo">
-                        {question.type === 'cuantitativa' ? (
+                        {question.type === 'quantitative' ? (
                             <Box>
                                 <Slider
                                     defaultValue={5}
@@ -92,6 +97,9 @@ const QuestionModal = ({
                         variant={'common'}
                         size={'medium'}
                         onClick={() => handleSendAnswer()}
+                        disabled={
+                            answer == '' && question.type == 'qualitative'
+                        }
                     >
                         {questionIndex === questionAmount
                             ? 'Enviar'
