@@ -29,7 +29,7 @@ const ModuleSeparator = ({
                 },
             }}
         >
-            <Typography className="h5 bold" color={textColor} align="center">
+            <Typography className="h6 bold" color={textColor} align="center">
                 {text}
             </Typography>
         </Divider>
