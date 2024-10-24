@@ -9,10 +9,9 @@ import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
 import Loader from '@/components/Loader';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 import { Grid } from '@mui/material';
-import { MeditateIcon } from '@/assets/MeditateIcon';
 import { iconsDictionary } from '@/util/module';
+import ContactCard from '../../components/ContactCard';
 
 export interface Module {
     id: string;
@@ -105,6 +104,9 @@ const ModuleScreen = () => {
                         ))}
                     </Grid>
                 </div>
+                <Box padding="0 16px">
+                    <ContactCard text={' En caso de ver algun contenido incorrecto no dudes en contactarnos en:'}/>
+                </Box>
                 <NavBar value={0} />
             </Box>
         </>
