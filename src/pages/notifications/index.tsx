@@ -14,10 +14,25 @@ type Notification = {
     variant: 'normal' | 'motivationalMessage';
     message: string;
     senderImage: string | undefined;
-}
+};
+
+const notificationsMock: Notification[] = [
+    {
+        variant: 'normal',
+        message: '¡Bienvenido a Renacentia!',
+        senderImage: undefined,
+    },
+    {
+        variant: 'motivationalMessage',
+        message: '¡Ánimo en tu tratamiento!',
+        senderImage:
+            'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
+    },
+];
 
 const Notifications = () => {
-    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const [notifications, setNotifications] =
+        useState<Notification[]>(notificationsMock);
     const router = useRouter();
 
     useEffect(() => {
@@ -36,7 +51,10 @@ const Notifications = () => {
 
     return (
         <Box height={'100vh'} className={'notifications-container'}>
-            <TopBar selected='notifications' amtNotifications={notifications.length} />
+            <TopBar
+                selected="notifications"
+                amtNotifications={notifications.length}
+            />
             <div
                 style={{
                     display: 'flex',
@@ -47,14 +65,18 @@ const Notifications = () => {
                     marginTop: '20px',
                 }}
             >
-                <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.push('/home')} />
+                <ArrowBackIosNewIcon
+                    sx={{ cursor: 'pointer' }}
+                    onClick={() => router.push('/home')}
+                />
             </div>
             <Box className={'notifications'}>
-                {notifications.length > 0 ? (
-                    notifications.map((notification, index) => (
+                {notificationsMock.length > 0 ? (
+                    notificationsMock.map((notification, index) => (
                         <NotificationsContainers
                             variant={notification.variant}
                             message={notification.message}
+                            senderName={'gtl-135'}
                             senderImage={notification?.senderImage || undefined}
                             key={index}
                         />

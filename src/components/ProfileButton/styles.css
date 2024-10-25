@@ -1,4 +1,4 @@
-.profile-buttons-container{
+.profile-buttons-container {
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
@@ -11,7 +11,7 @@
     background-color: var(--primary-100);
 }
 
-.profile-buttons{
+.profile-buttons {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -23,7 +23,7 @@
     background-color: var(--secondary-200);
 }
 
-.profile-button-title-arrow{
+.profile-button-title-arrow {
     width: 100%;
     display: flex;
     flex-direction: row;

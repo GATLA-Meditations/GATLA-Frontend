@@ -18,7 +18,7 @@ const PencilIcon = ({ width, height, fill }: PencilIconProps) => {
                 height: height || '24px',
             }}
         >
-            <ModeEditIcon width={'24px'} height={'24px'}/>
+            <ModeEditIcon width={'24px'} height={'24px'} />
         </div>
     );
 };

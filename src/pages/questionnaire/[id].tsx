@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Question from '@/components/Question';
+import NumericQuestion from '../../components/NumericQuestion';
 import React, { useEffect, useState } from 'react';
 import { getQuestionnarieById, submitQuestionnaire } from '@/service/apis';
 import './styles.css';
@@ -7,13 +7,16 @@ import Button from '@/components/Button';
 import WithAuth from '@/components/WithAuth';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Loader from '@/components/Loader';
+import SingleChoiceQuestion from '@/components/SingleChoiceQuestion';
+import NotAQuestion from '@/components/NotAQuestion';
 
 export interface QuestionProps {
     name: string;
     id: string;
-    metadata:string;
+    metadata: string;
     answer: string;
     optionsAmt: number;
+    type: string;
 }
 
 export interface QuestionnaireAnswers {
@@ -64,7 +67,12 @@ const TestPage = () => {
         });
         setIsLoading(false);
     };
-    const allQuestionsAnswered = questions?.every(
+
+    const questionsToAnswer = questions?.filter(
+        (question) => question.type !== 'NOT_A_QUESTION'
+    );
+
+    const allQuestionsAnswered = questionsToAnswer?.every(
         (question) => question.answer
     );
 
@@ -76,7 +84,7 @@ const TestPage = () => {
         <div className={'questionnaire-questions-main-div'}>
             <div className={'progress-bar-arrow-div'}>
                 <div className={'progress-bar'}>
-                    {questions?.map((question, key) => {
+                    {questionsToAnswer?.map((question, key) => {
                         return (
                             <div
                                 key={key}
@@ -92,7 +100,10 @@ const TestPage = () => {
                         marginLeft: '10px',
                     }}
                 >
-                    <ArrowBackIosNewIcon sx={{ cursor: 'pointer' }} onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => router.back()}
+                    />
                 </div>
             </div>
 
@@ -103,27 +114,58 @@ const TestPage = () => {
             </div>
             <div className={'questionnaire-questions-div'}>
                 {questions?.map((question, key) => {
-                    return (
-                        <div className={'question-div'} key={key}>
-                            <Question
-                                optionsAmt={JSON.parse(question.metadata).max}
-                                optionsText={[
-                                    'Completamente en desacuerdo',
-                                    'En desacuerdo',
-                                    'Parcialmente en desacuerdo',
-                                    'Indiferente',
-                                    'Parcialmente de acuerdo',
-                                    'De acuerdo',
-                                    'Completamente de acuerdo',
-                                ]}
-                                key={key}
-                                id={question.id}
-                                questionText={question.name}
-                                onChange={handleOnChange}
-                                selected={question.answer}
-                            />
-                        </div>
-                    );
+                    switch (question.type) {
+                    case 'NUMERIC': {
+                        return (
+                            <div className={'question-div'} key={key}>
+                                <NumericQuestion
+                                    optionsAmt={
+                                        JSON.parse(question.metadata).max
+                                    }
+                                    optionsText={Array.from(
+                                        {
+                                            length: JSON.parse(
+                                                question.metadata
+                                            ).max,
+                                        },
+                                        (_, i) => (i + 1).toString()
+                                    )}
+                                    key={key}
+                                    id={question.id}
+                                    questionTitle={question.name}
+                                    onChange={handleOnChange}
+                                    selected={question.answer}
+                                />
+                            </div>
+                        );
+                    }
+                    case 'SINGLE_CHOICE': {
+                        return (
+                            <div className={'question-div'} key={key}>
+                                <SingleChoiceQuestion
+                                    optionsText={
+                                        JSON.parse(question.metadata)
+                                            .options
+                                    }
+                                    key={key}
+                                    id={question.id}
+                                    questionTitle={question.name}
+                                    onChange={handleOnChange}
+                                    selected={question.answer}
+                                />
+                            </div>
+                        );
+                    }
+                    case 'NOT_A_QUESTION': {
+                        return (
+                            <div className={'question-div'} key={key}>
+                                <NotAQuestion
+                                    questionTitle={question.name}
+                                />
+                            </div>
+                        );
+                    }
+                    }
                 })}
             </div>
             <div className={'questionnaire-send-button-div'}>

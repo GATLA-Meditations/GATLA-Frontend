@@ -93,9 +93,9 @@ const Achievements = () => {
                 </svg>
                 <h1 style={h1Style}>{days}</h1>
                 <h2 style={h2Style}>
-                    Días seguidos
+                    Días trabajando
                     <br />
-                    en racha
+                    en tu bienestar
                 </h2>
             </div>
             <div style={itemStyle}>
@@ -152,7 +152,7 @@ const Achievements = () => {
                     />
                 </svg>
                 <h1 style={h1Style}>{goals}</h1>
-                <h2 style={h2Style}>Recompensas recibidas</h2>
+                <h2 style={h2Style}>Premios por tu compromiso</h2>
             </div>
         </div>
     );

@@ -84,3 +84,19 @@
     flex-direction: row;
     margin-bottom: 12px;
 }
+
+.option-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.css-vqmohf-MuiButtonBase-root-MuiRadio-root.Mui-checked {
+    color: var(--secondary-400);
+}
+
+.border-radius-15 {
+    border-radius: 15px;
+}

@@ -8,7 +8,7 @@ const firebaseConfig = {
     storageBucket: 'renacentia.appspot.com',
     messagingSenderId: '110093984274',
     appId: '1:110093984274:web:d5883dae8a68cb00a0eecb',
-    measurementId: 'G-6T5PHYKB8W'
+    measurementId: 'G-6T5PHYKB8W',
 };
 
 firebase.initializeApp(firebaseConfig);
@@ -19,9 +19,9 @@ messaging.onBackgroundMessage((payload) => {
         '[firebase-messaging-sw.js] Received background message ',
         payload
     );
-    const notificationTitle = payload.notification.title;
+    const notificationTitle = payload.data.title;
     const notificationOptions = {
-        body: payload.notification.body,
+        body: payload.data.body,
         icon: './icon-192x192.png',
     };
     self.registration.showNotification(notificationTitle, notificationOptions);
