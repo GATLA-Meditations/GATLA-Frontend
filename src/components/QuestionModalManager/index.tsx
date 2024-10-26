@@ -11,8 +11,8 @@ import WithToast, { WithToastProps } from '@/hoc/withToast';
 export interface IWeeklyQuestion {
     id: string;
     question: string;
-    type: 'quantitative' | 'qualitative';
-    options?: string[];
+    type: 'quantitative' | 'qualitative' | 'not_a_question';
+    metadata?: string;
     answer: string;
 }
 
@@ -20,6 +20,8 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
     const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState<IWeeklyQuestion[]>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [checked, setChecked] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(true);
 
     useEffect(() => {
         const fetchAfterModuleQuestions = async () => {
@@ -36,18 +38,48 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
         fetchAfterModuleQuestions();
     }, []);
 
+    const checkIfThereIsAQuestionNotAnswered = () => {
+        return questions.some((q) => {
+            if (q.type === 'not_a_question') {
+                return false;
+            }
+            if (q.type === 'quantitative' && q.answer === '0') {
+                return true;
+            }
+            return q.answer === '';
+        });
+    };
+
+    useEffect(() => {
+        questions.pop();
+    }, [checked]);
+
     const handleQuestionModalAnswer = (index: number, answer: string) => {
         setQuestions((prevState) => {
-            const updatedQuestions = prevState.map((q, i) =>
+            let updatedQuestions = prevState.map((q, i) =>
                 i === index - 1 ? { ...q, answer } : q
             );
+            if (activeQuestionIndex + 1 > updatedQuestions.length) {
+                const check = checkIfThereIsAQuestionNotAnswered();
+                if (check) {
+                    updatedQuestions.push({
+                        id: 'temp_question_id',
+                        question:
+                            'No respondiste a todas las preguntas, queres enviar las respuetas igual?',
+                        type: 'not_a_question',
+                        metadata: '',
+                        answer: '',
+                    });
+                    setChecked(true);
+                }
+            }
 
             if (activeQuestionIndex + 1 > updatedQuestions.length) {
                 // Here we have to send the questions and answers to the backend
                 const answersToPost = updatedQuestions.map(
                     ({ id, answer }) => ({ id, answer })
                 );
-                postAfterModuleQuestions({answers: answersToPost})
+                postAfterModuleQuestions({ answers: answersToPost })
                     .then(() =>
                         showToast(
                             'Respuestas enviadas correctamente!',
@@ -55,7 +87,10 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                         )
                     )
                     .catch((error) =>
-                        console.error('Error posting answers:', error)
+                        showToast(
+                            'Hubo un error al enviar las respuestas',
+                            'error'
+                        )
                     );
             }
 
@@ -76,7 +111,7 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                 const answersToPost = updatedQuestions.map(
                     ({ id, answer }) => ({ id, answer })
                 );
-                postAfterModuleQuestions({answers: answersToPost})
+                postAfterModuleQuestions({ answers: answersToPost })
                     .then(() =>
                         showToast(
                             'Respuestas enviadas correctamente!',
@@ -84,7 +119,10 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                         )
                     )
                     .catch((error) =>
-                        console.error('Error posting answers:', error)
+                        showToast(
+                            'Hubo un error al enviar las respuestas',
+                            'error'
+                        )
                     );
             }
 
@@ -92,6 +130,25 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
         });
 
         setActiveQuestionIndex((prevIndex) => prevIndex + 1);
+    };
+
+    const handleNotAQuestion = () => {
+        if (activeQuestionIndex + 1 > questions.length) {
+            const answersToPost = questions.map(({ id, answer }) => ({
+                id,
+                answer,
+            }));
+            postAfterModuleQuestions({ answers: answersToPost })
+                .then(() =>
+                    showToast('Respuestas enviadas correctamente!', 'success')
+                )
+                .catch((error) =>
+                    showToast('Hubo un error al enviar las respuestas', 'error')
+                );
+            setIsModalOpen(false);
+        } else {
+            setActiveQuestionIndex((prevIndex) => prevIndex + 1);
+        }
     };
 
     if (activeQuestionIndex === 0) {
@@ -103,7 +160,7 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                     setActiveQuestionIndex(activeQuestionIndex + 1)
                 }
                 topButtonColor={'common'}
-                size={'small'}
+                size={'medium'}
                 bottomButton={false}
                 description={
                     '¡Felicitaciones, completaste una semana de tratamiento!\n' +
@@ -117,16 +174,22 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
         <>
             {activeQuestionIndex <= questions.length && (
                 <QuestionModal
-                    open={true}
+                    open={isModalOpen}
                     title={'Resumen semanal'}
                     questionIndex={activeQuestionIndex}
                     questionAmount={questions.length}
                     question={questions[activeQuestionIndex - 1]}
+                    goBackFunction={() =>
+                        setActiveQuestionIndex(activeQuestionIndex - 1)
+                    }
                     sendAnswerFunction={
                         questions[activeQuestionIndex - 1].type ==
                         'quantitative'
                             ? handleQuestionModalAnswer
-                            : handleChangeQualitativeQuestion
+                            : questions[activeQuestionIndex - 1].type ==
+                                'qualitative'
+                                ? handleChangeQualitativeQuestion
+                                : handleNotAQuestion
                     }
                 />
             )}

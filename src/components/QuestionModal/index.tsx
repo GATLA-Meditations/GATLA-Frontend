@@ -1,9 +1,10 @@
-import { Modal, Slider, Typography } from '@mui/material';
+import { Modal, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import './styles.css';
 import Button from '@/components/Button';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { IWeeklyQuestion } from '@/components/QuestionModalManager';
+import FaceScale from '@/components/FaceScale';
 
 interface QuestionModalProps {
     open: boolean;
@@ -12,6 +13,7 @@ interface QuestionModalProps {
     questionAmount: number;
     question: IWeeklyQuestion;
     sendAnswerFunction: (index: number, value: string) => void;
+    goBackFunction: (index: number) => void;
 }
 
 const QuestionModal = ({
@@ -21,19 +23,20 @@ const QuestionModal = ({
     questionAmount,
     question,
     sendAnswerFunction,
+    goBackFunction,
 }: QuestionModalProps) => {
     const [answer, setAnswerState] = useState('');
-    const [sliderValue, setSliderValue] = useState(5);
+    const [faceScale, setFaceScale] = useState(0);
 
     const handleSendAnswer = () => {
         if (question.type === 'quantitative') {
-            setAnswerState(sliderValue.toString());
-            sendAnswerFunction(questionIndex, sliderValue.toString());
-            setSliderValue(5);
+            setAnswerState(faceScale.toString());
+            sendAnswerFunction(questionIndex, question.answer ? question.answer : faceScale.toString());
         } else {
-            sendAnswerFunction(questionIndex, answer);
+            sendAnswerFunction(questionIndex, question.answer ? question.answer : answer);
         }
         setAnswerState('');
+        setFaceScale(0);
     };
 
     return (
@@ -64,23 +67,15 @@ const QuestionModal = ({
                     <Box style={{ width: '100%' }} className="chulo">
                         {question.type === 'quantitative' ? (
                             <Box>
-                                <Slider
-                                    defaultValue={5}
-                                    min={0}
-                                    max={10}
-                                    step={1}
-                                    onChange={(e, value) =>
-                                        setSliderValue(value as number)
+                                <FaceScale
+                                    onChange={(value) => setFaceScale(value)}
+                                    questionOptions={
+                                        JSON.parse(question.metadata!).options
                                     }
+                                    question={question}
                                 />
-                                <Typography
-                                    textAlign={'center'}
-                                    className={'body1'}
-                                >
-                                    Tu respuesta es: {sliderValue}
-                                </Typography>
                             </Box>
-                        ) : (
+                        ) : question.type === 'qualitative' ? (
                             <Box className={'question-modal-input-container'}>
                                 <textarea
                                     className={'question-modal-textarea'}
@@ -88,18 +83,31 @@ const QuestionModal = ({
                                     onChange={(e) =>
                                         setAnswerState(e.target.value)
                                     }
-                                    value={answer}
+                                    value={
+                                        question.answer
+                                            ? question.answer
+                                            : answer
+                                    }
                                 />
                             </Box>
+                        ) : (
+                            <Typography
+                                textAlign={'center'}
+                                className={'body1'}
+                            ></Typography>
                         )}
                     </Box>
+                    <Button
+                        variant="grey"
+                        size="medium"
+                        onClick={() => goBackFunction(questionIndex)}
+                    >
+                        Volver a la pregunta anterior
+                    </Button>
                     <Button
                         variant={'common'}
                         size={'medium'}
                         onClick={() => handleSendAnswer()}
-                        disabled={
-                            answer == '' && question.type == 'qualitative'
-                        }
                     >
                         {questionIndex === questionAmount
                             ? 'Enviar'
