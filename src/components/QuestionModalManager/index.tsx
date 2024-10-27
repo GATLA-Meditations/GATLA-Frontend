@@ -162,10 +162,13 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                 topButtonColor={'common'}
                 size={'medium'}
                 bottomButton={false}
-                description={
-                    '¡Felicitaciones, completaste una semana de tratamiento!\n' +
-                    '¿Querés contarnos un poco acerca de como fue esta semana?'
+                title={
+                    '¡Felicitaciones, completaste una semana de tratamiento!'
                 }
+                description={
+                    'Nos intersa saber cómo te fue en esta semana con las meditaciones, el sueño, náuseas y dolor. Te vamos a hacer un par de preguntas cortas con respecto a estos temas.'
+                }
+                closeIcon={false}
             />
         );
     }

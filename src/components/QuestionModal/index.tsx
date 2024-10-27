@@ -98,7 +98,7 @@ const QuestionModal = ({
                         )}
                     </Box>
                     <Button
-                        variant="grey"
+                        variant="outlined"
                         size="medium"
                         onClick={() => goBackFunction(questionIndex)}
                     >

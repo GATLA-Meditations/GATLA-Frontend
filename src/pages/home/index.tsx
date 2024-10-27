@@ -150,7 +150,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         progress={actualModule.progress}
                     />
                 </Box>
-                {isTimeForAfterModuleQuestions && <QuestionModalManager />}
+                {true && <QuestionModalManager />}
                 <ModuleSeparator
                     text={'Logros de compañeros'}
                     separatorColor={'white'}

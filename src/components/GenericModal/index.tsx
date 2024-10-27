@@ -22,6 +22,7 @@ interface GenericModalProps {
     pictureUrl?: string;
     backgroundColor?: string;
     topButtonDisabled?: boolean;
+    closeIcon?: boolean;
 }
 
 const GenericModal = ({
@@ -39,6 +40,7 @@ const GenericModal = ({
     bottomButtonColor,
     backgroundColor = 'var(--primary-100)',
     topButtonDisabled,
+    closeIcon = true,
 }: GenericModalProps) => {
     const handleConfirm = () => {
         topButtonAction();
@@ -66,13 +68,15 @@ const GenericModal = ({
                     outline: 'none',
                 }}
             >
-                <IconButton
-                    className="modal-close-button"
-                    onClick={handleClose}
-                    style={{ position: 'absolute', top: 8, right: 8 }}
-                >
-                    <CloseIcon />
-                </IconButton>
+                {closeIcon && (
+                    <IconButton
+                        className="modal-close-button"
+                        onClick={handleClose}
+                        style={{ position: 'absolute', top: 8, right: 8 }}
+                    >
+                        <CloseIcon />
+                    </IconButton>
+                )}
 
                 <Box>
                     {title && (
