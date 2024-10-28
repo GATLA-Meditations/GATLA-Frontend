@@ -24,11 +24,12 @@ import QuestionModalManager from '@/components/QuestionModalManager';
 import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
 import {FriendAchievement} from '@/util/types';
+import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
 
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
-    const { fcmToken, notificationPermissionStatus } = useFcmToken();
+    const {profile} = useGetProfileInfo();
     const [friendsAchievements, setFriendsAchievements] =
         useState<FriendAchievement[]>([]);
     const router = useRouter();
@@ -110,10 +111,12 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         }
     };
 
-    const handleOnClickCongrats = async (friendId: string, description: string) => {
+    const handleOnClickCongrats = async (friendId: string, description: string, index:number) => {
         try{
             setIsLoading(true);
-            const response = await congratulateFriend(friendId, description);
+            const response = await congratulateFriend(friendId, `${profile?.patientCode} dice: ¡Felicitaciones por haber ${description}!`);
+            showToast('Felicitación enviada', 'success');
+            handleOnCloseCongrats(index);
             return response.data;
         }catch (error){
             console.log(error);
@@ -181,8 +184,8 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                                 key={index}
                                 userName={congrat.user.patient_code}
                                 userAvatarUrl={congrat.user.image}
-                                achievementName={congrat.description}
-                                onClick={() => handleOnClickCongrats(congrat.user.id, congrat.description)}
+                                achievementName={`¡Ha ${congrat.description}!`}
+                                onClick={() => handleOnClickCongrats(congrat.user.id, congrat.description, index)}
                                 onClose={() => handleOnCloseCongrats(index)}
                             />
                         );

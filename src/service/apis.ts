@@ -3,7 +3,7 @@ import {
     QuestionnaireAnswers,
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
-import {Notification, UserAchievementNotification} from '@/util/types';
+import {Notification, FriendAchievement} from '@/util/types';
 
 const baseURL =
     process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
@@ -218,12 +218,12 @@ export const updateNotificationSettings = async (settings: any) => {
     }
 };
 
-export const useGetUserNotifications = async (page: string, pageSize: string): Promise<Notification[]> => {
+export const getUserNotifications = async (page: string, pageSize: string): Promise<Notification[]> => {
     try {
         const response = await gatlaAxios.get(
             `user/notifications?page=${page}&pageSize=${pageSize}`
         );
-        return response.data;
+        return response.data.data;
     } catch (error) {
         console.log(error);
         return [];
@@ -268,7 +268,7 @@ export const checkForAfterModuleQuestions = async () => {
     }
 };
 
-export const getFriendsAchievements = async (): Promise<UserAchievementNotification[]> => {
+export const getFriendsAchievements = async (): Promise<FriendAchievement[]> => {
     try{
         const response = await gatlaAxios.get('/friends/notifications');
         return response.data;

@@ -26,6 +26,6 @@ export interface NotificationInfo {
 }
 
 export interface Notification {
-    notificationInfo: NotificationInfo;
+    notification: NotificationInfo;
     read:boolean;
 }
