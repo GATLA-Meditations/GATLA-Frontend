@@ -9,7 +9,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Loader from '@/components/Loader';
 import SingleChoiceQuestion from '@/components/SingleChoiceQuestion';
 import NotAQuestion from '@/components/NotAQuestion';
-import GenericModal from "@/components/GenericModal";
+import GenericModal from '@/components/GenericModal';
 
 export interface QuestionProps {
     name: string;
