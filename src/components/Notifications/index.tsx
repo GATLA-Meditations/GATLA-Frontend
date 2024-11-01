@@ -16,7 +16,7 @@ const Notifications = ({ amtNotifications }: NotificationsIconProps) => {
             >
                 <Badge badgeContent={amtNotifications} color="error">
                     <NotificationsIcon
-                        style={{ color: 'var(--primary-700)' }}
+                        style={{ color: 'var(--primary-600)' }}
                     />
                 </Badge>
             </IconButton>
