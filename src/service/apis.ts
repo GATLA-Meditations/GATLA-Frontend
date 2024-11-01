@@ -265,3 +265,20 @@ export const checkForAfterModuleQuestions = async () => {
         console.log(error);
     }
 };
+
+export const getCommunityStatus = async () => {
+    try {
+        const response = await gatlaAxios.get('/community/status');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const updateCommunityStatus = async (status: boolean) => {
+    try {
+        await gatlaAxios.put('/community/status', { isActivated: status });
+    } catch (error) {
+        console.log(error);
+    }
+};

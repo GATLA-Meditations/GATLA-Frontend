@@ -22,12 +22,14 @@ import SpaIcon from '@mui/icons-material/Spa';
 import AbcIcon from '@mui/icons-material/Abc';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from 'next/router';
+import { Forum } from '@mui/icons-material';
 
 const Settings = ({ showToast }: WithToastProps) => {
     const [notifications, setNotifications] = useState({
         meditationNotifications: false,
         motivationalNotifications: false, // son los achievements pero en el back se llaman asi
         phrasesNotifications: false,
+        community: false,
     });
     const router = useRouter();
 
@@ -240,6 +242,58 @@ const Settings = ({ showToast }: WithToastProps) => {
                                                 name="phrasesNotifications"
                                                 checked={
                                                     notifications.phrasesNotifications
+                                                }
+                                                onChange={handleChange}
+                                            />
+                                        }
+                                    />
+                                </Box>
+                            </Box>
+                            <Box
+                                display="flex"
+                                alignItems="center"
+                                flexDirection={'row'}
+                                width="100%"
+                            >
+                                <Box
+                                    display="flex"
+                                    alignItems="center"
+                                    justifyContent="center"
+                                    bgcolor={'primary.main'}
+                                    borderRadius="8px"
+                                    padding="4px"
+                                >
+                                    <Forum style={{ color: 'white' }} />
+                                </Box>
+                                <Box
+                                    display="flex"
+                                    flexDirection="column"
+                                    width="100%"
+                                >
+                                    <FormControlLabel
+                                        label={
+                                            <Box>
+                                                <Typography className="body1bold">
+                                                    Comunidad Renacentia
+                                                </Typography>
+                                                <Typography
+                                                    variant="body2"
+                                                    color="textSecondary"
+                                                >
+                                                    Tener compañeros de camnio
+                                                </Typography>
+                                            </Box>
+                                        }
+                                        labelPlacement="start"
+                                        sx={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                        }}
+                                        control={
+                                            <Switch
+                                                name="community"
+                                                checked={
+                                                    notifications.community
                                                 }
                                                 onChange={handleChange}
                                             />

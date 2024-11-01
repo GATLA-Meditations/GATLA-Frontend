@@ -11,6 +11,8 @@ import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import {
     checkForAfterModuleQuestions,
     getActualModule,
+    getCommunityStatus,
+    updateCommunityStatus,
 } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
@@ -23,6 +25,8 @@ import useFcmToken from '@/hooks/useFCMToken';
 import QuestionModalManager from '@/components/QuestionModalManager';
 import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
+import { Switch, Typography } from '@mui/material';
+import { Group } from '@mui/icons-material';
 
 interface CongratsInfo {
     userName: string;
@@ -53,6 +57,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
     const router = useRouter();
     const [isTimeForAfterModuleQuestions, setIsTimeForAfterModuleQuestions] =
         useState(false);
+    const [isCommunityActivated, setIsCommunityActivated] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -64,6 +69,8 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
             try {
                 const moduleData = await getActualModule();
                 setActualModule(moduleData);
+                const communityData = await getCommunityStatus();
+                setIsCommunityActivated(communityData.isActivated);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -122,6 +129,15 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         return <Loader />;
     }
 
+    const handleCommunityActivation = async () => {
+        try {
+            await updateCommunityStatus(!isCommunityActivated);
+            setIsCommunityActivated(!isCommunityActivated);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     return (
         <>
             <Box height={'100vh'} className={'home-div'}>
@@ -151,34 +167,62 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                     />
                 </Box>
                 {isTimeForAfterModuleQuestions && <QuestionModalManager />}
-                <ModuleSeparator
-                    text={'Logros de compañeros'}
-                    separatorColor={'white'}
-                    textColor={'white'}
-                />
-                <div
-                    style={{
-                        display: 'flex',
-                        overflowX: 'scroll',
-                        flexDirection: 'row',
-                        boxSizing: 'border-box',
-                        padding: '16px',
-                        gap: '8px',
-                        width: 'auto',
-                    }}
-                >
-                    {congratsOptions.map((congratsOption, index) => {
-                        return (
-                            <CongratsCard
-                                key={index}
-                                userName={congratsOption.userName}
-                                userAvatarUrl={congratsOption.userAvatarUrl}
-                                achievementName={congratsOption.achievementName}
-                                onClose={() => handleOnCloseCongrats(index)}
+                {isCommunityActivated ? (
+                    <>
+                        <ModuleSeparator
+                            text={'Logros de compañeros'}
+                            separatorColor={'white'}
+                            textColor={'white'}
+                        />
+                        <div
+                            style={{
+                                display: 'flex',
+                                overflowX: 'scroll',
+                                flexDirection: 'row',
+                                boxSizing: 'border-box',
+                                padding: '16px',
+                                gap: '8px',
+                                width: 'auto',
+                            }}
+                        >
+                            {congratsOptions.map((congratsOption, index) => (
+                                <CongratsCard
+                                    key={index}
+                                    userName={congratsOption.userName}
+                                    userAvatarUrl={congratsOption.userAvatarUrl}
+                                    achievementName={
+                                        congratsOption.achievementName
+                                    }
+                                    onClose={() => handleOnCloseCongrats(index)}
+                                />
+                            ))}
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <ModuleSeparator
+                            text="Comunidad Renacentia"
+                            separatorColor={'white'}
+                            textColor={'white'}
+                        />
+                        <Box
+                            display="flex"
+                            flexDirection="row"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            padding="16px"
+                        >
+                            <Typography color="white" fontSize={16}>
+                                ¿Deseas activar comunidad renacentia?
+                            </Typography>
+                            <Switch
+                                checked={isCommunityActivated}
+                                onChange={handleCommunityActivation}
+                                inputProps={{ 'aria-label': 'controlled' }}
                             />
-                        );
-                    })}
-                </div>
+                        </Box>
+                    </>
+                )}
                 <Box className="content" />
                 <NavBar value={0} />
             </Box>
