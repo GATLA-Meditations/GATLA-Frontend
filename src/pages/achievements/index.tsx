@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import TopBar from '@/components/TopBar';
 import './styles.css';
 import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import WithAuth from '@/components/WithAuth';
-import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import {Grid} from '@mui/material';
 import ObtainedAchievement from '@/components/ObtainedAchievement';
 import Typography from '@mui/material/Typography';
 import LockedAchievement from '@/components/LockedAchievement';
 import NavBar from '@/components/NavBar';
-import {getAchievements, getAllAchievements, getUserStats} from '@/service/apis';
+import {getAchievements, getAllAchievements} from '@/service/apis';
 
 const AchievementsScreen = () => {
     const [achievementsUnlocked, setAchievementsUnlocked] = React.useState([
@@ -51,10 +50,9 @@ const AchievementsScreen = () => {
     }, []);
 
     return (
-        <Box height={'100vh'}>
-            <TopBar amtNotifications={0} selected={''} />
+        <Box height={'100vh'} paddingBottom="5px">
+            <TopBar amtNotifications={0} selected={''}/>
             <Box className={'achievements_content'}>
-                <AchievementsHomeMenu/>
                 {achievementsUnlocked.length > 0 && (
                     <>
                         <Typography className={'title_text'}>Logros obtenidos</Typography>
@@ -68,14 +66,14 @@ const AchievementsScreen = () => {
                             {achievementsUnlocked.map((achievement, index) => (
                                 <Grid item key={index} display="flex">
                                     <ObtainedAchievement
-                                        rewardCard={'https://cdn.discordapp.com/attachments/1232427585737195630/1279808510774870016/ObtainedAchievement.png?ex=66d5ca0e&is=66d4788e&hm=1b47d6cb3e711be37cda4bbc8e50fea4e18537a979f412c9d65e42d7a57d70a3&'}
+                                        rewardCard={achievement.unlockedImage}
                                         text={achievement.unlockedDescription} title={achievement.title}/>
                                 </Grid>
                             ))}
                         </Grid>
                     </>
                 )}
-                {achievementsUnlocked.length > 0 && (
+                {achievementsLocked.length > 0 && (
                     <>
                         <Typography className={'title_text'}>Logros restantes</Typography>
                         <Grid
@@ -88,7 +86,7 @@ const AchievementsScreen = () => {
                             {achievementsLocked.map((achievement, index) => (
                                 <Grid item key={index} display="flex">
                                     <LockedAchievement
-                                        rewardCard={'https://cdn.discordapp.com/attachments/1232427585737195630/1279808416763744256/LockedAchievement.png?ex=66d5c9f8&is=66d47878&hm=b7ef44ba19b53330ae7818f4154b4cc4b988684b4ba7dda200209b4e89de1100&'}
+                                        rewardCard={achievement.lockedImage}
                                         text={achievement.lockedDescription}/>
                                 </Grid>
                             ))}

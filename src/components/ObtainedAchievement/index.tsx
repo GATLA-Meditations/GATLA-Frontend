@@ -15,7 +15,7 @@ const ObtainedAchievement = ({
     title,
 }: ObtainedAchievementProps) => {
     return (
-        <Box className={'achievement-card'}>
+        <Box className={'achievement-card-obtained'}>
             <Box className={'image-container'}>
                 <img
                     src={rewardCard}
