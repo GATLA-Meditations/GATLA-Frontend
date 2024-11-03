@@ -23,7 +23,7 @@ const StoreElement = ({
     return (
         <Box
             className={`element-container-${type}`}
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', cursor: 'pointer' }}
             onClick={onClick}
         >
             <img

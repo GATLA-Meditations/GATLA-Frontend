@@ -8,12 +8,19 @@ import StoreElement, { StoreElementProps } from '@/components/StoreElement';
 import { buyItem, chooseBackground } from '@/service/apis';
 import ChangeBackgroundModal from '@/components/Modals/ChangeBackgroundModal';
 import BuyItemModal from '../Modals/BuyItemModal';
+import CheckIcon from '@mui/icons-material/Check';
+import { WithToastProps } from '@/hoc/withToast';
+import Skeleton from '@mui/material/Skeleton';
 
 export type PersonalizeItemsBoxProps = {
     label: string;
     items: any[];
     onUpdateItems: () => void;
     unlocks: number;
+    selectedBackground: string | null;
+    selectedAvatar: string | null;
+    onBackgroundSelect: (backgroundId: string) => void;
+    isLoading: boolean;
 };
 
 const PersonalizeItemsBox = ({
@@ -21,9 +28,14 @@ const PersonalizeItemsBox = ({
     items,
     onUpdateItems,
     unlocks,
-}: PersonalizeItemsBoxProps) => {
+    selectedBackground,
+    selectedAvatar,
+    onBackgroundSelect,
+    showToast,
+    isLoading,
+}: PersonalizeItemsBoxProps & WithToastProps) => {
     const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
-    const [selectedBackground, setSelectedBackground] = useState<{
+    const [selectedBackgroundState, setSelectedBackgroundState] = useState<{
         url: string | null;
         name: string | null;
     }>({ url: null, name: null });
@@ -36,24 +48,36 @@ const PersonalizeItemsBox = ({
         backgroundUrl: string,
         backgroundName: string
     ) => {
-        setSelectedBackground({ url: backgroundUrl, name: backgroundName });
+        setSelectedBackgroundState({
+            url: backgroundUrl,
+            name: backgroundName,
+        });
         setIsBackgroundModalOpen(true);
     };
 
     const handleCloseModal = () => {
         setIsBackgroundModalOpen(false);
-        setSelectedBackground({ url: null, name: null });
+        setSelectedBackgroundState({ url: null, name: null });
     };
 
     const handleConfirmBackgroundChange = async () => {
-        if (selectedBackground.url) {
+        if (selectedBackgroundState.url) {
             try {
-                await chooseBackground(selectedBackground.url);
+                await chooseBackground(selectedBackgroundState.url);
+                const selectedBgId = items.find(
+                    (item) =>
+                        item.previewPicture === selectedBackgroundState.url
+                )?.id;
+
+                if (selectedBgId) {
+                    onBackgroundSelect(selectedBgId);
+                    showToast('Fondo seleccionado correctamente!', 'success');
+                }
             } catch (error) {
                 console.error(error);
             } finally {
                 setIsBackgroundModalOpen(false);
-                setSelectedBackground({ url: null, name: null });
+                setSelectedBackgroundState({ url: null, name: null });
             }
         }
     };
@@ -82,34 +106,61 @@ const PersonalizeItemsBox = ({
                 <ArrowRightIcon width={'16px'} height={'16px'} />
             </Stack>
             <Box className={'store-elements-box'}>
-                {items.map((element: StoreElementProps) => (
-                    <StoreElement
-                        id={element.id}
-                        key={element.previewPicture}
-                        type={element.type}
-                        previewPicture={element.previewPicture}
-                        isLocked={element.isLocked}
-                        onClick={
-                            !element.isLocked
-                                ? element.type === 'BACKGROUND'
-                                    ? () =>
-                                        handleBackgroundChange(
-                                            element.previewPicture,
-                                            element.name || ''
-                                        )
-                                    : undefined
-                                : () => handleSelectBuyItem(element)
-                        }
-                    />
-                ))}
+                {isLoading ? (
+                    <>
+                        {Array.from(new Array(3)).map((_, index) => (
+                            <Skeleton
+                                key={index}
+                                variant="rectangular"
+                                className={
+                                    label === 'Fondos'
+                                        ? 'background-skeleton'
+                                        : 'avatar-skeleton'
+                                }
+                            />
+                        ))}
+                    </>
+                ) : (
+                    items.map((element: StoreElementProps) => (
+                        <div
+                            key={element.id}
+                            className={`item ${element.id === selectedBackground ? 'selected-background' : ''} ${element.id === selectedAvatar ? 'selected-avatar' : ''}`}
+                        >
+                            <StoreElement
+                                id={element.id}
+                                key={element.previewPicture}
+                                type={element.type}
+                                previewPicture={element.previewPicture}
+                                isLocked={element.isLocked}
+                                onClick={
+                                    !element.isLocked
+                                        ? element.type === 'BACKGROUND'
+                                            ? () =>
+                                                handleBackgroundChange(
+                                                    element.previewPicture,
+                                                    element.name || ''
+                                                )
+                                            : undefined
+                                        : () => handleSelectBuyItem(element)
+                                }
+                            />
+                            {(element.id === selectedBackground ||
+                                element.id === selectedAvatar) && (
+                                <div className="tick">
+                                    <CheckIcon className="tick-icon" />
+                                </div>
+                            )}
+                        </div>
+                    ))
+                )}
             </Box>
             {isBackgroundModalOpen && (
                 <ChangeBackgroundModal
                     open={isBackgroundModalOpen}
                     onClose={handleCloseModal}
                     onConfirm={handleConfirmBackgroundChange}
-                    backgroundName={selectedBackground.name || ''}
-                    backgroundPreview={selectedBackground.url}
+                    backgroundName={selectedBackgroundState.name || ''}
+                    backgroundPreview={selectedBackgroundState.url}
                 />
             )}
             {isBuyItemModalOpen && (

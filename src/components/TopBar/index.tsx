@@ -60,7 +60,7 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                             borderRadius: '100%',
                         }}
                     >
-                        <PeopleButton/>
+                        <PeopleButton />
                     </Box>
                     <Box
                         sx={{

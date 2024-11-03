@@ -3,8 +3,10 @@ import {
     QuestionnaireAnswers,
     QuestionProps,
 } from '@/pages/questionnaire/[id]';
+import {Notification, FriendAchievement} from '@/util/types';
 
-const baseURL = process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
+const baseURL =
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://api.renacentia.org';
 
 const config = (token: string) => ({
     headers: {
@@ -71,6 +73,15 @@ export const getVideo = async (activityId: string) => {
     }
 };
 
+export const sendVideoTime = async (activityId: string, time: number) => {
+    try {
+        await gatlaAxios.put(`/user/view-time/${activityId}/${time}`);
+    } catch (error) {
+        console.error('Error sending video time:', error);
+        throw error;
+    }
+};
+
 export const getModuleById = async (id: string) => {
     try {
         // const token = localStorage.getItem('token')!!;
@@ -124,33 +135,37 @@ export const getUserProfile = async () => {
     try {
         const response = await gatlaAxios.get('/user/profile');
         return response.data;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const getUserStats = async () => {
     try {
         const response = await gatlaAxios.get('/user/homestats');
         return response.data;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const getUserItems = async () => {
     try {
         const response = await gatlaAxios.get('/user/shop-items');
         return response.data.items;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const updateUserAvatar = async (avatar: string) => {
     try {
-        const response = await gatlaAxios.put('/user/image', { url: avatar });
+        const response = await gatlaAxios.put('/user/image', {url: avatar});
         return response;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const chooseBackground = async (background: string) => {
     try {
-        await gatlaAxios.put('/user/background', { url: background });
+        await gatlaAxios.put('/user/background', {url: background});
     } catch (error) {
         console.log(error);
     }
@@ -207,14 +222,75 @@ export const updateNotificationSettings = async (settings: any) => {
     }
 };
 
-export const useGetUserNotifications = async (params: any) => {
+export const getUserNotifications = async (page: string, pageSize: string): Promise<Notification[]> => {
     try {
-        const response = await gatlaAxios.get('user/notifications?page=1&pageSize=10');
+        const response = await gatlaAxios.get(
+            `user/notifications?page=${page}&pageSize=${pageSize}`
+        );
+        return response.data.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+
+export const saveUserNotificationToken = async (data: any) => {
+    try {
+        const response = await gatlaAxios.post('/notification/token', data);
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAfterModuleQuestions = async () => {
+    try {
+        const response = await gatlaAxios.get('/module-question/questions');
         return response.data;
     } catch (error) {
         console.log(error);
     }
 };
+
+export const postAfterModuleQuestions = async (data: any) => {
+    try {
+        const response = await gatlaAxios.post(
+            '/module-question/answers',
+            data
+        );
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const checkForAfterModuleQuestions = async () => {
+    try {
+        const response = await gatlaAxios.get('/module-question/isTime');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getFriendsAchievements = async (): Promise<FriendAchievement[]> => {
+    try {
+        const response = await gatlaAxios.get('/friends/notifications');
+        return response.data;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }
+};
+
+export const congratulateFriend = async (friendId: string, message: string) => {
+    try {
+        const response = await gatlaAxios.post(`/friends/congratulate-friend/${friendId}`, {message});
+        return response.data;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const getAchievements = async () => {
     try {
         return await gatlaAxios.get('/achievement/user/');

@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import React from 'react';
 
 interface ModuleSeparatorProps {
@@ -29,7 +29,7 @@ const ModuleSeparator = ({
                 },
             }}
         >
-            <Typography className="h5 bold" color={textColor} align="center">
+            <Typography className="h6 bold" color={textColor} align="center">
                 {text}
             </Typography>
         </Divider>

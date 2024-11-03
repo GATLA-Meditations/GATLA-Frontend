@@ -45,10 +45,11 @@ const PreTesting = () => {
             <div className="activity-division-div">
                 {module?.activities?.map((activity, key) => (
                     <ActivityCard
+                        icon={<></>}
                         key={key}
                         onClick={() => handleQuestionnaireOnClick(activity.id)} //Modal en caso de que no se haya completado la actividad previa
                         title={activity.name}
-                        isAllowed={activity.unlocked}
+                        isAllowed={true}
                     />
                 ))}
             </div>

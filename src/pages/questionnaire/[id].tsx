@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import Question from '@/components/Question';
+import NumericQuestion from '../../components/NumericQuestion';
 import React, { useEffect, useState } from 'react';
 import { getQuestionnarieById, submitQuestionnaire } from '@/service/apis';
 import './styles.css';
@@ -7,12 +7,17 @@ import Button from '@/components/Button';
 import WithAuth from '@/components/WithAuth';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Loader from '@/components/Loader';
+import SingleChoiceQuestion from '@/components/SingleChoiceQuestion';
+import NotAQuestion from '@/components/NotAQuestion';
+import GenericModal from '@/components/GenericModal';
 
 export interface QuestionProps {
     name: string;
     id: string;
+    metadata: string;
     answer: string;
     optionsAmt: number;
+    type: string;
 }
 
 export interface QuestionnaireAnswers {
@@ -26,6 +31,7 @@ const TestPage = () => {
     const [questionnaireName, setQuestionnaireName] = useState('');
     const [questions, setQuestions] = useState<QuestionProps[]>();
     const [isLoading, setIsLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         getQuestionnaire().then();
@@ -49,6 +55,26 @@ const TestPage = () => {
     };
 
     const handleSendButton = async () => {
+        if (allQuestionsAnswered) {
+            setIsLoading(true);
+            await submitQuestionnaire({
+                questionnaireId: id,
+                answers: questions!!,
+            });
+            await router.push({
+                pathname: '/home',
+                query: {
+                    message: 'El cuestionario ha sido enviado correctamente',
+                    type: 'success',
+                },
+            });
+            setIsLoading(false);
+        } else {
+            setIsModalOpen(true);
+        }
+    };
+
+    const handleModalConfirm = async () => {
         setIsLoading(true);
         await submitQuestionnaire({
             questionnaireId: id,
@@ -62,8 +88,14 @@ const TestPage = () => {
             },
         });
         setIsLoading(false);
+        setIsModalOpen(false);
     };
-    const allQuestionsAnswered = questions?.every(
+
+    const questionsToAnswer = questions?.filter(
+        (question) => question.type !== 'NOT_A_QUESTION'
+    );
+
+    const allQuestionsAnswered = questionsToAnswer?.every(
         (question) => question.answer
     );
 
@@ -75,7 +107,7 @@ const TestPage = () => {
         <div className={'questionnaire-questions-main-div'}>
             <div className={'progress-bar-arrow-div'}>
                 <div className={'progress-bar'}>
-                    {questions?.map((question, key) => {
+                    {questionsToAnswer?.map((question, key) => {
                         return (
                             <div
                                 key={key}
@@ -91,7 +123,10 @@ const TestPage = () => {
                         marginLeft: '10px',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => router.back()}
+                    />
                 </div>
             </div>
 
@@ -102,40 +137,80 @@ const TestPage = () => {
             </div>
             <div className={'questionnaire-questions-div'}>
                 {questions?.map((question, key) => {
-                    return (
-                        <div className={'question-div'} key={key}>
-                            <Question
-                                optionsAmt={7}
-                                optionsText={[
-                                    'Completamente en desacuerdo',
-                                    'En desacuerdo',
-                                    'Parcialmente en desacuerdo',
-                                    'Indiferente',
-                                    'Parcialmente de acuerdo',
-                                    'De acuerdo',
-                                    'Completamente de acuerdo',
-                                ]}
-                                key={key}
-                                id={question.id}
-                                questionText={question.name}
-                                onChange={handleOnChange}
-                                selected={question.answer}
-                            />
-                        </div>
-                    );
+                    switch (question.type) {
+                    case 'NUMERIC': {
+                        return (
+                            <div className={'question-div'} key={key}>
+                                <NumericQuestion
+                                    optionsAmt={
+                                        JSON.parse(question.metadata).max
+                                    }
+                                    optionsText={Array.from(
+                                        {
+                                            length: JSON.parse(
+                                                question.metadata
+                                            ).max,
+                                        },
+                                        (_, i) => (i + 1).toString()
+                                    )}
+                                    key={key}
+                                    id={question.id}
+                                    questionTitle={question.name}
+                                    onChange={handleOnChange}
+                                    selected={question.answer}
+                                />
+                            </div>
+                        );
+                    }
+                    case 'SINGLE_CHOICE': {
+                        return (
+                            <div className={'question-div'} key={key}>
+                                <SingleChoiceQuestion
+                                    optionsText={
+                                        JSON.parse(question.metadata)
+                                            .options
+                                    }
+                                    key={key}
+                                    id={question.id}
+                                    questionTitle={question.name}
+                                    onChange={handleOnChange}
+                                    selected={question.answer}
+                                />
+                            </div>
+                        );
+                    }
+                    case 'NOT_A_QUESTION': {
+                        return (
+                            <div className={'question-div'} key={key}>
+                                <NotAQuestion
+                                    questionTitle={question.name}
+                                />
+                            </div>
+                        );
+                    }
+                    }
                 })}
             </div>
             <div className={'questionnaire-send-button-div'}>
-                {allQuestionsAnswered && (
-                    <Button
-                        variant={'common'}
-                        size={'medium'}
-                        onClick={handleSendButton}
-                    >
-                        Enviar respuestas
-                    </Button>
-                )}
+                <Button
+                    variant={'common'}
+                    size={'medium'}
+                    onClick={handleSendButton}
+                >
+                    Enviar respuestas
+                </Button>
             </div>
+            <GenericModal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Enviar cuestionario"
+                description="No respondiste a todas las preguntas, ¿quieres enviar las respuestas igual?"
+                topButtonText="Confirmar"
+                topButtonAction={handleModalConfirm}
+                topButtonColor="common"
+                bottomButtonText="Cancelar"
+                bottomButtonColor="red"
+            />
         </div>
     );
 };

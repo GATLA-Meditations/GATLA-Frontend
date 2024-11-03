@@ -18,6 +18,14 @@
     background-color: var(--secondary-100);
 }
 
+.background-division-container {
+    overflow-x: scroll;
+}
+
+.avatar-division-container {
+    overflow-x: scroll;
+}
+
 .store-elements-division-container {
     display: flex;
     flex-direction: column;

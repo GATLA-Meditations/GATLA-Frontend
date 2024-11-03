@@ -1,0 +1,14 @@
+.description-text-container {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 16px;
+    border-radius: 12px;
+    background-color: var(--primary-100);
+}
+
+.mail-contact-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 16px;
+}

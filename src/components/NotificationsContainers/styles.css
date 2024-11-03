@@ -6,7 +6,7 @@
 
 .motivationalMessage {
     background-color: #f0f0f0;
-    border-radius: 15px;
+    border-radius: 15px 15px 15px 0;
     display: flex;
     align-items: center;
     word-wrap: break-word;
@@ -16,7 +16,7 @@
 .motivationalMessage::after {
     content: '';
     position: absolute;
-    bottom: 3px;
+    bottom: -8px;
     left: 10px;
     border: 10px solid transparent;
     border-top-color: #f0f0f0;
@@ -39,4 +39,10 @@
 
 .message {
     margin: 0;
+}
+
+.notification-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }

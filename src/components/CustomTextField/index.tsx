@@ -10,6 +10,8 @@ interface CustomTextFieldProps {
     name?: string;
     type?: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    icon?: React.ReactNode;
+    iconOnClick?: () => void;
 }
 
 const CustomTextField = ({
@@ -20,6 +22,8 @@ const CustomTextField = ({
     name,
     type,
     onChange,
+    icon,
+    iconOnClick,
 }: CustomTextFieldProps) => {
     const [inputValue, setInputValue] = useState(variant);
 
@@ -33,13 +37,20 @@ const CustomTextField = ({
     return (
         <div className="customTextFieldContainer">
             {label && <label className="label h6">{label}</label>}
-            <input
-                className={`customTextField ${inputValue}`}
-                placeholder={placeholder}
-                onChange={handleInputChange}
-                name={name}
-                type={type}
-            />
+            <div className="inputWrapper">
+                <input
+                    className={`customTextField ${inputValue}`}
+                    placeholder={placeholder}
+                    onChange={handleInputChange}
+                    name={name}
+                    type={type}
+                />
+                {icon && (
+                    <div className="iconContainer" onClick={iconOnClick}>
+                        {icon}
+                    </div>
+                )}
+            </div>
             {variant === 'error' && helperText && (
                 <p className="helperText">{helperText}</p>
             )}

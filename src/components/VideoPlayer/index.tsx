@@ -1,15 +1,28 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import ReactPlayer, { ReactPlayerProps } from 'react-player';
 import './styles.css';
 import Loader from '@/components/Loader';
+import { Button } from '@mui/material';
+import PlayIcon from '@/assets/PlayIcon';
 
 export interface VideoPlayerProps extends ReactPlayerProps {
     url: string;
+    isPlaying?: (time: number) => void;
+    isPausing?: (time: number) => void;
+    sendInfo?: (time: number) => void;
 }
 
-const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
+const VideoPlayer: React.FC<VideoPlayerProps> = ({
+    url,
+    onReady,
+    isPlaying,
+    isPausing,
+    sendInfo,
+}) => {
     const ref = useRef<ReactPlayer>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [playing, setPlaying] = useState<boolean>(false);
+    const [duration, setDuration] = useState<number>(0);
 
     const handleReady = () => {
         setIsLoading(false);
@@ -17,26 +30,40 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
             // @ts-ignore
             onReady();
         } // Call the original onReady prop if it exists
+
+        if (ref.current) {
+            const videoDuration = ref.current.getDuration();
+            setDuration(videoDuration);
+        }
     };
 
     const handlePlay = () => {
         if (ref.current) {
-            console.log('Video is playing', ref.current.getCurrentTime());
+            isPlaying && isPlaying(ref.current.getCurrentTime());
+            sendInfo && sendInfo(ref.current.getCurrentTime());
+            setPlaying(true);
         }
     };
 
     const handlePause = () => {
         if (ref.current) {
-            console.log('Video is paused', ref.current.getCurrentTime());
+            isPausing && isPausing(ref.current.getCurrentTime());
+            setPlaying(false);
         }
     };
 
-    const handleBuffer = () => {
-        setIsLoading(true);
+    const handleProgress = () => {
+        if (ref.current) {
+            sendInfo && sendInfo(ref.current.getCurrentTime());
+        }
     };
 
-    const handleBufferEnd = () => {
-        setIsLoading(false);
+    const togglePlayPause = () => {
+        if (playing) {
+            handlePause();
+        } else {
+            handlePlay();
+        }
     };
 
     return (
@@ -46,17 +73,24 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url, onReady }) => {
                     <Loader />
                 </div>
             )}
+            <div className="video-player-overlay" onClick={togglePlayPause} />
             <ReactPlayer
                 ref={ref}
+                playing={playing}
                 url={url}
                 onReady={handleReady}
-                onPlay={handlePlay}
-                onPause={handlePause}
-                onBuffer={handleBuffer}
-                onBufferEnd={handleBufferEnd}
+                onBufferEnd={() => setIsLoading(false)}
+                onProgress={handleProgress}
+                progressInterval={60000}
+                onEnded={() => sendInfo && sendInfo(duration)}
                 controls={false}
                 className="video-player"
             />
+            {!playing && (
+                <Button className={'control-button'} onClick={togglePlayPause}>
+                    <PlayIcon fill={'white'} width={'50px'} height={'50px'} />
+                </Button>
+            )}
         </div>
     );
 };

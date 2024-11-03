@@ -9,7 +9,9 @@ import Box from '@mui/material/Box';
 import TopBar from '@/components/TopBar';
 import Loader from '@/components/Loader';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import { Grid } from '@mui/material';
+import { iconsDictionary } from '@/util/module';
+import ContactCard from '../../components/ContactCard';
 
 export interface Module {
     id: string;
@@ -68,25 +70,43 @@ const ModuleScreen = () => {
                         marginTop: '20px',
                     }}
                 >
-                    <ArrowBackIosNewIcon onClick={() => router.back()} />
+                    <ArrowBackIosNewIcon
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => router.back()}
+                    />
                 </div>
                 <div className="module-name-div">
-                    <p className={'h2 bold'}>{module?.name}</p>
+                    <p className={'h2 bold module-name'}>{module?.name}</p>
                 </div>
                 <div className="activity-division-div">
-                    {module?.activities?.map((activity, key) => (
-                        <ActivityCard
-                            key={key}
-                            onClick={
-                                activity.unlocked
-                                    ? () => handleActivityOnClick(activity.id)
-                                    : () => {}
-                            } //Modal en caso de que no se haya completado la actividad previa
-                            title={activity.name}
-                            isAllowed={activity.unlocked}
-                        />
-                    ))}
+                    <Grid
+                        container
+                        rowSpacing={1}
+                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+                        padding={'16px'}
+                    >
+                        {module?.activities?.map((activity, key, index) => (
+                            <Grid item xs={6} key={key}>
+                                <ActivityCard
+                                    onClick={
+                                        activity.unlocked
+                                            ? () =>
+                                                handleActivityOnClick(
+                                                    activity.id
+                                                )
+                                            : () => {}
+                                    }
+                                    title={activity.name}
+                                    isAllowed={activity.unlocked}
+                                    icon={iconsDictionary[key]}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
                 </div>
+                <Box padding="0 16px">
+                    <ContactCard text={' En caso de ver algun contenido incorrecto no dudes en contactarnos en:'}/>
+                </Box>
                 <NavBar value={0} />
             </Box>
         </>

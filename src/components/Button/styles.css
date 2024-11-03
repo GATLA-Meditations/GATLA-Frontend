@@ -5,6 +5,7 @@
     border-radius: 25px;
     color: white;
     border: none;
+    cursor: pointer;
 }
 
 .grey {
@@ -25,6 +26,12 @@
 
 .common {
     background: var(--primary-300);
+}
+
+.outlined {
+    background: var(--primary-100);
+    border: 1px solid var(--primary-300);
+    color: var(--primary-300);
 }
 
 .small {
