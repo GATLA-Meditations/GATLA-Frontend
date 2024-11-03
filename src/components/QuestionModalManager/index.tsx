@@ -79,19 +79,7 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                 const answersToPost = updatedQuestions.map(
                     ({ id, answer }) => ({ id, answer })
                 );
-                postAfterModuleQuestions({ answers: answersToPost })
-                    .then(() =>
-                        showToast(
-                            'Respuestas enviadas correctamente!',
-                            'success'
-                        )
-                    )
-                    .catch((error) =>
-                        showToast(
-                            'Hubo un error al enviar las respuestas',
-                            'error'
-                        )
-                    );
+                sendAnswers(answersToPost);
             }
 
             return updatedQuestions;
@@ -111,19 +99,7 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                 const answersToPost = updatedQuestions.map(
                     ({ id, answer }) => ({ id, answer })
                 );
-                postAfterModuleQuestions({ answers: answersToPost })
-                    .then(() =>
-                        showToast(
-                            'Respuestas enviadas correctamente!',
-                            'success'
-                        )
-                    )
-                    .catch((error) =>
-                        showToast(
-                            'Hubo un error al enviar las respuestas',
-                            'error'
-                        )
-                    );
+                sendAnswers(answersToPost);
             }
 
             return updatedQuestions;
@@ -138,17 +114,19 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
                 id,
                 answer,
             }));
-            postAfterModuleQuestions({ answers: answersToPost })
-                .then(() =>
-                    showToast('Respuestas enviadas correctamente!', 'success')
-                )
-                .catch((error) =>
-                    showToast('Hubo un error al enviar las respuestas', 'error')
-                );
+            sendAnswers(answersToPost);
             setIsModalOpen(false);
         } else {
             setActiveQuestionIndex((prevIndex) => prevIndex + 1);
         }
+    };
+
+
+    const sendAnswers = (answers: {id: string, answer:string}[]) => {
+        console.log(answers);
+        postAfterModuleQuestions({ answers })
+            .then(() => showToast('Respuestas enviadas correctamente!', 'success'))
+            .catch(() => showToast('Hubo un error al enviar las respuestas', 'error'));
     };
 
     if (activeQuestionIndex === 0) {
