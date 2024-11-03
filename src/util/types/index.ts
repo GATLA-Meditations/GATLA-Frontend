@@ -6,3 +6,26 @@ export interface User {
     background: string;
     achievements: Achievement[];
 }
+
+export interface FriendAchievement {
+    id: string;
+    title: string;
+    description: string;
+    user: {
+        id: string;
+        patient_code:string;
+        image: string;
+    }
+}
+
+export interface NotificationInfo {
+    content:string;
+    title:string;
+    createdAt:string;
+    id:string;
+}
+
+export interface Notification {
+    notification: NotificationInfo;
+    read:boolean;
+}
