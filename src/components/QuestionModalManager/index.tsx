@@ -123,7 +123,6 @@ const QuestionModalManager = ({ showToast }: WithToastProps) => {
 
 
     const sendAnswers = (answers: {id: string, answer:string}[]) => {
-        console.log(answers);
         postAfterModuleQuestions({ answers })
             .then(() => showToast('Respuestas enviadas correctamente!', 'success'))
             .catch(() => showToast('Hubo un error al enviar las respuestas', 'error'));
