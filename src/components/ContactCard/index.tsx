@@ -4,15 +4,17 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import {contactMail} from '@/util/information';
 import CopyIcon from '@/assets/CopyIcon';
+import withToast, {WithToastProps} from '@/hoc/withToast';
 
 interface ContactCardProps {
     text: string;
 }
 
-const ContactCard = ({ text }: ContactCardProps) => {
+const ContactCard = ({ text, showToast }: WithToastProps & ContactCardProps) => {
     const handleCopyButton = () => {
         try {
             navigator.clipboard.writeText(contactMail).then();
+            showToast('Correo copiado al portapapeles', 'success');
         } catch (e) {
             console.error(e);
         }
@@ -41,4 +43,4 @@ const ContactCard = ({ text }: ContactCardProps) => {
         </Box>
     );
 };
-export default ContactCard;
+export default withToast(ContactCard);

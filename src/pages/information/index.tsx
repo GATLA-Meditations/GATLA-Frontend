@@ -13,7 +13,7 @@ import {
 import withToast, { WithToastProps } from '@/hoc/withToast';
 import ContactCard from '../../components/ContactCard';
 
-const InformationScreen = ({ showToast }: WithToastProps) => {
+const InformationScreen = () => {
 
     return (
         <Box height={'100%'} marginBottom={'100px'}>
@@ -58,4 +58,4 @@ const InformationScreen = ({ showToast }: WithToastProps) => {
     );
 };
 
-export default withToast(InformationScreen);
+export default InformationScreen;

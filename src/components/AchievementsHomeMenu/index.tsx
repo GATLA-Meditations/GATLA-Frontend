@@ -28,6 +28,8 @@ const Achievements = () => {
         background: 'var(--white)',
         borderRadius: '10px',
         gap: '8px',
+        padding: '4px',
+        boxSizing: 'border-box',
     };
 
     const h1Style: React.CSSProperties = {
