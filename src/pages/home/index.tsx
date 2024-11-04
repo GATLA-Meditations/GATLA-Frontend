@@ -9,8 +9,10 @@ import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import {
-    checkForAfterModuleQuestions, congratulateFriend,
-    getActualModule, getFriendsAchievements,
+    checkForAfterModuleQuestions,
+    congratulateFriend,
+    getActualModule,
+    getFriendsAchievements,
 } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
@@ -23,9 +25,10 @@ import useFcmToken from '@/hooks/useFCMToken';
 import QuestionModalManager from '@/components/QuestionModalManager';
 import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
-import {FriendAchievement} from '@/util/types';
-import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import { FriendAchievement } from '@/util/types';
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 import Help from '@/components/Help';
+import { Typography } from '@mui/material';
 
 interface CongratsInfo {
     userName: string;
@@ -35,9 +38,10 @@ interface CongratsInfo {
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
-    const {profile} = useGetProfileInfo();
-    const [friendsAchievements, setFriendsAchievements] =
-        useState<FriendAchievement[]>([]);
+    const { profile } = useGetProfileInfo();
+    const [friendsAchievements, setFriendsAchievements] = useState<
+        FriendAchievement[]
+    >([]);
     const router = useRouter();
     const [isTimeForAfterModuleQuestions, setIsTimeForAfterModuleQuestions] =
         useState(false);
@@ -91,6 +95,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                 setIsLoading(false);
             }
         }
+
         fetchFriendsAchievements();
     }, []);
 
@@ -117,14 +122,21 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         }
     };
 
-    const handleOnClickCongrats = async (friendId: string, description: string, index:number) => {
-        try{
+    const handleOnClickCongrats = async (
+        friendId: string,
+        description: string,
+        index: number
+    ) => {
+        try {
             setIsLoading(true);
-            const response = await congratulateFriend(friendId, `${profile?.patientCode} dice: ¡Felicitaciones por haber ${description}!`);
+            const response = await congratulateFriend(
+                friendId,
+                `${profile?.patientCode} dice: ¡Felicitaciones por haber ${description}!`
+            );
             showToast('Felicitación enviada', 'success');
             handleOnCloseCongrats(index);
             return response.data;
-        }catch (error){
+        } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
@@ -132,7 +144,9 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
     };
 
     const handleOnCloseCongrats = (index: number) => {
-        setFriendsAchievements(friendsAchievements.filter((_, i) => i !== index));
+        setFriendsAchievements(
+            friendsAchievements.filter((_, i) => i !== index)
+        );
     };
 
     if (isLoading || !actualModule.name) {
@@ -172,11 +186,16 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                     text={'Logros de compañeros'}
                     separatorColor={'white'}
                     textColor={'white'}
-                    helper={<Help text={'Aquí podras ver los logros de tus compañeros de camino'}/>}
+                    helper={
+                        <Help
+                            text={
+                                'Aquí podras ver los logros de tus compañeros de camino'
+                            }
+                        />
+                    }
                 />
                 <div
                     style={{
-                        display: 'flex',
                         overflowX: 'scroll',
                         flexDirection: 'row',
                         boxSizing: 'border-box',
@@ -185,18 +204,32 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         width: 'auto',
                     }}
                 >
-                    {friendsAchievements.map((congrat, index) => {
-                        return (
-                            <CongratsCard
-                                key={index}
-                                userName={congrat.user.patient_code}
-                                userAvatarUrl={congrat.user.image}
-                                achievementName={`¡Ha ${congrat.description}!`}
-                                onClick={() => handleOnClickCongrats(congrat.user.id, congrat.description, index)}
-                                onClose={() => handleOnCloseCongrats(index)}
-                            />
-                        );
-                    })}
+                    {friendsAchievements.length > 0 ? (
+                        friendsAchievements.map((congrat, index) => {
+                            return (
+                                <CongratsCard
+                                    key={index}
+                                    userName={congrat.user.patient_code}
+                                    userAvatarUrl={congrat.user.image}
+                                    achievementName={`¡Ha ${congrat.description}!`}
+                                    onClick={() =>
+                                        handleOnClickCongrats(
+                                            congrat.user.id,
+                                            congrat.description,
+                                            index
+                                        )
+                                    }
+                                    onClose={() => handleOnCloseCongrats(index)}
+                                />
+                            );
+                        })
+                    ) : (
+                        <Typography color="white" textAlign="center">
+                            Tus compañeros todavía no tienen logros.
+                            <br />
+                            ¡Sé el primero en conseguir uno!
+                        </Typography>
+                    )}
                 </div>
                 <Box className="content" />
                 <NavBar value={0} />

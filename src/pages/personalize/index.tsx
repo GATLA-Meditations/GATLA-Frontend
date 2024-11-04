@@ -12,6 +12,7 @@ import TopBar from '@/components/TopBar';
 import { getProgressAndUnlocks, getShopItems } from '@/service/apis';
 import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 import WithToast, { WithToastProps } from '@/hoc/withToast';
+import Help from '@/components/Help';
 
 const Personalize = ({ showToast }: WithToastProps) => {
     const [backgroundItems, setBackgroundItems] = useState<StoreElementProps[]>(
@@ -97,9 +98,12 @@ const Personalize = ({ showToast }: WithToastProps) => {
             <TopBar amtNotifications={0} />
             <Box className={'personalize-title-div'}>
                 <Box className={'title-progress-div'}>
-                    <Typography className={'h5'}>
-                        Desbloqueos disponibles
-                    </Typography>
+                    <Box display='flex' flexDirection='row' alignItems='center' gap='6px'>
+                        <Typography className={'h6'} mb='3px'>
+                            Desbloqueos disponibles
+                        </Typography>
+                        <Help text="Medita para conseguir desbloqueos. Con ellos podrás personalizar tu perfil con avatars y fondos" />
+                    </Box>
                     <Box className={'progress'}>
                         <Box className={'unlocks'}>
                             <Box className={'unlocks-value'}>
