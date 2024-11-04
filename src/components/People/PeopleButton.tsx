@@ -7,7 +7,7 @@ const PeopleButton = () => {
     return (
         <Link href="/information">
             <IconButton size="large" aria-label="settings">
-                <PeopleAltIcon sx={{ color: '#0d0949' }} />
+                <PeopleAltIcon sx={{ color: 'var(--primary-600)'}} />
             </IconButton>
         </Link>
     );

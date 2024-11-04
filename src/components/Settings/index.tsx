@@ -6,7 +6,7 @@ const SettingsButton = () => {
     return (
         <Link href="/settings">
             <IconButton size="large" aria-label="settings">
-                <SettingsIcon style={{ color: 'var(--primary-700)' }} />
+                <SettingsIcon style={{ color: 'var(--primary-600)' }} />
             </IconButton>
         </Link>
     );

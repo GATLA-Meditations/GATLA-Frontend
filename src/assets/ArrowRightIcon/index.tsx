@@ -1,6 +1,7 @@
 export interface IconProps {
     width: string;
     height: string;
+    color?: string;
 }
 
 const ArrowRightIcon = ({ width, height }: IconProps) => {

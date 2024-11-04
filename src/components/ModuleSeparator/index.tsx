@@ -1,11 +1,13 @@
-import { Box, Divider, Typography } from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import React from 'react';
+import './styles.css';
 
 interface ModuleSeparatorProps {
     text: string;
     separatorColor: string;
     textColor: string;
     textAlign?: 'left' | 'center' | 'right';
+    helper?: React.ReactNode;
 }
 
 const ModuleSeparator = ({
@@ -13,6 +15,7 @@ const ModuleSeparator = ({
     separatorColor,
     textColor,
     textAlign,
+    helper
 }: ModuleSeparatorProps) => {
     return (
         <Divider
@@ -29,9 +32,12 @@ const ModuleSeparator = ({
                 },
             }}
         >
-            <Typography className="h6 bold" color={textColor} align="center">
-                {text}
-            </Typography>
+            <div className={'divider-content'}>
+                <Typography className="h6 bold" color={textColor} align="center">
+                    {text}
+                </Typography>
+                {helper}
+            </div>
         </Divider>
     );
 };

@@ -9,8 +9,8 @@ import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import {
-    checkForAfterModuleQuestions,
-    getActualModule,
+    checkForAfterModuleQuestions, congratulateFriend,
+    getActualModule, getFriendsAchievements,
 } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
@@ -23,6 +23,9 @@ import useFcmToken from '@/hooks/useFCMToken';
 import QuestionModalManager from '@/components/QuestionModalManager';
 import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
+import {FriendAchievement} from '@/util/types';
+import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import Help from '@/components/Help';
 
 interface CongratsInfo {
     userName: string;
@@ -30,26 +33,11 @@ interface CongratsInfo {
     achievementName: string;
 }
 
-const congratsInfoMock: CongratsInfo[] = [
-    {
-        userName: 'gtl-135',
-        userAvatarUrl:
-            'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
-        achievementName: '¡Completó la primer semana de meditación!',
-    },
-    {
-        userName: 'gtl-135',
-        userAvatarUrl:
-            'https://media.discordapp.net/attachments/1232427585737195630/1247661124543844476/blank-profile-picture-973460_960_720.png?ex=66696838&is=666816b8&hm=d38422eae0d1a478d8233dc4cc63a92e564f3104b13e8b4e17fa99ddf656cbcc&=&format=webp&quality=lossless&width=662&height=662',
-        achievementName: '¡Logró una meditación completa!',
-    },
-];
-
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
-    const { fcmToken, notificationPermissionStatus } = useFcmToken();
-    const [congratsOptions, setCongratsOptions] =
-        useState<CongratsInfo[]>(congratsInfoMock);
+    const {profile} = useGetProfileInfo();
+    const [friendsAchievements, setFriendsAchievements] =
+        useState<FriendAchievement[]>([]);
     const router = useRouter();
     const [isTimeForAfterModuleQuestions, setIsTimeForAfterModuleQuestions] =
         useState(false);
@@ -92,6 +80,21 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
     }, []);
 
     useEffect(() => {
+        async function fetchFriendsAchievements() {
+            setIsLoading(true);
+            try {
+                const response = await getFriendsAchievements();
+                setFriendsAchievements(response);
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        fetchFriendsAchievements();
+    }, []);
+
+    useEffect(() => {
         if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
             navigator.serviceWorker.register('/firebase-messaging-sw.js');
             const messaging = getMessaging(firebaseApp);
@@ -114,8 +117,22 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         }
     };
 
+    const handleOnClickCongrats = async (friendId: string, description: string, index:number) => {
+        try{
+            setIsLoading(true);
+            const response = await congratulateFriend(friendId, `${profile?.patientCode} dice: ¡Felicitaciones por haber ${description}!`);
+            showToast('Felicitación enviada', 'success');
+            handleOnCloseCongrats(index);
+            return response.data;
+        }catch (error){
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     const handleOnCloseCongrats = (index: number) => {
-        setCongratsOptions(congratsOptions.filter((_, i) => i !== index));
+        setFriendsAchievements(friendsAchievements.filter((_, i) => i !== index));
     };
 
     if (isLoading || !actualModule.name) {
@@ -155,6 +172,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                     text={'Logros de compañeros'}
                     separatorColor={'white'}
                     textColor={'white'}
+                    helper={<Help text={'Aquí podras ver los logros de tus compañeros de camino'}/>}
                 />
                 <div
                     style={{
@@ -167,13 +185,14 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         width: 'auto',
                     }}
                 >
-                    {congratsOptions.map((congratsOption, index) => {
+                    {friendsAchievements.map((congrat, index) => {
                         return (
                             <CongratsCard
                                 key={index}
-                                userName={congratsOption.userName}
-                                userAvatarUrl={congratsOption.userAvatarUrl}
-                                achievementName={congratsOption.achievementName}
+                                userName={congrat.user.patient_code}
+                                userAvatarUrl={congrat.user.image}
+                                achievementName={`¡Ha ${congrat.description}!`}
+                                onClick={() => handleOnClickCongrats(congrat.user.id, congrat.description, index)}
                                 onClose={() => handleOnCloseCongrats(index)}
                             />
                         );
