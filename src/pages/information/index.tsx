@@ -8,22 +8,12 @@ import Typography from '@mui/material/Typography';
 import AdminCard from '@/components/AdminCard';
 import {
     adminCards,
-    contactMail,
-    infoContacto,
     textRenacentia,
 } from '@/util/information';
-import CopyIcon from '@/assets/CopyIcon';
 import withToast, { WithToastProps } from '@/hoc/withToast';
+import ContactCard from '../../components/ContactCard';
 
-const InformationScreen = ({ showToast }: WithToastProps) => {
-    const handleCopyButton = () => {
-        try {
-            navigator.clipboard.writeText(contactMail).then();
-            showToast('E-mail copiado al portapapeles', 'success');
-        } catch (e) {
-            console.error(e);
-        }
-    };
+const InformationScreen = () => {
 
     return (
         <Box height={'100%'} marginBottom={'100px'}>
@@ -60,26 +50,7 @@ const InformationScreen = ({ showToast }: WithToastProps) => {
                     ))}
                 </Box>
                 <Box className={'information-container'}>
-                    <Box className={'description-text-container'}>
-                        <Typography className="body1">
-                            {infoContacto}
-                        </Typography>
-                        <Box className={'mail-contact-container'}>
-                            <Typography className={'body1 bold'}>
-                                {contactMail}
-                            </Typography>
-                            <Box
-                                display={'flex'}
-                                onClick={() => handleCopyButton()}
-                            >
-                                <CopyIcon
-                                    width={'18px'}
-                                    height={'18px'}
-                                    color={'#000'}
-                                />
-                            </Box>
-                        </Box>
-                    </Box>
+                    <ContactCard text={' Si tienes algun problema o consulta no dudes en contactarnos en:'}/>
                 </Box>
             </Box>
             <NavBar value={0} />
@@ -87,4 +58,4 @@ const InformationScreen = ({ showToast }: WithToastProps) => {
     );
 };
 
-export default withToast(InformationScreen);
+export default InformationScreen;

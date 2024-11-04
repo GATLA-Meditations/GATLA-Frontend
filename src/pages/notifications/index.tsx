@@ -5,42 +5,25 @@ import NavBar from '@/components/NavBar';
 import TopBar from '@/components/TopBar';
 import NotificationsContainers from '@/components/NotificationsContainers';
 import './styles.css';
-import { useGetUserNotifications } from '@/service/apis';
+
 import { Typography } from '@mui/material';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from 'next/router';
+import {Notification} from '@/util/types';
+import {getUserNotifications} from '@/service/apis';
 
-type Notification = {
-    variant: 'normal' | 'motivationalMessage';
-    message: string;
-    senderImage: string | undefined;
-};
-
-const notificationsMock: Notification[] = [
-    {
-        variant: 'normal',
-        message: '¡Bienvenido a Renacentia!',
-        senderImage: undefined,
-    },
-    {
-        variant: 'motivationalMessage',
-        message: '¡Ánimo en tu tratamiento!',
-        senderImage:
-            'https://icon-library.com/images/avatar-icon-images/avatar-icon-images-4.jpg',
-    },
-];
 
 const Notifications = () => {
     const [notifications, setNotifications] =
-        useState<Notification[]>(notificationsMock);
+        useState<Notification[]>([]);
     const router = useRouter();
+    const [page, setPage] = useState(0);
 
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                const data = await useGetUserNotifications();
-                setNotifications(data || []);
+                const data = await getUserNotifications(page.toString(10), '10');
+                setNotifications(data);
             } catch (error) {
                 console.error('Error fetching notifications:', error);
             }
@@ -71,13 +54,11 @@ const Notifications = () => {
                 />
             </div>
             <Box className={'notifications'}>
-                {notificationsMock.length > 0 ? (
-                    notificationsMock.map((notification, index) => (
+                {notifications.length > 0 ? (
+                    notifications.map((notification, index) => (
                         <NotificationsContainers
-                            variant={notification.variant}
-                            message={notification.message}
-                            senderName={'gtl-135'}
-                            senderImage={notification?.senderImage || undefined}
+                            variant={'motivationalMessage'}
+                            message={notification.notification.content}
                             key={index}
                         />
                     ))
