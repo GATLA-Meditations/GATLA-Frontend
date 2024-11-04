@@ -27,6 +27,7 @@ import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
 import {FriendAchievement} from '@/util/types';
 import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import Help from '@/components/Help';
 import { Switch, Typography } from '@mui/material';
 import { Group } from '@mui/icons-material';
 
@@ -184,6 +185,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                             text={'Logros de compañeros'}
                             separatorColor={'white'}
                             textColor={'white'}
+                            helper={<Help text={'Aquí podras ver los logros de tus compañeros de camino'}/>}
                         />
                         <div
                             style={{
