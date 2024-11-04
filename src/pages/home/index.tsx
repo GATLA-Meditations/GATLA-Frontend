@@ -9,8 +9,12 @@ import NavBar from '@/components/NavBar';
 import Box from '@mui/material/Box';
 import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
 import {
-    checkForAfterModuleQuestions, congratulateFriend,
-    getActualModule, getFriendsAchievements,
+    checkForAfterModuleQuestions,
+    congratulateFriend,
+    getActualModule,
+    getFriendsAchievements,
+    getCommunityStatus,
+    updateCommunityStatus,
 } from '@/service/apis';
 import WithAuth from '@/components/WithAuth';
 import { useRouter } from 'next/router';
@@ -23,24 +27,22 @@ import useFcmToken from '@/hooks/useFCMToken';
 import QuestionModalManager from '@/components/QuestionModalManager';
 import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
-import {FriendAchievement} from '@/util/types';
-import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import { FriendAchievement } from '@/util/types';
+import { useGetProfileInfo } from '@/hooks/useGetProfileInfo';
 import Help from '@/components/Help';
-
-interface CongratsInfo {
-    userName: string;
-    userAvatarUrl: string;
-    achievementName: string;
-}
+import { Switch, Typography } from '@mui/material';
+import { Group } from '@mui/icons-material';
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
-    const {profile} = useGetProfileInfo();
-    const [friendsAchievements, setFriendsAchievements] =
-        useState<FriendAchievement[]>([]);
+    const { profile } = useGetProfileInfo();
+    const [friendsAchievements, setFriendsAchievements] = useState<
+        FriendAchievement[]
+    >([]);
     const router = useRouter();
     const [isTimeForAfterModuleQuestions, setIsTimeForAfterModuleQuestions] =
         useState(false);
+    const [isCommunityActivated, setIsCommunityActivated] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -52,6 +54,8 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
             try {
                 const moduleData = await getActualModule();
                 setActualModule(moduleData);
+                const communityData = await getCommunityStatus();
+                setIsCommunityActivated(communityData.isActivated);
             } catch (error) {
                 console.log(error);
             } finally {
@@ -91,6 +95,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                 setIsLoading(false);
             }
         }
+
         fetchFriendsAchievements();
     }, []);
 
@@ -117,14 +122,21 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
         }
     };
 
-    const handleOnClickCongrats = async (friendId: string, description: string, index:number) => {
-        try{
+    const handleOnClickCongrats = async (
+        friendId: string,
+        description: string,
+        index: number
+    ) => {
+        try {
             setIsLoading(true);
-            const response = await congratulateFriend(friendId, `${profile?.patientCode} dice: ¡Felicitaciones por haber ${description}!`);
+            const response = await congratulateFriend(
+                friendId,
+                `${profile?.patientCode} dice: ¡Felicitaciones por haber ${description}!`
+            );
             showToast('Felicitación enviada', 'success');
             handleOnCloseCongrats(index);
             return response.data;
-        }catch (error){
+        } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
@@ -132,12 +144,23 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
     };
 
     const handleOnCloseCongrats = (index: number) => {
-        setFriendsAchievements(friendsAchievements.filter((_, i) => i !== index));
+        setFriendsAchievements(
+            friendsAchievements.filter((_, i) => i !== index)
+        );
     };
 
     if (isLoading || !actualModule.name) {
         return <Loader />;
     }
+
+    const handleCommunityActivation = async () => {
+        try {
+            await updateCommunityStatus(!isCommunityActivated);
+            setIsCommunityActivated(!isCommunityActivated);
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     return (
         <>
@@ -168,36 +191,81 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                     />
                 </Box>
                 {isTimeForAfterModuleQuestions && <QuestionModalManager />}
-                <ModuleSeparator
-                    text={'Logros de compañeros'}
-                    separatorColor={'white'}
-                    textColor={'white'}
-                    helper={<Help text={'Aquí podras ver los logros de tus compañeros de camino'}/>}
-                />
-                <div
-                    style={{
-                        display: 'flex',
-                        overflowX: 'scroll',
-                        flexDirection: 'row',
-                        boxSizing: 'border-box',
-                        padding: '16px',
-                        gap: '8px',
-                        width: 'auto',
-                    }}
-                >
-                    {friendsAchievements.map((congrat, index) => {
-                        return (
-                            <CongratsCard
-                                key={index}
-                                userName={congrat.user.patient_code}
-                                userAvatarUrl={congrat.user.image}
-                                achievementName={`¡Ha ${congrat.description}!`}
-                                onClick={() => handleOnClickCongrats(congrat.user.id, congrat.description, index)}
-                                onClose={() => handleOnCloseCongrats(index)}
+                {isCommunityActivated ? (
+                    <>
+                        <ModuleSeparator
+                            text={'Logros de compañeros'}
+                            separatorColor={'white'}
+                            textColor={'white'}
+                            helper={
+                                <Help
+                                    text={
+                                        'Aquí podras ver los logros de tus compañeros de camino'
+                                    }
+                                />
+                            }
+                        />
+                        <div
+                            style={{
+                                display: 'flex',
+                                overflowX: 'scroll',
+                                flexDirection: 'row',
+                                boxSizing: 'border-box',
+                                padding: '16px',
+                                gap: '8px',
+                                width: 'auto',
+                            }}
+                        >
+                            {friendsAchievements.map((congrat, index) => {
+                                return (
+                                    <CongratsCard
+                                        key={index}
+                                        userName={congrat.user.patient_code}
+                                        userAvatarUrl={congrat.user.image}
+                                        achievementName={`¡Ha ${congrat.description}!`}
+                                        onClick={() =>
+                                            handleOnClickCongrats(
+                                                congrat.user.id,
+                                                congrat.description,
+                                                index
+                                            )
+                                        }
+                                        onClose={() =>
+                                            handleOnCloseCongrats(index)
+                                        }
+                                    />
+                                );
+                            })}
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <ModuleSeparator
+                            text="Comunidad Renacentia"
+                            separatorColor={'white'}
+                            textColor={'white'}
+                            helper={
+                                <Help text="Activa la comunidad para ver los logros de tus compañeros de camino" />
+                            }
+                        />
+                        <Box
+                            display="flex"
+                            flexDirection="row"
+                            alignItems="center"
+                            justifyContent="space-between"
+                            padding="16px"
+                        >
+                            <Typography color="white" fontSize={16}>
+                                ¿Deseas activar comunidad renacentia?
+                            </Typography>
+                            <Switch
+                                checked={isCommunityActivated}
+                                onChange={handleCommunityActivation}
+                                inputProps={{ 'aria-label': 'controlled' }}
                             />
-                        );
-                    })}
-                </div>
+                        </Box>
+                    </>
+                )}
                 <Box className="content" />
                 <NavBar value={0} />
             </Box>
