@@ -2,6 +2,7 @@ import { Avatar, Box, Typography } from '@mui/material';
 import React from 'react';
 import Button from '../Button';
 import './styles.css';
+import Help from '@/components/Help';
 
 interface ChangeAvatarModalProps {
     isOpen: boolean;
@@ -109,6 +110,14 @@ const ChangeAvatarModal = ({
                                     Cancelar
                                 </Button>
                             </>
+                        </Box>
+                        <Box>
+                            <Help
+                                text={
+                                    'Selecciona un avatar y luego confirma tu selección'
+                                }
+                                color="white"
+                            />
                         </Box>
                     </Box>
                 </>
