@@ -9,6 +9,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import Loader from '@/components/Loader';
 import SingleChoiceQuestion from '@/components/SingleChoiceQuestion';
 import NotAQuestion from '@/components/NotAQuestion';
+import GenericModal from '@/components/GenericModal';
 
 export interface QuestionProps {
     name: string;
@@ -30,6 +31,7 @@ const TestPage = () => {
     const [questionnaireName, setQuestionnaireName] = useState('');
     const [questions, setQuestions] = useState<QuestionProps[]>();
     const [isLoading, setIsLoading] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         getQuestionnaire().then();
@@ -53,6 +55,26 @@ const TestPage = () => {
     };
 
     const handleSendButton = async () => {
+        if (allQuestionsAnswered) {
+            setIsLoading(true);
+            await submitQuestionnaire({
+                questionnaireId: id,
+                answers: questions!!,
+            });
+            await router.push({
+                pathname: '/home',
+                query: {
+                    message: 'El cuestionario ha sido enviado correctamente',
+                    type: 'success',
+                },
+            });
+            setIsLoading(false);
+        } else {
+            setIsModalOpen(true);
+        }
+    };
+
+    const handleModalConfirm = async () => {
         setIsLoading(true);
         await submitQuestionnaire({
             questionnaireId: id,
@@ -66,6 +88,7 @@ const TestPage = () => {
             },
         });
         setIsLoading(false);
+        setIsModalOpen(false);
     };
 
     const questionsToAnswer = questions?.filter(
@@ -169,16 +192,25 @@ const TestPage = () => {
                 })}
             </div>
             <div className={'questionnaire-send-button-div'}>
-                {allQuestionsAnswered && (
-                    <Button
-                        variant={'common'}
-                        size={'medium'}
-                        onClick={handleSendButton}
-                    >
-                        Enviar respuestas
-                    </Button>
-                )}
+                <Button
+                    variant={'common'}
+                    size={'medium'}
+                    onClick={handleSendButton}
+                >
+                    Enviar respuestas
+                </Button>
             </div>
+            <GenericModal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Enviar cuestionario"
+                description="No respondiste a todas las preguntas, ¿quieres enviar las respuestas igual?"
+                topButtonText="Confirmar"
+                topButtonAction={handleModalConfirm}
+                topButtonColor="common"
+                bottomButtonText="Cancelar"
+                bottomButtonColor="red"
+            />
         </div>
     );
 };

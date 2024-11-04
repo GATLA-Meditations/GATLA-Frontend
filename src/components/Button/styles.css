@@ -28,6 +28,12 @@
     background: var(--primary-300);
 }
 
+.outlined {
+    background: var(--primary-100);
+    border: 1px solid var(--primary-300);
+    color: var(--primary-300);
+}
+
 .small {
     height: 36px;
     width: 149px;
