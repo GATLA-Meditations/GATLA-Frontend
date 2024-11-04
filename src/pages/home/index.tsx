@@ -25,7 +25,13 @@ import CongratsCard from '@/components/CongratsCard';
 import ModuleSeparator from '@/components/ModuleSeparator';
 import {FriendAchievement} from '@/util/types';
 import {useGetProfileInfo} from '@/hooks/useGetProfileInfo';
+import Help from '@/components/Help';
 
+interface CongratsInfo {
+    userName: string;
+    userAvatarUrl: string;
+    achievementName: string;
+}
 
 const HomeScreen = ({ showToast }: WithToastProps) => {
     const [actualModule, setActualModule] = useState({} as EntryPointData);
@@ -166,6 +172,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                     text={'Logros de compañeros'}
                     separatorColor={'white'}
                     textColor={'white'}
+                    helper={<Help text={'Aquí podras ver los logros de tus compañeros de camino'}/>}
                 />
                 <div
                     style={{
