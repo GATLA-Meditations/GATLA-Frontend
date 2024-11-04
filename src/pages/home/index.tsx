@@ -72,7 +72,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
             setIsLoading(true);
             try {
                 const response = await checkForAfterModuleQuestions();
-                setIsTimeForAfterModuleQuestions(response.isTime);
+                setIsTimeForAfterModuleQuestions(response);
             } catch (error) {
                 console.log(error);
             } finally {
