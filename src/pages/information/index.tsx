@@ -6,26 +6,21 @@ import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import Typography from '@mui/material/Typography';
 import AdminCard from '@/components/AdminCard';
-import {
-    adminCards,
-    textRenacentia,
-} from '@/util/information';
-import withToast, { WithToastProps } from '@/hoc/withToast';
+import { adminCards, textRenacentia } from '@/util/information';
 import ContactCard from '../../components/ContactCard';
 
 const InformationScreen = () => {
-
     return (
         <Box height={'100%'} marginBottom={'100px'}>
             <TopBar amtNotifications={0} selected={''} />
             <Box className={'information-page-container'}>
                 <Box className={'information-container'}>
-                    <Typography
-                        className="h5 bold"
-                        color={'var(--secondary-600)'}
+                    <p
+                        className="title bold header"
+                        style={{ width: 'fit-content' }}
                     >
                         Descripción
-                    </Typography>
+                    </p>
                     <Box className={'description-text-container'}>
                         <Typography className="body1">
                             {textRenacentia}
@@ -34,8 +29,8 @@ const InformationScreen = () => {
                 </Box>
                 <Box className={'information-container'}>
                     <Typography
-                        className="h5 bold"
-                        color={'var(--secondary-600)'}
+                        className="title bold header"
+                        style={{ width: 'fit-content' }}
                     >
                         Equipo Renacentia
                     </Typography>
@@ -50,7 +45,11 @@ const InformationScreen = () => {
                     ))}
                 </Box>
                 <Box className={'information-container'}>
-                    <ContactCard text={' Si tienes algun problema o consulta no dudes en contactarnos en:'}/>
+                    <ContactCard
+                        text={
+                            ' Si tienes algun problema o consulta no dudes en contactarnos en:'
+                        }
+                    />
                 </Box>
             </Box>
             <NavBar value={0} />

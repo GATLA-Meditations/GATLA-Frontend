@@ -117,6 +117,7 @@ const ChangeAvatarModal = ({
                                     'Selecciona un avatar y luego confirma tu selección'
                                 }
                                 color="white"
+                                textColor="var(--primary-300)"
                             />
                         </Box>
                     </Box>

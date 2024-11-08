@@ -76,7 +76,7 @@ const ModuleScreen = () => {
                     />
                 </div>
                 <div className="module-name-div">
-                    <p className={'h2 bold module-name'}>{module?.name}</p>
+                    <p className={'h4 bold module-name'}>{module?.name}</p>
                 </div>
                 <div className="activity-division-div">
                     <Grid

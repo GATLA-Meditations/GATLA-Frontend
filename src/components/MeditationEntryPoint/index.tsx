@@ -72,7 +72,12 @@ const MeditationEntryPoint = ({
                 display={'flex'}
                 flexDirection={'row'}
             >
-                <Typography fontSize={'1.25rem'}>{name}</Typography>
+                <Typography
+                    fontSize={'1.25rem'}
+                    style={{color: 'var(--primary-300)' }}
+                >
+                    {name}
+                </Typography>
             </Box>
         </Box>
     );
