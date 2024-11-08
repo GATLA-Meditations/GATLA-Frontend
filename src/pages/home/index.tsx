@@ -203,6 +203,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         gap: '8px',
                         width: 'auto',
                         display: 'flex',
+                        justifyContent: 'center',
                     }}
                 >
                     {friendsAchievements.length > 0 ? (
