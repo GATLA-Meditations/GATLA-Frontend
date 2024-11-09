@@ -41,7 +41,7 @@ const PreTesting = () => {
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
             <TopBar amtNotifications={0} />
             <div className="module-name-div">
-                <p className='h2 bold question-title'>{module?.name}</p>
+                <p className='title bold question-title'>{module?.name}</p>
             </div>
             <div className="activity-division-div">
                 {module?.activities?.map((activity, key) => (

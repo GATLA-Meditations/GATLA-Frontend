@@ -22,7 +22,7 @@ import SpaIcon from '@mui/icons-material/Spa';
 import AbcIcon from '@mui/icons-material/Abc';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from 'next/router';
-import './styles.css'
+import './styles.css';
 
 const Settings = ({ showToast }: WithToastProps) => {
     const [notifications, setNotifications] = useState({
