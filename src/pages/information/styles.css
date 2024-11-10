@@ -18,6 +18,7 @@
     flex-direction: column;
     margin: 0 16px;
     gap: 10px;
+
 }
 
 .description-text-container {
@@ -34,3 +35,13 @@
     flex-direction: row;
     gap: 16px;
 }
+
+
+.header {
+    color: var(--primary-400) !important;
+    border: 2px solid var(--primary-400) !important;
+    padding: 8px;
+    border-radius: 36px;
+    background-color: var(--primary-100);
+}
+

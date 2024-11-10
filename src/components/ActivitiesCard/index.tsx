@@ -1,5 +1,3 @@
-import LockIcon from '@mui/icons-material/Lock';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Lock } from '@/assets/Lock/Lock';
 import './styles.css';
 import React from 'react';
