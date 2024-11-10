@@ -60,52 +60,37 @@ const ModuleScreen = () => {
         <>
             <Box height={'100vh'} className={'home-div'}>
                 <TopBar amtNotifications={0} />
-                <div
-                    style={{
-                        display: 'flex',
-                        alignItems: 'flex-start',
-                        width: '90%',
-                        color: 'black',
-                        marginLeft: '10px',
-                        marginTop: '20px',
-                    }}
-                >
-                    <ArrowBackIosNewIcon
-                        sx={{ cursor: 'pointer' }}
-                        onClick={() => router.back()}
-                    />
-                </div>
-                <div className="module-name-div">
-                    <p className={'h4 bold module-name'}>{module?.name}</p>
+                <div className={'module-name-div'}>
+                    <div className={'arrow-title-container'}>
+                        <ArrowBackIosNewIcon
+                            sx={{ cursor: 'pointer' }}
+                            onClick={() => router.back()}
+                        />
+                    </div>
+                    <p className={'h5 module-name'}>{module?.name}</p>
                 </div>
                 <div className="activity-division-div">
-                    <Grid
-                        container
-                        rowSpacing={1}
-                        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-                        padding={'16px'}
-                    >
-                        {module?.activities?.map((activity, key, index) => (
-                            <Grid item xs={6} key={key}>
-                                <ActivityCard
-                                    onClick={
-                                        activity.unlocked
-                                            ? () =>
-                                                handleActivityOnClick(
-                                                    activity.id
-                                                )
-                                            : () => {}
-                                    }
-                                    title={activity.name}
-                                    isAllowed={activity.unlocked}
-                                    icon={iconsDictionary[key]}
-                                />
-                            </Grid>
-                        ))}
-                    </Grid>
+                    {module?.activities?.map((activity, key, index) => (
+                        <ActivityCard
+                            index={key}
+                            key={key}
+                            onClick={
+                                activity.unlocked
+                                    ? () => handleActivityOnClick(activity.id)
+                                    : () => {}
+                            }
+                            title={activity.name}
+                            isAllowed={activity.unlocked}
+                            icon={iconsDictionary[key]}
+                        />
+                    ))}
                 </div>
                 <Box padding="0 16px">
-                    <ContactCard text={' En caso de ver algun contenido incorrecto no dudes en contactarnos en:'}/>
+                    <ContactCard
+                        text={
+                            ' En caso de ver algun contenido incorrecto no dudes en contactarnos en:'
+                        }
+                    />
                 </Box>
                 <NavBar value={0} />
             </Box>
