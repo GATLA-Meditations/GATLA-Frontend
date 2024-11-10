@@ -8,8 +8,12 @@
     cursor: pointer;
 }
 
+.chip:focus-visible{
+    outline: none !important;
+}
+
 .chip.filled {
-    background: var(--secondary-300);
+    background: var(--primary-300);
     color: white;
 }
 

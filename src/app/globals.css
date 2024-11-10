@@ -114,6 +114,11 @@
     font-weight: 400 !important;
 }
 
+.title {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
 .body1 {
     font-size: 16px !important;
 }

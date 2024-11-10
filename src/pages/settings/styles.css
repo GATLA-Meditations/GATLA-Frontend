@@ -1,0 +1,8 @@
+.header {
+    color: var(--primary-400) !important;
+    border: 2px solid var(--primary-400) !important;
+    padding: 16px;
+    border-radius: 36px;
+    background-color: var(--primary-100);
+    width: 165px;
+}

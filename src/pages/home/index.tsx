@@ -191,6 +191,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                             text={
                                 'Aquí podras ver los logros de tus compañeros de camino'
                             }
+                            textColor='var(--primary-300)'
                         />
                     }
                 />

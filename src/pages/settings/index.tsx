@@ -22,6 +22,7 @@ import SpaIcon from '@mui/icons-material/Spa';
 import AbcIcon from '@mui/icons-material/Abc';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { useRouter } from 'next/router';
+import './styles.css';
 
 const Settings = ({ showToast }: WithToastProps) => {
     const [notifications, setNotifications] = useState({
@@ -74,7 +75,7 @@ const Settings = ({ showToast }: WithToastProps) => {
                 padding={'2vh'}
                 gap={'16px'}
             >
-                <Typography className={'h5'}>Configuración</Typography>
+                <p className='h5 bold header'>Configuración</p>
                 <Box
                     display={'flex'}
                     flexDirection={'column'}

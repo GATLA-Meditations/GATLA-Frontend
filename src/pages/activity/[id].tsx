@@ -75,7 +75,7 @@ const Activity = () => {
     };
 
     const handleSendVideoInfo = async (time: number) => {
-        await sendVideoTime(id, time).catch((error) =>
+        await sendVideoTime(id, time / 60).catch((error) =>
             console.error('Error sending video time', error)
         );
     };

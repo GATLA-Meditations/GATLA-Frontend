@@ -10,6 +10,7 @@ import ActivityCard from '@/components/ActivitiesCard';
 import { useRouter } from 'next/router';
 import WithAuth from '@/components/WithAuth';
 import Loader from '@/components/Loader';
+import { QuestionnaireIcon } from '@/assets/QuestionnaireIcon';
 
 const PreTesting = () => {
     const [module, setModule] = useState<Module>();
@@ -40,12 +41,12 @@ const PreTesting = () => {
         <Box display={'flex'} flexDirection={'column'} height={'100vh'}>
             <TopBar amtNotifications={0} />
             <div className="module-name-div">
-                <p className={'h2 bold'}>{module?.name}</p>
+                <p className='title bold question-title'>{module?.name}</p>
             </div>
             <div className="activity-division-div">
                 {module?.activities?.map((activity, key) => (
                     <ActivityCard
-                        icon={<></>}
+                        icon={<QuestionnaireIcon width="60" height="60" />}
                         key={key}
                         onClick={() => handleQuestionnaireOnClick(activity.id)} //Modal en caso de que no se haya completado la actividad previa
                         title={activity.name}
