@@ -73,6 +73,7 @@ const ModuleScreen = () => {
                     {module?.activities?.map((activity, key, index) => (
                         <ActivityCard
                             index={key}
+                            key={key}
                             onClick={
                                 activity.unlocked
                                     ? () => handleActivityOnClick(activity.id)
