@@ -1,13 +1,19 @@
 .card-div {
     display: flex;
-    background-color: white;
-    opacity: 0.8;
-    flex-direction: column;
+    color: white;
+    flex-direction: row;
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
     align-items: center;
-    justify-content: center;
-    border-radius: 8px;
+    justify-content: space-around;
+    border-radius: 24px;
+    padding: 0 16px;
     cursor: pointer;
-    height: 200px;
+    height: 100px;
+    width: 100%;
+    margin: 0 16px;
+    box-sizing: border-box;
 }
 
 .title-div {
@@ -16,7 +22,7 @@
     width: 100%;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--secondary-300);
+    background-color: var(--primary-200);
     color: #f4f4f4;
     height: 40%;
     box-sizing: border-box;
@@ -53,5 +59,15 @@
 }
 
 .activity-title {
-    color: white;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    width: 80%;
+    white-space: normal;
 }
+
+.activity-title-div {
+    display: flex;
+    width: 80%;
+}
+

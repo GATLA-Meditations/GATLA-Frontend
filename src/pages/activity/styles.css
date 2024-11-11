@@ -41,13 +41,15 @@
 
 .activity-title-div {
     display: flex;
-    margin-top: 12px;
     padding: 12px;
     align-items: center;
 }
 
 .activity-title {
-    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: normal;
 }
 
 .show-description-arrow-div {

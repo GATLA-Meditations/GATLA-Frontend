@@ -191,6 +191,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                             text={
                                 'Aquí podras ver los logros de tus compañeros de camino'
                             }
+                            textColor='var(--primary-300)'
                         />
                     }
                 />
@@ -203,6 +204,7 @@ const HomeScreen = ({ showToast }: WithToastProps) => {
                         gap: '8px',
                         width: 'auto',
                         display: 'flex',
+                        justifyContent: 'center',
                     }}
                 >
                     {friendsAchievements.length > 0 ? (

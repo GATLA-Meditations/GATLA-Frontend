@@ -98,11 +98,21 @@ const Personalize = ({ showToast }: WithToastProps) => {
             <TopBar amtNotifications={0} />
             <Box className={'personalize-title-div'}>
                 <Box className={'title-progress-div'}>
-                    <Box display='flex' flexDirection='row' alignItems='center' gap='6px'>
-                        <Typography className={'h6'} mb='3px'>
+                    <Box
+                        display="flex"
+                        flexDirection="row"
+                        alignItems="center"
+                        gap="6px"
+                    >
+                        <Typography className={'h6'} mb="3px">
                             Desbloqueos disponibles
                         </Typography>
-                        <Help text="Medita para conseguir desbloqueos. Con ellos podrás personalizar tu perfil con avatars y fondos" />
+                        <Box zIndex={1000}>
+                            <Help
+                                text="Medita para conseguir desbloqueos. Con ellos podrás personalizar tu perfil con avatars y fondos"
+                                textColor="var(--primary-300)"
+                            />
+                        </Box>
                     </Box>
                     <Box className={'progress'}>
                         <Box className={'unlocks'}>

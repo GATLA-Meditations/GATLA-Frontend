@@ -8,9 +8,10 @@ export interface HelpProps {
     right?: number;
     left?: number;
     color?: string;
+    textColor?: string;
 }
 
-const Help = ({ text, right, left, color }: HelpProps) => {
+const Help = ({ text, right, left, color, textColor }: HelpProps) => {
     const [isHelpOpen, setIsHelpOpen] = useState(false);
 
     const handleHelpClick = () => {
@@ -30,6 +31,7 @@ const Help = ({ text, right, left, color }: HelpProps) => {
                         left: left,
                         textAlign: 'center',
                         backgroundColor: color,
+                        color: textColor,
                     }}
                 >
                     <p>{text}</p>
