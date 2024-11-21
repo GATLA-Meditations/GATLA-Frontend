@@ -135,33 +135,37 @@ export const getUserProfile = async () => {
     try {
         const response = await gatlaAxios.get('/user/profile');
         return response.data;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const getUserStats = async () => {
     try {
         const response = await gatlaAxios.get('/user/homestats');
         return response.data;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const getUserItems = async () => {
     try {
         const response = await gatlaAxios.get('/user/shop-items');
         return response.data.items;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const updateUserAvatar = async (avatar: string) => {
     try {
-        const response = await gatlaAxios.put('/user/image', { url: avatar });
+        const response = await gatlaAxios.put('/user/image', {url: avatar});
         return response;
-    } catch (error) {}
+    } catch (error) {
+    }
 };
 
 export const chooseBackground = async (background: string) => {
     try {
-        await gatlaAxios.put('/user/background', { url: background });
+        await gatlaAxios.put('/user/background', {url: background});
     } catch (error) {
         console.log(error);
     }
@@ -269,22 +273,36 @@ export const checkForAfterModuleQuestions = async () => {
 };
 
 export const getFriendsAchievements = async (): Promise<FriendAchievement[]> => {
-    try{
+    try {
         const response = await gatlaAxios.get('/friends/notifications');
         return response.data;
-    }catch (error){
+    } catch (error) {
         console.log(error);
         return [];
     }
 };
 
-export const congratulateFriend = async (friendId:string, message: string) => {
-    try{
+export const congratulateFriend = async (friendId: string, message: string) => {
+    try {
         const response = await gatlaAxios.post(`/friends/congratulate-friend/${friendId}`, {message});
         return response.data;
-    }
-    catch (error){
+    } catch (error) {
         console.log(error);
     }
-    
+};
+
+export const getAchievements = async () => {
+    try {
+        return await gatlaAxios.get('/achievement/user/');
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const getAllAchievements = async () => {
+    try {
+        return await gatlaAxios.get('/achievement/all/');
+    } catch (error) {
+        console.log(error);
+    }
 };

@@ -65,7 +65,7 @@ const Achievements = () => {
                         ? convertMinutesToHours(stats.totalWatchTime)
                         : 0
                 );
-                setGoals(stats.goals ? stats.goals : 0);
+                setGoals(stats.achivements ? stats.achivements : 0);
             }
         } catch (error) {}
     }
