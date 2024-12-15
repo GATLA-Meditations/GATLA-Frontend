@@ -1,34 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Renacentia WEB
+
+## Requirements
+
+- **Node.js 20 or later**
+    - *Tip:* Install [nvm](https://github.com/nvm-sh/nvm) to easily manage Node.js versions.
+    - After installing nvm, type `nvm install 20` in the terminal to install the correct Node.js version
+    - Then type `nvm use 20` to switch to the correct version.
+- A `.env` file with the necessary configuration variables (ask someone to provide it).
 
 ## Getting Started
 
-First, run the development server:
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd <project-directory>
+   ```
+2. **Add the environment file:**
+   Place the provided `.env` file in the root of the project.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+5. **Open the application:**
+   Navigate to [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Additional Commands
 
-## Learn More
+- **Build for production:**
+  ```bash
+  npm run build
+  ```
+- **Run the production server:**
+  ```bash
+  npm start
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+## Troubleshooting
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Node.js version issues:**  
+  Ensure you are using Node.js 20 or later by running:
+  ```bash
+  nvm current
+  ```
+- **Environment configuration:**  
+  Double-check that all variables in the `.env` file are correctly set.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
