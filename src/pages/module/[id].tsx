@@ -85,7 +85,7 @@ const ModuleScreen = () => {
                         />
                     ))}
                 </div>
-                <Box padding="0 16px">
+                <Box padding="0 16px 120px 16px">
                     <ContactCard
                         text={
                             ' En caso de ver algun contenido incorrecto no dudes en contactarnos en:'
