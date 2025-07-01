@@ -130,7 +130,7 @@ const TopBar = ({ amtNotifications, selected }: TopBarProps) => {
                                 <ListItemText
                                     primary={
                                         <Typography sx={{ fontWeight: 'bold', color: 'var(--primary-600)' }}>
-                                            Acerca nuestro
+                                            Acerca de nosotros
                                         </Typography>
                                     }
                                 />
