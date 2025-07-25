@@ -74,13 +74,17 @@ const ModuleScreen = () => {
                         <ActivityCard
                             index={key}
                             key={key}
+                            // onClick={
+                            //     activity.unlocked
+                            //         ? () => handleActivityOnClick(activity.id)
+                            //         : () => {}
+                            // }
                             onClick={
-                                activity.unlocked
-                                    ? () => handleActivityOnClick(activity.id)
-                                    : () => {}
+                                () => handleActivityOnClick(activity.id)
                             }
                             title={activity.name}
-                            isAllowed={activity.unlocked}
+                            // isAllowed={activity.unlocked}
+                            isAllowed={true}
                             icon={iconsDictionary[key]}
                         />
                     ))}
