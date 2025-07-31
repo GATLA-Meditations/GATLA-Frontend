@@ -2,10 +2,9 @@ import Box from '@mui/material/Box';
 import React from 'react';
 import Typography from '@mui/material/Typography';
 import './styles.css';
-import Image, { StaticImageData } from 'next/image';
 
 interface LockedAchievementProps {
-    rewardCard: StaticImageData;
+    rewardCard: any;
     text?: string;
 }
 
@@ -13,7 +12,7 @@ const LockedAchievement = ({ rewardCard, text }: LockedAchievementProps) => {
     return (
         <Box className={'achievement-card'}>
             <Box className={'image-container'}>
-                <Image
+                <img
                     src={rewardCard}
                     alt="logo"
                     style={{ objectFit: 'contain' }}

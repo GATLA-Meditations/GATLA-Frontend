@@ -1,115 +1,100 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import TopBar from '@/components/TopBar';
 import './styles.css';
 import Box from '@mui/material/Box';
 import '../../app/globals.css';
 import WithAuth from '@/components/WithAuth';
-import logoUnlocked from '@/assets/ObtainedAchievementIcon/ObtainedAchievement.png';
-import AchievementsHomeMenu from '@/components/AchievementsHomeMenu';
-import { Grid } from '@mui/material';
+import {Grid} from '@mui/material';
 import ObtainedAchievement from '@/components/ObtainedAchievement';
-import logoLocked from '@/assets/LockedAchievementIcon/LockedAchievement.png';
 import Typography from '@mui/material/Typography';
 import LockedAchievement from '@/components/LockedAchievement';
 import NavBar from '@/components/NavBar';
-import { getUserStats } from '@/service/apis';
+import {getAchievements, getAllAchievements} from '@/service/apis';
 
 const AchievementsScreen = () => {
-    const achievementsUnlocked = [
+    const [achievementsUnlocked, setAchievementsUnlocked] = React.useState([
         {
-            rewardCard: logoUnlocked,
-            text: '“De nuestras vulnerabilidades vienen nuestras fortalezas”',
-            title: 'Emociones positivas',
-        },
+            unlockedImage: '',
+            unlockedDescription: '',
+            title: '',
+        }
+    ]);
+    const [achievementsLocked, setAchievementsLocked] = React.useState([
         {
-            rewardCard: logoUnlocked,
-            text: '“De nuestras vulnerabilidades vienen nuestras fortalezas”',
-            title: 'Emociones positivas',
-        },
-        {
-            rewardCard: logoUnlocked,
-            text: '“De nuestras vulnerabilidades vienen nuestras fortalezas”',
-            title: 'Emociones positivas',
-        },
-        {
-            rewardCard: logoUnlocked,
-            text: '“De nuestras vulnerabilidades vienen nuestras fortalezas”',
-            title: 'Emociones positivas',
-        },
-        {
-            rewardCard: logoUnlocked,
-            text: '“De nuestras vulnerabilidades vienen nuestras fortalezas”',
-            title: 'Emociones positivas',
-        },
-        {
-            rewardCard: logoUnlocked,
-            text: '“De nuestras vulnerabilidades vienen nuestras fortalezas”',
-            title: 'Emociones positivas',
-        },
-    ];
+            lockedImage: '',
+            lockedDescription: '',
+        }
+    ]);
 
-    const achievementsLocked = [
-        {
-            rewardCard: logoLocked,
-            text: 'Completar meditación de la semana 8',
-        },
-        {
-            rewardCard: logoLocked,
-            text: 'Completar meditación de la semana 8',
-        },
-        {
-            rewardCard: logoLocked,
-            text: 'Completar meditación de la semana 8',
-        },
-    ];
+    React.useEffect(() => {
+        getAchievements()
+            .then(response => {
+                if (response) {
+                    setAchievementsUnlocked(response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching unlocked achievements:', error);
+            });
+
+        getAllAchievements()
+            .then(response => {
+                if (response) {
+                    setAchievementsLocked(response.data);
+                    console.log(response.data);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching locked achievements:', error);
+            });
+    }, []);
 
     return (
-        <Box height={'100vh'}>
-            <TopBar amtNotifications={0} selected={''} />
+        <Box height={'100vh'} paddingBottom="5px">
+            <TopBar amtNotifications={0} selected={''}/>
             <Box className={'achievements_content'}>
-                <AchievementsHomeMenu />
-                <Typography className={'title_text'}>
-                    Logros obtenidos
-                </Typography>
-                <Grid
-                    container
-                    spacing={0.5}
-                    display="flex"
-                    alignItems={'center'}
-                    justifyContent={'center'}
-                >
-                    {achievementsUnlocked.map((achievement, index) => (
-                        <Grid item key={index} display="flex">
-                            <ObtainedAchievement
-                                rewardCard={achievement.rewardCard}
-                                text={achievement.text}
-                                title={achievement.title}
-                            />
+                {achievementsUnlocked.length > 0 && (
+                    <>
+                        <Typography className={'title_text'}>Logros obtenidos</Typography>
+                        <Grid
+                            container
+                            spacing={0.5}
+                            display="flex"
+                            alignItems={'center'}
+                            justifyContent={'center'}
+                        >
+                            {achievementsUnlocked.map((achievement, index) => (
+                                <Grid item key={index} display="flex">
+                                    <ObtainedAchievement
+                                        rewardCard={achievement.unlockedImage}
+                                        text={achievement.unlockedDescription} title={achievement.title}/>
+                                </Grid>
+                            ))}
                         </Grid>
-                    ))}
-                </Grid>
-
-                <Typography className={'title_text'}>
-                    Logros restantes
-                </Typography>
-                <Grid
-                    container
-                    spacing={0.5}
-                    display="flex"
-                    alignItems={'center'}
-                    justifyContent={'center'}
-                >
-                    {achievementsLocked.map((achievement, index) => (
-                        <Grid item key={index} display="flex">
-                            <LockedAchievement
-                                rewardCard={achievement.rewardCard}
-                                text={achievement.text}
-                            />
+                    </>
+                )}
+                {achievementsLocked.length > 0 && (
+                    <>
+                        <Typography className={'title_text'}>Logros restantes</Typography>
+                        <Grid
+                            container
+                            spacing={0.5}
+                            display="flex"
+                            alignItems={'center'}
+                            justifyContent={'center'}
+                        >
+                            {achievementsLocked.map((achievement, index) => (
+                                <Grid item key={index} display="flex">
+                                    <LockedAchievement
+                                        rewardCard={achievement.lockedImage}
+                                        text={achievement.lockedDescription}/>
+                                </Grid>
+                            ))}
                         </Grid>
-                    ))}
-                </Grid>
+                    </>
+                )}
             </Box>
-            <NavBar value={2} />
+            <NavBar value={2}/>
         </Box>
     );
 };
